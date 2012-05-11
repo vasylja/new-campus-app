@@ -112,7 +112,8 @@ public class TUMOnlineRequest {
 			// no access token found
 			// show a dialog for the user
 			Intent iTUMSettings = new Intent(callingActivity, TUMOnlineSettings.class);
-			Dialogs.showIntentSwitchDialog(callingActivity, callingActivity, "Kein TUMOnline AccessToken gesetzt. Jetzt setzen?", iTUMSettings);
+			Dialogs.showIntentSwitchDialog(callingActivity, callingActivity,
+					"Kein TUMOnline AccessToken gesetzt. Jetzt setzen?", iTUMSettings);
 
 		}
 
@@ -296,8 +297,8 @@ public class TUMOnlineRequest {
 					listener.onFetchError(context.getString(R.string.empty_result));
 				} else if (result.contains("Token ist nicht bestätigt oder ungültig")) {
 					Intent iTUMSettings = new Intent(context, TUMOnlineSettings.class);
-					Dialogs.showIntentSwitchDialog(context, (Activity) context, ((Activity) context).getString(R.string.dialog_access_token_invalid),
-							iTUMSettings);
+					Dialogs.showIntentSwitchDialog(context, (Activity) context,
+							((Activity) context).getString(R.string.dialog_access_token_invalid), iTUMSettings);
 
 					listener.onFetchError(context.getString(R.string.dialog_access_token_invalid));
 				}

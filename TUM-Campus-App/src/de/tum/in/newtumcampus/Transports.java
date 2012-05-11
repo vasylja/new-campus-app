@@ -33,7 +33,8 @@ import de.tum.in.newtumcampus.models.TransportManager;
 /**
  * Activity to show transport stations and departures
  */
-public class Transports extends Activity implements OnItemClickListener, OnItemLongClickListener, OnEditorActionListener {
+public class Transports extends Activity implements OnItemClickListener, OnItemLongClickListener,
+		OnEditorActionListener {
 
 	/**
 	 * Check if a network connection is available or can be available soon
@@ -64,7 +65,8 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 		TransportManager tm = new TransportManager(this, Const.db);
 		Cursor c = tm.getAllFromDb();
 
-		ListAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c, c.getColumnNames(), new int[] { android.R.id.text1 });
+		ListAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c, c.getColumnNames(),
+				new int[] { android.R.id.text1 });
 
 		final ListView lv = (ListView) findViewById(R.id.listView);
 		lv.setAdapter(adapter);
@@ -95,8 +97,8 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 
 		// initialize empty departure list, disable on click in list
 		MatrixCursor c2 = new MatrixCursor(new String[] { "name", "desc", "_id" });
-		SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item, c2, c2.getColumnNames(), new int[] {
-				android.R.id.text1, android.R.id.text2 }) {
+		SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item, c2,
+				c2.getColumnNames(), new int[] { android.R.id.text1, android.R.id.text2 }) {
 
 			@Override
 			public boolean isEnabled(int position) {
@@ -113,10 +115,10 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 		final String location = c.getString(c.getColumnIndex("name"));
 
 		TextView tv = (TextView) findViewById(R.id.transportText);
-		tv.setText(getString(R.string.departure)+" " + location);
+		tv.setText(getString(R.string.departure) + " " + location);
 
 		tv = (TextView) findViewById(R.id.transportText2);
-		tv.setText(getString(R.string.saved_station)+":");
+		tv.setText(getString(R.string.saved_station) + ":");
 
 		// save clicked station into db and refresh station list
 		// (could be clicked on search result list)

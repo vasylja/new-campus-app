@@ -38,10 +38,13 @@ public class Hours extends Activity implements OnItemClickListener, ViewBinder {
 	public void onStart() {
 		super.onStart();
 
-		names = new String[] { getString(R.string.libraries), getString(R.string.information), getString(R.string.mensa_garching),
-				getString(R.string.mensa_großhadern), getString(R.string.mensa_city), getString(R.string.mensa_pasing), getString(R.string.mensa_weihenstephan) };
+		names = new String[] { getString(R.string.libraries), getString(R.string.information),
+				getString(R.string.mensa_garching), getString(R.string.mensa_großhadern),
+				getString(R.string.mensa_city), getString(R.string.mensa_pasing),
+				getString(R.string.mensa_weihenstephan) };
 
-		categories = new String[] { "library", "info", "cafeteria_gar", "cafeteria_grh", "cafeteria", "cafeteria_pas", "cafeteria_wst" };
+		categories = new String[] { "library", "info", "cafeteria_gar", "cafeteria_grh", "cafeteria", "cafeteria_pas",
+				"cafeteria_wst" };
 
 		// show all categories
 		ListView lv = (ListView) findViewById(R.id.listView);
@@ -78,8 +81,8 @@ public class Hours extends Activity implements OnItemClickListener, ViewBinder {
 		LocationManager lm = new LocationManager(this, Const.db);
 		Cursor c = lm.getAllHoursFromDb(categories[position]);
 
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item, c, c.getColumnNames(), new int[] { android.R.id.text1,
-				android.R.id.text2 }) {
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item, c,
+				c.getColumnNames(), new int[] { android.R.id.text1, android.R.id.text2 }) {
 
 			@Override
 			public boolean isEnabled(int position) {

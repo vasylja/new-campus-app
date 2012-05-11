@@ -1,9 +1,8 @@
 package de.tum.in.newtumcampus.models;
 
 /**
- * An Element of the Organisation Tree.
- * In the App a List of those Elements is showed ({@link OrgItemList}).
- * The shown Elements are for Navigation to an Element without child-Element, whose details are then shown.
+ * An Element of the Organisation Tree. In the App a List of those Elements is showed ({@link OrgItemList}). The shown Elements are for Navigation to an Element
+ * without child-Element, whose details are then shown.
  * <p>
  * 
  * @author Thomas Behrens
@@ -32,7 +31,7 @@ public class OrgItem {
 	 */
 	private String nameEn;
 
-	//Getter and Setter Functions
+	// Getter and Setter Functions
 	public String getId() {
 		return id;
 	}

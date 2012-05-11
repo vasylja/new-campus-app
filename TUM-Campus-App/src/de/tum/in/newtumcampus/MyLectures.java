@@ -125,7 +125,8 @@ public class MyLectures extends Activity implements TUMOnlineRequestFetchListene
 			}
 		}
 		// simple adapter for the spinner
-		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, filters);
+		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_dropdown_item, filters);
 		spFilter.setAdapter(spinnerArrayAdapter);
 		spFilter.setOnItemSelectedListener(new OnItemSelectedListener() {
 

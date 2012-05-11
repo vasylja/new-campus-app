@@ -30,7 +30,8 @@ import de.tum.in.newtumcampus.services.DownloadService;
 /**
  * Activity to show RSS-feeds and their news items
  */
-public class Feeds extends Activity implements OnItemClickListener, ViewBinder, OnItemLongClickListener, View.OnClickListener {
+public class Feeds extends Activity implements OnItemClickListener, ViewBinder, OnItemLongClickListener,
+		View.OnClickListener {
 
 	/**
 	 * Current selected feed (ID)
@@ -61,7 +62,8 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		FeedManager fm = new FeedManager(this, Const.db);
 		Cursor c = fm.getAllFromDb();
 
-		adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c, c.getColumnNames(), new int[] { android.R.id.text1 });
+		adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c, c.getColumnNames(),
+				new int[] { android.R.id.text1 });
 
 		// add a footer to the list for adding new feeds
 		View view = getLayoutInflater().inflate(R.layout.feeds_footer, null, false);
@@ -130,8 +132,8 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		FeedItemManager fim = new FeedItemManager(this, Const.db);
 		Cursor c2 = fim.getAllFromDb(feedId);
 
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.feeds_listview, c2, c2.getColumnNames(), new int[] { R.id.icon, R.id.title,
-				R.id.description });
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.feeds_listview, c2, c2.getColumnNames(),
+				new int[] { R.id.icon, R.id.title, R.id.description });
 
 		adapter.setViewBinder(this);
 		ListView lv2 = (ListView) findViewById(R.id.listView2);

@@ -96,7 +96,6 @@ public class LectureItemManager extends SQLiteOpenHelper {
 				e.printStackTrace();
 			}
 
-
 			// get schedule for my lectures
 			for (int i = 0; i < MyLecturesList.getLehrveranstaltungen().size(); i++) {
 				FindLecturesRow currentLecture = MyLecturesList.getLehrveranstaltungen().get(i);
@@ -119,69 +118,71 @@ public class LectureItemManager extends SQLiteOpenHelper {
 				// now, enter each task date to the current Lecture
 				if (MyLectureTerminList != null && MyLectureTerminList.getLehrveranstaltungenTermine() != null)
 					for (int y = 0; y < MyLectureTerminList.getLehrveranstaltungenTermine().size(); y++) {
-					try {
-						// set currentTask
-						LectureAppointmentsRow currentTask = MyLectureTerminList.getLehrveranstaltungenTermine().get(y);
+						try {
+							// set currentTask
+							LectureAppointmentsRow currentTask = MyLectureTerminList.getLehrveranstaltungenTermine()
+									.get(y);
 
-						// parse dates
-						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-						Date start = formatter.parse(currentTask.getBeginn_datum_zeitpunkt());
-						Date end = formatter.parse(currentTask.getEnde_datum_zeitpunkt());
+							// parse dates
+							SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+							Date start = formatter.parse(currentTask.getBeginn_datum_zeitpunkt());
+							Date end = formatter.parse(currentTask.getEnde_datum_zeitpunkt());
 
-						// check if the task is in the future
-						Calendar cnow = Calendar.getInstance();
-						Calendar cend = Calendar.getInstance();
-						cend.setTime(end);
+							// check if the task is in the future
+							Calendar cnow = Calendar.getInstance();
+							Calendar cend = Calendar.getInstance();
+							cend.setTime(end);
 
-						if (cnow.before(cend)) {
+							if (cnow.before(cend)) {
 
-							// set name/module/ort/lectureId
-							String location = "";
-							if (currentTask.getOrt() != null)
-								location = currentTask.getOrt();
-							String name = "";
-							if (currentLecture.getTitel() != null)
-								name = currentLecture.getTitel();
+								// set name/module/ort/lectureId
+								String location = "";
+								if (currentTask.getOrt() != null)
+									location = currentTask.getOrt();
+								String name = "";
+								if (currentLecture.getTitel() != null)
+									name = currentLecture.getTitel();
 
-							String lectureId = "";
-							if (currentLecture.getStp_lv_nr() != null)
-								lectureId = currentLecture.getStp_lv_nr();
+								String lectureId = "";
+								if (currentLecture.getStp_lv_nr() != null)
+									lectureId = currentLecture.getStp_lv_nr();
 
-							String module = "";
-							if (name.contains("(") && name.contains(")")) {
-								module = name.substring(name.indexOf("(") + 1, name.indexOf(")"));
-								name = name.substring(0, name.indexOf("(")).trim();
+								String module = "";
+								if (name.contains("(") && name.contains(")")) {
+									module = name.substring(name.indexOf("(") + 1, name.indexOf(")"));
+									name = name.substring(0, name.indexOf("(")).trim();
+								}
+
+								// set id
+								String id = lectureId + "_" + String.valueOf(start.getTime());
+
+								// set wochentag
+								String wochentag = Utils.getWeekDayByDate(start).toUpperCase();
+
+								SimpleDateFormat sdfvon = new SimpleDateFormat("HH:mm");
+								String von = sdfvon.format(start);
+
+								String seriesId = lectureId + "_" + wochentag + "_" + von;
+
+								// set note and url
+								String note = "";
+								if (currentTask.getTermin_betreff() != null)
+									note = currentTask.getTermin_betreff();
+								String url = "";
+								if (lectureId.length() == 0) {
+									lectureId = Utils.md5(name);
+								}
+
+								// now, make entry to database
+								replaceIntoDb(new LectureItem(id, lectureId, start, end, name, module, location, note,
+										url, seriesId));
+
 							}
-
-							// set id
-							String id = lectureId + "_" + String.valueOf(start.getTime());
-
-							// set wochentag
-							String wochentag = Utils.getWeekDayByDate(start).toUpperCase();
-
-							SimpleDateFormat sdfvon = new SimpleDateFormat("HH:mm");
-							String von = sdfvon.format(start);
-
-							String seriesId = lectureId + "_" + wochentag + "_" + von;
-
-							// set note and url
-							String note = "";
-							if (currentTask.getTermin_betreff() != null)
-								note = currentTask.getTermin_betreff();
-							String url = "";
-							if (lectureId.length() == 0) {
-								lectureId = Utils.md5(name);
-							}
-
-							// now, make entry to database
-							replaceIntoDb(new LectureItem(id, lectureId, start, end, name, module, location, note, url, seriesId));
-
+						} catch (Exception ex) {
+							Log.d("TUMOnlineParseATask", "the task could not be parsed");
+							ex.printStackTrace();
 						}
-					} catch (Exception ex) {
-						Log.d("TUMOnlineParseATask", "the task could not be parsed");
-						ex.printStackTrace();
 					}
-				}
 
 			}
 
@@ -223,8 +224,7 @@ public class LectureItemManager extends SQLiteOpenHelper {
 	/**
 	 * Import lecture items from a CSV file
 	 * 
-	 * Header format: TERMIN_TYP, TITEL, ORT, LV_NUMMER, DATUM, VON, BIS,
-	 * WOCHENTAG, ANMERKUNG, URL
+	 * Header format: TERMIN_TYP, TITEL, ORT, LV_NUMMER, DATUM, VON, BIS, WOCHENTAG, ANMERKUNG, URL
 	 * 
 	 * <pre>
 	 * @param file CSV File
@@ -233,8 +233,7 @@ public class LectureItemManager extends SQLiteOpenHelper {
 	 * </pre>
 	 */
 	public void importCsv(File file, String encoding) throws Exception {
-		List<String[]> list = Utils
-				.readCsv(new FileInputStream(file), encoding);
+		List<String[]> list = Utils.readCsv(new FileInputStream(file), encoding);
 
 		if (list.size() == 0) {
 			return;
@@ -246,8 +245,7 @@ public class LectureItemManager extends SQLiteOpenHelper {
 
 			// skip canceled events on import
 			int terminTypId = headers.indexOf("TERMIN_TYP");
-			if (row.length > terminTypId
-					&& row[terminTypId].contains("abgesagt")) {
+			if (row.length > terminTypId && row[terminTypId].contains("abgesagt")) {
 				continue;
 			}
 
@@ -257,8 +255,7 @@ public class LectureItemManager extends SQLiteOpenHelper {
 
 			String module = "";
 			if (name.contains("(") && name.contains(")")) {
-				module = name.substring(name.indexOf("(") + 1,
-						name.indexOf(")"));
+				module = name.substring(name.indexOf("(") + 1, name.indexOf(")"));
 				name = name.substring(0, name.indexOf("(")).trim();
 			}
 
@@ -269,11 +266,9 @@ public class LectureItemManager extends SQLiteOpenHelper {
 			Date start = Utils.getDateTimeDe(datum + " " + von);
 			Date end = Utils.getDateTimeDe(datum + " " + bis);
 
-			String id = row[headers.indexOf("LV_NUMMER")] + "_"
-					+ String.valueOf(start.getTime());
+			String id = row[headers.indexOf("LV_NUMMER")] + "_" + String.valueOf(start.getTime());
 
-			String seriesId = row[headers.indexOf("LV_NUMMER")] + "_"
-					+ row[headers.indexOf("WOCHENTAG")] + "_"
+			String seriesId = row[headers.indexOf("LV_NUMMER")] + "_" + row[headers.indexOf("WOCHENTAG")] + "_"
 					+ row[headers.indexOf("VON")];
 
 			String note = "";
@@ -290,8 +285,7 @@ public class LectureItemManager extends SQLiteOpenHelper {
 				lectureId = Utils.md5(name);
 			}
 
-			replaceIntoDb(new LectureItem(id, lectureId, start, end, name,
-					module, location, note, url, seriesId));
+			replaceIntoDb(new LectureItem(id, lectureId, start, end, name, module, location, note, url, seriesId));
 		}
 	}
 
@@ -302,34 +296,28 @@ public class LectureItemManager extends SQLiteOpenHelper {
 	 */
 	public Cursor getCurrentFromDb() {
 		return db.rawQuery("SELECT name, location, id as _id "
-				+ "FROM lectures_items WHERE datetime('now', 'localtime') "
-				+ "BETWEEN start AND end AND "
+				+ "FROM lectures_items WHERE datetime('now', 'localtime') " + "BETWEEN start AND end AND "
 				+ "lectureId NOT IN ('holiday', 'vacation') LIMIT 1", null);
 	}
 
 	/**
 	 * Get all upcoming and unfinished lecture items from the database
 	 * 
-	 * @return Database cursor (name, note, location, weekday, start_de, end_de,
-	 *         start_dt, end_dt, url, lectureId, _id)
+	 * @return Database cursor (name, note, location, weekday, start_de, end_de, start_dt, end_dt, url, lectureId, _id)
 	 */
 	public Cursor getRecentFromDb() {
-		return db
-				.rawQuery(
-						"SELECT name, note, location, "
-								+ "strftime('%w', start) as weekday, "
-								+ "strftime('%H:%M', start) as start_de, "
-								+ "strftime('%H:%M', end) as end_de, "
-								+ "strftime('%d.%m.%Y', start) as start_dt, "
-								+ "strftime('%d.%m.%Y', end) as end_dt, "
-								+ "url, lectureId, id as _id "
-								+ "FROM lectures_items WHERE end > datetime('now', 'localtime') AND "
-								+ "start < date('now', '+7 day') ORDER BY start",
-						null);
+		return db.rawQuery("SELECT name, note, location, " + "strftime('%w', start) as weekday, "
+				+ "strftime('%H:%M', start) as start_de, " + "strftime('%H:%M', end) as end_de, "
+				+ "strftime('%d.%m.%Y', start) as start_dt, " + "strftime('%d.%m.%Y', end) as end_dt, "
+				+ "url, lectureId, id as _id " + "FROM lectures_items WHERE end > datetime('now', 'localtime') AND "
+				+ "start < date('now', '+7 day') ORDER BY start", null);
 	}
 
 	public Cursor getFutureFromDb() {
-		return db.rawQuery("SELECT name, note, location, start, end, url FROM lectures_items WHERE end > datetime('now', 'localtime') ORDER BY start", null);
+		return db
+				.rawQuery(
+						"SELECT name, note, location, start, end, url FROM lectures_items WHERE end > datetime('now', 'localtime') ORDER BY start",
+						null);
 	}
 
 	/**
@@ -342,14 +330,10 @@ public class LectureItemManager extends SQLiteOpenHelper {
 	 * </pre>
 	 */
 	public Cursor getAllFromDb(String lectureId) {
-		return db.rawQuery("SELECT name, note, location, "
-				+ "strftime('%w', start) as weekday, "
-				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, "
-				+ "strftime('%H:%M', end) as end_de, "
-				+ "strftime('%d.%m.%Y', start) as start_dt, "
-				+ "strftime('%d.%m.%Y', end) as end_dt, "
-				+ "url, lectureId, id as _id "
-				+ "FROM lectures_items WHERE lectureId = ? ORDER BY start",
+		return db.rawQuery("SELECT name, note, location, " + "strftime('%w', start) as weekday, "
+				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, " + "strftime('%H:%M', end) as end_de, "
+				+ "strftime('%d.%m.%Y', start) as start_dt, " + "strftime('%d.%m.%Y', end) as end_dt, "
+				+ "url, lectureId, id as _id " + "FROM lectures_items WHERE lectureId = ? ORDER BY start",
 				new String[] { lectureId });
 	}
 
@@ -392,14 +376,10 @@ public class LectureItemManager extends SQLiteOpenHelper {
 			throw new Exception("Invalid id.");
 		}
 
-		db.execSQL(
-				"REPLACE INTO lectures_items (id, lectureId, start, end, "
-						+ "name, module, location, note, url, seriesId) VALUES "
-						+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-				new String[] { l.id, l.lectureId,
-						Utils.getDateTimeString(l.start),
-						Utils.getDateTimeString(l.end), l.name, l.module,
-						l.location, l.note, l.url, l.seriesId });
+		db.execSQL("REPLACE INTO lectures_items (id, lectureId, start, end, "
+				+ "name, module, location, note, url, seriesId) VALUES " + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				new String[] { l.id, l.lectureId, Utils.getDateTimeString(l.start), Utils.getDateTimeString(l.end),
+						l.name, l.module, l.location, l.note, l.url, l.seriesId });
 	}
 
 	/**
@@ -410,8 +390,7 @@ public class LectureItemManager extends SQLiteOpenHelper {
 	 * </pre>
 	 */
 	public void deleteItemFromDb(String id) {
-		db.execSQL("DELETE FROM lectures_items WHERE id = ?",
-				new String[] { id });
+		db.execSQL("DELETE FROM lectures_items WHERE id = ?", new String[] { id });
 	}
 
 	/**
@@ -422,8 +401,7 @@ public class LectureItemManager extends SQLiteOpenHelper {
 	 * </pre>
 	 */
 	public void deleteLectureFromDb(String id) {
-		db.execSQL("DELETE FROM lectures_items WHERE lectureId = ?",
-				new String[] { id });
+		db.execSQL("DELETE FROM lectures_items WHERE lectureId = ?", new String[] { id });
 	}
 
 	@Override

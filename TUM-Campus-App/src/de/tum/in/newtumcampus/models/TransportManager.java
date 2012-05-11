@@ -58,25 +58,21 @@ public class TransportManager extends SQLiteOpenHelper {
 		String lookupUrl = "http://www.mvg-live.de/ims/dfiStaticAnzeige.svc?haltestelle="
 				+ URLEncoder.encode(location, "ISO-8859-1");
 
-		String query = URLEncoder
-				.encode("select content from html where url=\"" + lookupUrl
-						+ "\" and xpath=\"//td[contains(@class,'Column')]/p\"");
+		String query = URLEncoder.encode("select content from html where url=\"" + lookupUrl
+				+ "\" and xpath=\"//td[contains(@class,'Column')]/p\"");
 		Utils.log(query);
 
-		JSONArray jsonArray = Utils.downloadJson(baseUrl + query)
-				.getJSONObject("query").getJSONObject("results")
+		JSONArray jsonArray = Utils.downloadJson(baseUrl + query).getJSONObject("query").getJSONObject("results")
 				.getJSONArray("p");
 
 		if (jsonArray.length() < 3) {
 			throw new Exception("<Keine Abfahrten gefunden>");
 		}
 
-		MatrixCursor mc = new MatrixCursor(
-				new String[] { "name", "desc", "_id" });
+		MatrixCursor mc = new MatrixCursor(new String[] { "name", "desc", "_id" });
 
 		for (int j = 2; j < jsonArray.length(); j = j + 3) {
-			String name = jsonArray.getString(j) + " "
-					+ jsonArray.getString(j + 1).trim();
+			String name = jsonArray.getString(j) + " " + jsonArray.getString(j + 1).trim();
 
 			String desc = jsonArray.getString(j + 2) + " min";
 
@@ -101,13 +97,11 @@ public class TransportManager extends SQLiteOpenHelper {
 		String lookupUrl = "http://www.mvg-live.de/ims/dfiStaticAuswahl.svc?haltestelle="
 				+ URLEncoder.encode(location, "ISO-8859-1");
 
-		String query = URLEncoder
-				.encode("select content from html where url=\"" + lookupUrl
-						+ "\" and xpath=\"//a[contains(@href,'haltestelle')]\"");
+		String query = URLEncoder.encode("select content from html where url=\"" + lookupUrl
+				+ "\" and xpath=\"//a[contains(@href,'haltestelle')]\"");
 		Utils.log(query);
 
-		JSONObject jsonObj = Utils.downloadJson(baseUrl + query).getJSONObject(
-				"query");
+		JSONObject jsonObj = Utils.downloadJson(baseUrl + query).getJSONObject("query");
 
 		JSONArray jsonArray = new JSONArray();
 		try {
@@ -140,8 +134,7 @@ public class TransportManager extends SQLiteOpenHelper {
 	 * @return Database cursor (name, _id)
 	 */
 	public Cursor getAllFromDb() {
-		return db.rawQuery("SELECT name, name as _id FROM transports "
-				+ "ORDER BY name", null);
+		return db.rawQuery("SELECT name, name as _id FROM transports " + "ORDER BY name", null);
 	}
 
 	/**
@@ -173,8 +166,7 @@ public class TransportManager extends SQLiteOpenHelper {
 		if (name.length() == 0) {
 			return;
 		}
-		db.execSQL("REPLACE INTO transports (name) VALUES (?)",
-				new String[] { name });
+		db.execSQL("REPLACE INTO transports (name) VALUES (?)", new String[] { name });
 	}
 
 	/**
@@ -185,15 +177,13 @@ public class TransportManager extends SQLiteOpenHelper {
 	 * </pre>
 	 */
 	public void deleteFromDb(String name) {
-		db.execSQL("DELETE FROM transports WHERE name = ?",
-				new String[] { name });
+		db.execSQL("DELETE FROM transports WHERE name = ?", new String[] { name });
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS transports ("
-				+ "name VARCHAR PRIMARY KEY)");
+		db.execSQL("CREATE TABLE IF NOT EXISTS transports (" + "name VARCHAR PRIMARY KEY)");
 	}
 
 	@Override

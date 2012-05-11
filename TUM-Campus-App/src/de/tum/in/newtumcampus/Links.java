@@ -23,7 +23,8 @@ import de.tum.in.newtumcampus.models.LinkManager;
 /**
  * Activity to show Links
  */
-public class Links extends Activity implements OnItemClickListener, OnItemLongClickListener, View.OnClickListener, ViewBinder {
+public class Links extends Activity implements OnItemClickListener, OnItemLongClickListener, View.OnClickListener,
+		ViewBinder {
 
 	SimpleCursorAdapter adapter;
 
@@ -36,7 +37,8 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 		LinkManager lm = new LinkManager(this, Const.db);
 		Cursor c = lm.getAllFromDb();
 
-		adapter = new SimpleCursorAdapter(this, R.layout.links_listview, c, c.getColumnNames(), new int[] { R.id.icon, R.id.name });
+		adapter = new SimpleCursorAdapter(this, R.layout.links_listview, c, c.getColumnNames(), new int[] { R.id.icon,
+				R.id.name });
 		adapter.setViewBinder(this);
 
 		// add footer view to add new links

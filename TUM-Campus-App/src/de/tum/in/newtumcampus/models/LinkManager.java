@@ -10,8 +10,7 @@ import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
 /**
- * Link Manager, handles database stuff, internal imports, external downloads
- * (icons)
+ * Link Manager, handles database stuff, internal imports, external downloads (icons)
  */
 public class LinkManager extends SQLiteOpenHelper {
 
@@ -79,16 +78,14 @@ public class LinkManager extends SQLiteOpenHelper {
 	 * Check if all icons are available in the cache directory
 	 */
 	public void checkExistingIcons() {
-		Cursor c = db.rawQuery(
-				"SELECT DISTINCT icon FROM links WHERE icon!=''", null);
+		Cursor c = db.rawQuery("SELECT DISTINCT icon FROM links WHERE icon!=''", null);
 
 		while (c.moveToNext()) {
 			String icon = c.getString(0);
 
 			File f = new File(icon);
 			if (!f.exists()) {
-				db.execSQL("UPDATE links SET icon='' WHERE icon=?",
-						new String[] { icon });
+				db.execSQL("UPDATE links SET icon='' WHERE icon=?", new String[] { icon });
 			}
 		}
 		c.close();
@@ -102,18 +99,15 @@ public class LinkManager extends SQLiteOpenHelper {
 	public void downloadMissingIcons() throws Exception {
 		checkExistingIcons();
 
-		Cursor c = db.rawQuery("SELECT DISTINCT url FROM links WHERE icon=''",
-				null);
+		Cursor c = db.rawQuery("SELECT DISTINCT url FROM links WHERE icon=''", null);
 
 		while (c.moveToNext()) {
 			String url = c.getString(0);
 
-			String target = Utils.getCacheDir("links/cache") + Utils.md5(url)
-					+ ".ico";
+			String target = Utils.getCacheDir("links/cache") + Utils.md5(url) + ".ico";
 			Utils.downloadIconFileThread(url, target);
 
-			db.execSQL("UPDATE links SET icon=? WHERE url=?", new String[] {
-					target, url });
+			db.execSQL("UPDATE links SET icon=? WHERE url=?", new String[] { target, url });
 		}
 		c.close();
 	}
@@ -124,8 +118,7 @@ public class LinkManager extends SQLiteOpenHelper {
 	 * @return Database cursor (icon, name, url, _id)
 	 */
 	public Cursor getAllFromDb() {
-		return db.rawQuery("SELECT icon, name, url, id as _id "
-				+ "FROM links ORDER BY name", null);
+		return db.rawQuery("SELECT icon, name, url, id as _id " + "FROM links ORDER BY name", null);
 	}
 
 	/**
@@ -161,16 +154,13 @@ public class LinkManager extends SQLiteOpenHelper {
 			throw new Exception("Invalid url.");
 		}
 
-		Cursor c = db.rawQuery("SELECT id FROM links WHERE name = ?",
-				new String[] { l.name });
+		Cursor c = db.rawQuery("SELECT id FROM links WHERE name = ?", new String[] { l.name });
 
 		if (c.moveToNext()) {
-			db.execSQL("UPDATE links SET url=?, icon='' WHERE id=?",
-					new String[] { l.url, c.getString(0) });
+			db.execSQL("UPDATE links SET url=?, icon='' WHERE id=?", new String[] { l.url, c.getString(0) });
 
 		} else {
-			db.execSQL("INSERT INTO links (name, url, icon) VALUES (?, ?, '')",
-					new String[] { l.name, l.url });
+			db.execSQL("INSERT INTO links (name, url, icon) VALUES (?, ?, '')", new String[] { l.name, l.url });
 		}
 	}
 
@@ -190,15 +180,13 @@ public class LinkManager extends SQLiteOpenHelper {
 	 * </pre>
 	 */
 	public void deleteFromDb(int id) {
-		db.execSQL("DELETE FROM links WHERE id = ?",
-				new String[] { String.valueOf(id) });
+		db.execSQL("DELETE FROM links WHERE id = ?", new String[] { String.valueOf(id) });
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS links ("
-				+ "id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, "
+		db.execSQL("CREATE TABLE IF NOT EXISTS links (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, "
 				+ "url VARCHAR, icon VARCHAR)");
 	}
 

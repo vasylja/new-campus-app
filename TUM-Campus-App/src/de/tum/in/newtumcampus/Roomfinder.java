@@ -70,7 +70,8 @@ public class Roomfinder extends Activity implements OnEditorActionListener {
 		}
 
 		// fetch css styles and build HTML document together with results
-		String text = Utils.buildHTMLDocument(FileUtils.sendGetRequest(httpClient, "http://portal.mytum.de/layout.css"), extractResultsFromURL());
+		String text = Utils.buildHTMLDocument(
+				FileUtils.sendGetRequest(httpClient, "http://portal.mytum.de/layout.css"), extractResultsFromURL());
 
 		// write resulting document to temporary file on SD-card
 		File file = null;
@@ -80,7 +81,8 @@ public class Roomfinder extends Activity implements OnEditorActionListener {
 			FileUtils.writeFile(file, text);
 
 			// get image and save it in the same folder as the document
-			FileUtils.getFileFromURL(httpClient, SERVICE_BASE_URL + "/default.gif", FileUtils.getFileOnSD("roomfinder", "default.gif"));
+			FileUtils.getFileFromURL(httpClient, SERVICE_BASE_URL + "/default.gif",
+					FileUtils.getFileOnSD("roomfinder", "default.gif"));
 
 			webView.loadUrl("file://" + file.getPath());
 

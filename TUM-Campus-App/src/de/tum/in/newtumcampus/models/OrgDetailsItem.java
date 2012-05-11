@@ -1,7 +1,7 @@
 package de.tum.in.newtumcampus.models;
 
 /**
- * Modell for the Organisation Details collected by  {@link OrgDetailsItemHandler}
+ * Modell for the Organisation Details collected by {@link OrgDetailsItemHandler}
  * <p>
  * 
  * @author Thomas Behrens
@@ -44,14 +44,13 @@ public class OrgDetailsItem {
 	private String contactEmail;
 	// Website of Organisation
 	private String contactLink;
-	// URL to a Googlemaps Site containing the 
+	// URL to a Googlemaps Site containing the
 	private String contactLocationURL;
 	// TUMOnline link
 	private String contactAdditionalInfo;
 	// TUMCampus link
 	private String tumCampusLink;
 
-	
 	/**
 	 * Additional Info Text: Can be very different filled
 	 */
@@ -59,7 +58,7 @@ public class OrgDetailsItem {
 	private String additionalInfoCaption;
 	// Information
 	private String additionalInfoText;
-	
+
 	public OrgDetailsItem() {
 		super();
 		this.id = "";
@@ -82,8 +81,6 @@ public class OrgDetailsItem {
 		this.additionalInfoCaption = "";
 		this.additionalInfoText = "";
 	}
-
-	
 
 	/**
 	 * @return the id

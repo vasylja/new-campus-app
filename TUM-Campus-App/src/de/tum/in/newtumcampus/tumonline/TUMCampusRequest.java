@@ -27,8 +27,8 @@ import android.content.DialogInterface.OnCancelListener;
 import android.util.Log;
 
 /**
- * This class will handle all action needed to communicate with the TUMCampus backend
- * The difference between this and the TUMOnline-class is the use of another webinterface 
+ * This class will handle all action needed to communicate with the TUMCampus backend The difference between this and the TUMOnline-class is the use of another
+ * webinterface
  * 
  * @author Thomas Behrens
  * @review Vincenz Doelle, Daniel G. Mayr
@@ -46,13 +46,13 @@ public class TUMCampusRequest {
 
 	/** parameters map to be added to the url */
 	private Map<String, String> parameters;
-	
+
 	/** Name of the called Function (of the interface) */
 	private final String method;
-	
+
 	/** asynchronous task for interactive fetch */
 	AsyncTask<Void, Void, String> backgroundTask = null;
-	
+
 	/** Progress dialog while fetching information */
 	private ProgressDialog progressDialog;
 
@@ -151,10 +151,10 @@ public class TUMCampusRequest {
 		}
 		return null;
 	}
-	
+
 	/**
-	 * this fetch method will fetch the data from the TUMOnline Request and will address the listeners onFetch if the fetch succeeded, 
-	 * else the onFetchError will be called
+	 * this fetch method will fetch the data from the TUMOnline Request and will address the listeners onFetch if the fetch succeeded, else the onFetchError
+	 * will be called
 	 * 
 	 * @param context
 	 *            the current context (may provide the current activity)
@@ -208,11 +208,10 @@ public class TUMCampusRequest {
 				}
 				if (result == null) {
 					listener.onFetchError(context.getString(R.string.empty_result));
-				} 
-				else if (result.contains("Token ist nicht bestätigt oder ungültig")) {
+				} else if (result.contains("Token ist nicht bestätigt oder ungültig")) {
 					Intent iTUMSettings = new Intent(context, TUMOnlineSettings.class);
-					Dialogs.showIntentSwitchDialog(context, (Activity) context, ((Activity) context).getString(R.string.dialog_access_token_invalid),
-							iTUMSettings);
+					Dialogs.showIntentSwitchDialog(context, (Activity) context,
+							((Activity) context).getString(R.string.dialog_access_token_invalid), iTUMSettings);
 
 					listener.onFetchError(context.getString(R.string.dialog_access_token_invalid));
 				}

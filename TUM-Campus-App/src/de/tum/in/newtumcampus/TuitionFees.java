@@ -73,18 +73,21 @@ public class TuitionFees extends Activity {
 		// check the credentials
 		tumOnlineUsername = PreferenceManager.getDefaultSharedPreferences(this).getString("lrz_id", null);
 		if (tumOnlineUsername == null) {
-			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_username_not_set), new Intent(this, TUMOnlineSettings.class));
+			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_username_not_set), new Intent(this,
+					TUMOnlineSettings.class));
 			return;
 		}
 
 		tumOnlinePassword = PreferenceManager.getDefaultSharedPreferences(this).getString("tumonline_password", null);
 		if (tumOnlinePassword == null) {
-			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_password_not_set), new Intent(this, TUMOnlineSettings.class));
+			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_password_not_set), new Intent(this,
+					TUMOnlineSettings.class));
 			return;
 		}
 
 		// if the document is updated in the last day show the document immediately
-		if (tuitionFeeDocument != null && tuitionFeeDocument.lastModified() > 0 && System.currentTimeMillis() - tuitionFeeDocument.lastModified() <= 86400000) {
+		if (tuitionFeeDocument != null && tuitionFeeDocument.lastModified() > 0
+				&& System.currentTimeMillis() - tuitionFeeDocument.lastModified() <= 86400000) {
 			webView.loadUrl("file://" + tuitionFeeDocument.getPath());
 
 		} else {
@@ -163,7 +166,8 @@ public class TuitionFees extends Activity {
 				progressDialog.dismiss();
 
 				if (status == false) {
-					Utils.showLongCenteredToast(TuitionFees.this, TuitionFees.this.getString(R.string.tumonline_settings_error));
+					Utils.showLongCenteredToast(TuitionFees.this,
+							TuitionFees.this.getString(R.string.tumonline_settings_error));
 				}
 			}
 		};
@@ -197,7 +201,8 @@ public class TuitionFees extends Activity {
 		String password = tumOnlinePassword;
 
 		// log in
-		url = "https://campus.tum.de/tumonline/wbanmeldung.durchfuehren?ctxid=check&curl=&cinframe=&cp1=" + username + "&cp2=" + password;
+		url = "https://campus.tum.de/tumonline/wbanmeldung.durchfuehren?ctxid=check&curl=&cinframe=&cp1=" + username
+				+ "&cp2=" + password;
 		String resp = FileUtils.sendPostRequest(httpClient, url);
 
 		// login unsuccessful

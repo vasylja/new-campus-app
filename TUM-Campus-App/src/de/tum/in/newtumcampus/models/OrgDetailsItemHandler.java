@@ -8,8 +8,8 @@ import de.tum.in.newtumcampus.common.Utils;
 import android.util.Log;
 
 /**
- * Class that handles an OrgDetailsObject and SAX-Parses the XML containing such Objects
- * The parsed Object has no child Objects (but can be implemented also with child Objects)
+ * Class that handles an OrgDetailsObject and SAX-Parses the XML containing such Objects The parsed Object has no child Objects (but can be implemented also
+ * with child Objects)
  * 
  * @author Thomas Behrens
  * @review Vincenz Doelle, Daniel G. Mayr
@@ -17,17 +17,17 @@ import android.util.Log;
 
 public class OrgDetailsItemHandler extends DefaultHandler {
 
-	// OrganisationDetails Object to load parsed data into 
+	// OrganisationDetails Object to load parsed data into
 	private final OrgDetailsItem odo = new OrgDetailsItem();
 
 	// Buffer for parsing
 	StringBuffer buff;
 	boolean buffering = false;
-	
+
 	// stores temporarily the attribute of the tag,
 	// to have access to it at the end tag
 	public String tempAtt;
-	
+
 	// save if the parser is inside Additional Information
 	// to handle those another way
 	boolean isInsideAdditionalInformation = false;
@@ -35,10 +35,11 @@ public class OrgDetailsItemHandler extends DefaultHandler {
 	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) {
 		// only buffer interesting tags
-		if (localName.equals("orgUnitID") || localName.equals("orgUnitName") || localName.equals("orgUnitCode") || localName.equals("orgUnitDescription")
-				|| localName.equals("contactName") || localName.equals("street") || localName.equals("locality") || localName.equals("pcode")
-				|| localName.equals("country") || localName.equals("telephone") || localName.equals("fax") || localName.equals("email")
-				|| localName.equals("webLink") || localName.equals("subBlock")) {
+		if (localName.equals("orgUnitID") || localName.equals("orgUnitName") || localName.equals("orgUnitCode")
+				|| localName.equals("orgUnitDescription") || localName.equals("contactName")
+				|| localName.equals("street") || localName.equals("locality") || localName.equals("pcode")
+				|| localName.equals("country") || localName.equals("telephone") || localName.equals("fax")
+				|| localName.equals("email") || localName.equals("webLink") || localName.equals("subBlock")) {
 			buff = new StringBuffer("");
 			buffering = true;
 			// to store first attribute till end tag
@@ -49,12 +50,13 @@ public class OrgDetailsItemHandler extends DefaultHandler {
 	@Override
 	public void endElement(String namespaceURI, String localName, String qName) {
 		// end buffer of interesting tags to handle their content
-		if (localName.equals("orgUnitID") || localName.equals("orgUnitName") || localName.equals("orgUnitCode") || localName.equals("orgUnitDescription")
-				|| localName.equals("contactName") || localName.equals("street") || localName.equals("locality") || localName.equals("pcode")
-				|| localName.equals("country") || localName.equals("telephone") || localName.equals("fax") || localName.equals("email")
-				|| localName.equals("webLink") || localName.equals("subBlock")) {
+		if (localName.equals("orgUnitID") || localName.equals("orgUnitName") || localName.equals("orgUnitCode")
+				|| localName.equals("orgUnitDescription") || localName.equals("contactName")
+				|| localName.equals("street") || localName.equals("locality") || localName.equals("pcode")
+				|| localName.equals("country") || localName.equals("telephone") || localName.equals("fax")
+				|| localName.equals("email") || localName.equals("webLink") || localName.equals("subBlock")) {
 			buffering = false;
-		
+
 			// String-Switch:
 			// Set attributes depending on localname of the tag
 			if (localName.equals("orgUnitID")) {

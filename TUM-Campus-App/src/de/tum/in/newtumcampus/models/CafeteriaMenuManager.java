@@ -53,8 +53,7 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 	 * @throws Exception
 	 * </pre>
 	 */
-	public void downloadFromExternal(List<Integer> ids, boolean force)
-			throws Exception {
+	public void downloadFromExternal(List<Integer> ids, boolean force) throws Exception {
 
 		if (!force && !SyncManager.needSync(db, this, 86400)) {
 			return;
@@ -63,10 +62,8 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 		int count = Utils.dbGetTableCount(db, "cafeterias_menus");
 
 		for (int id : ids) {
-			Cursor c = db.rawQuery("SELECT 1 FROM cafeterias_menus "
-					+ "WHERE mensaId = ? AND "
-					+ "date > date('now', '+6 day') LIMIT 1",
-					new String[] { String.valueOf(id) });
+			Cursor c = db.rawQuery("SELECT 1 FROM cafeterias_menus " + "WHERE mensaId = ? AND "
+					+ "date > date('now', '+6 day') LIMIT 1", new String[] { String.valueOf(id) });
 
 			if (c.getCount() > 0) {
 				c.close();
@@ -106,15 +103,12 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 	 * @return Database cursor (date_de, _id)
 	 */
 	public Cursor getDatesFromDb() {
-		return db.rawQuery(
-				"SELECT DISTINCT strftime('%d.%m.%Y', date) as date_de, date as _id "
-						+ "FROM cafeterias_menus WHERE "
-						+ "date >= date() ORDER BY date", null);
+		return db.rawQuery("SELECT DISTINCT strftime('%d.%m.%Y', date) as date_de, date as _id "
+				+ "FROM cafeterias_menus WHERE " + "date >= date() ORDER BY date", null);
 	}
 
 	/**
-	 * Get all types and names from the database for a special date and a
-	 * special cafeteria
+	 * Get all types and names from the database for a special date and a special cafeteria
 	 * 
 	 * <pre>
 	 * @param mensaId Mensa ID, e.g. 411
@@ -123,20 +117,15 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 	 * </pre>
 	 */
 	public Cursor getTypeNameFromDb(String mensaId, String date) {
-		return db
-				.rawQuery(
-						"SELECT typeLong, group_concat(name, '\n') as names, id as _id "
-								+ "FROM cafeterias_menus WHERE mensaId = ? AND "
-								+ "date = ? GROUP BY typeLong ORDER BY typeNr, typeLong, name",
-						new String[] { mensaId, date });
+		return db.rawQuery("SELECT typeLong, group_concat(name, '\n') as names, id as _id "
+				+ "FROM cafeterias_menus WHERE mensaId = ? AND "
+				+ "date = ? GROUP BY typeLong ORDER BY typeNr, typeLong, name", new String[] { mensaId, date });
 	}
 
 	/**
 	 * Convert JSON object to CafeteriaMenu
 	 * 
-	 * Example JSON: e.g.
-	 * {"id":"25544","mensa_id":"411","date":"2011-06-20","type_short"
-	 * :"tg","type_long":"Tagesgericht 3","type_nr":"3","name":
+	 * Example JSON: e.g. {"id":"25544","mensa_id":"411","date":"2011-06-20","type_short" :"tg","type_long":"Tagesgericht 3","type_nr":"3","name":
 	 * "Cordon bleu vom Schwein (mit Formfleischhinterschinken) (S) (1,2,3,8)"}
 	 * 
 	 * <pre>
@@ -147,18 +136,15 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 	 */
 	public static CafeteriaMenu getFromJson(JSONObject json) throws Exception {
 
-		return new CafeteriaMenu(json.getInt("id"), json.getInt("mensa_id"),
-				Utils.getDate(json.getString("date")),
-				json.getString("type_short"), json.getString("type_long"),
-				json.getInt("type_nr"), json.getString("name"));
+		return new CafeteriaMenu(json.getInt("id"), json.getInt("mensa_id"), Utils.getDate(json.getString("date")),
+				json.getString("type_short"), json.getString("type_long"), json.getInt("type_nr"),
+				json.getString("name"));
 	}
 
 	/**
 	 * Convert JSON object to CafeteriaMenu (addendum)
 	 * 
-	 * Example JSON: e.g.
-	 * {"mensa_id":"411","date":"2011-07-29","name":"Pflaumenkompott"
-	 * ,"type_short":"bei","type_long":"Beilagen"}
+	 * Example JSON: e.g. {"mensa_id":"411","date":"2011-07-29","name":"Pflaumenkompott" ,"type_short":"bei","type_long":"Beilagen"}
 	 * 
 	 * <pre>
 	 * @param json see above
@@ -166,12 +152,10 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 	 * @throws Exception
 	 * </pre>
 	 */
-	public static CafeteriaMenu getFromJsonAddendum(JSONObject json)
-			throws Exception {
+	public static CafeteriaMenu getFromJsonAddendum(JSONObject json) throws Exception {
 
-		return new CafeteriaMenu(0, json.getInt("mensa_id"), Utils.getDate(json
-				.getString("date")), json.getString("type_short"),
-				json.getString("type_long"), 10, json.getString("name"));
+		return new CafeteriaMenu(0, json.getInt("mensa_id"), Utils.getDate(json.getString("date")),
+				json.getString("type_short"), json.getString("type_long"), 10, json.getString("name"));
 	}
 
 	/**
@@ -198,13 +182,10 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 		if (c.date.before(getDate("2011-01-01"))) {
 			throw new Exception("Invalid date.");
 		}
-		db.execSQL(
-				"REPLACE INTO cafeterias_menus (id, mensaId, date, typeShort, "
-						+ "typeLong, typeNr, name) VALUES (?, ?, ?, ?, ?, ?, ?)",
-				new String[] { String.valueOf(c.id),
-						String.valueOf(c.cafeteriaId),
-						Utils.getDateString(c.date), c.typeShort, c.typeLong,
-						String.valueOf(c.typeNr), c.name });
+		db.execSQL("REPLACE INTO cafeterias_menus (id, mensaId, date, typeShort, "
+				+ "typeLong, typeNr, name) VALUES (?, ?, ?, ?, ?, ?, ?)",
+				new String[] { String.valueOf(c.id), String.valueOf(c.cafeteriaId), Utils.getDateString(c.date),
+						c.typeShort, c.typeLong, String.valueOf(c.typeNr), c.name });
 	}
 
 	/**
@@ -222,8 +203,7 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 	 * </pre>
 	 */
 	public void deleteFromDb(int mensaId) {
-		db.execSQL("DELETE FROM cafeterias_menus WHERE mensaId = ?",
-				new String[] { String.valueOf(mensaId) });
+		db.execSQL("DELETE FROM cafeterias_menus WHERE mensaId = ?", new String[] { String.valueOf(mensaId) });
 	}
 
 	/**

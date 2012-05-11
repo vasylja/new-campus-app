@@ -13,6 +13,7 @@ import de.tum.in.newtumcampus.models.LectureAppointmentsListAdapter;
 import de.tum.in.newtumcampus.models.LectureAppointmentsRowSet;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
+
 /**
  * This activity provides the appointment dates to a given lecture using the TUMOnline web service.
  * 

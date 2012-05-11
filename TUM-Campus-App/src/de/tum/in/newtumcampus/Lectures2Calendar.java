@@ -59,7 +59,7 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		// to set minutes for reminder interactively
 		tvReminderCaption = (TextView) findViewById(R.id.tvReminderCaption);
 	}
-	
+
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -72,7 +72,8 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		String[] calendarStrings = calendars.keySet().toArray(new String[0]);
 		// simple adapter for the spinner
 
-		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, calendarStrings);
+		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_dropdown_item, calendarStrings);
 		spinCalendar.setAdapter(spinnerArrayAdapter);
 		spinCalendar.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -81,8 +82,9 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 				String filter = spinCalendar.getItemAtPosition(arg2).toString();
 				// get id for that string
 				Integer iselect = calendars.get(filter);
-				//well, not in map (may not be needed)
-				if(iselect==null) selectedCalendar=-1;
+				// well, not in map (may not be needed)
+				if (iselect == null)
+					selectedCalendar = -1;
 				else
 					// select it
 					selectedCalendar = iselect.intValue();
@@ -100,7 +102,8 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 	/**
 	 * @see http://www.developer.com/ws/article.php/3850276/Working-with-the-Android-Calendar.htm
 	 */
-	public boolean addToCalendar(int calendar_id, String title, String description, String location, long start, long end, int minRemind) {
+	public boolean addToCalendar(int calendar_id, String title, String description, String location, long start,
+			long end, int minRemind) {
 
 		// end should be after start
 		if (start >= end)
@@ -128,7 +131,7 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 
 		return true;
 	}
-	
+
 	/**
 	 * set a reminder for a given event
 	 * 
@@ -148,7 +151,6 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		return true;
 	}
 
-	
 	/**
 	 * this method returns the calendar or event uri with respect to the sdk version
 	 * 
@@ -161,13 +163,15 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		Uri calendarURI = null;
 
 		if (android.os.Build.VERSION.SDK_INT <= 7) {
-			calendarURI = (eventUri) ? Uri.parse("content://calendar/events") : Uri.parse("content://calendar/calendars");
+			calendarURI = (eventUri) ? Uri.parse("content://calendar/events") : Uri
+					.parse("content://calendar/calendars");
 		} else {
-			calendarURI = (eventUri) ? Uri.parse("content://com.android.calendar/events") : Uri.parse("content://com.android.calendar/calendars");
+			calendarURI = (eventUri) ? Uri.parse("content://com.android.calendar/events") : Uri
+					.parse("content://com.android.calendar/calendars");
 		}
 		return calendarURI;
 	}
-	
+
 	/**
 	 * this method returns the uri of the reminder content provider
 	 * 
@@ -200,7 +204,7 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		// maybe we do not have the rights
 		if (cursor == null)
 			return null;
-		
+
 		// we found some
 		// init our result map
 		Map<String, Integer> result = new HashMap<String, Integer>();
@@ -214,7 +218,6 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		}
 		return result;
 	}
-
 
 	@Override
 	public void onClick(View v) {
@@ -254,7 +257,8 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 								long end = cal.getTimeInMillis();
 
 								// put it to calendar
-								addToCalendar(selectedCalendar, title, description, location, start, end, sbReminder.getProgress());
+								addToCalendar(selectedCalendar, title, description, location, start, end,
+										sbReminder.getProgress());
 							} catch (Exception ex) {
 								ex.printStackTrace();
 							}

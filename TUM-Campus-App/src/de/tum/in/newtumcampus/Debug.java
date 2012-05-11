@@ -88,7 +88,8 @@ public class Debug extends Activity implements View.OnClickListener {
 	 */
 	public void debugSQL(String query) {
 		debugReset();
-		SQLiteDatabase db = SQLiteDatabase.openDatabase(getDatabasePath(Const.db).toString(), null, SQLiteDatabase.OPEN_READONLY);
+		SQLiteDatabase db = SQLiteDatabase.openDatabase(getDatabasePath(Const.db).toString(), null,
+				SQLiteDatabase.OPEN_READONLY);
 
 		// output raw data row-by-row
 		Cursor c = db.rawQuery(query, null);
