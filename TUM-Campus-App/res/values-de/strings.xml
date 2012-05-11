@@ -334,6 +334,21 @@
     <string name="tumonline_password">Passwort für TUMOnline</string>
     <string name="tumonline_access_token">Access token für TUMOnline</string>
     <string name="lrz_id">Kennung für das LRZ\nz.B. go42tum</string>
+    
+    <!-- DownloadService.java -->
+    <string name="updating">Aktualisiere …</string>
+    <string name="tum_campus_download">TUMCampus download …</string>
+    <string name="cafeterias">Mensen</string>
+	<string name="completed">Fertig!</string>
+	
+	<!-- ImportService.java -->
+	<string name="importing">Importiere…</string>
+	<string name="tum_campus_import">TUMCampus import …</string>
+	<string name="service">Service</string>
+	<string name="import_from_tumonline">import aus TUMOnline</string>
+	
+	<!-- SilenceService -->
+	<string name="set_ringer_mode">set ringer mode: </string>
 
     <!-- ###### MANIFEST ####### -->
     <string name="current_events">Aktuelle Veranstaltungen</string>
@@ -352,6 +367,7 @@
     <string name="settings">Einstellungen</string>
 
     <!-- ###### OTHER ####### -->
+    <string name="access_token">AccessToken</string>
     <string name="dialog_access_token_missing">TUMOnline-Access-Token ist nicht gesetzt! Jetzt setzen?</string>
     <string name="dialog_access_token_missing2">TUMOnline-Access-Token ist nicht gesetzt!</string>
     <string name="dialog_access_token_invalid">TUMOnline-Access-Token ist ungültig! Neu setzen?</string>

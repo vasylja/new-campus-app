@@ -174,9 +174,9 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 			}
 		};
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Wirklch löschen?");
-		builder.setPositiveButton("Ja", listener);
-		builder.setNegativeButton("Nein", null);
+		builder.setMessage(getString(R.string.really_delete));
+		builder.setPositiveButton(getString(R.string.yes), listener);
+		builder.setNegativeButton(getString(R.string.no), null);
 		builder.show();
 		return false;
 	}
@@ -184,7 +184,7 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem m = menu.add(0, Menu.FIRST, 0, "Aktualisieren");
+		MenuItem m = menu.add(0, Menu.FIRST, 0, getString(R.string.update));
 		m.setIcon(R.drawable.ic_menu_refresh);
 		return true;
 	}

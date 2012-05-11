@@ -203,8 +203,12 @@ public final class R {
     }
     public static final class string {
         public static final int abbreviation=0x7f050084;
+        /**  ###### OTHER ####### 
+ ###### OTHER ####### 
+         */
+        public static final int access_token=0x7f0500d4;
         public static final int access_token_generated=0x7f0500b6;
-        public static final int access_token_settings=0x7f0500c4;
+        public static final int access_token_settings=0x7f0500cd;
         public static final int access_token_wasnt_generated=0x7f0500b7;
         public static final int add=0x7f050017;
         public static final int add_info=0x7f0500a8;
@@ -229,7 +233,8 @@ public final class R {
         public static final int business_informatics_bachelor_0809=0x7f050065;
         public static final int business_informatics_bachelor_1112=0x7f050064;
         public static final int business_informatics_master=0x7f050069;
-        public static final int calendarexport=0x7f0500de;
+        public static final int cafeterias=0x7f0500bf;
+        public static final int calendarexport=0x7f0500e8;
         /**  Plans.java 
  Plans.java 
          */
@@ -244,8 +249,8 @@ public final class R {
  Documents.java 
          */
         public static final int certificate_of_matriculation=0x7f05006d;
-        public static final int chooseReminder=0x7f0500df;
-        public static final int choose_calendar=0x7f0500dd;
+        public static final int chooseReminder=0x7f0500e9;
+        public static final int choose_calendar=0x7f0500e7;
         /**  hours.xml 
  hours.xml 
          */
@@ -273,6 +278,7 @@ public final class R {
  curricula.xml 
          */
         public static final int choose_study_plan=0x7f050005;
+        public static final int completed=0x7f0500c0;
         public static final int computational_science_master=0x7f05006c;
         public static final int confirmation_about_payment=0x7f05006f;
         public static final int contact_details=0x7f050086;
@@ -281,7 +287,7 @@ public final class R {
         /**  ###### MANIFEST ####### 
  ###### MANIFEST ####### 
          */
-        public static final int current_events=0x7f0500bd;
+        public static final int current_events=0x7f0500c6;
         /**  main.xml & several listview/details.xml containing TUM-logo 
  main.xml & several listview/details.xml containing TUM-logo 
          */
@@ -290,7 +296,7 @@ public final class R {
  ExamListAdapter.java 
          */
         public static final int date=0x7f05005e;
-        public static final int deactivated=0x7f0500e0;
+        public static final int deactivated=0x7f0500ea;
         public static final int debug_cafeterias=0x7f050007;
         public static final int debug_cafeterias_menus=0x7f050008;
         public static final int debug_events=0x7f05000c;
@@ -302,7 +308,7 @@ public final class R {
         public static final int debug_locations=0x7f050010;
         public static final int debug_master=0x7f050012;
         public static final int debug_news=0x7f05000d;
-        public static final int debug_sqllite=0x7f0500c9;
+        public static final int debug_sqllite=0x7f0500d2;
         /**  debug.xml 
  debug.xml 
          */
@@ -313,40 +319,37 @@ public final class R {
          */
         public static final int departure=0x7f0500ad;
         public static final int description=0x7f050093;
-        public static final int dialog_access_token_invalid=0x7f0500cd;
-        /**  ###### OTHER ####### 
- ###### OTHER ####### 
-         */
-        public static final int dialog_access_token_missing=0x7f0500cb;
-        public static final int dialog_access_token_missing2=0x7f0500cc;
+        public static final int dialog_access_token_invalid=0x7f0500d7;
+        public static final int dialog_access_token_missing=0x7f0500d5;
+        public static final int dialog_access_token_missing2=0x7f0500d6;
         /**  TumOnlineSettings.java 
  TumOnlineSettings.java 
          */
         public static final int dialog_new_token=0x7f0500b4;
-        public static final int dialog_password_not_set=0x7f0500cf;
-        public static final int dialog_username_not_set=0x7f0500ce;
+        public static final int dialog_password_not_set=0x7f0500d9;
+        public static final int dialog_username_not_set=0x7f0500d8;
         public static final int documents=0x7f05004f;
         public static final int download_new=0x7f050072;
-        public static final int elements_found=0x7f0500d1;
+        public static final int elements_found=0x7f0500db;
         public static final int email=0x7f050088;
         public static final int empty_cache=0x7f0500b3;
-        public static final int empty_result=0x7f0500da;
-        public static final int error=0x7f0500e1;
+        public static final int empty_result=0x7f0500e4;
+        public static final int error=0x7f0500eb;
         public static final int error_lrz_wrong=0x7f0500b5;
-        public static final int error_occurred_while_opening=0x7f0500db;
-        public static final int event_details=0x7f0500be;
+        public static final int error_occurred_while_opening=0x7f0500e5;
+        public static final int event_details=0x7f0500c7;
         public static final int events=0x7f050055;
         public static final int examination_aids=0x7f050030;
         public static final int examiner=0x7f05001d;
-        public static final int export2calendar=0x7f0500d9;
-        public static final int export_events=0x7f0500d8;
+        public static final int export2calendar=0x7f0500e3;
+        public static final int export_events=0x7f0500e2;
         public static final int fax=0x7f05008a;
         /**  TuitionFees.java 
  TuitionFees.java 
          */
         public static final int fetching_document=0x7f0500ac;
         public static final int first_date=0x7f050026;
-        public static final int full_app_info=0x7f0500c8;
+        public static final int full_app_info=0x7f0500d1;
         public static final int function=0x7f0500a5;
         public static final int games_engineering_bachelor=0x7f050067;
         /**  tumonline.xml 
@@ -367,11 +370,16 @@ public final class R {
         public static final int howto_import_lectures=0x7f050038;
         public static final int howto_import_rss_feed=0x7f050039;
         public static final int howto_tumonline=0x7f0500b8;
+        public static final int import_from_tumonline=0x7f0500c4;
         public static final int import_hint=0x7f05003a;
         public static final int import_lectures_from_sd_card=0x7f050034;
         public static final int import_lectures_from_tumonline=0x7f050035;
         public static final int import_links=0x7f050036;
         public static final int import_rss_feed=0x7f050037;
+        /**  ImportService.java 
+ ImportService.java 
+         */
+        public static final int importing=0x7f0500c1;
         public static final int informatics_bachelor=0x7f050063;
         public static final int informatics_master=0x7f050068;
         public static final int information=0x7f050077;
@@ -401,11 +409,11 @@ public final class R {
         public static final int lec_method_details=0x7f05002d;
         public static final int lec_target=0x7f05002e;
         public static final int lecture_begin=0x7f050025;
-        public static final int lecture_dates=0x7f0500c2;
-        public static final int lecture_details=0x7f0500c1;
+        public static final int lecture_dates=0x7f0500cb;
+        public static final int lecture_details=0x7f0500ca;
         public static final int lecturer=0x7f050028;
         public static final int lectures=0x7f05004b;
-        public static final int lectures_found=0x7f0500dc;
+        public static final int lectures_found=0x7f0500e6;
         /**  Hours.java 
  Hours.java 
          */
@@ -438,7 +446,7 @@ public final class R {
         public static final int mvv=0x7f050053;
         public static final int mvv_efa=0x7f0500b1;
         public static final int mvv_fast_train_net=0x7f05009d;
-        public static final int mvv_live=0x7f0500c7;
+        public static final int mvv_live=0x7f0500d0;
         public static final int mvv_nightlines=0x7f05009e;
         /**  MyLectures.java 
  MyLectures.java 
@@ -450,8 +458,8 @@ public final class R {
  lectures_horizontal.xml & lectures.xml 
          */
         public static final int next_lectures=0x7f050032;
-        public static final int no=0x7f0500d4;
-        public static final int no_internet_connection=0x7f0500d5;
+        public static final int no=0x7f0500de;
+        public static final int no_internet_connection=0x7f0500df;
         /**  News.java 
  News.java 
          */
@@ -460,7 +468,7 @@ public final class R {
  StaffDetails.java 
          */
         public static final int no_person_set=0x7f05005f;
-        public static final int no_sd_card=0x7f0500d6;
+        public static final int no_sd_card=0x7f0500e0;
         public static final int office_hours=0x7f0500a9;
         public static final int open_from_sd=0x7f050071;
         /**  Curricula.java 
@@ -472,15 +480,15 @@ public final class R {
  organisation.xml & organisation_details.xml 
          */
         public static final int organisation_caption=0x7f05003e;
-        public static final int organisation_details=0x7f0500c6;
+        public static final int organisation_details=0x7f0500cf;
         public static final int organisation_of_lecture=0x7f050029;
         public static final int organisations=0x7f05004d;
-        public static final int own_lectures=0x7f0500c3;
+        public static final int own_lectures=0x7f0500cc;
         /**  evemts.xml 
  events.xml 
          */
         public static final int past_events=0x7f050014;
-        public static final int person_information=0x7f0500c5;
+        public static final int person_information=0x7f0500ce;
         public static final int person_search=0x7f05004c;
         public static final int personinformation_are_getting_fetched=0x7f0500a2;
         public static final int phone=0x7f050089;
@@ -492,7 +500,7 @@ public final class R {
         public static final int please_insert_at_least_two_chars=0x7f0500a0;
         public static final int plz=0x7f050090;
         public static final int prices=0x7f050061;
-        public static final int really_delete=0x7f0500d2;
+        public static final int really_delete=0x7f0500dc;
         public static final int room=0x7f0500aa;
         public static final int roomfinder=0x7f05007f;
         /**  Roomfinder 
@@ -509,14 +517,19 @@ public final class R {
         public static final int search_caption=0x7f050041;
         public static final int search_help=0x7f050042;
         public static final int search_is_running=0x7f0500a1;
-        public static final int search_lectures=0x7f0500c0;
+        public static final int search_lectures=0x7f0500c9;
         public static final int search_result=0x7f0500b0;
         public static final int search_station=0x7f050046;
         public static final int secretary=0x7f050087;
         public static final int semester=0x7f05001c;
         public static final int semester_data=0x7f050023;
-        public static final int settings=0x7f0500ca;
-        public static final int something_wrong=0x7f0500d0;
+        public static final int service=0x7f0500c3;
+        /**  SilenceService 
+ SilenceService 
+         */
+        public static final int set_ringer_mode=0x7f0500c5;
+        public static final int settings=0x7f0500d3;
+        public static final int something_wrong=0x7f0500da;
         public static final int street=0x7f05008f;
         public static final int study_plans=0x7f050050;
         public static final int study_status=0x7f05006e;
@@ -529,10 +542,12 @@ public final class R {
  Organisation.java 
          */
         public static final int tum=0x7f050081;
+        public static final int tum_campus_download=0x7f0500be;
+        public static final int tum_campus_import=0x7f0500c2;
         public static final int tum_logo=0x7f05003c;
         public static final int tumcampus_link=0x7f050095;
         public static final int tumonline_access_token=0x7f0500bb;
-        public static final int tumonline_connection=0x7f0500bf;
+        public static final int tumonline_connection=0x7f0500c8;
         public static final int tumonline_link=0x7f050094;
         public static final int tumonline_password=0x7f0500ba;
         /**  main_import.xml 
@@ -546,17 +561,21 @@ public final class R {
  TumCampus.java 
          */
         public static final int update=0x7f050049;
+        /**  DownloadService.java 
+ DownloadService.java 
+         */
+        public static final int updating=0x7f0500bd;
         /**  feeds_footer.xml 
  feeds_footer.xml & links_footer.xml 
          */
         public static final int url=0x7f050015;
         public static final int user_data=0x7f0500b9;
-        public static final int warning_no_internet_connection_for_organisation_details=0x7f0500d7;
+        public static final int warning_no_internet_connection_for_organisation_details=0x7f0500e1;
         /**  Lectures.java 
  Lectures.java 
          */
         public static final int week_splitted=0x7f05007d;
-        public static final int yes=0x7f0500d3;
+        public static final int yes=0x7f0500dd;
         /**  plans.xml 
  plans.xml 
          */

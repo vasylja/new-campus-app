@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.media.AudioManager;
 import de.tum.in.newtumcampus.Const;
+import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.LectureItemManager;
 
@@ -44,7 +45,7 @@ public class SilenceService extends IntentService {
 			c.close();
 			lim.close();
 
-			Utils.log("set ringer mode: " + mode);
+			Utils.log(getString(R.string.set_ringer_mode) + mode);
 			// execute (no-)silence mode
 			AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 			am.setRingerMode(mode);

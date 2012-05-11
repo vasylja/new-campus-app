@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import de.tum.in.newtumcampus.Const;
+import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.TumCampus;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.Feed;
@@ -74,17 +75,17 @@ public class ImportService extends IntentService {
 			String ns = Context.NOTIFICATION_SERVICE;
 			NotificationManager nm = (NotificationManager) getSystemService(ns);
 
-			Notification notification = new Notification(android.R.drawable.stat_sys_download, "Importiere ...",
+			Notification notification = new Notification(android.R.drawable.stat_sys_download, getString(R.string.importing),
 					System.currentTimeMillis());
 
 			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, TumCampus.class), 0);
 
-			notification.setLatestEventInfo(this, "TUMCampus import ...", "", contentIntent);
+			notification.setLatestEventInfo(this, getString(R.string.tum_campus_import), "", contentIntent);
 			nm.notify(1, notification);
 
 			// added by Daniel G. Mayr
 			if (action.equals("lecturesTUMOnline")) {
-				Log.d("Service", "import from TUMOnline");
+				Log.d(getString(R.string.service), getString(R.string.import_from_tumonline));
 				importLectureItemsFromTUMOnline();
 			} else {
 
@@ -106,7 +107,8 @@ public class ImportService extends IntentService {
 					message(e, "");
 				}
 			}
-			message("Fertig!", "completed");
+//			TODO Check whether to change "completed"
+			message(getString(R.string.completed), "completed");
 			nm.cancel(1);
 		}
 	}
@@ -293,7 +295,7 @@ public class ImportService extends IntentService {
 		if (Utils.getSettingBool(this, Const.Settings.debug)) {
 			message += sw.toString();
 		}
-		message(info + " " + message, "error");
+		message(info + " " + message, getString(R.string.error));
 	}
 
 	/**

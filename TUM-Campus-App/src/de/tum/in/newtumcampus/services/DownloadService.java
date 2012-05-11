@@ -96,15 +96,15 @@ public class DownloadService extends IntentService {
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager nm = (NotificationManager) getSystemService(ns);
 
-		Notification notification = new Notification(android.R.drawable.stat_sys_download, "Aktualisiere ...",
+		Notification notification = new Notification(android.R.drawable.stat_sys_download, getString(R.string.updating),
 				System.currentTimeMillis());
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, TumCampus.class), 0);
 
-		notification.setLatestEventInfo(this, "TUMCampus download ...", "", contentIntent);
+		notification.setLatestEventInfo(this, getString(R.string.tum_campus_download), "", contentIntent);
 		nm.notify(1, notification);
 
-		logMessage("Aktualisiere: ", "");
+		logMessage(getString(R.string.updating), "");
 
 		String action = intent.getStringExtra("action");
 		Utils.log(action);
@@ -116,30 +116,31 @@ public class DownloadService extends IntentService {
 
 		// download all or only one action
 		if ((action == null || action.equals("feeds")) && !destroyed) {
-			logMessage("RSS, ", "");
+			logMessage(getString(R.string.rss_feeds)+", ", "");
 			downloadFeeds(force);
 		}
 		if ((action == null || action.equals("news")) && !destroyed) {
-			logMessage("Nachrichten, ", "");
+			logMessage(getString(R.string.news)+", ", "");
 			downloadNews(force);
 		}
 		if ((action == null || action.equals("events")) && !destroyed) {
-			logMessage("Veranstaltungen, ", "");
+			logMessage(getString(R.string.events)+", ", "");
 			downloadEvents(force);
 		}
 		if ((action == null || action.equals("cafeterias")) && !destroyed) {
-			logMessage("Mensen, ", "");
+			logMessage(getString(R.string.cafeterias)+", ", "");
 			downloadCafeterias(force);
 		}
 		if ((action == null || action.equals("links")) && !destroyed) {
-			logMessage("Links, ", "");
+			logMessage(getString(R.string.links)+", ", "");
 			downloadLinks();
 		}
 		if ((action == null || action.equals("organisations")) && !destroyed) {
-			logMessage("Organisationen, ", "");
+			logMessage(getString(R.string.organisations)+", ", "");
 			downloadOrganisations();
 		}
-		logMessage("Fertig!", "completed");
+//		TODO Check whether to change "completed"
+		logMessage(getString(R.string.completed), "completed");
 		nm.cancel(1);
 	}
 
