@@ -96,8 +96,8 @@ public class DownloadService extends IntentService {
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager nm = (NotificationManager) getSystemService(ns);
 
-		Notification notification = new Notification(android.R.drawable.stat_sys_download, getString(R.string.updating),
-				System.currentTimeMillis());
+		Notification notification = new Notification(android.R.drawable.stat_sys_download,
+				getString(R.string.updating), System.currentTimeMillis());
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, TumCampus.class), 0);
 
@@ -116,30 +116,30 @@ public class DownloadService extends IntentService {
 
 		// download all or only one action
 		if ((action == null || action.equals("feeds")) && !destroyed) {
-			logMessage(getString(R.string.rss_feeds)+", ", "");
+			logMessage(getString(R.string.rss_feeds) + ", ", "");
 			downloadFeeds(force);
 		}
 		if ((action == null || action.equals("news")) && !destroyed) {
-			logMessage(getString(R.string.news)+", ", "");
+			logMessage(getString(R.string.news) + ", ", "");
 			downloadNews(force);
 		}
 		if ((action == null || action.equals("events")) && !destroyed) {
-			logMessage(getString(R.string.events)+", ", "");
+			logMessage(getString(R.string.events) + ", ", "");
 			downloadEvents(force);
 		}
 		if ((action == null || action.equals("cafeterias")) && !destroyed) {
-			logMessage(getString(R.string.cafeterias)+", ", "");
+			logMessage(getString(R.string.cafeterias) + ", ", "");
 			downloadCafeterias(force);
 		}
 		if ((action == null || action.equals("links")) && !destroyed) {
-			logMessage(getString(R.string.links)+", ", "");
+			logMessage(getString(R.string.links) + ", ", "");
 			downloadLinks();
 		}
 		if ((action == null || action.equals("organisations")) && !destroyed) {
-			logMessage(getString(R.string.organisations)+", ", "");
+			logMessage(getString(R.string.organisations) + ", ", "");
 			downloadOrganisations();
 		}
-//		TODO Check whether to change "completed"
+		// TODO Check whether to change "completed"
 		logMessage(getString(R.string.completed), "completed");
 		nm.cancel(1);
 	}

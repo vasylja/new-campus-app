@@ -26,7 +26,7 @@ public class EventsDetails extends Activity {
 			String description = c.getString(c.getColumnIndex("description"));
 			String image = c.getString(c.getColumnIndex("image"));
 
-			String[] weekDays = "So,Mo,Di,Mi,Do,Fr,Sa".split(",");
+			String[] weekDays = getString(R.string.week_splitted).split(",");
 
 			setTitle(c.getString(c.getColumnIndex("name")));
 

@@ -120,6 +120,7 @@ public class Staff extends Activity implements OnEditorActionListener, TUMOnline
 	public void onFetchError(String errorReason) {
 		Utils.showLongCenteredToast(Staff.this, errorReason);
 		lvPersons.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+		// TODO Check whether to export to string.xml
 				new String[] { "keine Ergebnisse" }));
 	}
 

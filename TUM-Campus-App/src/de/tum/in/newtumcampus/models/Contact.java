@@ -16,7 +16,7 @@ import org.simpleframework.xml.Element;
 public class Contact implements Serializable {
 
 	private static final long serialVersionUID = 4413581972047241018L;
-
+	// TODO Think of exporting to string.xml or constants
 	@Element(name = "telefon", required = false)
 	private String telefon;
 

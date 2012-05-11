@@ -100,7 +100,7 @@ public class Organisation extends Activity implements OnClickListener {
 		// start at the top level
 		this.orgId = TOP_LEVEL_ORG;
 		this.parentId = TOP_LEVEL_ORG;
-
+		// TODO Check for rightfull checking. Check in the whole class.
 		// set language = German if system language is German else set English
 		if (System.getProperty("user.language").compareTo("de") == 0) {
 			language = "de";

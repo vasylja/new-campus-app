@@ -114,7 +114,7 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		event.put("title", title);
 		event.put("description", description);
 		event.put("eventLocation", location);
-
+		// TODO Check if rightfull assignment
 		event.put("eventTimezone", "Europe/Berlin");
 
 		event.put("dtstart", start);

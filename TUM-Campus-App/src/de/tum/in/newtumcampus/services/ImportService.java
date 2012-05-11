@@ -75,8 +75,8 @@ public class ImportService extends IntentService {
 			String ns = Context.NOTIFICATION_SERVICE;
 			NotificationManager nm = (NotificationManager) getSystemService(ns);
 
-			Notification notification = new Notification(android.R.drawable.stat_sys_download, getString(R.string.importing),
-					System.currentTimeMillis());
+			Notification notification = new Notification(android.R.drawable.stat_sys_download,
+					getString(R.string.importing), System.currentTimeMillis());
 
 			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, TumCampus.class), 0);
 
@@ -107,7 +107,7 @@ public class ImportService extends IntentService {
 					message(e, "");
 				}
 			}
-//			TODO Check whether to change "completed"
+			// TODO Check whether to change "completed"
 			message(getString(R.string.completed), "completed");
 			nm.cancel(1);
 		}

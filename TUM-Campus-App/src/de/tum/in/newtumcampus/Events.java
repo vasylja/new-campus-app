@@ -87,7 +87,7 @@ public class Events extends Activity implements OnItemClickListener, ViewBinder 
 		 * </pre>
 		 */
 		if (view.getId() == R.id.infos) {
-			String[] weekDays = "So,Mo,Di,Mi,Do,Fr,Sa".split(",");
+			String[] weekDays = getString(R.string.week_splitted).split(",");
 
 			TextView infos = (TextView) view;
 			infos.setText(weekDays[c.getInt(c.getColumnIndex("weekday"))] + ", "
@@ -101,7 +101,7 @@ public class Events extends Activity implements OnItemClickListener, ViewBinder 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem m = menu.add(0, Menu.FIRST, 0, "Aktualisieren");
+		MenuItem m = menu.add(0, Menu.FIRST, 0, getString(R.string.update));
 		m.setIcon(R.drawable.ic_menu_refresh);
 		return true;
 	}

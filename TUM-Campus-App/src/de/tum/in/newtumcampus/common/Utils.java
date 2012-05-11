@@ -259,6 +259,7 @@ public class Utils {
 	 * @throws Exception
 	 * </pre>
 	 */
+	// TODO Think how not to hardcode Exception text.
 	public static String getCacheDir(String directory) throws Exception {
 		File f = new File(Environment.getExternalStorageDirectory().getPath() + "/tumcampus/" + directory);
 		if (!f.exists()) {
@@ -698,12 +699,14 @@ public class Utils {
 	 * @param dObject
 	 * @return
 	 */
+	// TODO Think how to make weekdays not hardcoded
 	public static String getWeekDayByDate(Date dObject) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(dObject);
 		int wday = c.get(Calendar.DAY_OF_WEEK);
 		switch (wday) {
 		case Calendar.SUNDAY:
+
 			return "So";
 		case Calendar.MONDAY:
 			return "Mo";

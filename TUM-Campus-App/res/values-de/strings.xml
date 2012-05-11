@@ -242,9 +242,6 @@
     <string name="mensa_pasing">Mensa Pasing</string>
     <string name="mensa_weihenstephan">Mensa Weihenstephan</string>
 
-    <!-- Lectures.java -->
-    <string name="week_splitted">So,Mo,Di,Mi,Do,Fr,Sa</string>
-
     <!-- MyLectures.java -->
     <string name="my_lectures">Meine Lehrveranstaltungen</string>
     <string name="roomfinder">Roomfinder</string>
@@ -367,6 +364,7 @@
     <string name="settings">Einstellungen</string>
 
     <!-- ###### OTHER ####### -->
+    <string name="week_splitted">So,Mo,Di,Mi,Do,Fr,Sa</string>
     <string name="access_token">AccessToken</string>
     <string name="dialog_access_token_missing">TUMOnline-Access-Token ist nicht gesetzt! Jetzt setzen?</string>
     <string name="dialog_access_token_missing2">TUMOnline-Access-Token ist nicht gesetzt!</string>
