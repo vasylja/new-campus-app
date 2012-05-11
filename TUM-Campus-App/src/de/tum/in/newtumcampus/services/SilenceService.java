@@ -15,10 +15,10 @@ import de.tum.in.newtumcampus.models.LectureItemManager;
 public class SilenceService extends IntentService {
 
 	/**
-	 * interval in milli seconds to check for current lectures 
+	 * interval in milli seconds to check for current lectures
 	 */
 	public static int interval = 60000;
-	
+
 	/**
 	 * default init (run intent in new thread)
 	 */
@@ -28,7 +28,7 @@ public class SilenceService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		
+
 		// loop until silence mode gets disabled in settings
 		while (Utils.getSettingBool(this, Const.Settings.silence)) {
 
@@ -38,7 +38,7 @@ public class SilenceService extends IntentService {
 			LectureItemManager lim = new LectureItemManager(this, Const.db);
 			Cursor c = lim.getCurrentFromDb();
 			if (c.getCount() != 0) {
-				// if current lecture(s) found, silence the mobile 
+				// if current lecture(s) found, silence the mobile
 				mode = AudioManager.RINGER_MODE_SILENT;
 			}
 			c.close();

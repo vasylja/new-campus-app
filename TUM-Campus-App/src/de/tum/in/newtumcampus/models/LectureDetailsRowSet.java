@@ -6,8 +6,7 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 /**
- * This class is dealing with the deserialization of the output of TUMOnline to
- * the method "DetailsLehrveranstaltungen"
+ * This class is dealing with the deserialization of the output of TUMOnline to the method "DetailsLehrveranstaltungen"
  * 
  * @author Daniel Mayr
  * @see LectureDetailsRow

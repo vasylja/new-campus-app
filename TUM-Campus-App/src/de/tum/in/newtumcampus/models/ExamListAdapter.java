@@ -69,10 +69,10 @@ public class ExamListAdapter extends BaseAdapter {
 		if (exam != null) {
 			holder.tvName.setText(exam.getCourse());
 			holder.tvGrade.setText(exam.getGrade());
-			holder.tvDetails1.setText(context.getString(R.string.date) + ": " + exam.getDate() + ", " + context.getString(R.string.semester) + ": "
-					+ exam.getSemester());
-			holder.tvDetails2.setText(context.getString(R.string.examiner) + ": " + exam.getExaminer() + ", " + context.getString(R.string.mode) + ": "
-					+ exam.getModus());
+			holder.tvDetails1.setText(context.getString(R.string.date) + ": " + exam.getDate() + ", "
+					+ context.getString(R.string.semester) + ": " + exam.getSemester());
+			holder.tvDetails2.setText(context.getString(R.string.examiner) + ": " + exam.getExaminer() + ", "
+					+ context.getString(R.string.mode) + ": " + exam.getModus());
 		}
 
 		return convertView;

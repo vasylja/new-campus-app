@@ -47,8 +47,8 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		LectureItemManager lim = new LectureItemManager(this, Const.db);
 		Cursor c = lim.getRecentFromDb();
 
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item, c, c.getColumnNames(), new int[] { android.R.id.text1,
-				android.R.id.text2 });
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item, c,
+				c.getColumnNames(), new int[] { android.R.id.text1, android.R.id.text2 });
 		adapter.setViewBinder(this);
 
 		ListView lv = (ListView) findViewById(R.id.listView);
@@ -61,8 +61,8 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		LectureManager lm = new LectureManager(this, Const.db);
 		Cursor c2 = lm.getAllFromDb();
 
-		SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c2, c2.getColumnNames(),
-				new int[] { android.R.id.text1 });
+		SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c2,
+				c2.getColumnNames(), new int[] { android.R.id.text1 });
 		adapter2.setViewBinder(new ViewBinder() {
 
 			@Override
@@ -122,11 +122,12 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 				info = c.getString(c.getColumnIndex("start_dt")) + " - " + c.getString(c.getColumnIndex("end_dt"));
 
 			} else if (lectureId.equals("holiday")) {
-				info = weekDays[c.getInt(c.getColumnIndex("weekday"))] + ", " + c.getString(c.getColumnIndex("start_dt"));
+				info = weekDays[c.getInt(c.getColumnIndex("weekday"))] + ", "
+						+ c.getString(c.getColumnIndex("start_dt"));
 
 			} else {
-				info = weekDays[c.getInt(c.getColumnIndex("weekday"))] + ", " + c.getString(c.getColumnIndex("start_de")) + " - "
-						+ c.getString(c.getColumnIndex("end_de"));
+				info = weekDays[c.getInt(c.getColumnIndex("weekday"))] + ", "
+						+ c.getString(c.getColumnIndex("start_de")) + " - " + c.getString(c.getColumnIndex("end_de"));
 
 				String location = c.getString(c.getColumnIndex("location"));
 				if (location.indexOf(",") != -1) {
@@ -187,8 +188,8 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		// tumonline search page => more lecture details
 		// 1593 = WS2011/12
 		if (url.length() == 0) {
-			url = "https://campus.tum.de/tumonline/wbSuche.LVSucheSimple?" + "pLVNrFlag=J&pSjNr=1593&pSemester=A&pSuchbegriff="
-					+ c.getString(c.getColumnIndex("lectureId"));
+			url = "https://campus.tum.de/tumonline/wbSuche.LVSucheSimple?"
+					+ "pLVNrFlag=J&pSjNr=1593&pSemester=A&pSuchbegriff=" + c.getString(c.getColumnIndex("lectureId"));
 		}
 
 		// Connection to browser

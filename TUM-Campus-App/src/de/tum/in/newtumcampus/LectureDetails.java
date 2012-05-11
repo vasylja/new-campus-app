@@ -118,9 +118,10 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 			LectureDetailsRowSet xmllv = serializer.read(LectureDetailsRowSet.class, rawResponse);
 			// only take first one (there should only be one)
 			if (xmllv.getLehrveranstaltungenDetails().size() != 1) {
-				Toast.makeText(this,
-						getString(R.string.something_wrong) + ": " + xmllv.getLehrveranstaltungenDetails().size() + " " + getString(R.string.elements_found),
-						10000).show();
+				Toast.makeText(
+						this,
+						getString(R.string.something_wrong) + ": " + xmllv.getLehrveranstaltungenDetails().size() + " "
+								+ getString(R.string.elements_found), 10000).show();
 			} else {
 				// we got exactly one row, thats fine
 				currentitem = xmllv.getLehrveranstaltungenDetails().get(0);

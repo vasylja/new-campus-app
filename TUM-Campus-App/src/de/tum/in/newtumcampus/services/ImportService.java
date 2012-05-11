@@ -74,7 +74,8 @@ public class ImportService extends IntentService {
 			String ns = Context.NOTIFICATION_SERVICE;
 			NotificationManager nm = (NotificationManager) getSystemService(ns);
 
-			Notification notification = new Notification(android.R.drawable.stat_sys_download, "Importiere ...", System.currentTimeMillis());
+			Notification notification = new Notification(android.R.drawable.stat_sys_download, "Importiere ...",
+					System.currentTimeMillis());
 
 			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, TumCampus.class), 0);
 
@@ -223,7 +224,8 @@ public class ImportService extends IntentService {
 			List<String[]> rows = Utils.readCsv(getAssets().open("locations.csv"), "ISO-8859-1");
 
 			for (String[] row : rows) {
-				lm.replaceIntoDb(new Location(Integer.parseInt(row[0]), row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]));
+				lm.replaceIntoDb(new Location(Integer.parseInt(row[0]), row[1], row[2], row[3], row[4], row[5], row[6],
+						row[7], row[8]));
 			}
 		}
 		lm.close();

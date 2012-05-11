@@ -129,7 +129,8 @@ public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 		}
 
 		// init the spinner
-		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, filters);
+		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_dropdown_item, filters);
 		spFilter.setAdapter(spinnerArrayAdapter);
 
 		// handle if program choice is changed

@@ -51,8 +51,7 @@ public class FeedItem {
 	 * @param image Local image, e.g. /mnt/sdcard/tumcampus/feeds/cache/xy.jpg
 	 * </pre>
 	 */
-	public FeedItem(int feedId, String title, String link, String description,
-			Date date, String image) {
+	public FeedItem(int feedId, String title, String link, String description, Date date, String image) {
 
 		this.feedId = feedId;
 		this.title = title;
@@ -64,8 +63,7 @@ public class FeedItem {
 
 	@Override
 	public String toString() {
-		return "feedId=" + feedId + " title=" + title + " link=" + link
-				+ " description=" + description + " date="
+		return "feedId=" + feedId + " title=" + title + " link=" + link + " description=" + description + " date="
 				+ Utils.getDateString(date) + " image=" + image;
 	}
 }

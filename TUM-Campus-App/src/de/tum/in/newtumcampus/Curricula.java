@@ -81,7 +81,8 @@ public class Curricula extends Activity {
 
 		String[] optionsArray = sortedOptions.toArray(new String[0]);
 
-		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_custom, optionsArray);
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_custom,
+				optionsArray);
 
 		lvCurricula = (ListView) findViewById(R.id.lstCurricula);
 		lvCurricula.setAdapter(arrayAdapter);
@@ -187,7 +188,8 @@ public class Curricula extends Activity {
 	 *            Target where the results should be written to
 	 */
 	private void fetchCurriculum(String url, File targetFile) {
-		String text = Utils.buildHTMLDocument(FileUtils.sendGetRequest(httpClient, "http://www.in.tum.de/fileadmin/_src/add.css"),
+		String text = Utils.buildHTMLDocument(
+				FileUtils.sendGetRequest(httpClient, "http://www.in.tum.de/fileadmin/_src/add.css"),
 				"<div id=\"maincontent\"><div class=\"inner\">" + extractResultsFromURL(url) + "</div></div>");
 
 		text = text.replace("href=\"fuer-studierende-der-tum", "href=\"http://www.in.tum.de/fuer-studierende-der-tum");
@@ -237,26 +239,32 @@ public class Curricula extends Activity {
 	 */
 	private void initOptions() {
 		options = new Hashtable<String, String>();
-		options.put(getString(R.string.informatics_bachelor),
+		options.put(
+				getString(R.string.informatics_bachelor),
 				"http://www.in.tum.de/fuer-studierende-der-tum/bachelor-studiengaenge/informatik/studienplan/studienbeginn-ab-ws-20072008.html");
-		options.put(getString(R.string.business_informatics_bachelor_0809),
+		options.put(
+				getString(R.string.business_informatics_bachelor_0809),
 				"http://www.in.tum.de/fuer-studierende-der-tum/bachelor-studiengaenge/wirtschaftsinformatik/studienplan/studienbeginn-ab-ws-20112012.html");
-		options.put(getString(R.string.business_informatics_bachelor_1112),
+		options.put(
+				getString(R.string.business_informatics_bachelor_1112),
 				"http://www.in.tum.de/fuer-studierende-der-tum/bachelor-studiengaenge/wirtschaftsinformatik/studienplan/studienbeginn-ab-ws-20082009.html");
 		options.put(getString(R.string.bioinformatics_bachelor),
 				"http://www.in.tum.de/fuer-studierende-der-tum/bachelor-studiengaenge/bioinformatik/studienplan/ws-20072008.html");
-		options.put(getString(R.string.games_engineering_bachelor),
+		options.put(
+				getString(R.string.games_engineering_bachelor),
 				"http://www.in.tum.de/fuer-studierende-der-tum/bachelor-studiengaenge/informatik-games-engineering/studienplan-games.html");
 
 		options.put(getString(R.string.informatics_master),
 				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/informatik/studienplan/studienplan-fpo-2007.html");
-		options.put(getString(R.string.business_informatics_master),
+		options.put(
+				getString(R.string.business_informatics_master),
 				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/wirtschaftsinformatik/studienplan/studienplan-fpo-2008.html");
 		options.put(getString(R.string.bioinformatics_master),
 				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/bioinformatik/studienplan/ws-20072008.html");
 		options.put(getString(R.string.automotive_master),
 				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/automotive-software-engineering/stundenplaene.html");
-		options.put(getString(R.string.computational_science_master),
+		options.put(
+				getString(R.string.computational_science_master),
 				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/computational-science-and-engineering/course/list-of-courses.html");
 	}
 }

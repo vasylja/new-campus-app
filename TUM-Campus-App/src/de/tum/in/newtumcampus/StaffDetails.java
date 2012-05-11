@@ -97,7 +97,8 @@ public class StaffDetails extends Activity {
 			for (int i = 0; i < groups.size(); i++) {
 				if (groups.get(i) != null) {
 					contentText.appendField(getString(R.string.function), groups.get(i).getTitle());
-					contentText.appendField(getString(R.string.group), groups.get(i).getOrg() + " (" + groups.get(i).getId() + ")" + "<br />");
+					contentText.appendField(getString(R.string.group), groups.get(i).getOrg() + " ("
+							+ groups.get(i).getId() + ")" + "<br />");
 				}
 			}
 		}
@@ -137,7 +138,8 @@ public class StaffDetails extends Activity {
 		// add all rooms
 		List<Room> rooms = employee.getRooms();
 		if (rooms != null && rooms.size() > 0) {
-			contentText.appendField(getString(R.string.room), rooms.get(0).getLocation() + " (" + rooms.get(0).getNumber() + ")");
+			contentText.appendField(getString(R.string.room), rooms.get(0).getLocation() + " ("
+					+ rooms.get(0).getNumber() + ")");
 		}
 
 		tvDetails4.setText(Html.fromHtml(contentText.toString()), TextView.BufferType.SPANNABLE);

@@ -39,8 +39,8 @@ public class EventsDetails extends Activity {
 			 * </pre>
 			 */
 			String infos = weekDays[c.getInt(c.getColumnIndex("weekday"))];
-			infos += ", " + c.getString(c.getColumnIndex("start_de")) + " - "
-					+ c.getString(c.getColumnIndex("end_de")) + "\n";
+			infos += ", " + c.getString(c.getColumnIndex("start_de")) + " - " + c.getString(c.getColumnIndex("end_de"))
+					+ "\n";
 			infos += c.getString(c.getColumnIndex("location")) + "\n";
 			infos += c.getString(c.getColumnIndex("link"));
 
@@ -59,7 +59,7 @@ public class EventsDetails extends Activity {
 						/ (double) iv.getDrawable().getIntrinsicHeight();
 
 				int screen = getWindowManager().getDefaultDisplay().getWidth();
-				int width = Math.min((int)(screen*0.9), 375);
+				int width = Math.min((int) (screen * 0.9), 375);
 				iv.getLayoutParams().width = width;
 				iv.getLayoutParams().height = (int) Math.floor(width / ratio);
 			}

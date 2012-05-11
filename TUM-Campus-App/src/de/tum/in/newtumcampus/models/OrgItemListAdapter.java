@@ -11,8 +11,7 @@ import android.widget.TextView;
 import de.tum.in.newtumcampus.R;
 
 /**
- * Adapterclass for {@OrgItemList}.
- * The purpose is to get Items from the list and set them into the Textview
+ * Adapterclass for {@OrgItemList}. The purpose is to get Items from the list and set them into the Textview
  * 
  * @author Thomas Behrens
  * @review Vincez Doelle, Daniel G. Mayr
@@ -67,10 +66,10 @@ public class OrgItemListAdapter extends BaseAdapter {
 		}
 		// get the name depending on the own language
 		if (organisationList.get(position) != null) {
-			if(System.getProperty("user.language")=="de") {
+			if (System.getProperty("user.language") == "de") {
 				holder.tvMainField.setText(organisationList.get(position).getNameDe());
 				holder.tvSubField1.setText(organisationList.get(position).getNameEn());
-			} else  {
+			} else {
 				holder.tvMainField.setText(organisationList.get(position).getNameEn());
 				holder.tvSubField1.setText(organisationList.get(position).getNameDe());
 			}

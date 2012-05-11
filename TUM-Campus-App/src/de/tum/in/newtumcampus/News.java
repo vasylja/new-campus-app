@@ -48,8 +48,8 @@ public class News extends Activity implements OnItemClickListener, ViewBinder {
 		NewsManager nm = new NewsManager(this, Const.db);
 		Cursor c = nm.getAllFromDb();
 
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.news_listview, c, c.getColumnNames(), new int[] { R.id.image, R.id.message,
-				R.id.date });
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.news_listview, c, c.getColumnNames(),
+				new int[] { R.id.image, R.id.message, R.id.date });
 		adapter.setViewBinder(this);
 
 		ListView lv = (ListView) findViewById(R.id.listView);

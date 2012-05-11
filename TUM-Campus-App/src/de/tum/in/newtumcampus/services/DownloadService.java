@@ -96,7 +96,8 @@ public class DownloadService extends IntentService {
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager nm = (NotificationManager) getSystemService(ns);
 
-		Notification notification = new Notification(android.R.drawable.stat_sys_download, "Aktualisiere ...", System.currentTimeMillis());
+		Notification notification = new Notification(android.R.drawable.stat_sys_download, "Aktualisiere ...",
+				System.currentTimeMillis());
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, TumCampus.class), 0);
 

@@ -138,7 +138,8 @@ public class FeedManager extends SQLiteOpenHelper {
 		Cursor c = db.rawQuery("SELECT id FROM feeds WHERE name = ?", new String[] { f.name });
 
 		if (c.moveToNext()) {
-			db.execSQL("UPDATE feeds SET name=?, feedUrl=? WHERE id=?", new String[] { f.name, f.feedUrl, c.getString(0) });
+			db.execSQL("UPDATE feeds SET name=?, feedUrl=? WHERE id=?",
+					new String[] { f.name, f.feedUrl, c.getString(0) });
 			return c.getInt(0);
 		}
 		db.execSQL("INSERT INTO feeds (name, feedUrl) VALUES (?, ?)", new String[] { f.name, f.feedUrl });
@@ -162,7 +163,8 @@ public class FeedManager extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS feeds (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, feedUrl VARCHAR)");
+		db.execSQL("CREATE TABLE IF NOT EXISTS feeds ("
+				+ "id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, feedUrl VARCHAR)");
 	}
 
 	@Override

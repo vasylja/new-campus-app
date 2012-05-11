@@ -35,12 +35,12 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 	 * To fetch the Details from the TUMCampus interface
 	 */
 	private TUMCampusRequest requestHandler;
-	
+
 	/**
 	 * Id of the organisation of which the details should be shown
 	 */
 	private String orgId;
-	
+
 	/**
 	 * Only for setting it in the caption at the top
 	 */
@@ -70,27 +70,28 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		// only load the details if the details page is new and it isn't a return from a link
 		TextView tvCaption = (TextView) findViewById(R.id.tvCaption);
 		if (tvCaption.getText().toString().compareTo(orgName) != 0) {
-			
-			//set the new organisation name in the heading
+
+			// set the new organisation name in the heading
 			tvCaption.setText(orgName);
 
 			// Initialise the request handler and append the orgUnitID to the URL
 			requestHandler = new TUMCampusRequest("");
 			requestHandler.setParameter("orgUnitID", orgId);
-			
+
 			// set loading text
 			requestHandler.setProgressDialogMessage(getString(R.string.loading_organisation_details));
-			
+
 			// do the TUMCampus request
 			requestHandler.fetchInteractive(this, this);
-			
+
 		}
 	}
 
 	/**
 	 * When the data has arrived call this function, parse the Data and Update the UserInterface
 	 * 
-	 * @param rawResp = XML-TUMCampus-Response (String)
+	 * @param rawResp
+	 *            = XML-TUMCampus-Response (String)
 	 */
 	@Override
 	public void onFetch(String rawResponse) {
@@ -100,24 +101,25 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		OrgDetailsItem o = parseOrgDetails(rawResponse);
 		updateUI(o);
 	}
-	
+
 	/**
 	 * while fetching a TUMOnline Request an error occured this will show the error message in a toast
 	 */
 	@Override
 	public void onFetchError(String errorReason) {
-		Utils.showLongCenteredToast(this,"Error: " + errorReason);
+		Utils.showLongCenteredToast(this, "Error: " + errorReason);
 	}
-	
+
 	@Override
 	public void onFetchCancelled() {
-		//do nothing
+		// do nothing
 	}
 
 	/**
 	 * Parse XML-String into one OrgDetails-Object
 	 * 
-	 * @param rawResp = XML-String to parse
+	 * @param rawResp
+	 *            = XML-String to parse
 	 * @return OrgDetailsItem (OrgDetails Object)
 	 */
 	private static OrgDetailsItem parseOrgDetails(String rawResp) {
@@ -146,41 +148,43 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		/* Parsing has finished. */
 		return null;
 	}
-	
+
 	/**
 	 * Helper Class that brings the Strings+Values in a GUI polished format
 	 * 
-	 * @param name	Name of the Attribute
-	 * @param value Value of the Attribute
+	 * @param name
+	 *            Name of the Attribute
+	 * @param value
+	 *            Value of the Attribute
 	 * @return line with name and value
 	 */
-	private static String makeStringShowable (String name, String value) {
-		
+	private static String makeStringShowable(String name, String value) {
+
 		// if value has length 0 => do nothing
-		if( value.length() == 0) {
+		if (value.length() == 0) {
 			return "";
 		}
-		
+
 		// attribute name in bold
 		String outputLine = "<b>" + name + "</b>";
 		// if (name + blank + value) > 36 then write value in the second line
-		if(name.length() + value.length() >35) {
+		if (name.length() + value.length() > 35) {
 			outputLine += "<br>" + value + "<br>";
 		} else {
 			outputLine += "\t" + value + "<br>";
 		}
 		return outputLine;
 	}
-	
+
 	/**
-	 * Remove various signs out of a number
-	 * -> Reason: To make a direct call possible
+	 * Remove various signs out of a number -> Reason: To make a direct call possible
 	 * 
-	 * @param punctedNumber = String can contain not numbers
+	 * @param punctedNumber
+	 *            = String can contain not numbers
 	 * @return number without special characters
 	 */
-	private static String removePunctuation (String punctedNumber) {
-		// make "(089) 56.." to "(089)56" 
+	private static String removePunctuation(String punctedNumber) {
+		// make "(089) 56.." to "(089)56"
 		punctedNumber = punctedNumber.replace(") ", ")");
 		// remove whitespaces and slashes
 		punctedNumber = punctedNumber.replace(" ", "-");
@@ -192,11 +196,11 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		return punctedNumber;
 	}
 
-
 	/**
 	 * Show the Organisation Details to the user
 	 * 
-	 * @param organisation (= organisation detail object)
+	 * @param organisation
+	 *            (= organisation detail object)
 	 */
 	private void updateUI(OrgDetailsItem organisation) {
 
@@ -211,15 +215,17 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 
 		// must-have data:
 		/** organisation code */
-		stringBuffer.append(makeStringShowable(getString(R.string.abbreviation),organisation.getCode()));
+		stringBuffer.append(makeStringShowable(getString(R.string.abbreviation), organisation.getCode()));
 		/** description */
-		stringBuffer.append(makeStringShowable(getString(R.string.description),organisation.getDescription().replace("\n", "<br>")));	// replace \n with <br> to keep passages
-		
+		stringBuffer.append(makeStringShowable(getString(R.string.description),
+				organisation.getDescription().replace("\n", "<br>"))); // replace \n with <br> to keep passages
+
 		/** >>Caption - Contact Data<< */
 		if ((organisation.getContactName().length() != 0) || (organisation.getContactEmail().length() != 0)
 				|| (organisation.getContactTelephone().length() != 0) || (organisation.getContactFax().length() != 0)
 				|| (organisation.getContactStreet().length() != 0) || (organisation.getContactPLZ().length() != 0)
-				|| (organisation.getContactLocality().length() != 0) || (organisation.getContactCountry().length() != 0)) {
+				|| (organisation.getContactLocality().length() != 0)
+				|| (organisation.getContactCountry().length() != 0)) {
 
 			stringBuffer.append("<br><u><b>" + getString(R.string.contact_details) + "</b></u><br>");
 		}
@@ -227,7 +233,7 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		/** organisation name */
 		stringBuffer.append(organisation.getContactName() + "<br>");
 		/** email */
-		stringBuffer.append(makeStringShowable(getString(R.string.email),organisation.getContactEmail()));
+		stringBuffer.append(makeStringShowable(getString(R.string.email), organisation.getContactEmail()));
 		/** phone */
 		if (organisation.getContactTelephone().length() != 0) {
 			stringBuffer.append("<b>" + getString(R.string.phone) + "\t</b>");
@@ -244,15 +250,15 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		/** fax */
 		String tempFaxNumber = organisation.getContactFax();
 		tempFaxNumber = removePunctuation(tempFaxNumber);
-		stringBuffer.append(makeStringShowable(getString(R.string.fax),tempFaxNumber));
+		stringBuffer.append(makeStringShowable(getString(R.string.fax), tempFaxNumber));
 		/** street */
-		stringBuffer.append(makeStringShowable(getString(R.string.street),organisation.getContactStreet()));
+		stringBuffer.append(makeStringShowable(getString(R.string.street), organisation.getContactStreet()));
 		/** plz */
-		stringBuffer.append(makeStringShowable(getString(R.string.plz),organisation.getContactPLZ()));
+		stringBuffer.append(makeStringShowable(getString(R.string.plz), organisation.getContactPLZ()));
 		/** town */
-		stringBuffer.append(makeStringShowable(getString(R.string.town),organisation.getContactLocality()));
+		stringBuffer.append(makeStringShowable(getString(R.string.town), organisation.getContactLocality()));
 		/** country */
-		stringBuffer.append(makeStringShowable(getString(R.string.country),organisation.getContactCountry()));
+		stringBuffer.append(makeStringShowable(getString(R.string.country), organisation.getContactCountry()));
 
 		/** >>Caption - Links<< */
 		if ((organisation.getContactLink().length() != 0) || (organisation.getContactLocationURL().length() != 0)
@@ -260,11 +266,12 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 			stringBuffer.append("<br><u><b>" + getString(R.string.links) + ":</b></u><br>");
 		}
 		/** TUMOnline link */
-		stringBuffer.append(makeStringShowable(getString(R.string.tumonline_link),organisation.getContactLink()));
+		stringBuffer.append(makeStringShowable(getString(R.string.tumonline_link), organisation.getContactLink()));
 		/** TUMCampus link */
-		stringBuffer.append(makeStringShowable(getString(R.string.tumcampus_link),organisation.getTumCampusLink()));
+		stringBuffer.append(makeStringShowable(getString(R.string.tumcampus_link), organisation.getTumCampusLink()));
 		/** GoogleMaps link */
-		stringBuffer.append(makeStringShowable(getString(R.string.googlemaps_link),organisation.getContactLocationURL()));
+		stringBuffer.append(makeStringShowable(getString(R.string.googlemaps_link),
+				organisation.getContactLocationURL()));
 
 		/** Additional information */
 		if (organisation.getAdditionalInfoCaption().length() != 0) {

@@ -126,8 +126,8 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		super.onResume();
 
 		// build main menu
-		SimpleAdapter adapter = new SimpleAdapter(this, buildMenu(), R.layout.main_listview, new String[] { "icon", "name", "icon2" }, new int[] { R.id.icon,
-				R.id.name, R.id.icon2 });
+		SimpleAdapter adapter = new SimpleAdapter(this, buildMenu(), R.layout.main_listview, new String[] { "icon",
+				"name", "icon2" }, new int[] { R.id.icon, R.id.name, R.id.icon2 });
 
 		ListView lv = (ListView) findViewById(R.id.menu);
 		lv.setAdapter(adapter);
@@ -189,11 +189,13 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
 		// build list, intent = start activity on click
-		addItem(list, R.drawable.vorlesung, getString(R.string.lectures), LectureItemManager.lastInserted > 0, new Intent(this, Lectures.class));
+		addItem(list, R.drawable.vorlesung, getString(R.string.lectures), LectureItemManager.lastInserted > 0,
+				new Intent(this, Lectures.class));
 
 		addItem(list, R.drawable.personnel, getString(R.string.person_search), false, new Intent(this, Staff.class));
 
-		addItem(list, R.drawable.organisationen, getString(R.string.organisations), false, new Intent(this, Organisation.class));
+		addItem(list, R.drawable.organisationen, getString(R.string.organisations), false, new Intent(this,
+				Organisation.class));
 
 		addItem(list, R.drawable.grade, getString(R.string.grades), false, new Intent(this, Grades.class));
 
@@ -203,23 +205,29 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 
 		addItem(list, R.drawable.euro, getString(R.string.tuition_fees), false, new Intent(this, TuitionFees.class));
 
-		addItem(list, R.drawable.essen, getString(R.string.menues), CafeteriaMenuManager.lastInserted > 0, new Intent(this, Cafeterias.class));
+		addItem(list, R.drawable.essen, getString(R.string.menues), CafeteriaMenuManager.lastInserted > 0, new Intent(
+				this, Cafeterias.class));
 
 		addItem(list, R.drawable.zug, getString(R.string.mvv), false, new Intent(this, Transports.class));
 
-		addItem(list, R.drawable.rss, getString(R.string.rss_feeds), FeedItemManager.lastInserted + FeedManager.lastInserted > 0, new Intent(this, Feeds.class));
+		addItem(list, R.drawable.rss, getString(R.string.rss_feeds), FeedItemManager.lastInserted
+				+ FeedManager.lastInserted > 0, new Intent(this, Feeds.class));
 
-		addItem(list, R.drawable.party, getString(R.string.events), EventManager.lastInserted > 0, new Intent(this, Events.class));
+		addItem(list, R.drawable.party, getString(R.string.events), EventManager.lastInserted > 0, new Intent(this,
+				Events.class));
 
 		addItem(list, R.drawable.kompass, getString(R.string.area_maps), false, new Intent(this, Plans.class));
 
-		addItem(list, android.R.drawable.ic_menu_mylocation, getString(R.string.roomfinder), false, new Intent(this, Roomfinder.class));
+		addItem(list, android.R.drawable.ic_menu_mylocation, getString(R.string.roomfinder), false, new Intent(this,
+				Roomfinder.class));
 
 		addItem(list, R.drawable.hours, getString(R.string.opening_hours), false, new Intent(this, Hours.class));
 
-		addItem(list, R.drawable.globus, getString(R.string.news), NewsManager.lastInserted > 0, new Intent(this, News.class));
+		addItem(list, R.drawable.globus, getString(R.string.news), NewsManager.lastInserted > 0, new Intent(this,
+				News.class));
 
-		addItem(list, R.drawable.www, getString(R.string.links), LinkManager.lastInserted > 0, new Intent(this, Links.class));
+		addItem(list, R.drawable.www, getString(R.string.links), LinkManager.lastInserted > 0, new Intent(this,
+				Links.class));
 
 		addItem(list, R.drawable.info, getString(R.string.app_info), false, new Intent(this, AppInfo.class));
 

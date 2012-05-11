@@ -22,14 +22,10 @@ public class Plans extends Activity implements OnItemClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.plans);
 
-		String[] plans = new String[] { getString(R.string.campus_garching), 
-										getString(R.string.campus_klinikum),
-										getString(R.string.campus_olympiapark), 
-										getString(R.string.campus_olympiapark_gyms),
-										getString(R.string.campus_main), 
-										getString(R.string.campus_weihenstephan),
-										getString(R.string.mvv_fast_train_net), 
-										getString(R.string.mvv_nightlines) };
+		String[] plans = new String[] { getString(R.string.campus_garching), getString(R.string.campus_klinikum),
+				getString(R.string.campus_olympiapark), getString(R.string.campus_olympiapark_gyms),
+				getString(R.string.campus_main), getString(R.string.campus_weihenstephan),
+				getString(R.string.mvv_fast_train_net), getString(R.string.mvv_nightlines) };
 
 		ListView lv = (ListView) findViewById(R.id.listView);
 		lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, plans));

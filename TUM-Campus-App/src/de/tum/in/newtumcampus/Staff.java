@@ -93,7 +93,8 @@ public class Staff extends Activity implements OnEditorActionListener, TUMOnline
 
 		// test by sample element "familienname" (required field)
 		if (!rawResp.contains("familienname")) {
-			lvPersons.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new String[] { "keine Ergebnisse" }));
+			lvPersons.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+					new String[] { "keine Ergebnisse" }));
 		}
 
 		Serializer serializer = new Persister();
@@ -118,7 +119,8 @@ public class Staff extends Activity implements OnEditorActionListener, TUMOnline
 	@Override
 	public void onFetchError(String errorReason) {
 		Utils.showLongCenteredToast(Staff.this, errorReason);
-		lvPersons.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new String[] { "keine Ergebnisse" }));
+		lvPersons.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+				new String[] { "keine Ergebnisse" }));
 	}
 
 	@Override

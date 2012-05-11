@@ -351,7 +351,8 @@ public class Utils {
 				String match = matcher.group(0);
 
 				Matcher href_match = href.matcher(match);
-				if (href_match.find() && (match.contains("application/rss+xml") || match.contains("application/atom+xml"))) {
+				if (href_match.find()
+						&& (match.contains("application/rss+xml") || match.contains("application/atom+xml"))) {
 					result = href_match.group(1);
 				}
 			}

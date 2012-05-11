@@ -138,7 +138,8 @@ public class Organisation extends Activity implements OnClickListener {
 
 		// check if internet is connected, show warning, that details cannot be shown
 		if (!Utils.isConnected(this)) {
-			Utils.showLongCenteredToast(this, getString(R.string.warning_no_internet_connection_for_organisation_details));
+			Utils.showLongCenteredToast(this,
+					getString(R.string.warning_no_internet_connection_for_organisation_details));
 		}
 
 	}
@@ -158,13 +159,15 @@ public class Organisation extends Activity implements OnClickListener {
 			// check if XML file exists and if it is bigger than 100kB (it is approximately 317kb, if the import isn't "wrong token")
 			// if no valid XML file -> set Token, Download XML data and start 'Organisations' again
 			if (!xmlOrgFile.exists() || !xmlOrgFile.isFile() || !(xmlOrgFile.length() > 100000)) {
-				
+
 				// accessToken for download access
-				String accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString("access_token", null);
+				String accessToken = PreferenceManager.getDefaultSharedPreferences(this)
+						.getString("access_token", null);
 
 				// if no token show toast
 				if (accessToken == null) {
-					Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_access_token_missing), new Intent(this, TUMOnlineSettings.class));
+					Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_access_token_missing),
+							new Intent(this, TUMOnlineSettings.class));
 				}
 
 				// if not connected show toast
@@ -241,15 +244,15 @@ public class Organisation extends Activity implements OnClickListener {
 			OrgItem oItem = new OrgItem();
 
 			// get the parent ID of the current item
-			String itemParentId = getValue(node,"parent");
+			String itemParentId = getValue(node, "parent");
 
 			// is this element one we are searching for? (has the parentId of the clicked Element)
 			if (itemParentId.contentEquals(parent)) {
 
 				// get the value of the name_de, name_en and nr element and save them in the current oItem
-				oItem.setId(getValue(node,"nr"));
-				oItem.setNameDe(getValue(node,"name_de"));
-				oItem.setNameEn(getValue(node,"name_en"));
+				oItem.setId(getValue(node, "nr"));
+				oItem.setNameDe(getValue(node, "name_de"));
+				oItem.setNameEn(getValue(node, "name_en"));
 				oItem.setParentId(itemParentId);
 
 				// add this organisation item to the organisation list
@@ -318,7 +321,7 @@ public class Organisation extends Activity implements OnClickListener {
 			// extract one organisation to an element
 			Node organisationItem = organisationList.item(i);
 			// get the parentId of the element
-			String itemParentId = getValue(organisationItem,"parent");
+			String itemParentId = getValue(organisationItem, "parent");
 
 			// if there is any item with the parentId of the id return true --> there is at least one suborganisation existing
 			if (itemParentId.contentEquals(organisationId)) {
@@ -339,12 +342,14 @@ public class Organisation extends Activity implements OnClickListener {
 		}
 		return doc;
 	}
-	
+
 	/**
 	 * Function that gets the Value out of a Node with a special name
 	 * 
-	 * @param item = Node that gets evaluated
-	 * @param type = Type of node (e.g. parent, id, nameDe)
+	 * @param item
+	 *            = Node that gets evaluated
+	 * @param type
+	 *            = Type of node (e.g. parent, id, nameDe)
 	 */
 	public String getValue(Node item, String type) {
 		Element elem = (Element) item;
@@ -381,7 +386,7 @@ public class Organisation extends Activity implements OnClickListener {
 			Node organisationItem = organisationList.item(i);
 
 			// go through every id and look if it there is any equal in any parent-Id field
-			String itemId = getValue(organisationItem,"nr");
+			String itemId = getValue(organisationItem, "nr");
 
 			// if there is an organisation that has the given parentId as organisationId
 			// make a parent element and return it
@@ -390,13 +395,13 @@ public class Organisation extends Activity implements OnClickListener {
 				// set the Name depending on the system language
 				String itemName;
 				if (language.equals("de")) {
-					itemName = getValue(organisationItem,"name_de");
+					itemName = getValue(organisationItem, "name_de");
 				} else {
-					itemName = getValue(organisationItem,"name_en");
+					itemName = getValue(organisationItem, "name_en");
 				}
-				
+
 				// get the parentId of the Item
-				String itemParentId = getValue(organisationItem,"parent");
+				String itemParentId = getValue(organisationItem, "parent");
 
 				// create new Organisation (OrgItem) and instantiate it
 				// with the data of the found parent Object

@@ -73,10 +73,12 @@ public class NewsManager extends SQLiteOpenHelper {
 				JSONObject obj = jsonArray.getJSONObject(i);
 
 				String[] types = new String[] { "photo", "link" };
-				String[] ids = new String[] { "162327853831856_228060957258545", "162327853831856_228060957258545", "162327853831856_224344127630228" };
+				String[] ids = new String[] { "162327853831856_228060957258545", "162327853831856_228060957258545",
+						"162327853831856_224344127630228" };
 
 				// filter out events, empty items
-				if ((!Arrays.asList(types).contains(obj.getString("type")) && !Arrays.asList(ids).contains(obj.getString("id")))
+				if ((!Arrays.asList(types).contains(obj.getString("type")) && !Arrays.asList(ids).contains(
+						obj.getString("id")))
 						|| !obj.getJSONObject("from").getString("id").equals("162327853831856")) {
 					continue;
 				}
@@ -101,7 +103,8 @@ public class NewsManager extends SQLiteOpenHelper {
 	 * @return Database cursor (image, message, date_de, link, _id)
 	 */
 	public Cursor getAllFromDb() {
-		return db.rawQuery("SELECT image, message, strftime('%d.%m.%Y', date) " + "as date_de, link, id as _id " + "FROM news ORDER BY date DESC", null);
+		return db.rawQuery("SELECT image, message, strftime('%d.%m.%Y', date) " + "as date_de, link, id as _id "
+				+ "FROM news ORDER BY date DESC", null);
 	}
 
 	/**
@@ -166,8 +169,8 @@ public class NewsManager extends SQLiteOpenHelper {
 		if (n.message.length() == 0) {
 			throw new Exception("Invalid news content.");
 		}
-		db.execSQL("REPLACE INTO news (id, message, link, image, date) " + "VALUES (?, ?, ?, ?, ?)",
-				new String[] { n.id, n.message, n.link, n.image, Utils.getDateString(n.date) });
+		db.execSQL("REPLACE INTO news (id, message, link, image, date) " + "VALUES (?, ?, ?, ?, ?)", new String[] {
+				n.id, n.message, n.link, n.image, Utils.getDateString(n.date) });
 	}
 
 	/**
@@ -188,7 +191,8 @@ public class NewsManager extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS news (" + "id VARCHAR PRIMARY KEY, message VARCHAR, link VARCHAR, " + "image VARCHAR, date VARCHAR)");
+		db.execSQL("CREATE TABLE IF NOT EXISTS news (" + "id VARCHAR PRIMARY KEY, message VARCHAR, link VARCHAR, "
+				+ "image VARCHAR, date VARCHAR)");
 	}
 
 	@Override

@@ -20,7 +20,8 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
  * @review Daniel G. Mayr
  * 
  */
-public class TUMOnlineSettings extends PreferenceActivity implements OnClickListener, android.content.DialogInterface.OnClickListener {
+public class TUMOnlineSettings extends PreferenceActivity implements OnClickListener,
+		android.content.DialogInterface.OnClickListener {
 
 	/** UI button to generate access token */
 	private Button btnGetAccessToken;
@@ -59,7 +60,8 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 		String strTokenXml = request.fetch();
 		Log.d("RAWOUTPUT", strTokenXml);
 		// it is only one tag in that xml, let's do a regex pattern
-		return strTokenXml.substring(strTokenXml.indexOf("<token>") + "<token>".length(), strTokenXml.indexOf("</token>"));
+		return strTokenXml.substring(strTokenXml.indexOf("<token>") + "<token>".length(),
+				strTokenXml.indexOf("</token>"));
 	}
 
 	/**
@@ -78,11 +80,13 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 			if (strLRZID.length() == 7) {
 
 				// is access token already set?
-				String oldaccesstoken = PreferenceManager.getDefaultSharedPreferences(this).getString("access_token", "");
+				String oldaccesstoken = PreferenceManager.getDefaultSharedPreferences(this).getString("access_token",
+						"");
 				if (oldaccesstoken.length() > 2) {
 					// show Dialog first
 					AlertDialog.Builder builder = new AlertDialog.Builder(this);
-					builder.setMessage(getString(R.string.dialog_new_token)).setPositiveButton(getString(R.string.yes), this)
+					builder.setMessage(getString(R.string.dialog_new_token))
+							.setPositiveButton(getString(R.string.yes), this)
 							.setNegativeButton(getString(R.string.no), this).show();
 				} else {
 					setAccessToken();
@@ -104,8 +108,8 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 			// save access token to preferences
 			Utils.setSetting(getBaseContext(), "access_token", strAccessToken);
 			Toast.makeText(this,
- getString(R.string.access_token_generated) + " - " + Utils.getSetting(this, "access_token"),
-					10000).show();
+					getString(R.string.access_token_generated) + " - " + Utils.getSetting(this, "access_token"), 10000)
+					.show();
 
 		} catch (Exception ex) {
 			// set access token to null

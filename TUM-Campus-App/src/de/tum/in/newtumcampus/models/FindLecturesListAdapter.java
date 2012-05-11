@@ -74,7 +74,8 @@ public class FindLecturesListAdapter extends BaseAdapter {
 		// if we have something to display - set for each lecture element
 		if (lvItem != null) {
 			holder.tvLectureName.setText(lvItem.getTitel());
-			holder.tvTypeSWSSemester.setText(lvItem.getStp_lv_art_name() + " - " + lvItem.getSemester_id() + " - " + lvItem.getDauer_info() + " SWS");
+			holder.tvTypeSWSSemester.setText(lvItem.getStp_lv_art_name() + " - " + lvItem.getSemester_id() + " - "
+					+ lvItem.getDauer_info() + " SWS");
 			holder.tvDozent.setText(lvItem.getVortragende_mitwirkende());
 		}
 

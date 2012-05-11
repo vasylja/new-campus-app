@@ -62,13 +62,15 @@ public class Documents extends Activity {
 		// check credentials
 		tumOnlineUsername = PreferenceManager.getDefaultSharedPreferences(this).getString("lrz_id", null);
 		if (tumOnlineUsername == null) {
-			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_username_not_set), new Intent(this, TUMOnlineSettings.class));
+			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_username_not_set), new Intent(this,
+					TUMOnlineSettings.class));
 			return;
 		}
 
 		tumOnlinePassword = PreferenceManager.getDefaultSharedPreferences(this).getString("tumonline_password", null);
 		if (tumOnlinePassword == null) {
-			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_password_not_set), new Intent(this, TUMOnlineSettings.class));
+			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_password_not_set), new Intent(this,
+					TUMOnlineSettings.class));
 			return;
 		}
 
@@ -91,7 +93,8 @@ public class Documents extends Activity {
 
 				try {
 					// try if document exists in storage
-					if (!FileUtils.getFileOnSD("documents", FileUtils.getFilename(options[selectedDocument], ".pdf")).exists()) {
+					if (!FileUtils.getFileOnSD("documents", FileUtils.getFilename(options[selectedDocument], ".pdf"))
+							.exists()) {
 						// we can access external storage but file does not exist
 						// hence, download it
 						getDocument();
@@ -112,7 +115,8 @@ public class Documents extends Activity {
 					public void onClick(DialogInterface dialog, int id) {
 						File file;
 						try {
-							file = FileUtils.getFileOnSD("documents", FileUtils.getFilename(options[selectedDocument], ".pdf"));
+							file = FileUtils.getFileOnSD("documents",
+									FileUtils.getFilename(options[selectedDocument], ".pdf"));
 							FileUtils.openFile(file, Documents.this, FileUtils.PDF_TYPE);
 						} catch (Exception e) {
 							Utils.showLongCenteredToast(Documents.this, getString(R.string.no_sd_card));
@@ -177,7 +181,8 @@ public class Documents extends Activity {
 					FileUtils.openFile(file, Documents.this, FileUtils.PDF_TYPE);
 
 				} else { // error occurred
-					Utils.showLongCenteredToast(Documents.this, Documents.this.getString(R.string.tumonline_settings_error));
+					Utils.showLongCenteredToast(Documents.this,
+							Documents.this.getString(R.string.tumonline_settings_error));
 				}
 			}
 		};
@@ -208,7 +213,8 @@ public class Documents extends Activity {
 		String password = tumOnlinePassword;
 
 		// log in
-		url = "https://campus.tum.de/tumonline/wbanmeldung.durchfuehren?ctxid=check&curl=&cinframe=&cp1=" + username + "&cp2=" + password;
+		url = "https://campus.tum.de/tumonline/wbanmeldung.durchfuehren?ctxid=check&curl=&cinframe=&cp1=" + username
+				+ "&cp2=" + password;
 		String resp = FileUtils.sendPostRequest(httpClient, url);
 
 		// parse pStPersonNr
@@ -249,21 +255,24 @@ public class Documents extends Activity {
 		// decide which document to download
 		switch (selectedDocument) {
 		case 0:
-			url = "https://campus.tum.de/tumonline/wbStudAusdrucke.immatrikulationsbescheinigung?pStPersonNr=" + personNr + "&pSemesterNr=" + semesterNr
-					+ "&pLanguage=" + "DE";
+			url = "https://campus.tum.de/tumonline/wbStudAusdrucke.immatrikulationsbescheinigung?pStPersonNr="
+					+ personNr + "&pSemesterNr=" + semesterNr + "&pLanguage=" + "DE";
 			break;
 		case 1:
-			url = "https://campus.tum.de/tumonline/wbStudAusdrucke.immatrikulationsbescheinigung?pStPersonNr=" + personNr + "&pSemesterNr=" + semesterNr
-					+ "&pLanguage=" + "EN";
+			url = "https://campus.tum.de/tumonline/wbStudAusdrucke.immatrikulationsbescheinigung?pStPersonNr="
+					+ personNr + "&pSemesterNr=" + semesterNr + "&pLanguage=" + "EN";
 			break;
 		case 2:
-			url = "https://campus.tum.de/tumonline/wbStudAusdrucke.immatrikulationsbeschein_mvv?pStPersonNr=" + personNr + "&pSemesterNr=" + semesterNr;
+			url = "https://campus.tum.de/tumonline/wbStudAusdrucke.immatrikulationsbeschein_mvv?pStPersonNr="
+					+ personNr + "&pSemesterNr=" + semesterNr;
 			break;
 		case 3:
-			url = "https://campus.tum.de/tumonline/wbStudAusdrucke.studienverlaufsbescheinigung?pStPersonNr=" + personNr + "&pSemesterNr=" + semesterNr;
+			url = "https://campus.tum.de/tumonline/wbStudAusdrucke.studienverlaufsbescheinigung?pStPersonNr="
+					+ personNr + "&pSemesterNr=" + semesterNr;
 			break;
 		case 4:
-			url = "https://campus.tum.de/tumonline/wbStudAusdrucke.zahlungsbeleg?pStPersonNr=" + personNr + "&pSemesterNr=" + semesterNr;
+			url = "https://campus.tum.de/tumonline/wbStudAusdrucke.zahlungsbeleg?pStPersonNr=" + personNr
+					+ "&pSemesterNr=" + semesterNr;
 			break;
 		default:
 			return null;
