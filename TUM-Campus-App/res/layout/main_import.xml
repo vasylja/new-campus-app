@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent" android:padding="6dip"
+	android:orientation="vertical" android:layout_width="fill_parent">
+
+    <Button android:id="@+id/btnTUMOnlineSettings"
+        android:layout_height="wrap_content" android:layout_width="fill_parent"
+        android:textColor="#FF2546A4" 
+        android:text="@string/tumonline_settings"/>
+
+    <Button android:id="@+id/importLecturesTUMOnline"
+        android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:textColor="#FF2546A4" 
+        android:text="@string/import_lectures_from_tumonline"/>
+
+	<Button android:id="@+id/importLectures"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:textColor="#FF2546A4" 
+		android:text="@string/import_lectures_from_sd_card"/>
+
+	<Button android:id="@+id/importLinks"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:textColor="#FF2546A4" 
+		android:text="@string/import_links" />
+
+	<Button android:id="@+id/importFeeds"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:textColor="#FF2546A4" android:layout_marginBottom="3dip" 
+		android:text="@string/import_rss_feed" />
+
+	<TextView 
+	    android:layout_width="fill_parent" android:layout_height="0.5dip" 
+	    android:background="#0065BD" />
+
+	<TextView 
+	    android:layout_width="fill_parent" android:layout_height="wrap_content" 
+	    android:textColor="#0065BD" android:layout_margin="3dip"
+		android:text="@string/howto_import_lectures" />
+
+	<TextView 
+	    android:layout_width="fill_parent" android:layout_height="0.5dip"
+		android:background="#0065BD" />
+
+	<TextView 
+	    android:layout_width="fill_parent" android:layout_height="wrap_content" 
+	    android:textColor="#0065BD" android:layout_margin="3dip" 
+		android:text="@string/howto_import_rss_feed" />
+
+	<TextView 
+	    android:layout_width="fill_parent" android:layout_height="0.5dip"
+	    android:background="#0065BD" />
+
+	<TextView 
+	    android:layout_width="fill_parent" android:layout_height="wrap_content"
+		 android:textColor="#0065BD" android:layout_margin="3dip" />
+
+	<TextView 
+	    android:layout_width="fill_parent" android:layout_height="0.5dip" 
+	    android:background="#0065BD" />
+
+	<TextView 
+	    android:layout_width="fill_parent" android:layout_height="wrap_content"
+	    android:textColor="#0065BD"	android:layout_margin="3dip" 
+		android:text="@string/import_hint"/>
+	
+</LinearLayout>

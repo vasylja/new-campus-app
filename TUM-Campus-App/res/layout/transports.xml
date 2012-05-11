@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical" android:background="#0065BD">
+
+	<TextView android:id="@+id/transportText"
+		android:layout_height="wrap_content" android:layout_width="fill_parent" 
+		android:paddingLeft="2dip" android:textColor="#FFFFFF" 
+		android:text="@string/choose_station" />
+
+	<ListView android:id="@+id/listView2"
+	    android:layout_height="fill_parent" android:layout_width="fill_parent"
+		android:layout_weight="51" android:background="#FFFFFF"  
+		android:scrollbars="vertical" android:padding="6.5dip" />
+
+	<TextView android:id="@+id/transportText2"
+		android:layout_height="wrap_content" android:layout_width="fill_parent" 
+		android:textColor="#FFFFFF" android:paddingLeft="2dip"
+		android:text="@string/saved_stations" />
+
+	<ListView android:id="@+id/listView"
+	    android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:background="#FFFFFF"  android:layout_weight="49"
+		android:scrollbars="vertical" android:padding="4dip" />
+
+	<EditText android:id="@+id/search" 
+	    android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:hint="@string/search_station" android:singleLine="true"
+		android:layout_marginTop="4dip" android:imeOptions="actionSearch" />
+</LinearLayout>

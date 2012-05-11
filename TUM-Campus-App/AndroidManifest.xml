@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="de.tum.in.tumcampus"
+    android:versionCode="11"
+    android:versionName="0.78" > <!-- android:installLocation="preferExternal" -->
+
+    <uses-sdk android:minSdkVersion="7" />
+
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="de.tum.in.tumcampus" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Daniel G. Mayr: export Lectures to calendar -->
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+
+    <application
+        android:icon="@drawable/icon"
+        android:label="TUMCampus"
+        android:theme="@android:style/Theme.Light" >
+        <uses-library android:name="android.test.runner" />
+
+        <activity
+            android:name=".TumCampus"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Cafeterias"
+            android:label="@string/menues" />
+        <activity
+            android:name=".Events"
+            android:label="@string/current_events" />
+        <activity
+            android:name=".EventsDetails"
+            android:label="@string/event_details" />
+        <activity
+            android:name=".Lectures"
+            android:label="@string/lectures" />
+
+        <!-- added by Daniel Mayr -->
+
+        <activity
+            android:name=".TUMOnline"
+            android:label="@string/tumonline_connection" />
+        <activity
+            android:name=".FindLectures"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/search_lectures" />
+        <activity
+            android:name=".LectureDetails"
+            android:label="@string/lecture_details" />
+        <activity
+            android:name=".LectureAppointments"
+            android:label="@string/lecture_dates" />
+        <activity
+            android:name=".MyLectures"
+            android:label="@string/own_lectures" />
+        <activity
+            android:name=".Lectures2Calendar"
+            android:label="@string/export2calendar" />
+
+        <!-- added by Vincenz Doelle -->
+
+        <activity
+            android:name=".TUMOnlineSettings"
+            android:label="@string/access_token_settings" />
+        <activity
+            android:name=".Staff"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/person_search" />
+        <activity
+            android:name=".StaffDetails"
+            android:label="@string/person_information" />
+        <activity
+            android:name=".Grades"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/grades" />
+        <activity
+            android:name=".Documents"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/documents" />
+        <activity
+            android:name=".Curricula"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/study_plans" />
+        <activity
+            android:name=".Roomfinder"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/roomfinder" />
+        <activity
+            android:name=".TuitionFees"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/tuition_fees" />
+
+        <!-- added by Thomas Behrens -->
+
+        <activity
+            android:name=".Organisation"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/organisations" />
+        <activity
+            android:name=".OrganisationDetails"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/organisation_details" />
+
+        <!-- others -->
+
+        <activity
+            android:name=".Links"
+            android:label="@string/links" />
+        <activity
+            android:name=".News"
+            android:label="@string/news" />
+        <activity
+            android:name=".Feeds"
+            android:label="@string/rss_feeds" />
+        <activity
+            android:name=".Transports"
+            android:label="@string/mvv_live" />
+        <activity
+            android:name=".Plans"
+            android:label="@string/area_maps" />
+        <activity
+            android:name=".Hours"
+            android:label="@string/opening_hours" />
+        <activity
+            android:name=".AppInfo"
+            android:label="@string/full_app_info" />
+        <activity
+            android:name=".Debug"
+            android:label="@string/debug_sqllite" />
+        <activity
+            android:name="Settings"
+            android:label="@string/settings"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <service
+            android:name=".services.DownloadService"
+            android:exported="false" />
+        <service
+            android:name=".services.ImportService"
+            android:exported="false" />
+        <service
+            android:name=".services.SilenceService"
+            android:exported="false" />
+
+        <receiver android:name=".receivers.BootCompleted" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

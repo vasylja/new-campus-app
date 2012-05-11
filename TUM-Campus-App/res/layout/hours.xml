@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:background="#0065BD" android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+    
+	<LinearLayout 
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:orientation="vertical">
+
+		<TextView 
+		    android:layout_width="fill_parent" android:layout_height="2dip" />
+
+		<ListView android:id="@+id/listView2"
+		    android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:background="#FFFFFF" android:scrollbars="vertical"
+			android:layout_marginBottom="33dip" android:padding="4dip" />
+		
+	</LinearLayout>
+
+	<SlidingDrawer android:id="@+id/slider"
+	    android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:handle="@+id/handle" android:content="@+id/slide">
+
+		<Button android:id="@+id/handle"
+		    android:layout_height="wrap_content" android:layout_width="fill_parent" 
+			android:background="#0065BD" android:textColor="#FFFFFF" 
+			android:height="33dip" 
+			android:text="@string/choose_category"/>
+
+		<LinearLayout android:id="@+id/slide"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:orientation="vertical" android:background="#F1FFFFFF" >
+
+			<ListView android:id="@+id/listView"
+			    android:layout_height="fill_parent" android:layout_width="fill_parent" 
+			    android:scrollbars="vertical" />
+			
+		</LinearLayout>
+	</SlidingDrawer>
+	</FrameLayout>
+</LinearLayout>

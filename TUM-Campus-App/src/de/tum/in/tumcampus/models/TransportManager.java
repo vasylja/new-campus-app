@@ -1,0 +1,203 @@
+﻿package de.tum.in.tumcampus.models;
+
+import java.net.URLEncoder;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import de.tum.in.tumcampus.Const;
+import de.tum.in.tumcampus.common.Utils;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.MatrixCursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * Transport Manager, handles database stuff, internet connections
+ */
+public class TransportManager extends SQLiteOpenHelper {
+
+	/**
+	 * Database connection
+	 */
+	private SQLiteDatabase db;
+
+	/**
+	 * Constructor, open/create database, create table if necessary
+	 * 
+	 * <pre>
+	 * @param context Context
+	 * @param database Filename, e.g. database.db
+	 * </pre>
+	 */
+	public TransportManager(Context context, String database) {
+		super(context, database, null, Const.dbVersion);
+
+		db = getWritableDatabase();
+		onCreate(db);
+	}
+
+	/**
+	 * Get all departures for a station
+	 * 
+	 * Cursor includes target station name, departure in remaining minutes
+	 * 
+	 * <pre>
+	 * @param location Station name
+	 * @return Database cursor (name, desc, _id)
+	 * @throws Exception
+	 * </pre>
+	 */
+	public Cursor getDeparturesFromExternal(String location) throws Exception {
+		String baseUrl = "http://query.yahooapis.com/v1/public/yql?format=json&q=";
+
+		// ISO needed for mvv
+		String lookupUrl = "http://www.mvg-live.de/ims/dfiStaticAnzeige.svc?haltestelle="
+				+ URLEncoder.encode(location, "ISO-8859-1");
+
+		String query = URLEncoder
+				.encode("select content from html where url=\"" + lookupUrl
+						+ "\" and xpath=\"//td[contains(@class,'Column')]/p\"");
+		Utils.log(query);
+
+		JSONArray jsonArray = Utils.downloadJson(baseUrl + query)
+				.getJSONObject("query").getJSONObject("results")
+				.getJSONArray("p");
+
+		if (jsonArray.length() < 3) {
+			throw new Exception("<Keine Abfahrten gefunden>");
+		}
+
+		MatrixCursor mc = new MatrixCursor(
+				new String[] { "name", "desc", "_id" });
+
+		for (int j = 2; j < jsonArray.length(); j = j + 3) {
+			String name = jsonArray.getString(j) + " "
+					+ jsonArray.getString(j + 1).trim();
+
+			String desc = jsonArray.getString(j + 2) + " min";
+
+			mc.addRow(new String[] { name, desc, String.valueOf(j) });
+		}
+		return mc;
+	}
+
+	/**
+	 * Find stations by station name prefix
+	 * 
+	 * <pre>
+	 * @param location Name prefix
+	 * @return Database Cursor (name, _id)
+	 * @throws Exception
+	 * </pre>
+	 */
+	public Cursor getStationsFromExternal(String location) throws Exception {
+
+		String baseUrl = "http://query.yahooapis.com/v1/public/yql?format=json&q=";
+
+		String lookupUrl = "http://www.mvg-live.de/ims/dfiStaticAuswahl.svc?haltestelle="
+				+ URLEncoder.encode(location, "ISO-8859-1");
+
+		String query = URLEncoder
+				.encode("select content from html where url=\"" + lookupUrl
+						+ "\" and xpath=\"//a[contains(@href,'haltestelle')]\"");
+		Utils.log(query);
+
+		JSONObject jsonObj = Utils.downloadJson(baseUrl + query).getJSONObject(
+				"query");
+
+		JSONArray jsonArray = new JSONArray();
+		try {
+			Object obj = jsonObj.getJSONObject("results").get("a");
+			if (obj instanceof JSONArray) {
+				jsonArray = (JSONArray) obj;
+			} else {
+				if (obj.toString().contains("aktualisieren")) {
+					throw new JSONException("");
+				}
+				jsonArray.put(obj);
+			}
+		} catch (JSONException e) {
+			throw new Exception("<Keine Station(en) gefunden>");
+		}
+
+		MatrixCursor mc = new MatrixCursor(new String[] { "name", "_id" });
+
+		for (int j = 0; j < jsonArray.length(); j++) {
+			String station = jsonArray.getString(j).replaceAll("\\s+", " ");
+
+			mc.addRow(new String[] { station, String.valueOf(j) });
+		}
+		return mc;
+	}
+
+	/**
+	 * Get all stations from the database
+	 * 
+	 * @return Database cursor (name, _id)
+	 */
+	public Cursor getAllFromDb() {
+		return db.rawQuery("SELECT name, name as _id FROM transports "
+				+ "ORDER BY name", null);
+	}
+
+	/**
+	 * Checks if the transports table is empty
+	 * 
+	 * @return true if no stations are available, else false
+	 */
+	public boolean empty() {
+		boolean result = true;
+		Cursor c = db.rawQuery("SELECT name FROM transports LIMIT 1", null);
+		if (c.moveToNext()) {
+			result = false;
+		}
+		c.close();
+		return result;
+	}
+
+	/**
+	 * Replace or Insert a station into the database
+	 * 
+	 * <pre>
+	 * @param name Station name
+	 * @throws Exception
+	 * </pre>
+	 */
+	public void replaceIntoDb(String name) {
+		Utils.log(name);
+
+		if (name.length() == 0) {
+			return;
+		}
+		db.execSQL("REPLACE INTO transports (name) VALUES (?)",
+				new String[] { name });
+	}
+
+	/**
+	 * delete a station from the database
+	 * 
+	 * <pre>
+	 * @param name Station name
+	 * </pre>
+	 */
+	public void deleteFromDb(String name) {
+		db.execSQL("DELETE FROM transports WHERE name = ?",
+				new String[] { name });
+	}
+
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		// create table if needed
+		db.execSQL("CREATE TABLE IF NOT EXISTS transports ("
+				+ "name VARCHAR PRIMARY KEY)");
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		onCreate(db);
+	}
+}

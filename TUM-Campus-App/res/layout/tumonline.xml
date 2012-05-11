@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btnGetAccessToken"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/generate_token" />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <SlidingDrawer
+        android:id="@+id/slider"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:content="@+id/slide"
+        android:handle="@+id/handle" >
+
+        <Button
+            android:id="@+id/handle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#0065BD"
+            android:height="33dip"
+            android:text="@string/howto"
+            android:textColor="#FFFFFF" />
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/slide"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#F1FFFFFF"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dip"
+                    android:background="#0065BD" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dip"
+                    android:text="@string/howto_tumonline"
+                    android:textColor="#0065BD" />
+            </LinearLayout>
+        </ScrollView>
+    </SlidingDrawer>
+
+</LinearLayout>
