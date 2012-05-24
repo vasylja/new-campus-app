@@ -21,7 +21,7 @@ import de.tum.in.newtumcampus.services.DownloadService;
  * Activity to show events (name, location, image, etc.)
  */
 public class Events extends Activity implements OnItemClickListener, ViewBinder {
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,7 +73,7 @@ public class Events extends Activity implements OnItemClickListener, ViewBinder 
 
 		// open event details when clicking an event in the list
 		Intent intent = new Intent(this, EventsDetails.class);
-		intent.putExtra("id", c.getString(c.getColumnIndex("_id")));
+		intent.putExtra(Const.ID_EXTRA, c.getString(c.getColumnIndex(Const.ID_COLUMN)));
 		startActivity(intent);
 	}
 
@@ -90,9 +90,9 @@ public class Events extends Activity implements OnItemClickListener, ViewBinder 
 			String[] weekDays = getString(R.string.week_splitted).split(",");
 
 			TextView infos = (TextView) view;
-			infos.setText(weekDays[c.getInt(c.getColumnIndex("weekday"))] + ", "
-					+ c.getString(c.getColumnIndex("start_de")) + " - " + c.getString(c.getColumnIndex("end_de"))
-					+ "\n" + c.getString(c.getColumnIndex("location")));
+			infos.setText(weekDays[c.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))] + ", "
+					+ c.getString(c.getColumnIndex(Const.START_DE_COLUMN)) + " - " + c.getString(c.getColumnIndex(Const.END_DE_COLUMN))
+					+ "\n" + c.getString(c.getColumnIndex(Const.LOCATION_COLUMN)));
 			return true;
 		}
 		return false;
@@ -110,7 +110,7 @@ public class Events extends Activity implements OnItemClickListener, ViewBinder 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// download latest events
 		Intent service = new Intent(this, DownloadService.class);
-		service.putExtra("action", "events");
+		service.putExtra(Const.ACTION_EXTRA, Const.EVENTS);
 		startService(service);
 		return true;
 	}

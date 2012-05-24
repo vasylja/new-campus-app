@@ -32,21 +32,18 @@ import de.tum.in.newtumcampus.R;
  */
 public class DownloadService extends IntentService {
 
-	/**
-	 * Indicator to avoid starting new downloads
-	 */
+	/** Indicator to avoid starting new downloads */
 	private volatile boolean destroyed = false;
 
-	/**
-	 * Download broadcast identifier
-	 */
+	/** Download broadcast identifier */
 	public final static String broadcast = "de.tum.in.newtumcampus.intent.action.BROADCAST_DOWNLOAD";
 
+	private static final String DOWNLOAD_SERVICE = "DownloadService";
 	/**
 	 * default init (run intent in new thread)
 	 */
 	public DownloadService() {
-		super("DownloadService");
+		super(DOWNLOAD_SERVICE);
 	}
 
 	/**
@@ -64,8 +61,8 @@ public class DownloadService extends IntentService {
 			if (!intent.getAction().equals(DownloadService.broadcast)) {
 				return;
 			}
-			if (intent.getStringExtra("action").length() != 0) {
-				Toast.makeText(context, intent.getStringExtra("message"), Toast.LENGTH_LONG).show();
+			if (intent.getStringExtra(Const.ACTION_EXTRA).length() != 0) {
+				Toast.makeText(context, intent.getStringExtra(Const.MESSAGE_EXTRA), Toast.LENGTH_LONG).show();
 
 				// wait until images are loaded
 				synchronized (this) {
@@ -106,7 +103,7 @@ public class DownloadService extends IntentService {
 
 		logMessage(getString(R.string.updating), "");
 
-		String action = intent.getStringExtra("action");
+		String action = intent.getStringExtra(Const.ACTION_EXTRA);
 		Utils.log(action);
 
 		boolean force = false;
@@ -115,32 +112,32 @@ public class DownloadService extends IntentService {
 		}
 
 		// download all or only one action
-		if ((action == null || action.equals("feeds")) && !destroyed) {
+		if ((action == null || action.equals(Const.FEEDS)) && !destroyed) {
 			logMessage(getString(R.string.rss_feeds) + ", ", "");
 			downloadFeeds(force);
 		}
-		if ((action == null || action.equals("news")) && !destroyed) {
+		if ((action == null || action.equals(Const.NEWS)) && !destroyed) {
 			logMessage(getString(R.string.news) + ", ", "");
 			downloadNews(force);
 		}
-		if ((action == null || action.equals("events")) && !destroyed) {
+		if ((action == null || action.equals(Const.EVENTS)) && !destroyed) {
 			logMessage(getString(R.string.events) + ", ", "");
 			downloadEvents(force);
 		}
-		if ((action == null || action.equals("cafeterias")) && !destroyed) {
+		if ((action == null || action.equals(Const.CAFETERIAS)) && !destroyed) {
 			logMessage(getString(R.string.cafeterias) + ", ", "");
 			downloadCafeterias(force);
 		}
-		if ((action == null || action.equals("links")) && !destroyed) {
+		if ((action == null || action.equals(Const.LINKS)) && !destroyed) {
 			logMessage(getString(R.string.links) + ", ", "");
 			downloadLinks();
 		}
-		if ((action == null || action.equals("organisations")) && !destroyed) {
+		if ((action == null || action.equals(Const.ORGANISATIONS)) && !destroyed) {
 			logMessage(getString(R.string.organisations) + ", ", "");
 			downloadOrganisations();
 		}
 		// TODO Check whether to change "completed"
-		logMessage(getString(R.string.completed), "completed");
+		logMessage(getString(R.string.completed), getString(R.string.completed));
 		nm.cancel(1);
 	}
 
@@ -245,7 +242,7 @@ public class DownloadService extends IntentService {
 	public void downloadOrganisations() {
 		OrganisationManager lm = new OrganisationManager(this);
 
-		String accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString("access_token", null);
+		String accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.ACCESS_TOKEN, null);
 
 		// if no token ask if token want to be set
 		if (accessToken == null) {
@@ -282,8 +279,8 @@ public class DownloadService extends IntentService {
 
 		Intent intentSend = new Intent();
 		intentSend.setAction(broadcast);
-		intentSend.putExtra("message", errorMessage);
-		intentSend.putExtra("action", "error");
+		intentSend.putExtra(Const.MESSAGE_EXTRA, errorMessage);
+		intentSend.putExtra(Const.ACTION_EXTRA, Const.ERROR);
 		sendBroadcast(intentSend);
 	}
 
@@ -300,8 +297,8 @@ public class DownloadService extends IntentService {
 
 		Intent intentSend = new Intent();
 		intentSend.setAction(broadcast);
-		intentSend.putExtra("message", this.message);
-		intentSend.putExtra("action", action);
+		intentSend.putExtra(Const.MESSAGE_EXTRA, this.message);
+		intentSend.putExtra(Const.ACTION_EXTRA, action);
 		sendBroadcast(intentSend);
 	}
 

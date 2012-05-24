@@ -32,11 +32,28 @@ import de.tum.in.newtumcampus.models.TransportManager;
  */
 public class ImportService extends IntentService {
 
+	public static final String IMPORT_SERVICE = "ImportService";
+	
+	public static final String ISO = "ISO-8859-1";
+	
+	public static final String CSV_TRANSPORTS = "transports.csv";
+	
+	public static final String CSV_FEEDS = "feeds.csv";
+	
+	public static final String CSV_LOCATIONS = "locations.csv";
+	
+	public static final String CSV_HOLIDAYS = "lectures_holidays.csv";
+	
+	public static final String CSV_VACATIONS = "lectures_vacations.csv";
+	
+	public static final String CSV_LINKS = "links.csv";
+	
+	
 	/**
 	 * default init (run intent in new thread)
 	 */
 	public ImportService() {
-		super("ImportService");
+		super(IMPORT_SERVICE);
 	}
 
 	/**
@@ -46,11 +63,11 @@ public class ImportService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		String action = intent.getStringExtra("action");
+		String action = intent.getStringExtra(Const.ACTION_EXTRA);
 		Utils.log(action);
 
 		// import all defaults or only one action
-		if (action.equals("defaults")) {
+		if (action.equals(Const.DEFAULTS)) {
 			try {
 				// get current app version
 				String version = getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
@@ -84,7 +101,7 @@ public class ImportService extends IntentService {
 			nm.notify(1, notification);
 
 			// added by Daniel G. Mayr
-			if (action.equals("lecturesTUMOnline")) {
+			if (action.equals(Const.LECTURES_TUM_ONLINE)) {
 				Log.d(getString(R.string.service), getString(R.string.import_from_tumonline));
 				importLectureItemsFromTUMOnline();
 			} else {
@@ -93,13 +110,13 @@ public class ImportService extends IntentService {
 					// check if sd card available
 					Utils.getCacheDir("");
 
-					if (action.equals("feeds")) {
+					if (action.equals(Const.FEEDS)) {
 						importFeeds();
 					}
-					if (action.equals("links")) {
+					if (action.equals(Const.LINKS)) {
 						importLinks();
 					}
-					if (action.equals("lectures")) {
+					if (action.equals(Const.LECTURES)) {
 						importLectureItems();
 					}
 
@@ -184,7 +201,7 @@ public class ImportService extends IntentService {
 
 		TransportManager tm = new TransportManager(this, Const.db);
 		if (tm.empty()) {
-			List<String[]> rows = Utils.readCsv(getAssets().open("transports.csv"), "ISO-8859-1");
+			List<String[]> rows = Utils.readCsv(getAssets().open(CSV_TRANSPORTS), ISO);
 
 			for (String[] row : rows) {
 				tm.replaceIntoDb(row[0]);
@@ -202,7 +219,7 @@ public class ImportService extends IntentService {
 
 		FeedManager nm = new FeedManager(this, Const.db);
 		if (nm.empty()) {
-			List<String[]> rows = Utils.readCsv(getAssets().open("feeds.csv"), "ISO-8859-1");
+			List<String[]> rows = Utils.readCsv(getAssets().open(CSV_FEEDS), ISO);
 
 			for (String[] row : rows) {
 				nm.insertUpdateIntoDb(new Feed(row[0], row[1]));
@@ -223,7 +240,7 @@ public class ImportService extends IntentService {
 
 		LocationManager lm = new LocationManager(this, Const.db);
 		if (lm.empty() || force) {
-			List<String[]> rows = Utils.readCsv(getAssets().open("locations.csv"), "ISO-8859-1");
+			List<String[]> rows = Utils.readCsv(getAssets().open(CSV_LOCATIONS), ISO);
 
 			for (String[] row : rows) {
 				lm.replaceIntoDb(new Location(Integer.parseInt(row[0]), row[1], row[2], row[3], row[4], row[5], row[6],
@@ -241,13 +258,13 @@ public class ImportService extends IntentService {
 	public void importLectureItemsDefaults() throws Exception {
 		LectureItemManager lim = new LectureItemManager(this, Const.db);
 		if (lim.empty()) {
-			List<String[]> rows = Utils.readCsv(getAssets().open("lectures_holidays.csv"), "ISO-8859-1");
+			List<String[]> rows = Utils.readCsv(getAssets().open(CSV_HOLIDAYS), ISO);
 
 			for (String[] row : rows) {
 				lim.replaceIntoDb(new LectureItem.Holiday(row[0], Utils.getDate(row[1]), row[2]));
 			}
 
-			rows = Utils.readCsv(getAssets().open("lectures_vacations.csv"), "ISO-8859-1");
+			rows = Utils.readCsv(getAssets().open(CSV_VACATIONS), ISO);
 
 			for (String[] row : rows) {
 				lim.replaceIntoDb(new LectureItem.Vacation(row[0], Utils.getDate(row[1]), Utils.getDate(row[2]), row[3]));
@@ -268,7 +285,7 @@ public class ImportService extends IntentService {
 	public void importLinksDefaults() throws Exception {
 		LinkManager lm = new LinkManager(this, Const.db);
 		if (lm.empty()) {
-			List<String[]> rows = Utils.readCsv(getAssets().open("links.csv"), "ISO-8859-1");
+			List<String[]> rows = Utils.readCsv(getAssets().open(CSV_LINKS), ISO);
 
 			for (String[] row : rows) {
 				lm.insertUpdateIntoDb(new Link(row[0], row[1]));
@@ -309,8 +326,8 @@ public class ImportService extends IntentService {
 	public void message(String message, String action) {
 		Intent intentSend = new Intent();
 		intentSend.setAction(broadcast);
-		intentSend.putExtra("message", message);
-		intentSend.putExtra("action", action);
+		intentSend.putExtra(Const.MESSAGE_EXTRA, message);
+		intentSend.putExtra(Const.ACTION_EXTRA, action);
 		sendBroadcast(intentSend);
 	}
 

@@ -28,24 +28,25 @@ import de.tum.in.newtumcampus.services.DownloadService;
  */
 public class Cafeterias extends Activity implements OnItemClickListener {
 
-	/**
-	 * Current Date selected (ISO format)
-	 */
+	/** Current Date selected (ISO format) */
 	private static String date;
 
-	/**
-	 * Current Date selected (German format)
-	 */
-	private static String dateStr;
+	/** Current Date selected (German format) */
+	private static String dateStr;	
+	
+	/** Cafeteria prices url */
+	private static String MENSA_PREISE = "http://www.studentenwerk-muenchen.de/mensa/unsere-preise/";
 
-	/**
-	 * Current Cafeteria selected
-	 */
+	/** Cafeteria list Garching url */
+	private static String MENSEN_GARCHING = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/garching/";
+	
+	/** Cafeteria list Muenchen url */
+	private static String MENSEN_MUENCHEN = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/muenchen/";
+	
+	/** Current Cafeteria selected */
 	private String cafeteriaId;
 
-	/**
-	 * Current Cafeteria name selected
-	 */
+	/** Current Cafeteria name selected */
 	private String cafeteriaName;
 
 	/**
@@ -138,8 +139,8 @@ public class Cafeterias extends Activity implements OnItemClickListener {
 		if (av.getId() == R.id.listView) {
 			ListView lv = (ListView) findViewById(R.id.listView);
 			Cursor c = (Cursor) lv.getAdapter().getItem(position);
-			date = c.getString(c.getColumnIndex("_id"));
-			dateStr = c.getString(c.getColumnIndex("date_de"));
+			date = c.getString(c.getColumnIndex(Const.ID_COLUMN));
+			dateStr = c.getString(c.getColumnIndex(Const.DATE_COLUMN_DE));
 		}
 
 		// click on cafeteria
@@ -147,8 +148,8 @@ public class Cafeterias extends Activity implements OnItemClickListener {
 			ListView lv2 = (ListView) findViewById(R.id.listView2);
 			Cursor c = (Cursor) lv2.getAdapter().getItem(position);
 
-			cafeteriaId = c.getString(c.getColumnIndex("_id"));
-			cafeteriaName = c.getString(c.getColumnIndex("name"));
+			cafeteriaId = c.getString(c.getColumnIndex(Const.ID_COLUMN));
+			cafeteriaName = c.getString(c.getColumnIndex(Const.NAME_COLUMN));
 		}
 
 		// get menus filtered by cafeteria and date
@@ -216,7 +217,7 @@ public class Cafeterias extends Activity implements OnItemClickListener {
 		case Menu.FIRST:
 			// download latest cafeterias and menus
 			Intent service = new Intent(this, DownloadService.class);
-			service.putExtra("action", "cafeterias");
+			service.putExtra(Const.ACTION_EXTRA, Const.CAFETERIAS);
 			startService(service);
 			return true;
 
@@ -225,18 +226,15 @@ public class Cafeterias extends Activity implements OnItemClickListener {
 			return true;
 
 		case Menu.FIRST + 2:
-			String url3 = "http://www.studentenwerk-muenchen.de/mensa/unsere-preise/";
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url3)));
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MENSA_PREISE)));
 			return true;
 
-		case Menu.FIRST + 3:
-			String url = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/garching/";
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+		case Menu.FIRST + 3:			
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MENSEN_GARCHING)));
 			return true;
 
 		case Menu.FIRST + 4:
-			String url2 = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/muenchen/";
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url2)));
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MENSEN_MUENCHEN)));
 			return true;
 		}
 		return false;

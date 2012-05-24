@@ -20,15 +20,15 @@ public class EventsDetails extends Activity {
 
 		// get event details from db
 		EventManager em = new EventManager(this, Const.db);
-		Cursor c = em.getDetailsFromDb(getIntent().getStringExtra("id"));
+		Cursor c = em.getDetailsFromDb(getIntent().getStringExtra(Const.ID_EXTRA));
 
 		if (c.moveToNext()) {
-			String description = c.getString(c.getColumnIndex("description"));
-			String image = c.getString(c.getColumnIndex("image"));
+			String description = c.getString(c.getColumnIndex(Const.DESCRIPTION_COLUMN));
+			String image = c.getString(c.getColumnIndex(Const.IMAGE_COLUMN));
 
 			String[] weekDays = getString(R.string.week_splitted).split(",");
 
-			setTitle(c.getString(c.getColumnIndex("name")));
+			setTitle(c.getString(c.getColumnIndex(Const.NAME_COLUMN)));
 
 			/**
 			 * <pre>
@@ -38,11 +38,11 @@ public class EventsDetails extends Activity {
 			 * Link
 			 * </pre>
 			 */
-			String infos = weekDays[c.getInt(c.getColumnIndex("weekday"))];
-			infos += ", " + c.getString(c.getColumnIndex("start_de")) + " - " + c.getString(c.getColumnIndex("end_de"))
+			String infos = weekDays[c.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))];
+			infos += ", " + c.getString(c.getColumnIndex(Const.START_DE_COLUMN)) + " - " + c.getString(c.getColumnIndex(Const.END_DE_COLUMN))
 					+ "\n";
-			infos += c.getString(c.getColumnIndex("location")) + "\n";
-			infos += c.getString(c.getColumnIndex("link"));
+			infos += c.getString(c.getColumnIndex(Const.LOCATION_COLUMN)) + "\n";
+			infos += c.getString(c.getColumnIndex(Const.LINK_COLUMN));
 
 			TextView tv = (TextView) findViewById(R.id.infos);
 			tv.setText(infos.trim());

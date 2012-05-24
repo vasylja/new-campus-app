@@ -42,8 +42,8 @@ public class TUMOnlineRequest {
 	public static final String LOGIN_SERVICE_URL = "https://campus.tum.de/tumonline/anmeldung.durchfuehren";
 
 	// logout service address
-	public static final String LOGOUT_SERVICE_URL = "https://campus.tum.de/tumonline/anmeldung.beenden";
-
+	public static final String LOGOUT_SERVICE_URL = "https://campus.tum.de/tumonline/anmeldung.beenden";	
+	
 	// set to null, if not needed
 	private String accessToken = null;
 
@@ -143,7 +143,7 @@ public class TUMOnlineRequest {
 	 * @return true if access token is available; false otherwise
 	 */
 	private boolean loadAccessTokenFromPreferences(Context context) {
-		accessToken = PreferenceManager.getDefaultSharedPreferences(context).getString("access_token", null);
+		accessToken = PreferenceManager.getDefaultSharedPreferences(context).getString(TUMOnlineConst.ACCESS_TOKEN, null);
 
 		// no access token set, or it is obviously wrong
 		if (accessToken == null || accessToken.length() < 1) {
@@ -153,7 +153,7 @@ public class TUMOnlineRequest {
 		Log.d("AccessToken", accessToken);
 		// ok, access token seems valid (at first)
 
-		setParameter("pToken", accessToken);
+		setParameter(TUMOnlineConst.P_TOKEN, accessToken);
 		return true;
 	}
 
@@ -183,7 +183,7 @@ public class TUMOnlineRequest {
 		parameters = new HashMap<String, String>();
 		// set accessToken as parameter if available
 		if (accessToken != null) {
-			parameters.put("pToken", accessToken);
+			parameters.put(TUMOnlineConst.P_TOKEN, accessToken);
 		}
 	}
 
@@ -296,7 +296,7 @@ public class TUMOnlineRequest {
 				if (result == null) {
 					listener.onFetchError(context.getString(R.string.empty_result));
 					// TODO Check whether to move to string.xml
-				} else if (result.contains("Token ist nicht bestätigt oder ungültig")) {
+				} else if (result.contains(TUMOnlineConst.TOKEN_NICHT_BESTAETIGT)) {
 					Intent iTUMSettings = new Intent(context, TUMOnlineSettings.class);
 					Dialogs.showIntentSwitchDialog(context, (Activity) context,
 							((Activity) context).getString(R.string.dialog_access_token_invalid), iTUMSettings);

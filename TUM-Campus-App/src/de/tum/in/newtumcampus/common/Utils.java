@@ -706,7 +706,6 @@ public class Utils {
 		int wday = c.get(Calendar.DAY_OF_WEEK);
 		switch (wday) {
 		case Calendar.SUNDAY:
-
 			return "So";
 		case Calendar.MONDAY:
 			return "Mo";

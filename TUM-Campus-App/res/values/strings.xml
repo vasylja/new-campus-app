@@ -6,16 +6,17 @@
 
     <!-- ###### LAYOUT FILES ####### -->
     <!-- appinfo.xml -->
-    <string name="app_info_text">		Android-Praktikum\n
-		Summersemester 2011\n
-		Christoph Richter, Thomas Bley\n
-		and\n
-		Wintersemester 2012\n
-		Vincenz Dölle, Daniel Mayr, Thomas Behrens\n
-		\n
-		Inofficial App from students for students\n
-		(no support/liability by the TUM)\n
-		\n
+    <string name="app_info_text">		
+        TUM Campus App -EXPERIMENTAL-\n
+        \n
+        by Christoph Richter, Thomas Bley (Android Praktikum SS2011)
+        and
+        Vincenz Dölle, Daniel Mayr, Thomas Behrens (Android Praktikum WS2011/12)\n
+        and 
+        Florian Schulz, Vasyl Malinskyi (Android Praktikum SS2012)
+		\nThis is an esperimental version introducing all the new Features from the last.
+        You are using this version at your own risk (no responsibility). There is no support for this app.\n
+        \nThis app was developed as part of the Android lab course.\n
 		In cooperation with:\n
 		TUM, faculty for Informatics\n
 		Chair 13, Prof. Dr. Uwe Baumgarten\n
@@ -364,6 +365,7 @@
 
     <!-- ###### OTHER ####### -->
     <string name="week_splitted">Su,Mo,Tu,We,Th,Fr,Sa</string>
+    <string name="facility_categories_splitted">library,info,cafeteria_gar,cafeteria_grh,cafeteria,cafeteria_pas,cafeteria_wst</string>
     <string name="access_token">AccessToken</string>
     <string name="dialog_access_token_missing">TUMOnline-Access-Token not set! Do you want to set it?</string>
     <string name="dialog_access_token_missing2">TUMOnline-Access-Token not set!</string>

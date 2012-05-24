@@ -4,7 +4,10 @@
  * defines constants for database and settings
  */
 public final class Const {
-
+	
+	/** Identifier of access token */ 
+	public static final String ACCESS_TOKEN = "access_token";
+	
 	/**
 	 * database filename
 	 */
@@ -15,6 +18,111 @@ public final class Const {
 	 */
 	public final static int dbVersion = 1;
 
+	/** Action identifier */
+	public static final String ACTION_EXTRA = "action";
+	
+	/** Message identifier */
+	public static final String MESSAGE_EXTRA = "message";
+	
+	/** ID identifier */
+	public static final String ID_EXTRA = "id";
+	
+	/** Title identifier */
+	public static final String TITLE_EXTRA = "title";
+	
+/**	Action values and filenames *************************************** */
+	
+	/** Action value "defaults" */
+	public static final String DEFAULTS = "defaults";
+	
+	/** Action value "cafeterias" */
+	public static final String CAFETERIAS = "cafeterias";
+	
+	/** Key for the curricula file*/
+	public static final String CURRICULA = "curricula";
+	
+	/** Action value "documents" */
+	public static final String DOCUMENTS = "documents";
+	
+	/** Action value "events" */
+	public static final String EVENTS = "events";
+	
+	/** Action value "feeds" */
+	public static final String FEEDS = "feeds";
+	
+	/** Action value "noten" */
+	public static final String NOTEN = "noten";
+	
+	/** Action value "news" */
+	public static final String NEWS = "news";
+	
+	/** Action value "links" */
+	public static final String LINKS = "links";
+	
+	/** Action value "organisations" */
+	public static final String ORGANISATIONS = "organisations";
+	
+	/** Action value "lecturesTUMOnline" */
+	public static final String LECTURES_TUM_ONLINE = "lecturesTUMOnline";
+	
+	/** Action values lectures */
+	public static final String LECTURES = "lectures";
+	
+/**	********************************************************************* */
+	
+	/** LRZ_ID identifier */
+	public static final String LRZ_ID = "lrz-id";
+	
+	/** TUMONLINE_PASSWORD identifier */
+	public static final String TUMONLINE_PASSWORD = "tumonline_password";
+	
+	/** Identifier of the date column */
+	public static final String DATE_COLUMN_DE = "date_de";
+	
+	/** Identifier of the id column */
+	public static final String ID_COLUMN = "_id";
+	
+	/** Identifier of the name column */
+	public static final String NAME_COLUMN = "name";
+	
+	/** Identifier of the Weekday column */
+	public static final String WEEKDAY_COLUMN = "weekday";
+	
+	/** Identifier of the Start column */
+	public static final String START_DE_COLUMN = "start_de";
+	
+	/** Identifier of the End column */
+	public static final String END_DE_COLUMN = "end_de";
+	
+	/** Identifier of the Location column */
+	public static final String LOCATION_COLUMN = "location";
+	
+	/** Identifier of the Description column */
+	public static final String DESCRIPTION_COLUMN = "description";
+	
+	/** Identifier of the Image column */
+	public static final String IMAGE_COLUMN = "image";
+
+	/** Identifier of the Link column */
+	public static final String LINK_COLUMN = "link";
+	
+	/** Identifier of the Transport column */
+	public static final String TRANSPORT_COLUMN = "transport";
+	
+	/** Identifier of the Address column */
+	public static final String ADDRESS_COLUMN = "address";
+	
+	/** Identifier of the Hours column */
+	public static final String HOURS_COLUMN = "hours";
+	
+	/** Identifier of the Remark column */
+	public static final String REMARK_COLUMN = "remark";
+	
+	/** Identifier of the Room column */
+	public static final String ROOM_COLUMN = "room";
+	
+	/** Error (used in extras)*/
+	public static final String ERROR = "error";
 	/**
 	 * constants for application settings
 	 */

@@ -209,7 +209,7 @@ public class TUMCampusRequest {
 				if (result == null) {
 					listener.onFetchError(context.getString(R.string.empty_result));
 					// TODO Check whether to move to string.xml
-				} else if (result.contains("Token ist nicht bestätigt oder ungültig")) {
+				} else if (result.contains(TUMOnlineConst.TOKEN_NICHT_BESTAETIGT)) {
 					Intent iTUMSettings = new Intent(context, TUMOnlineSettings.class);
 					Dialogs.showIntentSwitchDialog(context, (Activity) context,
 							((Activity) context).getString(R.string.dialog_access_token_invalid), iTUMSettings);

@@ -47,7 +47,7 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 	 * Adapter for feed list
 	 */
 	private SimpleCursorAdapter adapter;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -107,7 +107,7 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		// click on feed item in list, open URL in browser
 		if (av.getId() == R.id.listView2) {
 			Cursor c = (Cursor) av.getAdapter().getItem(position);
-			String link = c.getString(c.getColumnIndex("link"));
+			String link = c.getString(c.getColumnIndex(Const.LINK_COLUMN));
 
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
 			startActivity(intent);
@@ -122,11 +122,11 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		// click on feed in list
 		if (position != -1) {
 			Cursor c = (Cursor) av.getAdapter().getItem(position);
-			feedId = c.getString(c.getColumnIndex("_id"));
-			feedName = c.getString(c.getColumnIndex("name"));
+			feedId = c.getString(c.getColumnIndex(Const.ID_COLUMN));
+			feedName = c.getString(c.getColumnIndex(Const.NAME_COLUMN));
 		}
 
-		setTitle("Nachrichten: " + feedName);
+		setTitle(getString(R.string.news) + feedName);
 
 		// get all feed items for a feed
 		FeedItemManager fim = new FeedItemManager(this, Const.db);
@@ -165,7 +165,7 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 
 				// delete feed from list, refresh feed list
 				Cursor c = (Cursor) av.getAdapter().getItem(position);
-				int _id = c.getInt(c.getColumnIndex("_id"));
+				int _id = c.getInt(c.getColumnIndex(Const.ID_COLUMN));
 
 				FeedManager fm = new FeedManager(av.getContext(), Const.db);
 				fm.deleteFromDb(_id);
@@ -193,7 +193,7 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// download latest feed items
 		Intent service = new Intent(this, DownloadService.class);
-		service.putExtra("action", "feeds");
+		service.putExtra(Const.ACTION_EXTRA, Const.FEEDS);
 		startService(service);
 		return true;
 	}

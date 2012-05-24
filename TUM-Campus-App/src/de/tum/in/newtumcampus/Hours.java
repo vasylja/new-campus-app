@@ -43,8 +43,7 @@ public class Hours extends Activity implements OnItemClickListener, ViewBinder {
 				getString(R.string.mensa_city), getString(R.string.mensa_pasing),
 				getString(R.string.mensa_weihenstephan) };
 
-		categories = new String[] { "library", "info", "cafeteria_gar", "cafeteria_grh", "cafeteria", "cafeteria_pas",
-				"cafeteria_wst" };
+		categories = getString(R.string.facility_categories_splitted).split(",");		
 
 		// show all categories
 		ListView lv = (ListView) findViewById(R.id.listView);
@@ -103,12 +102,12 @@ public class Hours extends Activity implements OnItemClickListener, ViewBinder {
 	@Override
 	public boolean setViewValue(View view, Cursor c, int index) {
 		if (view.getId() == android.R.id.text2) {
-			String transport = c.getString(c.getColumnIndex("transport"));
-			String address = c.getString(c.getColumnIndex("address"));
+			String transport = c.getString(c.getColumnIndex(Const.TRANSPORT_COLUMN));
+			String address = c.getString(c.getColumnIndex(Const.ADDRESS_COLUMN));
 
-			String hours = c.getString(c.getColumnIndex("hours"));
-			String remark = c.getString(c.getColumnIndex("remark"));
-			String room = c.getString(c.getColumnIndex("room"));
+			String hours = c.getString(c.getColumnIndex(Const.HOURS_COLUMN));
+			String remark = c.getString(c.getColumnIndex(Const.REMARK_COLUMN));
+			String room = c.getString(c.getColumnIndex(Const.ROOM_COLUMN));
 
 			StringBuilder sb = new StringBuilder(hours + "\n" + address);
 			if (room.length() > 0) {

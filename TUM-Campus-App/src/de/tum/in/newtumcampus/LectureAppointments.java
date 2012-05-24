@@ -36,6 +36,8 @@ public class LectureAppointments extends Activity implements TUMOnlineRequestFet
 	/** UI elements */
 	private ListView lvTermine;
 	private TextView tvTermineLectureName;
+	
+	private static final String VERANSTALTUNGEN_TERMINE = "veranstaltungenTermine";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

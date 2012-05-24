@@ -37,7 +37,7 @@ public class Curricula extends Activity {
 
 	/** Key for the shared preference */
 	private static final String PREF_CURRICULUM_SETTING_KEY = "preferred_curriculum";
-
+	
 	/** Http client to fetch the curricula data */
 	private DefaultHttpClient httpClient;
 
@@ -126,7 +126,7 @@ public class Curricula extends Activity {
 
 		File file = null;
 		try {
-			file = FileUtils.getFileOnSD("curricula", filename);
+			file = FileUtils.getFileOnSD(Const.CURRICULA, filename);
 		} catch (Exception e) {
 			Utils.showLongCenteredToast(this, getString(R.string.no_sd_card));
 			Log.d("EXCEPTION", e.getMessage());

@@ -47,6 +47,10 @@ public class FindLectures extends Activity implements OnEditorActionListener, TU
 
 	/** Handler to send request to TUMOnline */
 	private TUMOnlineRequest requestHandler;
+	
+	private static String VERANSTALTUNGENSUCHE = "veranstaltungenSuche";
+	
+	private static String P_SUCHE = "pSuche";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +69,7 @@ public class FindLectures extends Activity implements OnEditorActionListener, TU
 		super.onStart();
 
 		// prepare the TUMOnlineRequest and check if the access token is set
-		requestHandler = new TUMOnlineRequest("veranstaltungenSuche", this);
+		requestHandler = new TUMOnlineRequest(VERANSTALTUNGENSUCHE, this);
 	}
 
 	@Override
@@ -77,7 +81,7 @@ public class FindLectures extends Activity implements OnEditorActionListener, TU
 		}
 
 		// set the query string as parameter for the TUMOnline request
-		requestHandler.setParameter("pSuche", etFindQuery.getText().toString());
+		requestHandler.setParameter(P_SUCHE, etFindQuery.getText().toString());
 
 		Utils.hideKeyboard(this, etFindQuery);
 
@@ -125,7 +129,7 @@ public class FindLectures extends Activity implements OnEditorActionListener, TU
 
 				// bundle data for the LectureDetails Activity
 				Bundle bundle = new Bundle();
-				bundle.putString("stp_sp_nr", item.getStp_sp_nr());
+				bundle.putString(item.STP_SP_NR, item.getStp_sp_nr());
 				Intent i = new Intent(FindLectures.this, LectureDetails.class);
 				i.putExtras(bundle);
 				// load LectureDetails

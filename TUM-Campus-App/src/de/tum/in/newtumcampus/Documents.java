@@ -41,7 +41,7 @@ public class Documents extends Activity {
 	private ListView lvDocuments;
 	// choice from list
 	private int selectedDocument;
-
+	
 	// all documents available; displayed in lvDocuments
 	String[] options;
 
@@ -60,14 +60,14 @@ public class Documents extends Activity {
 		super.onStart();
 
 		// check credentials
-		tumOnlineUsername = PreferenceManager.getDefaultSharedPreferences(this).getString("lrz_id", null);
+		tumOnlineUsername = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.LRZ_ID, null);
 		if (tumOnlineUsername == null) {
 			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_username_not_set), new Intent(this,
 					TUMOnlineSettings.class));
 			return;
 		}
 
-		tumOnlinePassword = PreferenceManager.getDefaultSharedPreferences(this).getString("tumonline_password", null);
+		tumOnlinePassword = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.TUMONLINE_PASSWORD, null);
 		if (tumOnlinePassword == null) {
 			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_password_not_set), new Intent(this,
 					TUMOnlineSettings.class));
@@ -93,7 +93,7 @@ public class Documents extends Activity {
 
 				try {
 					// try if document exists in storage
-					if (!FileUtils.getFileOnSD("documents", FileUtils.getFilename(options[selectedDocument], ".pdf"))
+					if (!FileUtils.getFileOnSD(Const.DOCUMENTS, FileUtils.getFilename(options[selectedDocument], ".pdf"))
 							.exists()) {
 						// we can access external storage but file does not exist
 						// hence, download it
@@ -115,7 +115,7 @@ public class Documents extends Activity {
 					public void onClick(DialogInterface dialog, int id) {
 						File file;
 						try {
-							file = FileUtils.getFileOnSD("documents",
+							file = FileUtils.getFileOnSD(Const.DOCUMENTS,
 									FileUtils.getFilename(options[selectedDocument], ".pdf"));
 							FileUtils.openFile(file, Documents.this, FileUtils.PDF_TYPE);
 						} catch (Exception e) {
@@ -237,7 +237,7 @@ public class Documents extends Activity {
 		// download file
 		File file = null;
 		try {
-			file = FileUtils.getFileOnSD("documents", FileUtils.getFilename(options[selectedDocument], ".pdf"));
+			file = FileUtils.getFileOnSD(Const.DOCUMENTS, FileUtils.getFilename(options[selectedDocument], ".pdf"));
 		} catch (Exception e) {
 			// do not notify user, since this exception cannot not happen here (catched in onItemClick above)
 			Log.d("EXCEPTION", e.getMessage());

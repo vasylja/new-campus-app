@@ -14,6 +14,8 @@ import org.simpleframework.xml.Root;
 
 @Root(name = "row")
 public class FindLecturesRow {
+	
+	public static final String STP_SP_NR = "stp_sp_nr";
 
 	@Element(name = "stp_sp_titel")
 	private String titel;

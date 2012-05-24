@@ -43,7 +43,7 @@ public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 
 	/** HTTP request handler to handle requests to TUMOnline */
 	private TUMOnlineRequest requestHandler;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,9 +58,9 @@ public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 	public void onStart() {
 		super.onStart();
 
-		requestHandler = new TUMOnlineRequest("noten", this);
+		requestHandler = new TUMOnlineRequest(Const.NOTEN, this);
 
-		String accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString("access_token", null);
+		String accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.ACCESS_TOKEN, null);
 		if (accessToken != null) {
 			fetchGrades();
 		}

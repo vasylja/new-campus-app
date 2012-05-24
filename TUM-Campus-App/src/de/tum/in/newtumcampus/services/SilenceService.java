@@ -15,16 +15,16 @@ import de.tum.in.newtumcampus.models.LectureItemManager;
  */
 public class SilenceService extends IntentService {
 
-	/**
-	 * interval in milli seconds to check for current lectures
-	 */
+	/** Interval in milliseconds to check for current lectures */
 	public static int interval = 60000;
+	
+	public static final String SILENCE_SERVICE = "SilenceService";
 
 	/**
 	 * default init (run intent in new thread)
 	 */
 	public SilenceService() {
-		super("SilenceService");
+		super(SILENCE_SERVICE);
 	}
 
 	@Override
