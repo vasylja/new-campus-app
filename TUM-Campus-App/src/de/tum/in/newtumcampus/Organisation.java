@@ -94,18 +94,18 @@ public class Organisation extends Activity implements OnClickListener {
 
 		setContentView(R.layout.organisation);
 
-		// list of organisations
+		// list of organizations
 		lvOrg = (ListView) findViewById(R.id.lstOrganisations);
 
 		// start at the top level
 		this.orgId = TOP_LEVEL_ORG;
 		this.parentId = TOP_LEVEL_ORG;
-		// TODO Check for rightfull checking. Check in the whole class.
+		// TODO Check for rightful checking. Check in the whole class.
 		// set language = German if system language is German else set English
-		if (System.getProperty("user.language").compareTo("de") == 0) {
-			language = "de";
+		if (System.getProperty("user.language").compareTo(Const.DE) == 0) {
+			language = Const.DE;
 		} else {
-			language = "en";
+			language = Const.EN;
 		}
 	}
 
@@ -114,9 +114,9 @@ public class Organisation extends Activity implements OnClickListener {
 		super.onStart();
 
 		// get transmitted data of the last activity (e.g. OrganisationDetails)
-		if (this.getIntent().hasExtra("orgId")) {
+		if (this.getIntent().hasExtra(Const.ORG_ID)) {
 			Bundle bundle = this.getIntent().getExtras();
-			orgId = bundle.getString("orgId");
+			orgId = bundle.getString(Const.ORG_ID);
 			parentId = getParent(orgId).getId();
 		}
 
@@ -127,7 +127,7 @@ public class Organisation extends Activity implements OnClickListener {
 		buildDocument();
 
 		// set orgName depending on language
-		if (language.equals("de")) {
+		if (language.equals(Const.DE)) {
 			orgName = getParent(parentId).getNameDe();
 		} else {
 			orgName = getParent(parentId).getNameEn();
@@ -149,7 +149,7 @@ public class Organisation extends Activity implements OnClickListener {
 		if (xmlOrgFile == null) {
 			// File linking to SD-card to a xml, that contains the whole organisation-tree
 			try {
-				xmlOrgFile = FileUtils.getFileOnSD("organisations", "org.xml");
+				xmlOrgFile = FileUtils.getFileOnSD(Const.ORGANISATIONS, "org.xml");
 			} catch (Exception e) {
 				Utils.showLongCenteredToast(this, getString(R.string.no_sd_card));
 				Log.d("EXCEPTION", e.getMessage());
@@ -162,7 +162,7 @@ public class Organisation extends Activity implements OnClickListener {
 
 				// accessToken for download access
 				String accessToken = PreferenceManager.getDefaultSharedPreferences(this)
-						.getString("access_token", null);
+						.getString(Const.ACCESS_TOKEN, null);
 
 				// if no token show toast
 				if (accessToken == null) {
@@ -272,14 +272,14 @@ public class Organisation extends Activity implements OnClickListener {
 				// look if no suborganisation exists, and if not make bundle and start OrganisationDetails
 				if (!existSuborganisation(org.getId())) {
 					Bundle bundle = new Bundle();
-					bundle.putString("orgParentId", org.getParentId());
-					bundle.putString("orgId", org.getId());
+					bundle.putString(Const.ORG_PARENT_ID, org.getParentId());
+					bundle.putString(Const.ORG_ID, org.getId());
 
 					// set orgName depending on language
-					if (language.equals("de")) {
-						bundle.putString("orgName", org.getNameDe());
+					if (language.equals(Const.DE)) {
+						bundle.putString(Const.ORG_NAME, org.getNameDe());
 					} else {
-						bundle.putString("orgName", org.getNameEn());
+						bundle.putString(Const.ORG_NAME, org.getNameEn());
 					}
 
 					// show organisation details
@@ -292,7 +292,7 @@ public class Organisation extends Activity implements OnClickListener {
 					parentId = orgId;
 					orgId = org.getId();
 					// switch correct language
-					if (language.equals("de")) {
+					if (language.equals(Const.DE)) {
 						orgName = org.getNameDe();
 					} else {
 						orgName = org.getNameEn();
@@ -407,7 +407,7 @@ public class Organisation extends Activity implements OnClickListener {
 				// with the data of the found parent Object
 				OrgItem parentObject = new OrgItem();
 				parentObject.setId(itemParentId);
-				if (language.equals("de")) {
+				if (language.equals(Const.DE)) {
 					parentObject.setNameDe(itemName);
 				} else {
 					parentObject.setNameEn(itemName);
@@ -418,7 +418,7 @@ public class Organisation extends Activity implements OnClickListener {
 		// if no parent found => jump to start layer
 		OrgItem parentObject = new OrgItem();
 		parentObject.setId(TOP_LEVEL_ORG);
-		if (language.equals("de")) {
+		if (language.equals(Const.DE)) {
 			parentObject.setNameDe(getString(R.string.tum));
 		} else {
 			parentObject.setNameEn(getString(R.string.tum));
@@ -452,7 +452,7 @@ public class Organisation extends Activity implements OnClickListener {
 			// Switch language
 			// -> German if German is system language
 			// if not German -> English
-			if (language.equals("de")) {
+			if (language.equals(Const.DE)) {
 				orgName = getParent(parentId).getNameDe();
 			} else {
 				orgName = getParent(parentId).getNameEn();

@@ -64,7 +64,7 @@ public class News extends Activity implements OnItemClickListener, ViewBinder {
 	public void onItemClick(AdapterView<?> aview, View view, int position, long id) {
 		ListView lv = (ListView) findViewById(R.id.listView);
 		Cursor c = (Cursor) lv.getAdapter().getItem(position);
-		String url = c.getString(c.getColumnIndex("link"));
+		String url = c.getString(c.getColumnIndex(Const.LINK_COLUMN));
 
 		if (url.length() == 0) {
 			Toast.makeText(this, getString(R.string.no_link_existing), Toast.LENGTH_LONG).show();
@@ -80,7 +80,7 @@ public class News extends Activity implements OnItemClickListener, ViewBinder {
 		// add url (domain only) to date
 		if (view.getId() == R.id.date) {
 			String date = cursor.getString(index);
-			String link = cursor.getString(cursor.getColumnIndex("link"));
+			String link = cursor.getString(cursor.getColumnIndex(Const.LINK_COLUMN));
 
 			if (link.length() > 0) {
 				TextView tv = (TextView) view;
@@ -111,7 +111,7 @@ public class News extends Activity implements OnItemClickListener, ViewBinder {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// download latest news
 		Intent service = new Intent(this, DownloadService.class);
-		service.putExtra("action", "news");
+		service.putExtra(Const.ACTION_EXTRA, Const.NEWS);
 		startService(service);
 		return true;
 	}

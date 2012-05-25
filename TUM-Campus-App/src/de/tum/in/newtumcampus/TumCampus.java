@@ -111,7 +111,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 
 		// import default values into database
 		Intent service = new Intent(this, ImportService.class);
-		service.putExtra("action", "defaults");
+		service.putExtra(Const.ACTION_EXTRA, Const.DEFAULTS);
 		startService(service);
 	}
 
@@ -125,6 +125,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 	protected void onResume() {
 		super.onResume();
 
+//		TODO Check whether to fill adapter from constants. Ex. name...
 		// build main menu
 		SimpleAdapter adapter = new SimpleAdapter(this, buildMenu(), R.layout.main_listview, new String[] { "icon",
 				"name", "icon2" }, new int[] { R.id.icon, R.id.name, R.id.icon2 });
@@ -395,7 +396,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		// Click on import lectures, start import service
 		if (v.getId() == R.id.importLectures) {
 			Intent service = new Intent(this, ImportService.class);
-			service.putExtra("action", "lectures");
+			service.putExtra(Const.ACTION_EXTRA, Const.LECTURES);
 			startService(service);
 			setImportButtons(false);
 		}
@@ -404,7 +405,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		// Click on import lectures from TUMOnline, start import service
 		if (v.getId() == R.id.importLecturesTUMOnline) {
 			Intent service = new Intent(this, ImportService.class);
-			service.putExtra("action", "lecturesTUMOnline");
+			service.putExtra(Const.ACTION_EXTRA, Const.LECTURES_TUM_ONLINE);
 			startService(service);
 			setImportButtons(false);
 		}
@@ -412,7 +413,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		// Click on import links, start import service
 		if (v.getId() == R.id.importLinks) {
 			Intent service = new Intent(this, ImportService.class);
-			service.putExtra("action", "links");
+			service.putExtra(Const.ACTION_EXTRA, Const.LINKS);
 			startService(service);
 			setImportButtons(false);
 		}
@@ -420,7 +421,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		// Click on import links, start import service
 		if (v.getId() == R.id.importFeeds) {
 			Intent service = new Intent(this, ImportService.class);
-			service.putExtra("action", "feeds");
+			service.putExtra(Const.ACTION_EXTRA, Const.FEEDS);
 			startService(service);
 			setImportButtons(false);
 		}
@@ -472,15 +473,15 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 
 			// show message from download service, refresh main menu
 			if (intent.getAction().equals(DownloadService.broadcast)) {
-				String message = intent.getStringExtra("message");
-				String action = intent.getStringExtra("action");
+				String message = intent.getStringExtra(Const.MESSAGE_EXTRA);
+				String action = intent.getStringExtra(Const.ACTION_EXTRA);
 
-				if (action.equals("completed")) {
+				if (action.equals(Const.COMPLETED)) {
 					syncing = false;
 				}
 				if (message.length() > 0) {
 					// make (long) Toast to every Error Message
-					if (action.compareTo("error") == 0) {
+					if (action.compareTo(Const.ERROR) == 0) {
 						Toast.makeText(TumCampus.this, message, Toast.LENGTH_LONG).show();
 					}
 				}
@@ -489,8 +490,8 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 
 			// show message from import service, refresh main menu
 			if (intent.getAction().equals(ImportService.broadcast)) {
-				String message = intent.getStringExtra("message");
-				String action = intent.getStringExtra("action");
+				String message = intent.getStringExtra(Const.MESSAGE_EXTRA);
+				String action = intent.getStringExtra(Const.ACTION_EXTRA);
 
 				if (action.length() != 0) {
 					Toast.makeText(context, message, Toast.LENGTH_LONG).show();

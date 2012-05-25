@@ -55,10 +55,10 @@ public class LectureAppointments extends Activity implements TUMOnlineRequestFet
 		super.onStart();
 
 		// set all for request handler
-		requestHandler = new TUMOnlineRequest("veranstaltungenTermine", this);
+		requestHandler = new TUMOnlineRequest(VERANSTALTUNGEN_TERMINE, this);
 		Bundle bundle = this.getIntent().getExtras();
 		// set Lecture Name (depends on bundle data)
-		tvTermineLectureName.setText(bundle.getString("title"));
+		tvTermineLectureName.setText(bundle.getString(Const.TITLE_EXTRA));
 		requestHandler.setParameter("pLVNr", bundle.getString("stp_sp_nr"));
 
 		// start fetching data

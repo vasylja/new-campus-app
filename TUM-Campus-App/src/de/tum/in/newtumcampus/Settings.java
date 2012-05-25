@@ -23,12 +23,12 @@ public class Settings extends PreferenceActivity {
 		String key = pref.getKey();
 
 		// open application details
-		if (key.equals("tumonline")) {
+		if (key.equals(Const.Settings.TUMONLINE_SETTINGS_KEY)) {
 			Intent intent = new Intent(this, TUMOnlineSettings.class);
 			startActivity(intent);
 		}
 		// open application details
-		if (key.equals("app_details")) {
+		if (key.equals(Const.Settings.APP_DETAILS_SETTINGS_KEY)) {
 
 			if (android.os.Build.VERSION.SDK_INT >= 9) {
 				// 2.3 and newer
@@ -43,7 +43,7 @@ public class Settings extends PreferenceActivity {
 				startActivity(intent);
 			}
 		}
-		if (key.equals("market")) {
+		if (key.equals(Const.Settings.MARKET_SETTINGS_KEY)) {
 			String url = "http://market.android.com/details?id=de.tum.in.newtumcampus";
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			startActivity(intent);

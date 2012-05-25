@@ -73,14 +73,14 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 			// btnAccessToken was pressed
 
 			// load preferences first (we need the lrz id)
-			String strLRZID = PreferenceManager.getDefaultSharedPreferences(this).getString("lrz_id", "");
+			String strLRZID = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.LRZ_ID, "");
 			Log.d("AcquiredLRZid", strLRZID);
 
 			// check if lrz could be valid?
 			if (strLRZID.length() == 7) {
 
 				// is access token already set?
-				String oldaccesstoken = PreferenceManager.getDefaultSharedPreferences(this).getString("access_token",
+				String oldaccesstoken = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.ACCESS_TOKEN,
 						"");
 				if (oldaccesstoken.length() > 2) {
 					// show Dialog first
@@ -101,19 +101,19 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 	public void setAccessToken() {
 		try {
 			// ok, do the request now
-			String strLRZID = Utils.getSetting(getBaseContext(), "lrz_id");
+			String strLRZID = Utils.getSetting(getBaseContext(), Const.LRZ_ID);
 			String strAccessToken = getAccessToken(strLRZID);
 			Log.d("AcquiredAccessToken", strAccessToken);
 
 			// save access token to preferences
-			Utils.setSetting(getBaseContext(), "access_token", strAccessToken);
+			Utils.setSetting(getBaseContext(), Const.ACCESS_TOKEN, strAccessToken);
 			Toast.makeText(this,
-					getString(R.string.access_token_generated) + " - " + Utils.getSetting(this, "access_token"), 10000)
+					getString(R.string.access_token_generated) + " - " + Utils.getSetting(this, Const.ACCESS_TOKEN), 10000)
 					.show();
 
 		} catch (Exception ex) {
 			// set access token to null
-			Utils.setSetting(this, "access_token", null);
+			Utils.setSetting(this, Const.ACCESS_TOKEN, null);
 			Toast.makeText(this, getString(R.string.access_token_wasnt_generated), 10000).show();
 		}
 	}

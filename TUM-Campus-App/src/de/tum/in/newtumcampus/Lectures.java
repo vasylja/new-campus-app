@@ -95,8 +95,8 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		if (view.getId() == android.R.id.text1) {
 			// truncate lecture name to 20 characters,
 			// append lecture unit note
-			String name = c.getString(c.getColumnIndex("name"));
-			String note = c.getString(c.getColumnIndex("note"));
+			String name = c.getString(c.getColumnIndex(Const.NAME_COLUMN));
+			String note = c.getString(c.getColumnIndex(Const.NOTE_COLUMN));
 			if (note.length() > 0) {
 				note = " - " + note;
 			}
@@ -116,20 +116,20 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 			 * </pre>
 			 */
 			String info = "";
-			String lectureId = c.getString(c.getColumnIndex("lectureId"));
+			String lectureId = c.getString(c.getColumnIndex(Const.LECTURE_ID_COLUMN));
+//	TODO IMPORTANT Check whether "start_dt" and "start_de" are actually the same
+			if (lectureId.equals(Const.VACATION)) {
+				info = c.getString(c.getColumnIndex(Const.START_DT_COLUMN)) + " - " + c.getString(c.getColumnIndex(Const.START_DT_COLUMN));
 
-			if (lectureId.equals("vacation")) {
-				info = c.getString(c.getColumnIndex("start_dt")) + " - " + c.getString(c.getColumnIndex("end_dt"));
-
-			} else if (lectureId.equals("holiday")) {
-				info = weekDays[c.getInt(c.getColumnIndex("weekday"))] + ", "
-						+ c.getString(c.getColumnIndex("start_dt"));
+			} else if (lectureId.equals(Const.HOLIDAY)) {
+				info = weekDays[c.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))] + ", "
+						+ c.getString(c.getColumnIndex(Const.START_DT_COLUMN));
 
 			} else {
-				info = weekDays[c.getInt(c.getColumnIndex("weekday"))] + ", "
-						+ c.getString(c.getColumnIndex("start_de")) + " - " + c.getString(c.getColumnIndex("end_de"));
+				info = weekDays[c.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))] + ", "
+						+ c.getString(c.getColumnIndex(Const.START_DE_COLUMN)) + " - " + c.getString(c.getColumnIndex(Const.START_DE_COLUMN));
 
-				String location = c.getString(c.getColumnIndex("location"));
+				String location = c.getString(c.getColumnIndex(Const.LOCATION_COLUMN));
 				if (location.indexOf(",") != -1) {
 					location = location.substring(0, location.indexOf(","));
 				}
@@ -153,9 +153,9 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		// Click on lecture list
 		if (av.getId() == R.id.listView2) {
 			Cursor c2 = (Cursor) lv2.getAdapter().getItem(position);
-			lectureId = c2.getString(c2.getColumnIndex("_id"));
-			String name = c2.getString(c2.getColumnIndex("name"));
-			String module = c2.getString(c2.getColumnIndex("module"));
+			lectureId = c2.getString(c2.getColumnIndex(Const.ID_COLUMN));
+			String name = c2.getString(c2.getColumnIndex(Const.NAME_COLUMN));
+			String module = c2.getString(c2.getColumnIndex(Const.MODULE_COLUMN));
 
 			// get all lecture units from a lecture
 			LectureItemManager lim = new LectureItemManager(this, Const.db);
@@ -178,7 +178,7 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 
 		// click on lecture unit list
 		Cursor c = (Cursor) lv.getAdapter().getItem(position);
-		String url = c.getString(c.getColumnIndex("url"));
+		String url = c.getString(c.getColumnIndex(Const.URL_COLUMN));
 
 		// empty link => no action
 		if (url.equals("about:blank")) {
@@ -270,7 +270,7 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 			public void onClick(DialogInterface dialog, int id) {
 
 				Cursor c = (Cursor) av.getAdapter().getItem(position);
-				String itemId = c.getString(c.getColumnIndex("_id"));
+				String itemId = c.getString(c.getColumnIndex(Const.ID_COLUMN));
 
 				if (av.getId() == R.id.listView) {
 					deleteLectureItem(itemId);

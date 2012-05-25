@@ -51,6 +51,8 @@ public class MyLectures extends Activity implements TUMOnlineRequestFetchListene
 	/** UI elements */
 	private ListView lvMyLecturesList;
 	private Spinner spFilter;
+	
+	private static final String VERANSTALTUNGEN_EIGENE = "veranstaltungenEigene";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,9 +68,9 @@ public class MyLectures extends Activity implements TUMOnlineRequestFetchListene
 	public void onStart() {
 		super.onStart();
 		// preparing the TUMOnline web service request
-		requestHandler = new TUMOnlineRequest("veranstaltungenEigene", this);
+		requestHandler = new TUMOnlineRequest(VERANSTALTUNGEN_EIGENE, this);
 
-		String accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString("access_token", null);
+		String accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.ACCESS_TOKEN, null);
 		if (accessToken != null) {
 			requestHandler.fetchInteractive(this, this);
 		}

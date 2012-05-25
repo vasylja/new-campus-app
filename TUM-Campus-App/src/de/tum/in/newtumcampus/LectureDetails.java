@@ -53,6 +53,8 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 
 	/** the current processing Lecture item (model: LectureDetailsRow) */
 	private LectureDetailsRow currentitem;
+	
+	private static final String VERANSTALTUNGEN_DETAILS = "veranstaltungenDetails";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 		super.onStart();
 
 		// the usual one: prepare the request to TUMOnline web service
-		requestHandler = new TUMOnlineRequest("veranstaltungenDetails", this);
+		requestHandler = new TUMOnlineRequest(VERANSTALTUNGEN_DETAILS, this);
 
 		// read lecture id from bundle
 		Bundle bundle = this.getIntent().getExtras();
@@ -96,7 +98,7 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 			Bundle bundle = new Bundle();
 			// LectureAppointments need the name and id of the facing lecture
 			bundle.putString("stp_sp_nr", currentitem.getStp_sp_nr());
-			bundle.putString("title", currentitem.getStp_sp_titel());
+			bundle.putString(Const.TITLE_EXTRA, currentitem.getStp_sp_titel());
 
 			Intent i = new Intent(this, LectureAppointments.class);
 			i.putExtras(bundle);

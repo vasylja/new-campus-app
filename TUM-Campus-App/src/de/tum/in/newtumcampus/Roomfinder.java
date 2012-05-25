@@ -76,13 +76,13 @@ public class Roomfinder extends Activity implements OnEditorActionListener {
 		// write resulting document to temporary file on SD-card
 		File file = null;
 		try {
-			file = FileUtils.getFileOnSD("roomfinder", "tmp.html");
+			file = FileUtils.getFileOnSD(Const.ROOMFINDER, "tmp.html");
 
 			FileUtils.writeFile(file, text);
 
 			// get image and save it in the same folder as the document
 			FileUtils.getFileFromURL(httpClient, SERVICE_BASE_URL + "/default.gif",
-					FileUtils.getFileOnSD("roomfinder", "default.gif"));
+					FileUtils.getFileOnSD(Const.ROOMFINDER, "default.gif"));
 
 			webView.loadUrl("file://" + file.getPath());
 

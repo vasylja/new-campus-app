@@ -39,6 +39,8 @@ public class TuitionFees extends Activity {
 
 	// widgets
 	private WebView webView;
+	
+	private static final String STUDIENBEITRAG_STATUS_URL = "https://campus.tum.de/tumonline/wbstudienbeitragstatus.show";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class TuitionFees extends Activity {
 
 		// get a reference and create if not exists
 		try {
-			tuitionFeeDocument = FileUtils.getFileOnSD("documents", "studienbeitragsstatus.html");
+			tuitionFeeDocument = FileUtils.getFileOnSD(Const.DOCUMENTS, "studienbeitragsstatus.html");
 		} catch (Exception e) {
 			Utils.showLongCenteredToast(this, getString(R.string.no_sd_card));
 			Log.d("EXCEPTION", e.getMessage());
@@ -71,14 +73,14 @@ public class TuitionFees extends Activity {
 		super.onStart();
 
 		// check the credentials
-		tumOnlineUsername = PreferenceManager.getDefaultSharedPreferences(this).getString("lrz_id", null);
+		tumOnlineUsername = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.LRZ_ID, null);
 		if (tumOnlineUsername == null) {
 			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_username_not_set), new Intent(this,
 					TUMOnlineSettings.class));
 			return;
 		}
 
-		tumOnlinePassword = PreferenceManager.getDefaultSharedPreferences(this).getString("tumonline_password", null);
+		tumOnlinePassword = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.TUMONLINE_PASSWORD, null);
 		if (tumOnlinePassword == null) {
 			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_password_not_set), new Intent(this,
 					TUMOnlineSettings.class));
@@ -93,7 +95,7 @@ public class TuitionFees extends Activity {
 		} else {
 			// download new
 			if (!tuitionFeeDocument.exists()) {
-				getDocument("https://campus.tum.de/tumonline/wbstudienbeitragstatus.show");
+				getDocument(STUDIENBEITRAG_STATUS_URL);
 			} else {
 				// give the user the choice
 				showAlertDialog();
@@ -117,7 +119,7 @@ public class TuitionFees extends Activity {
 		builder.setNegativeButton(getString(R.string.download_new), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
-				getDocument("https://campus.tum.de/tumonline/wbstudienbeitragstatus.show");
+				getDocument(STUDIENBEITRAG_STATUS_URL);
 			}
 		});
 
@@ -206,6 +208,7 @@ public class TuitionFees extends Activity {
 		String resp = FileUtils.sendPostRequest(httpClient, url);
 
 		// login unsuccessful
+//		TODO Check whether tuition fees work with English TUMOnline
 		if (resp.contains("Kennwort vergessen?")) {
 			return false;
 		}

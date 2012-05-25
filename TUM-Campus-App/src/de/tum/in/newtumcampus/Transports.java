@@ -112,7 +112,7 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 	public void onItemClick(final AdapterView<?> av, View v, int position, long id) {
 		// click on station in list
 		Cursor c = (Cursor) av.getAdapter().getItem(position);
-		final String location = c.getString(c.getColumnIndex("name"));
+		final String location = c.getString(c.getColumnIndex(Const.NAME_COLUMN));
 
 		TextView tv = (TextView) findViewById(R.id.transportText);
 		tv.setText(getString(R.string.departure) + " " + location);
@@ -172,7 +172,7 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 
 				// delete station from list, refresh station list
 				Cursor c = (Cursor) av.getAdapter().getItem(position);
-				String location = c.getString(c.getColumnIndex("name"));
+				String location = c.getString(c.getColumnIndex(Const.NAME_COLUMN));
 
 				TransportManager tm = new TransportManager(av.getContext(), Const.db);
 				tm.deleteFromDb(location);

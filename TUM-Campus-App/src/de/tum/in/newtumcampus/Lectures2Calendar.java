@@ -32,7 +32,7 @@ import de.tum.in.newtumcampus.models.LectureItemManager;
  * 
  */
 public class Lectures2Calendar extends Activity implements OnClickListener, OnSeekBarChangeListener {
-
+//	TODO Constants not exported from this class
 	/** UI elements */
 	private Button btnToCalendar;
 	private Spinner spinCalendar;

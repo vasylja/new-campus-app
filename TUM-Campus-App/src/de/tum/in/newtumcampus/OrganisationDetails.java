@@ -53,8 +53,8 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 
 		// get the submitted (bundle) data
 		Bundle bundle = this.getIntent().getExtras();
-		orgId = bundle.getString("orgId");
-		orgName = bundle.getString("orgName");
+		orgId = bundle.getString(Const.ORG_ID);
+		orgName = bundle.getString(Const.ORG_NAME);
 	}
 
 	@Override
@@ -298,7 +298,7 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		// if button "back" is clicked -> make a new Bundle with the orgId and start Organisation-Activity
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 			Bundle bundle = new Bundle();
-			bundle.putString("orgId", orgId);
+			bundle.putString(Const.ORG_ID, orgId);
 			Intent i = new Intent(OrganisationDetails.this, Organisation.class);
 			i.putExtras(bundle);
 			startActivity(i);

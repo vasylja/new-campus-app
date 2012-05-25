@@ -61,7 +61,7 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 	public void onItemClick(AdapterView<?> aview, View view, int position, long id) {
 		ListView lv = (ListView) findViewById(R.id.listView);
 		Cursor c = (Cursor) lv.getAdapter().getItem(position);
-		String url = c.getString(c.getColumnIndex("url"));
+		String url = c.getString(c.getColumnIndex(Const.URL_COLUMN));
 
 		// Open Url in Browser
 		try {
@@ -83,7 +83,7 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 
 				// delete link from list, refresh link list
 				Cursor c = (Cursor) av.getAdapter().getItem(position);
-				int _id = c.getInt(c.getColumnIndex("_id"));
+				int _id = c.getInt(c.getColumnIndex(Const.ID_COLUMN));
 
 				LinkManager lm = new LinkManager(av.getContext(), Const.db);
 				lm.deleteFromDb(_id);

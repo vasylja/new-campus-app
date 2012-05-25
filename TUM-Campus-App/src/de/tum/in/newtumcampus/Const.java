@@ -17,6 +17,12 @@ public final class Const {
 	 * database version used by SQLiteOpenHelper
 	 */
 	public final static int dbVersion = 1;
+	
+	/** Identifier for the German language */
+	public static final String DE = "de";
+	
+	/** Identifier for the English language */
+	public static final String EN = "en";
 
 	/** Action identifier */
 	public static final String ACTION_EXTRA = "action";
@@ -59,14 +65,30 @@ public final class Const {
 	/** Action value "links" */
 	public static final String LINKS = "links";
 	
-	/** Action value "organisations" */
+	/** Action value and filename "organisations" */
 	public static final String ORGANISATIONS = "organisations";
+	
+	/** Action value and filename "roomfinder" */
+	public static final String ROOMFINDER = "roomfinder";
 	
 	/** Action value "lecturesTUMOnline" */
 	public static final String LECTURES_TUM_ONLINE = "lecturesTUMOnline";
 	
-	/** Action values lectures */
+	/** Action value "lectures" */
 	public static final String LECTURES = "lectures";
+	
+	/** Action value "completed" */
+	public static final String COMPLETED = "completed";
+	
+	/** Extra value "orgId" */
+	public static final String ORG_ID = "orgId";
+	
+	/** Extra value "orgParentId" */
+	public static final String ORG_PARENT_ID = "orgParentId";
+	
+	/** Extra value "ORG_NAME" */
+	public static final String ORG_NAME = "orgName";
+	
 	
 /**	********************************************************************* */
 	
@@ -75,6 +97,8 @@ public final class Const {
 	
 	/** TUMONLINE_PASSWORD identifier */
 	public static final String TUMONLINE_PASSWORD = "tumonline_password";
+	
+/** Column identifiers ************************************************** */
 	
 	/** Identifier of the date column */
 	public static final String DATE_COLUMN_DE = "date_de";
@@ -121,6 +145,39 @@ public final class Const {
 	/** Identifier of the Room column */
 	public static final String ROOM_COLUMN = "room";
 	
+	/** Identifier of the Note ("Notiz" not Grade) column */
+	public static final String NOTE_COLUMN = "note";
+	
+	/** Identifier of the LectureId column */
+	public static final String LECTURE_ID_COLUMN = "lectureId";
+	
+	/** Identifier of the module column */
+	public static final String MODULE_COLUMN = "module";
+	
+	/** Identifier of the URL column */
+	public static final String URL_COLUMN = "url";
+	
+//	TODO IMPORTANT Check whether "start_dt" and "start_de" are actually the same
+	/** Lecture starting date */
+	public static final String START_DT_COLUMN = "start_dt";
+	
+	/** Lecture ending date */
+	public static final String END_DT_COLUMN = "end_dt";
+	
+/** ****************************************************************** */
+	
+/** LectureId column values ****************************************** */
+	
+	/** Vacation */
+	public static final String VACATION = "vacation";
+	
+	/** Holiday */
+	public static final String HOLIDAY = "holiday";
+	
+	/** 
+	
+/** ****************************************************************** */	
+	
 	/** Error (used in extras)*/
 	public static final String ERROR = "error";
 	/**
@@ -141,5 +198,10 @@ public final class Const {
 		 * enable silence service, silence the mobile during lectures
 		 */
 		public final static String silence = "silence";
+		
+		/** Settings keys */
+		public static final String TUMONLINE_SETTINGS_KEY = "tumonline";
+		public static final String APP_DETAILS_SETTINGS_KEY = "app_details";
+		public static final String MARKET_SETTINGS_KEY = "market";
 	}
 }

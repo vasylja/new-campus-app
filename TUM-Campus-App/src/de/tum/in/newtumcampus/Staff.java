@@ -44,6 +44,8 @@ public class Staff extends Activity implements OnEditorActionListener, TUMOnline
 
 	/** List to display the results */
 	private ListView lvPersons;
+	
+	private static final String PERSONEN_SUCHE = "personenSuche";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,7 @@ public class Staff extends Activity implements OnEditorActionListener, TUMOnline
 	public void onStart() {
 		super.onStart();
 
-		requestHandler = new TUMOnlineRequest("personenSuche", this);
+		requestHandler = new TUMOnlineRequest(PERSONEN_SUCHE, this);
 
 	}
 
