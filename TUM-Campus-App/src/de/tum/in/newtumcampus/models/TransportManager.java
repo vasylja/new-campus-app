@@ -105,7 +105,7 @@ public class TransportManager extends SQLiteOpenHelper {
 
 		JSONArray jsonArray = new JSONArray();
 		try {
-			Object obj = jsonObj.getJSONObject("results").get("a");
+			Object obj = jsonObj.getJSONObject(ModelsConst.JSON_RESULTS).get("a");
 			if (obj instanceof JSONArray) {
 				jsonArray = (JSONArray) obj;
 			} else {

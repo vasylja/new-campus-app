@@ -95,7 +95,7 @@ public class LectureItem {
 				+ Utils.getDateTimeString(end) + ", name=" + name + ", module=" + module + ", location=" + location
 				+ ", note=" + note + ", seriesId=" + seriesId + ", url=" + url;
 	}
-
+//	TODO Check whether to externalise Strings ex. Feiertag
 	/**
 	 * Holiday object (extends LectureItem)
 	 */

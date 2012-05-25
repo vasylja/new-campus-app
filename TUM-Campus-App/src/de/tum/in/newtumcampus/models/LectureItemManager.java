@@ -73,7 +73,7 @@ public class LectureItemManager extends SQLiteOpenHelper {
 
 			// acquire access token
 			String accessToken = null;
-			accessToken = PreferenceManager.getDefaultSharedPreferences(con).getString("access_token", null);
+			accessToken = PreferenceManager.getDefaultSharedPreferences(con).getString(Const.ACCESS_TOKEN, null);
 
 			if (accessToken == null) {
 				throw new Exception("no access token set");

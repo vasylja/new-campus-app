@@ -61,7 +61,7 @@ public class NewsManager extends SQLiteOpenHelper {
 		String url = "https://graph.facebook.com/162327853831856/feed/?limit=100&access_token=";
 		String token = "141869875879732|FbjTXY-wtr06A18W9wfhU8GCkwU";
 
-		JSONArray jsonArray = Utils.downloadJson(url + URLEncoder.encode(token)).getJSONArray("data");
+		JSONArray jsonArray = Utils.downloadJson(url + URLEncoder.encode(token)).getJSONArray(ModelsConst.JSON_DATA);
 
 		cleanupDb();
 		int count = Utils.dbGetTableCount(db, "news");
@@ -79,7 +79,7 @@ public class NewsManager extends SQLiteOpenHelper {
 				// filter out events, empty items
 				if ((!Arrays.asList(types).contains(obj.getString("type")) && !Arrays.asList(ids).contains(
 						obj.getString("id")))
-						|| !obj.getJSONObject("from").getString("id").equals("162327853831856")) {
+						|| !obj.getJSONObject(ModelsConst.JSON_FROM).getString(ModelsConst.JSON_ID).equals("162327853831856")) {
 					continue;
 				}
 				if (countItems > 24) {
@@ -126,30 +126,30 @@ public class NewsManager extends SQLiteOpenHelper {
 
 		String target = "";
 		if (json.has("picture")) {
-			String picture = json.getString("picture");
+			String picture = json.getString(ModelsConst.JSON_PICTURE);
 			target = Utils.getCacheDir("news/cache") + Utils.md5(picture) + ".jpg";
 			Utils.downloadFileThread(picture, target);
 		}
 		String link = "";
-		if (json.has("link") && !json.getString("link").contains("www.facebook.com")) {
-			link = json.getString("link");
+		if (json.has(ModelsConst.JSON_LINK) && !json.getString(ModelsConst.JSON_LINK).contains(ModelsConst.FACEBOOK)) {
+			link = json.getString(ModelsConst.JSON_LINK);
 		}
-		if (link.length() == 0 && json.has("object_id")) {
-			link = "http://graph.facebook.com/" + json.getString("object_id") + "/Picture?type=normal";
+		if (link.length() == 0 && json.has(ModelsConst.JSON_OBJECT_ID)) {
+			link = "http://graph.facebook.com/" + json.getString(ModelsConst.JSON_OBJECT_ID) + "/Picture?type=normal";
 		}
 
 		// message empty => description empty => caption
 		String message = "";
-		if (json.has("message")) {
-			message = json.getString("message");
-		} else if (json.has("description")) {
-			message = json.getString("description");
-		} else if (json.has("caption")) {
-			message = json.getString("caption");
+		if (json.has(ModelsConst.JSON_MESSAGE)) {
+			message = json.getString(ModelsConst.JSON_MESSAGE);
+		} else if (json.has(ModelsConst.JSON_DESCRIPTION)) {
+			message = json.getString(ModelsConst.JSON_DESCRIPTION);
+		} else if (json.has(ModelsConst.JSON_CAPTION)) {
+			message = json.getString(ModelsConst.JSON_CAPTION);
 		}
-		Date date = Utils.getDate(json.getString("created_time"));
+		Date date = Utils.getDate(json.getString(ModelsConst.JSON_CREATED_TIME));
 
-		return new News(json.getString("id"), message, link, target, date);
+		return new News(json.getString(ModelsConst.JSON_ID), message, link, target, date);
 	}
 
 	/**

@@ -32,6 +32,7 @@ public class OrgDetailsItemHandler extends DefaultHandler {
 	// to handle those another way
 	boolean isInsideAdditionalInformation = false;
 
+//	TODO Check whether refactor list of interesting tags
 	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) {
 		// only buffer interesting tags

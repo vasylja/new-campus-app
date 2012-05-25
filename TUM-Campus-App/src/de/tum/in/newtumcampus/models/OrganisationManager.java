@@ -6,6 +6,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.content.Context;
 import android.util.Log;
+import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.FileUtils;
 
 /**
@@ -89,7 +90,7 @@ public class OrganisationManager {
 		String url = "https://campus.tum.de/tumonline/wbservicesbasic.orgBaum?pToken=" + token;
 
 		// delete and create new file if there is already an old one existing
-		File xmlOrgFile = FileUtils.getFileOnSD("organisations", "org.xml");
+		File xmlOrgFile = FileUtils.getFileOnSD(Const.ORGANISATIONS, "org.xml");
 		if (xmlOrgFile.exists()) {
 			xmlOrgFile.delete();
 			xmlOrgFile.createNewFile();

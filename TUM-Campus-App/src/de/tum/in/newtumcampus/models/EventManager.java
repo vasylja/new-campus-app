@@ -132,7 +132,7 @@ public class EventManager extends SQLiteOpenHelper {
 	 */
 	public static Event getFromJson(JSONObject json) throws Exception {
 
-		String eventId = json.getString("id");
+		String eventId = json.getString(ModelsConst.JSON_ID);
 
 		String picture = "http://graph.facebook.com/" + eventId + "/Picture?type=large";
 
@@ -140,18 +140,18 @@ public class EventManager extends SQLiteOpenHelper {
 		Utils.downloadFileThread(picture, target);
 
 		String description = "";
-		if (json.has("description")) {
-			description = json.getString("description");
+		if (json.has(ModelsConst.JSON_DESCRIPTION)) {
+			description = json.getString(ModelsConst.JSON_DESCRIPTION);
 		}
 		String location = "";
-		if (json.has("location")) {
-			location = json.getString("location");
+		if (json.has(ModelsConst.JSON_LOCATION)) {
+			location = json.getString(ModelsConst.JSON_LOCATION);
 		}
 		// Link only available in event/feed
 		String link = "";
 
-		return new Event(eventId, json.getString("name"), Utils.getDateTime(json.getString("start_time")),
-				Utils.getDateTime(json.getString("end_time")), location, description, link, target);
+		return new Event(eventId, json.getString(ModelsConst.JSON_NAME), Utils.getDateTime(json.getString(ModelsConst.JSON_START_TIME)),
+				Utils.getDateTime(json.getString(ModelsConst.JSON_END_TIME)), location, description, link, target);
 	}
 
 	/**

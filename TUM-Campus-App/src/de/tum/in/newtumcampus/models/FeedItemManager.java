@@ -158,22 +158,22 @@ public class FeedItemManager extends SQLiteOpenHelper {
 	public static FeedItem getFromJson(int feedId, JSONObject json) throws Exception {
 
 		String target = "";
-		if (json.has("enclosure")) {
-			final String enclosure = json.getJSONObject("enclosure").getString("url");
+		if (json.has(ModelsConst.JSON_ENCLOSURE)) {
+			final String enclosure = json.getJSONObject(ModelsConst.JSON_ENCLOSURE).getString(ModelsConst.URL);
 
 			target = Utils.getCacheDir("rss/cache") + Utils.md5(enclosure) + ".jpg";
 			Utils.downloadFileThread(enclosure, target);
 		}
 		Date pubDate = new Date();
-		if (json.has("pubDate")) {
-			pubDate = Utils.getDateTimeRfc822(json.getString("pubDate"));
+		if (json.has(ModelsConst.JSON_PUB_DATE)) {
+			pubDate = Utils.getDateTimeRfc822(json.getString(ModelsConst.JSON_PUB_DATE));
 		}
 		String description = "";
-		if (json.has("description") && !json.isNull("description")) {
+		if (json.has(ModelsConst.JSON_DESCRIPTION) && !json.isNull(ModelsConst.JSON_DESCRIPTION)) {
 			// decode HTML entites, remove links, images, etc.
-			description = Html.fromHtml(json.getString("description").replaceAll("\\<.*?\\>", "")).toString();
+			description = Html.fromHtml(json.getString(ModelsConst.JSON_DESCRIPTION).replaceAll("\\<.*?\\>", "")).toString();
 		}
-		return new FeedItem(feedId, json.getString("title").replaceAll("\n", ""), json.getString("link"), description,
+		return new FeedItem(feedId, json.getString(ModelsConst.JSON_TITLE).replaceAll("\n", ""), json.getString(ModelsConst.JSON_LINK), description,
 				pubDate, target);
 	}
 

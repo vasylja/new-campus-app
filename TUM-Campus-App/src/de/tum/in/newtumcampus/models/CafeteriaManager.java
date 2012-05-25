@@ -57,7 +57,7 @@ public class CafeteriaManager extends SQLiteOpenHelper {
 
 		String url = "http://lu32kap.typo3.lrz.de/mensaapp/exportDB.php";
 
-		JSONArray jsonArray = Utils.downloadJson(url).getJSONArray("mensa_mensen");
+		JSONArray jsonArray = Utils.downloadJson(url).getJSONArray(ModelsConst.JSON_MENSA_MENSEN);
 		removeCache();
 
 		// write cafeterias into database, transaction = speedup
@@ -115,7 +115,7 @@ public class CafeteriaManager extends SQLiteOpenHelper {
 	 */
 	public static Cafeteria getFromJson(JSONObject json) throws JSONException {
 
-		return new Cafeteria(json.getInt("id"), json.getString("name"), json.getString("anschrift"));
+		return new Cafeteria(json.getInt(ModelsConst.JSON_ID), json.getString(ModelsConst.JSON_NAME), json.getString(ModelsConst.JSON_ANSCHRIFT));
 	}
 
 	/**
