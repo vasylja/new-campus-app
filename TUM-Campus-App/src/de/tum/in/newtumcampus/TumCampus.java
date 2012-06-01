@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -219,8 +220,10 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 
 		addItem(list, R.drawable.kompass, getString(R.string.area_maps), false, new Intent(this, Plans.class));
 
-		addItem(list, android.R.drawable.ic_menu_mylocation, getString(R.string.roomfinder), false, new Intent(this,
-				Roomfinder.class));
+		addItem(list, android.R.drawable.ic_menu_mylocation, getString(R.string.roomfinder), false,
+				createRoomfinderAppIntent());
+//		TODO Remove comments after checking
+//				new Intent(this,Roomfinder.class));
 
 		addItem(list, R.drawable.hours, getString(R.string.opening_hours), false, new Intent(this, Hours.class));
 
@@ -261,7 +264,31 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		map.put("intent", intent);
 		list.add(map);
 	}
+	
+	/** @Author Vasyl Malinskyi */
 
+	private Intent createRoomfinderAppIntent(){
+		Intent resultIntent = null;
+		try {
+			  final Intent intent = new Intent();
+			  intent.setAction("android.intent.action.SEARCH");
+			  intent.addCategory("de.tum.event");
+//			  intent.putExtra("searchString", "android");
+			  resultIntent=intent;
+//			  TODO Check, whether exception will still be thrown.
+//			  startActivity(intent);
+			} catch (ActivityNotFoundException e) {
+			  Toast.makeText(this, "Please install the TUM Roomfinder App" , Toast.LENGTH_LONG).show();
+			 
+			  final Intent marketIntent = new Intent();
+			  marketIntent.setAction("android.intent.action.VIEW");
+			  marketIntent.setData(Uri.parse("market://details?id=de.tum.roomfinder"));
+			  resultIntent=marketIntent;
+//			  startActivity(marketIntent); //Consider catching this, too
+			}
+		return resultIntent;
+	}
+	
 	@Override
 	public void onItemClick(AdapterView<?> av, View view, int position, long id) {
 

@@ -92,8 +92,9 @@ public final class Const {
 	
 /**	********************************************************************* */
 	
+//	TODO Check whether there it makes sense to export to strings (because of identifier for SharedPreferences)
 	/** LRZ_ID identifier */
-	public static final String LRZ_ID = "lrz-id";
+	public static final String LRZ_ID = "lrz_id";
 	
 	/** TUMONLINE_PASSWORD identifier */
 	public static final String TUMONLINE_PASSWORD = "tumonline_password";
