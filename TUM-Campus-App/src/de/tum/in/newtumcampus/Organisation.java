@@ -33,59 +33,37 @@ import de.tum.in.newtumcampus.models.OrgItemList;
 import de.tum.in.newtumcampus.models.OrgItemListAdapter;
 import de.tum.in.newtumcampus.models.OrganisationManager;
 
-/************************************
- * Things could be improved:
- * - add an loading screen after every click
- * - color pushed elements e.g. blue after clicked on it, to see that a element has been clicked
- * - 
- ************************************/
+/************************************ Things could be improved: - add an loading screen after every click - color pushed elements e.g. blue after clicked
+ * on it, to see that a element has been clicked - ************************************/
 
-/**
- * Activity that shows the first level of organisations at TUM.
+/** Activity that shows the first level of organisations at TUM.
  * 
  * @author Thomas Behrens
- * @review Vincenz Doelle, Daniel G. Mayr
- */
+ * @review Vincenz Doelle, Daniel G. Mayr */
 public class Organisation extends Activity implements OnClickListener {
 
-	/**
-	 * To show at start the highest Organisation level (The highest Organisations are child of "Organisation 1" = TUM)
-	 */
+	/** To show at start the highest Organisation level (The highest Organisations are child of "Organisation 1" = TUM) */
 	private static final String TOP_LEVEL_ORG = "1";
 
-	/**
-	 * language is "de"->German or "en"->English depending on the system language
-	 */
+	/** language is "de"->German or "en"->English depending on the system language */
 	private static String language;
 
-	/**
-	 * orgId is the ID of the organisation you click on
-	 */
+	/** orgId is the ID of the organisation you click on */
 	private String orgId;
 
-	/**
-	 * parentId is the ID of the parent organisation, of which the sub-organisations are showed
-	 */
+	/** parentId is the ID of the parent organisation, of which the sub-organisations are showed */
 	private String parentId;
 
-	/**
-	 * orgName is the name of the parent organisation, whose folder is showed
-	 */
+	/** orgName is the name of the parent organisation, whose folder is showed */
 	private String orgName;
 
-	/**
-	 * The org.xml File on the SD-card
-	 */
+	/** The org.xml File on the SD-card */
 	private File xmlOrgFile;
 
-	/**
-	 * List of Organisations shown on the Display
-	 */
+	/** List of Organisations shown on the Display */
 	private ListView lvOrg;
 
-	/**
-	 * The document is used to access and parse the xml.org file on the SD-card
-	 */
+	/** The document is used to access and parse the xml.org file on the SD-card */
 	private Document doc;
 
 	@Override
@@ -156,13 +134,14 @@ public class Organisation extends Activity implements OnClickListener {
 				return null;
 			}
 
-			// check if XML file exists and if it is bigger than 100kB (it is approximately 317kb, if the import isn't "wrong token")
+			// check if XML file exists and if it is bigger than 100kB (it is approximately 317kb, if the import isn't
+			// "wrong token")
 			// if no valid XML file -> set Token, Download XML data and start 'Organisations' again
 			if (!xmlOrgFile.exists() || !xmlOrgFile.isFile() || !(xmlOrgFile.length() > 100000)) {
 
 				// accessToken for download access
-				String accessToken = PreferenceManager.getDefaultSharedPreferences(this)
-						.getString(Const.ACCESS_TOKEN, null);
+				String accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.ACCESS_TOKEN,
+						null);
 
 				// if no token show toast
 				if (accessToken == null) {
@@ -191,9 +170,7 @@ public class Organisation extends Activity implements OnClickListener {
 		return xmlOrgFile;
 	}
 
-	/**
-	 * SAX-Parsing the org.xml-File to get Information for the Jump in the Organisation Structure
-	 */
+	/** SAX-Parsing the org.xml-File to get Information for the Jump in the Organisation Structure */
 	private void buildDocument() {
 		// (sax) dom parsing
 		DocumentBuilderFactory docBuilderFactory;
@@ -210,15 +187,13 @@ public class Organisation extends Activity implements OnClickListener {
 		doc.getDocumentElement().normalize();
 	}
 
-	/**
-	 * Show all items in a certain layer having a parent element with parent_id = parent.
+	/** Show all items in a certain layer having a parent element with parent_id = parent.
 	 * 
 	 * @param parent
 	 *            all items with the same parent
 	 * @throws ParserConfigurationException
 	 * @throws IOException
-	 * @throws SAXException
-	 */
+	 * @throws SAXException */
 	public void showItems(String parent) {
 
 		// caption button gets caption
@@ -303,12 +278,10 @@ public class Organisation extends Activity implements OnClickListener {
 		});
 	}
 
-	/**
-	 * Returns true if there are one or more elements in the organisation tree inside this organisation
+	/** Returns true if there are one or more elements in the organisation tree inside this organisation
 	 * 
 	 * @param organisationId
-	 * @return
-	 */
+	 * @return */
 	private boolean existSuborganisation(String organisationId) {
 
 		// get list of all organisations
@@ -323,7 +296,8 @@ public class Organisation extends Activity implements OnClickListener {
 			// get the parentId of the element
 			String itemParentId = getValue(organisationItem, "parent");
 
-			// if there is any item with the parentId of the id return true --> there is at least one suborganisation existing
+			// if there is any item with the parentId of the id return true --> there is at least one suborganisation
+			// existing
 			if (itemParentId.contentEquals(organisationId)) {
 				return true;
 			}
@@ -331,11 +305,9 @@ public class Organisation extends Activity implements OnClickListener {
 		return false;
 	}
 
-	/**
-	 * Return the private Document if existing, else build a new one
+	/** Return the private Document if existing, else build a new one
 	 * 
-	 * @return
-	 */
+	 * @return */
 	private Document getDocument() {
 		if (this.doc == null) {
 			buildDocument();
@@ -343,14 +315,12 @@ public class Organisation extends Activity implements OnClickListener {
 		return doc;
 	}
 
-	/**
-	 * Function that gets the Value out of a Node with a special name
+	/** Function that gets the Value out of a Node with a special name
 	 * 
 	 * @param item
 	 *            = Node that gets evaluated
 	 * @param type
-	 *            = Type of node (e.g. parent, id, nameDe)
-	 */
+	 *            = Type of node (e.g. parent, id, nameDe) */
 	public String getValue(Node item, String type) {
 		Element elem = (Element) item;
 		// filter the item with a special tag
@@ -362,12 +332,10 @@ public class Organisation extends Activity implements OnClickListener {
 		return list.item(0).getNodeValue();
 	}
 
-	/**
-	 * Searches for the parentId of an element, if it is already in the highest layer, it returns 1.
+	/** Searches for the parentId of an element, if it is already in the highest layer, it returns 1.
 	 * 
 	 * @param parentId
-	 * @return
-	 */
+	 * @return */
 	public OrgItem getParent(String parentId) {
 
 		// if already in highest layer => create OrgItem of highest layer
@@ -426,11 +394,9 @@ public class Organisation extends Activity implements OnClickListener {
 		return parentObject;
 	}
 
-	/**
-	 * A click on the BackButton should show the parent class or go back to the main menu
+	/** A click on the BackButton should show the parent class or go back to the main menu
 	 * 
-	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
-	 */
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent) */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 

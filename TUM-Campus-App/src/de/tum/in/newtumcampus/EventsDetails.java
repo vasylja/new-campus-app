@@ -8,9 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import de.tum.in.newtumcampus.models.EventManager;
 
-/**
- * Activity to show event details (name, location, image, description, etc.)
- */
+/** Activity to show event details (name, location, image, description, etc.) */
 public class EventsDetails extends Activity {
 
 	@Override
@@ -30,17 +28,15 @@ public class EventsDetails extends Activity {
 
 			setTitle(c.getString(c.getColumnIndex(Const.NAME_COLUMN)));
 
-			/**
-			 * <pre>
+			/** <pre>
 			 * show infos as:
 			 * Week-day, Start DateTime - End Time
 			 * Location
 			 * Link
-			 * </pre>
-			 */
+			 * </pre> */
 			String infos = weekDays[c.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))];
-			infos += ", " + c.getString(c.getColumnIndex(Const.START_DE_COLUMN)) + " - " + c.getString(c.getColumnIndex(Const.END_DE_COLUMN))
-					+ "\n";
+			infos += ", " + c.getString(c.getColumnIndex(Const.START_DE_COLUMN)) + " - "
+					+ c.getString(c.getColumnIndex(Const.END_DE_COLUMN)) + "\n";
 			infos += c.getString(c.getColumnIndex(Const.LOCATION_COLUMN)) + "\n";
 			infos += c.getString(c.getColumnIndex(Const.LINK_COLUMN));
 

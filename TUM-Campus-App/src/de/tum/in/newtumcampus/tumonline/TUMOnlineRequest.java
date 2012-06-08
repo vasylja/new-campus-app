@@ -26,13 +26,10 @@ import de.tum.in.newtumcampus.common.Dialogs;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.R;
 
-/**
- * This class will handle all action needed to communicate with the TUMOnline XML-RPC backend.
+/** This class will handle all action needed to communicate with the TUMOnline XML-RPC backend.
  * 
  * 
- * @author Thomas Behrens, Vincenz Dölle, Daniel Mayr
- * 
- */
+ * @author Thomas Behrens, Vincenz Dölle, Daniel Mayr */
 public class TUMOnlineRequest {
 
 	// server address
@@ -42,8 +39,8 @@ public class TUMOnlineRequest {
 	public static final String LOGIN_SERVICE_URL = "https://campus.tum.de/tumonline/anmeldung.durchfuehren";
 
 	// logout service address
-	public static final String LOGOUT_SERVICE_URL = "https://campus.tum.de/tumonline/anmeldung.beenden";	
-	
+	public static final String LOGOUT_SERVICE_URL = "https://campus.tum.de/tumonline/anmeldung.beenden";
+
 	// set to null, if not needed
 	private String accessToken = null;
 
@@ -66,43 +63,38 @@ public class TUMOnlineRequest {
 	private String progressDialogMessage = "";
 
 	// constructor without accessToken
-	/**
-	 * this constructor generates an empty request call for the TUMOnline webservice without setting any parameters or the access token to use access token see
-	 * the other constructors
+	/** this constructor generates an empty request call for the TUMOnline webservice without setting any parameters or
+	 * the access token to use access token see the other constructors
 	 * 
 	 * @author Daniel G. Mayr
 	 * @param method
-	 *            the function name to which we are calling
-	 */
+	 *            the function name to which we are calling */
 	public TUMOnlineRequest(String method) {
 		this.method = method;
 		resetParameters();
 	}
 
-	/**
-	 * this constructor generates an request to the given method. you can also provide an access token. if you want to use the stored access token and show a
-	 * dialog if this one is not set, take {@link TUMOnlineRequest(String method, Activity callingActivity)}
+	/** this constructor generates an request to the given method. you can also provide an access token. if you want to
+	 * use the stored access token and show a dialog if this one is not set, take {@link TUMOnlineRequest(String method,
+	 * Activity callingActivity)}
 	 * 
 	 * @param method
 	 *            facing web service function
 	 * @param accessToken
-	 *            user's access token to the webservice
-	 */
+	 *            user's access token to the webservice */
 	public TUMOnlineRequest(String method, String accessToken) {
 		this.method = method;
 		this.accessToken = accessToken;
 		resetParameters();
 	}
 
-	/**
-	 * this constructor will try to load the access token from preferences. if this is not possible, a dialog will prompt the user to generate the access token
-	 * via the settings menu
+	/** this constructor will try to load the access token from preferences. if this is not possible, a dialog will
+	 * prompt the user to generate the access token via the settings menu
 	 * 
 	 * @param method
 	 *            function name, which is the last part of the core URL
 	 * @param callingActivity
-	 *            the activity from which the constructor will be called (mostly this)
-	 */
+	 *            the activity from which the constructor will be called (mostly this) */
 	public TUMOnlineRequest(String method, Activity callingActivity) {
 		this.method = method;
 
@@ -123,27 +115,24 @@ public class TUMOnlineRequest {
 		setProgressDialogMessage(callingActivity.getString(R.string.search_is_running));
 	}
 
-	/**
-	 * Sets one parameter name to its given value
+	/** Sets one parameter name to its given value
 	 * 
 	 * @param name
 	 *            identifier of the parameter
 	 * @param value
-	 *            value of the parameter
-	 */
+	 *            value of the parameter */
 	public void setParameter(String name, String value) {
 		parameters.put(name, value);
 	}
 
-	/**
-	 * Check if TUMOnline access token can be retrieved from shared preferences.
+	/** Check if TUMOnline access token can be retrieved from shared preferences.
 	 * 
 	 * @param context
 	 *            The context
-	 * @return true if access token is available; false otherwise
-	 */
+	 * @return true if access token is available; false otherwise */
 	private boolean loadAccessTokenFromPreferences(Context context) {
-		accessToken = PreferenceManager.getDefaultSharedPreferences(context).getString(TUMOnlineConst.ACCESS_TOKEN, null);
+		accessToken = PreferenceManager.getDefaultSharedPreferences(context).getString(TUMOnlineConst.ACCESS_TOKEN,
+				null);
 
 		// no access token set, or it is obviously wrong
 		if (accessToken == null || accessToken.length() < 1) {
@@ -157,28 +146,23 @@ public class TUMOnlineRequest {
 		return true;
 	}
 
-	/**
-	 * If you want to put a complete Parameter Map into the request, use this function to merge them with the existing parameter map
+	/** If you want to put a complete Parameter Map into the request, use this function to merge them with the existing
+	 * parameter map
 	 * 
 	 * @param existingMap
-	 *            a Map<String,String> which should be set
-	 */
+	 *            a Map<String,String> which should be set */
 	public void setParameters(Map<String, String> existingMap) {
 		parameters.putAll(existingMap);
 	}
 
-	/**
-	 * Returns a map with all set parameter pairs
+	/** Returns a map with all set parameter pairs
 	 * 
-	 * @return Map<String, String> parameters
-	 */
+	 * @return Map<String, String> parameters */
 	public Map<String, String> getParameters() {
 		return parameters;
 	}
 
-	/**
-	 * Reset parameters to an empty Map
-	 */
+	/** Reset parameters to an empty Map */
 	public void resetParameters() {
 		parameters = new HashMap<String, String>();
 		// set accessToken as parameter if available
@@ -187,11 +171,9 @@ public class TUMOnlineRequest {
 		}
 	}
 
-	/**
-	 * This will return the URL to the TUMOnlineRequest with regard to the set parameters
+	/** This will return the URL to the TUMOnlineRequest with regard to the set parameters
 	 * 
-	 * @return a String URL
-	 */
+	 * @return a String URL */
 	public String getRequestURL() {
 		String url = SERVICE_BASE_URL + method + "?";
 		Iterator<Entry<String, String>> itMapIterator = parameters.entrySet().iterator();
@@ -202,13 +184,11 @@ public class TUMOnlineRequest {
 		return url;
 	}
 
-	/**
-	 * Fetches the result of the HTTPRequest (which can be seen by using getRequestURL)
+	/** Fetches the result of the HTTPRequest (which can be seen by using getRequestURL)
 	 * 
 	 * @author Daniel G. Mayr
 	 * @return output will be a raw String
-	 * @see getRequestURL
-	 */
+	 * @see getRequestURL */
 	public String fetch() {
 		String url = getRequestURL();
 		Log.d("TUMOnlineXMLRequest", "fetching URL " + url);
@@ -234,15 +214,13 @@ public class TUMOnlineRequest {
 
 	}
 
-	/**
-	 * this fetch method will fetch the data from the TUMOnline Request and will address the listeners onFetch if the fetch succeeded, else the onFetchError
-	 * will be called
+	/** this fetch method will fetch the data from the TUMOnline Request and will address the listeners onFetch if the
+	 * fetch succeeded, else the onFetchError will be called
 	 * 
 	 * @param context
 	 *            the current context (may provide the current activity)
 	 * @param listener
-	 *            the listener, which takes the result
-	 */
+	 *            the listener, which takes the result */
 	public void fetchInteractive(final Context context, final TUMOnlineRequestFetchListener listener) {
 
 		if (!loadAccessTokenFromPreferences(context)) {

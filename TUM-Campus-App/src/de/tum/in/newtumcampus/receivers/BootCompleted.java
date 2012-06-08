@@ -5,9 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-/**
- * Receiver used to start the silenceService after the boot
- */
+/** Receiver used to start the silenceService after the boot */
 public class BootCompleted extends BroadcastReceiver {
 
 	@Override

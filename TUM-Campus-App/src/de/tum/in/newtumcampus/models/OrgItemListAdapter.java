@@ -10,12 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import de.tum.in.newtumcampus.R;
 
-/**
- * Adapterclass for {@OrgItemList}. The purpose is to get Items from the list and set them into the Textview
+/** Adapterclass for {@OrgItemList}. The purpose is to get Items from the list and set them into the
+ * Textview
  * 
  * @author Thomas Behrens
- * @review Vincez Doelle, Daniel G. Mayr
- */
+ * @review Vincez Doelle, Daniel G. Mayr */
 
 public class OrgItemListAdapter extends BaseAdapter {
 

@@ -27,38 +27,31 @@ import de.tum.in.newtumcampus.models.Location;
 import de.tum.in.newtumcampus.models.LocationManager;
 import de.tum.in.newtumcampus.models.TransportManager;
 
-/**
- * Service used to import files from internal sd-card
- */
+/** Service used to import files from internal sd-card */
 public class ImportService extends IntentService {
 
 	public static final String IMPORT_SERVICE = "ImportService";
-	
+
 	public static final String ISO = "ISO-8859-1";
-	
+
 	public static final String CSV_TRANSPORTS = "transports.csv";
-	
+
 	public static final String CSV_FEEDS = "feeds.csv";
-	
+
 	public static final String CSV_LOCATIONS = "locations.csv";
-	
+
 	public static final String CSV_HOLIDAYS = "lectures_holidays.csv";
-	
+
 	public static final String CSV_VACATIONS = "lectures_vacations.csv";
-	
+
 	public static final String CSV_LINKS = "links.csv";
-	
-	
-	/**
-	 * default init (run intent in new thread)
-	 */
+
+	/** default init (run intent in new thread) */
 	public ImportService() {
 		super(IMPORT_SERVICE);
 	}
 
-	/**
-	 * Import broadcast identifier
-	 */
+	/** Import broadcast identifier */
 	public final static String broadcast = "de.tum.in.newtumcampus.intent.action.BROADCAST_IMPORT";
 
 	@Override
@@ -130,9 +123,7 @@ public class ImportService extends IntentService {
 		}
 	}
 
-	/**
-	 * Import feeds from internal directory
-	 */
+	/** Import feeds from internal directory */
 	public void importFeeds() {
 		FeedManager nm = new FeedManager(this, Const.db);
 		try {
@@ -143,9 +134,7 @@ public class ImportService extends IntentService {
 		nm.close();
 	}
 
-	/**
-	 * Import links from internal directory
-	 */
+	/** Import links from internal directory */
 	public void importLinks() {
 		LinkManager lm = new LinkManager(this, Const.db);
 		try {
@@ -156,9 +145,7 @@ public class ImportService extends IntentService {
 		lm.close();
 	}
 
-	/**
-	 * Import lectures and lecture items from internal directory
-	 */
+	/** Import lectures and lecture items from internal directory */
 	public void importLectureItems() {
 		LectureItemManager lim = new LectureItemManager(this, Const.db);
 		try {
@@ -173,11 +160,9 @@ public class ImportService extends IntentService {
 		lm.close();
 	}
 
-	/**
-	 * imports lecture items from TUMOnline HINT: access token have to be set
+	/** imports lecture items from TUMOnline HINT: access token have to be set
 	 * 
-	 * @author Daniel G. Mayr
-	 */
+	 * @author Daniel G. Mayr */
 	public void importLectureItemsFromTUMOnline() {
 		LectureItemManager lim = new LectureItemManager(this, Const.db);
 		try {
@@ -192,11 +177,9 @@ public class ImportService extends IntentService {
 		lm.close();
 	}
 
-	/**
-	 * Import default stations from assets
+	/** Import default stations from assets
 	 * 
-	 * @throws Exception
-	 */
+	 * @throws Exception */
 	public void importTransportsDefaults() throws Exception {
 
 		TransportManager tm = new TransportManager(this, Const.db);
@@ -210,11 +193,9 @@ public class ImportService extends IntentService {
 		tm.close();
 	}
 
-	/**
-	 * Import default feeds from assets
+	/** Import default feeds from assets
 	 * 
-	 * @throws Exception
-	 */
+	 * @throws Exception */
 	public void importFeedsDefaults() throws Exception {
 
 		FeedManager nm = new FeedManager(this, Const.db);
@@ -228,14 +209,12 @@ public class ImportService extends IntentService {
 		nm.close();
 	}
 
-	/**
-	 * Import default location and opening hours from assets
+	/** Import default location and opening hours from assets
 	 * 
 	 * <pre>
 	 * @param force boolean force import of locations
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void importLocationsDefaults(boolean force) throws Exception {
 
 		LocationManager lm = new LocationManager(this, Const.db);
@@ -250,11 +229,9 @@ public class ImportService extends IntentService {
 		lm.close();
 	}
 
-	/**
-	 * Import default lectures, lecture items (holidays, vacations) from assets
+	/** Import default lectures, lecture items (holidays, vacations) from assets
 	 * 
-	 * @throws Exception
-	 */
+	 * @throws Exception */
 	public void importLectureItemsDefaults() throws Exception {
 		LectureItemManager lim = new LectureItemManager(this, Const.db);
 		if (lim.empty()) {
@@ -277,11 +254,9 @@ public class ImportService extends IntentService {
 		lm.close();
 	}
 
-	/**
-	 * Import default links from assets
+	/** Import default links from assets
 	 * 
-	 * @throws Exception
-	 */
+	 * @throws Exception */
 	public void importLinksDefaults() throws Exception {
 		LinkManager lm = new LinkManager(this, Const.db);
 		if (lm.empty()) {
@@ -294,14 +269,12 @@ public class ImportService extends IntentService {
 		lm.close();
 	}
 
-	/**
-	 * Send notification message to service caller
+	/** Send notification message to service caller
 	 * 
 	 * <pre>
 	 * @param e Exception, get message and stacktrace from 
 	 * @param info Notification info, append to exception message
-	 * </pre>
-	 */
+	 * </pre> */
 	public void message(Exception e, String info) {
 		Utils.log(e, info);
 
@@ -315,14 +288,12 @@ public class ImportService extends IntentService {
 		message(info + " " + message, getString(R.string.error));
 	}
 
-	/**
-	 * Send notification message to service caller
+	/** Send notification message to service caller
 	 * 
 	 * <pre>
 	 * @param message Notification message
 	 * @param action Notification action (e.g. error, completed)
-	 * </pre>
-	 */
+	 * </pre> */
 	public void message(String message, String action) {
 		Intent intentSend = new Intent();
 		intentSend.setAction(broadcast);

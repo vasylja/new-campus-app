@@ -7,9 +7,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 
-/**
- * Activity to show the settings dialog
- */
+/** Activity to show the settings dialog */
 public class Settings extends PreferenceActivity {
 
 	@Override

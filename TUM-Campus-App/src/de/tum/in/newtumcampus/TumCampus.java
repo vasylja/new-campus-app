@@ -45,18 +45,14 @@ import de.tum.in.newtumcampus.services.DownloadService;
 import de.tum.in.newtumcampus.services.ImportService;
 import de.tum.in.newtumcampus.services.SilenceService;
 
-/**
- * Main activity to show main menu, logo and refresh button
- */
+/** Main activity to show main menu, logo and refresh button */
 public class TumCampus extends Activity implements OnItemClickListener, View.OnClickListener {
 
 	static boolean syncing = false;
 
-	/**
-	 * Returns network connection type if available or can be available soon
+	/** Returns network connection type if available or can be available soon
 	 * 
-	 * @return empty String if not available or connection type if available
-	 */
+	 * @return empty String if not available or connection type if available */
 	public String getConnection() {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -126,7 +122,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 	protected void onResume() {
 		super.onResume();
 
-//		TODO Check whether to fill adapter from constants. Ex. name...
+		// TODO Check whether to fill adapter from constants. Ex. name...
 		// build main menu
 		SimpleAdapter adapter = new SimpleAdapter(this, buildMenu(), R.layout.main_listview, new String[] { "icon",
 				"name", "icon2" }, new int[] { R.id.icon, R.id.name, R.id.icon2 });
@@ -140,13 +136,11 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		// hello world text
 		TextView tv = (TextView) findViewById(R.id.hello);
 
-		/**
-		 * <pre>
+		/** <pre>
 		 * hide download button if offline
 		 * show cancel button if currently syncing
 		 * else show download button
-		 * </pre>
-		 */
+		 * </pre> */
 		if (conn.length() > 0) {
 			b.setVisibility(android.view.View.VISIBLE);
 			if (!syncing) {
@@ -182,11 +176,9 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		startService(service);
 	}
 
-	/**
-	 * Return main menu item list
+	/** Return main menu item list
 	 * 
-	 * @return item list of Map[] (icon, name, icon2, intent)
-	 */
+	 * @return item list of Map[] (icon, name, icon2, intent) */
 	public List<Map<String, Object>> buildMenu() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
@@ -222,8 +214,8 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 
 		addItem(list, android.R.drawable.ic_menu_mylocation, getString(R.string.roomfinder), false,
 				createRoomfinderAppIntent());
-//		TODO Remove comments after checking
-//				new Intent(this,Roomfinder.class));
+		// TODO Remove comments after checking
+		// new Intent(this,Roomfinder.class));
 
 		addItem(list, R.drawable.hours, getString(R.string.opening_hours), false, new Intent(this, Hours.class));
 
@@ -241,8 +233,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		return list;
 	}
 
-	/**
-	 * Add menu item to list
+	/** Add menu item to list
 	 * 
 	 * <pre>
 	 * @param list List to append new item to
@@ -250,8 +241,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 	 * @param name Menu item name
 	 * @param changed Menu item was changed recently
 	 * @param intent Activity to start on click
-	 * </pre>
-	 */
+	 * </pre> */
 	public void addItem(List<Map<String, Object>> list, int icon, String name, boolean changed, Intent intent) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("icon", icon);
@@ -264,31 +254,31 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		map.put("intent", intent);
 		list.add(map);
 	}
-	
+
 	/** @Author Vasyl Malinskyi */
 
-	private Intent createRoomfinderAppIntent(){
+	private Intent createRoomfinderAppIntent() {
 		Intent resultIntent = null;
 		try {
-			  final Intent intent = new Intent();
-			  intent.setAction("android.intent.action.SEARCH");
-			  intent.addCategory("de.tum.event");
-//			  intent.putExtra("searchString", "android");
-			  resultIntent=intent;
-//			  TODO Check, whether exception will still be thrown.
-//			  startActivity(intent);
-			} catch (ActivityNotFoundException e) {
-			  Toast.makeText(this, "Please install the TUM Roomfinder App" , Toast.LENGTH_LONG).show();
-			 
-			  final Intent marketIntent = new Intent();
-			  marketIntent.setAction("android.intent.action.VIEW");
-			  marketIntent.setData(Uri.parse("market://details?id=de.tum.roomfinder"));
-			  resultIntent=marketIntent;
-//			  startActivity(marketIntent); //Consider catching this, too
-			}
+			final Intent intent = new Intent();
+			intent.setAction("android.intent.action.SEARCH");
+			intent.addCategory("de.tum.event");
+			// intent.putExtra("searchString", "android");
+			resultIntent = intent;
+			// TODO Check, whether exception will still be thrown.
+			// startActivity(intent);
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(this, "Please install the TUM Roomfinder App", Toast.LENGTH_LONG).show();
+
+			final Intent marketIntent = new Intent();
+			marketIntent.setAction("android.intent.action.VIEW");
+			marketIntent.setData(Uri.parse("market://details?id=de.tum.roomfinder"));
+			resultIntent = marketIntent;
+			// startActivity(marketIntent); //Consider catching this, too
+		}
 		return resultIntent;
 	}
-	
+
 	@Override
 	public void onItemClick(AdapterView<?> av, View view, int position, long id) {
 
@@ -359,9 +349,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		return false;
 	}
 
-	/**
-	 * Clears the cache (database tables, sd-card)
-	 */
+	/** Clears the cache (database tables, sd-card) */
 	public void clearCache() {
 		try {
 			Utils.getCacheDir("");
@@ -460,13 +448,11 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		}
 	}
 
-	/**
-	 * Initialize import buttons
+	/** Initialize import buttons
 	 * 
 	 * <pre>
 	 * @param enabled True to enable buttons, False to disable buttons
-	 * </pre>
-	 */
+	 * </pre> */
 	public void setImportButtons(boolean enabled) {
 		Button b = (Button) findViewById(R.id.importLectures);
 		b.setOnClickListener(this);
@@ -491,9 +477,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		b.setEnabled(enabled);
 	}
 
-	/**
-	 * Receiver for Download and Import services
-	 */
+	/** Receiver for Download and Import services */
 	private final BroadcastReceiver receiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {

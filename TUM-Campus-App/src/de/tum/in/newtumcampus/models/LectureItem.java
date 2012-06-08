@@ -4,63 +4,40 @@ import java.util.Date;
 
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * LectureItem object
- */
+/** LectureItem object */
 public class LectureItem {
 
-	/**
-	 * Lecture item ID (LectureId_Start-Unix-Timestamp)
-	 */
+	/** Lecture item ID (LectureId_Start-Unix-Timestamp) */
 	String id;
 
-	/**
-	 * Lecture ID
-	 */
+	/** Lecture ID */
 	String lectureId;
 
-	/**
-	 * Start DateTime
-	 */
+	/** Start DateTime */
 	Date start;
 
-	/**
-	 * End DateTime
-	 */
+	/** End DateTime */
 	Date end;
 
-	/**
-	 * Lecture name
-	 */
+	/** Lecture name */
 	String name;
 
-	/**
-	 * Lecture module
-	 */
+	/** Lecture module */
 	String module;
 
-	/**
-	 * Lecture item location
-	 */
+	/** Lecture item location */
 	String location;
 
-	/**
-	 * Lecture item note, e.g. Übung
-	 */
+	/** Lecture item note, e.g. Übung */
 	String note;
 
-	/**
-	 * Lecture item URL
-	 */
+	/** Lecture item URL */
 	String url;
 
-	/**
-	 * Lecture item series ID (LectureID_Week-Day_Start-Time)
-	 */
+	/** Lecture item series ID (LectureID_Week-Day_Start-Time) */
 	String seriesId;
 
-	/**
-	 * New Lecture item
+	/** New Lecture item
 	 * 
 	 * <pre>
 	 * @param id Lecture item ID (LectureId_Start-Unix-Timestamp)
@@ -73,8 +50,7 @@ public class LectureItem {
 	 * @param note Lecture item note, e.g. Übung
 	 * @param url Lecture item URL
 	 * @param seriesId Lecture item series ID (LectureID_Week-Day_Start-Time)
-	 * </pre>
-	 */
+	 * </pre> */
 	public LectureItem(String id, String lectureId, Date start, Date end, String name, String module, String location,
 			String note, String url, String seriesId) {
 		this.id = id;
@@ -95,41 +71,34 @@ public class LectureItem {
 				+ Utils.getDateTimeString(end) + ", name=" + name + ", module=" + module + ", location=" + location
 				+ ", note=" + note + ", seriesId=" + seriesId + ", url=" + url;
 	}
-//	TODO Check whether to externalise Strings ex. Feiertag
-	/**
-	 * Holiday object (extends LectureItem)
-	 */
+
+	// TODO Check whether to externalise Strings ex. Feiertag
+	/** Holiday object (extends LectureItem) */
 	public static class Holiday extends LectureItem {
 
-		/**
-		 * New Holiday
+		/** New Holiday
 		 * 
 		 * <pre>
 		 * @param id Holiday ID
 		 * @param date Date
 		 * @param name Name, e.g. Allerheiligen
-		 * </pre>
-		 */
+		 * </pre> */
 		public Holiday(String id, Date date, String name) {
 			super(id, "holiday", date, date, "Feiertag", "", "", name, "about:blank", id);
 		}
 	}
 
-	/**
-	 * Vacation object (extends LectureItem)
-	 */
+	/** Vacation object (extends LectureItem) */
 	public static class Vacation extends LectureItem {
 
-		/**
-		 * New Vacation
+		/** New Vacation
 		 * 
 		 * <pre>
 		 * @param id Vacation ID
 		 * @param start Begin Date
 		 * @param end End Date
 		 * @param name Name, e.g. Sommerferien
-		 * </pre>
-		 */
+		 * </pre> */
 		public Vacation(String id, Date start, Date end, String name) {
 			super(id, "vacation", start, end, "Ferien", "", "", name, "about:blank", id);
 		}

@@ -14,29 +14,21 @@ import android.database.sqlite.SQLiteOpenHelper;
 import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * News Manager, handles database stuff, external imports
- */
+/** News Manager, handles database stuff, external imports */
 public class NewsManager extends SQLiteOpenHelper {
 
-	/**
-	 * Database connection
-	 */
+	/** Database connection */
 	private final SQLiteDatabase db;
 
-	/**
-	 * Last insert counter
-	 */
+	/** Last insert counter */
 	public static int lastInserted = 0;
 
-	/**
-	 * Constructor, open/create database, create table if necessary
+	/** Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
 	 * @param database Filename, e.g. database.db
-	 * </pre>
-	 */
+	 * </pre> */
 	public NewsManager(Context context, String database) {
 		super(context, database, null, Const.dbVersion);
 
@@ -44,14 +36,12 @@ public class NewsManager extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	/**
-	 * Download news from external interface (JSON)
+	/** Download news from external interface (JSON)
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void downloadFromExternal(boolean force) throws Exception {
 
 		if (!force && !SyncManager.needSync(db, this, 86400)) {
@@ -79,7 +69,8 @@ public class NewsManager extends SQLiteOpenHelper {
 				// filter out events, empty items
 				if ((!Arrays.asList(types).contains(obj.getString("type")) && !Arrays.asList(ids).contains(
 						obj.getString("id")))
-						|| !obj.getJSONObject(ModelsConst.JSON_FROM).getString(ModelsConst.JSON_ID).equals("162327853831856")) {
+						|| !obj.getJSONObject(ModelsConst.JSON_FROM).getString(ModelsConst.JSON_ID)
+								.equals("162327853831856")) {
 					continue;
 				}
 				if (countItems > 24) {
@@ -97,31 +88,30 @@ public class NewsManager extends SQLiteOpenHelper {
 		lastInserted += Utils.dbGetTableCount(db, "news") - count;
 	}
 
-	/**
-	 * Get all news from the database
+	/** Get all news from the database
 	 * 
-	 * @return Database cursor (image, message, date_de, link, _id)
-	 */
+	 * @return Database cursor (image, message, date_de, link, _id) */
 	public Cursor getAllFromDb() {
 		return db.rawQuery("SELECT image, message, strftime('%d.%m.%Y', date) " + "as date_de, link, id as _id "
 				+ "FROM news ORDER BY date DESC", null);
 	}
 
-	/**
-	 * Convert JSON object to News and download news image
+	/** Convert JSON object to News and download news image
 	 * 
-	 * Example JSON: e.g. { "id": "162327853831856_174943842570257", "from": { ... }, "message": "Testing ...", "picture":
-	 * "http://photos-d.ak.fbcdn.net/hphotos-ak-ash4/268937_174943835903591_162327853831856_476156_7175901_s.jpg" , "link":
-	 * "https://www.facebook.com/photo.php?fbid=174943835903591&set=a.174943832570258.47966.162327853831856&type=1" , "name": "Wall Photos", "icon":
-	 * "http://static.ak.fbcdn.net/rsrc.php/v1/yz/r/StEh3RhPvjk.gif", "type": "photo", "object_id": "174943835903591", "created_time":
-	 * "2011-07-04T01:58:25+0000", "updated_time": "2011-07-04T01:58:25+0000" },
+	 * Example JSON: e.g. { "id": "162327853831856_174943842570257", "from": { ... }, "message": "Testing ...",
+	 * "picture":
+	 * "http://photos-d.ak.fbcdn.net/hphotos-ak-ash4/268937_174943835903591_162327853831856_476156_7175901_s.jpg" ,
+	 * "link":
+	 * "https://www.facebook.com/photo.php?fbid=174943835903591&set=a.174943832570258.47966.162327853831856&type=1" ,
+	 * "name": "Wall Photos", "icon": "http://static.ak.fbcdn.net/rsrc.php/v1/yz/r/StEh3RhPvjk.gif", "type": "photo",
+	 * "object_id": "174943835903591", "created_time": "2011-07-04T01:58:25+0000", "updated_time":
+	 * "2011-07-04T01:58:25+0000" },
 	 * 
 	 * <pre>
 	 * @param json see above
 	 * @return News
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public static News getFromJson(JSONObject json) throws Exception {
 
 		String target = "";
@@ -152,14 +142,12 @@ public class NewsManager extends SQLiteOpenHelper {
 		return new News(json.getString(ModelsConst.JSON_ID), message, link, target, date);
 	}
 
-	/**
-	 * Replace or Insert a event in the database
+	/** Replace or Insert a event in the database
 	 * 
 	 * <pre>
 	 * @param n News object
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void replaceIntoDb(News n) throws Exception {
 		Utils.log(n.toString());
 
@@ -173,17 +161,13 @@ public class NewsManager extends SQLiteOpenHelper {
 				n.id, n.message, n.link, n.image, Utils.getDateString(n.date) });
 	}
 
-	/**
-	 * Removes all cache items
-	 */
+	/** Removes all cache items */
 	public void removeCache() {
 		db.execSQL("DELETE FROM news");
 		Utils.emptyCacheDir("news/cache");
 	}
 
-	/**
-	 * Removes all old items (older than 3 months)
-	 */
+	/** Removes all old items (older than 3 months) */
 	public void cleanupDb() {
 		db.execSQL("DELETE FROM news WHERE date < date('now','-3 month')");
 	}

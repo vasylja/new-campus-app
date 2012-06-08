@@ -23,34 +23,24 @@ import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 
-/**
- * Lecture item Manager, handles database stuff, internal imports
- */
+/** Lecture item Manager, handles database stuff, internal imports */
 public class LectureItemManager extends SQLiteOpenHelper {
 
-	/**
-	 * Database connection
-	 */
+	/** Database connection */
 	private final SQLiteDatabase db;
 
-	/**
-	 * Last insert counter
-	 */
+	/** Last insert counter */
 	public static int lastInserted = 0;
 
-	/**
-	 * Additional information for exception messages
-	 */
+	/** Additional information for exception messages */
 	public String lastInfo = "";
 
-	/**
-	 * Constructor, open/create database, create table if necessary
+	/** Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
 	 * @param database Filename, e.g. database.db
-	 * </pre>
-	 */
+	 * </pre> */
 	public LectureItemManager(Context context, String database) {
 		super(context, database, null, Const.dbVersion);
 
@@ -58,13 +48,11 @@ public class LectureItemManager extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	/**
-	 * this function allows us to import all lecture settings from TUMOnline
+	/** this function allows us to import all lecture settings from TUMOnline
 	 * 
 	 * @todo check not to set any data to null
 	 * @author Daniel G. Mayr
-	 * @throws Exception
-	 */
+	 * @throws Exception */
 	public void importFromTUMOnline(Context con) throws Exception {
 		int count = Utils.dbGetTableCount(db, "lectures_items");
 
@@ -194,11 +182,9 @@ public class LectureItemManager extends SQLiteOpenHelper {
 		lastInserted += Utils.dbGetTableCount(db, "lectures_items") - count;
 	}
 
-	/**
-	 * Import lecture items from sd-card directory
+	/** Import lecture items from sd-card directory
 	 * 
-	 * @throws Exception
-	 */
+	 * @throws Exception */
 	public void importFromInternal() throws Exception {
 		File[] files = new File(Utils.getCacheDir("lectures")).listFiles();
 
@@ -221,8 +207,7 @@ public class LectureItemManager extends SQLiteOpenHelper {
 		lastInserted += Utils.dbGetTableCount(db, "lectures_items") - count;
 	}
 
-	/**
-	 * Import lecture items from a CSV file
+	/** Import lecture items from a CSV file
 	 * 
 	 * Header format: TERMIN_TYP, TITEL, ORT, LV_NUMMER, DATUM, VON, BIS, WOCHENTAG, ANMERKUNG, URL
 	 * 
@@ -230,8 +215,7 @@ public class LectureItemManager extends SQLiteOpenHelper {
 	 * @param file CSV File
 	 * @param encoding Charset, e.g. ISO-8859-1
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void importCsv(File file, String encoding) throws Exception {
 		List<String[]> list = Utils.readCsv(new FileInputStream(file), encoding);
 
@@ -289,22 +273,18 @@ public class LectureItemManager extends SQLiteOpenHelper {
 		}
 	}
 
-	/**
-	 * Get all lecture items from the database
+	/** Get all lecture items from the database
 	 * 
-	 * @return Database cursor (name, location, _id)
-	 */
+	 * @return Database cursor (name, location, _id) */
 	public Cursor getCurrentFromDb() {
 		return db.rawQuery("SELECT name, location, id as _id "
 				+ "FROM lectures_items WHERE datetime('now', 'localtime') " + "BETWEEN start AND end AND "
 				+ "lectureId NOT IN ('holiday', 'vacation') LIMIT 1", null);
 	}
 
-	/**
-	 * Get all upcoming and unfinished lecture items from the database
+	/** Get all upcoming and unfinished lecture items from the database
 	 * 
-	 * @return Database cursor (name, note, location, weekday, start_de, end_de, start_dt, end_dt, url, lectureId, _id)
-	 */
+	 * @return Database cursor (name, note, location, weekday, start_de, end_de, start_dt, end_dt, url, lectureId, _id) */
 	public Cursor getRecentFromDb() {
 		return db.rawQuery("SELECT name, note, location, " + "strftime('%w', start) as weekday, "
 				+ "strftime('%H:%M', start) as start_de, " + "strftime('%H:%M', end) as end_de, "
@@ -320,15 +300,13 @@ public class LectureItemManager extends SQLiteOpenHelper {
 						null);
 	}
 
-	/**
-	 * Get all lecture items for a special lecture from the database
+	/** Get all lecture items for a special lecture from the database
 	 * 
 	 * <pre>
 	 * @param lectureId Lecture ID
 	 * @return Database cursor (name, note, location, weekday, start_de,
 	 * 		   end_de, start_dt, end_dt, url, location, _id)
-	 * </pre>
-	 */
+	 * </pre> */
 	public Cursor getAllFromDb(String lectureId) {
 		return db.rawQuery("SELECT name, note, location, " + "strftime('%w', start) as weekday, "
 				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, " + "strftime('%H:%M', end) as end_de, "
@@ -337,11 +315,9 @@ public class LectureItemManager extends SQLiteOpenHelper {
 				new String[] { lectureId });
 	}
 
-	/**
-	 * Checks if the lectures_items table is empty
+	/** Checks if the lectures_items table is empty
 	 * 
-	 * @return true if no lecture items are available, else false
-	 */
+	 * @return true if no lecture items are available, else false */
 	public boolean empty() {
 		boolean result = true;
 		Cursor c = db.rawQuery("SELECT id FROM lectures_items LIMIT 1", null);
@@ -352,14 +328,12 @@ public class LectureItemManager extends SQLiteOpenHelper {
 		return result;
 	}
 
-	/**
-	 * Replace or Insert a lecture item in the database
+	/** Replace or Insert a lecture item in the database
 	 * 
 	 * <pre>
 	 * @param l LectureItem object
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void replaceIntoDb(LectureItem l) throws Exception {
 		Utils.log(l.toString());
 
@@ -382,24 +356,20 @@ public class LectureItemManager extends SQLiteOpenHelper {
 						l.name, l.module, l.location, l.note, l.url, l.seriesId });
 	}
 
-	/**
-	 * Delete lecture item from database
+	/** Delete lecture item from database
 	 * 
 	 * <pre>
 	 * @param id Lecture item ID
-	 * </pre>
-	 */
+	 * </pre> */
 	public void deleteItemFromDb(String id) {
 		db.execSQL("DELETE FROM lectures_items WHERE id = ?", new String[] { id });
 	}
 
-	/**
-	 * Delete lecture items from database
+	/** Delete lecture items from database
 	 * 
 	 * <pre>
 	 * @param id Lecture ID
-	 * </pre>
-	 */
+	 * </pre> */
 	public void deleteLectureFromDb(String id) {
 		db.execSQL("DELETE FROM lectures_items WHERE lectureId = ?", new String[] { id });
 	}

@@ -18,10 +18,11 @@ import de.tum.in.newtumcampus.models.LectureDetailsRowSet;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
 
-/**
- * This Activity will show all details found on the TUMOnline web service identified by its lecture id (which has to be posted to this activity by bundle).
+/** This Activity will show all details found on the TUMOnline web service identified by its lecture id (which has to be
+ * posted to this activity by bundle).
  * 
- * There is also the opportunity to get all appointments which are related to this lecture by clicking the button on top of the view.
+ * There is also the opportunity to get all appointments which are related to this lecture by clicking the button on top
+ * of the view.
  * 
  * HINT: a valid TUM Online token is needed
  * 
@@ -31,8 +32,7 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
  * 
  * @solves [M6] Details einer Lehrveranstaltung ausgeben
  * @author Daniel G. Mayr
- * @review Thomas Behrens // i found nothing tbd.
- */
+ * @review Thomas Behrens // i found nothing tbd. */
 public class LectureDetails extends Activity implements OnClickListener, TUMOnlineRequestFetchListener {
 
 	/** Handler to send request to TUMOnline */
@@ -53,7 +53,7 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 
 	/** the current processing Lecture item (model: LectureDetailsRow) */
 	private LectureDetailsRow currentitem;
-	
+
 	private static final String VERANSTALTUNGEN_DETAILS = "veranstaltungenDetails";
 
 	@Override
@@ -106,11 +106,9 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 		}
 	}
 
-	/**
-	 * process the given TUMOnline Data and display the details
+	/** process the given TUMOnline Data and display the details
 	 * 
-	 * @param rawResponse
-	 */
+	 * @param rawResponse */
 	@Override
 	public void onFetch(String rawResponse) {
 
@@ -151,9 +149,7 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 		}
 	}
 
-	/**
-	 * while fetching a TUMOnline Request an error occurred this will show the error message in a toast
-	 */
+	/** while fetching a TUMOnline Request an error occurred this will show the error message in a toast */
 	@Override
 	public void onFetchError(String errorReason) {
 		Utils.showLongCenteredToast(this, errorReason);

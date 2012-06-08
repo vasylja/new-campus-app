@@ -16,11 +16,9 @@ import android.widget.TextView.OnEditorActionListener;
 import de.tum.in.newtumcampus.common.FileUtils;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Activity to show a convenience interface for using the MyTUM room finder.
+/** Activity to show a convenience interface for using the MyTUM room finder.
  * 
- * @author Vincenz Doelle
- */
+ * @author Vincenz Doelle */
 public class Roomfinder extends Activity implements OnEditorActionListener {
 
 	// the URLs of the MyTUM roomfinder web service
@@ -97,11 +95,9 @@ public class Roomfinder extends Activity implements OnEditorActionListener {
 
 	}
 
-	/**
-	 * Extract the results from the URL's document.
+	/** Extract the results from the URL's document.
 	 * 
-	 * @return The extracted results.
-	 */
+	 * @return The extracted results. */
 	private String extractResultsFromURL() {
 		String param1 = "searchstring=" + URLEncoder.encode(etSearch.getText().toString());
 		String param2 = "building=Alle";

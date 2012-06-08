@@ -10,13 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import de.tum.in.newtumcampus.R;
 
-/**
- * Custom UI adapter for a list of employees.
+/** Custom UI adapter for a list of employees.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens
- */
+ * @review Thomas Behrens */
 public class StaffListAdapter extends BaseAdapter {
 	private static List<Person> employees;
 

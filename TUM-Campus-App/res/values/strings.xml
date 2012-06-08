@@ -40,9 +40,12 @@
 		Protection of privacy:\n
 		The application only saves individual-related\n
 		data, if the user explicit enters some\n
-		or imports them manually with a SD-card.\n
+		or imports them manually from TUMOnline or an SD-card \n
+		(ex. marks, lectures).\n
 		The application transmits no individual-rated\n
-		data and no usage statistics to third parties.</string>
+		data except such that are needed for communication \n
+		with the TUMOnline API (ex. AccessToken).
+		No usage statistics is transmitted to third parties.</string>
 
     <!-- cafeterias_horizontal.xml & cafeterias.xml -->
     <string name="choose_mensa">Please select a university canteen.</string>

@@ -12,16 +12,14 @@ import de.tum.in.newtumcampus.FindLectures;
 import de.tum.in.newtumcampus.MyLectures;
 import de.tum.in.newtumcampus.R;
 
-/**
- * This class handles the view output of the results for finding lectures via TUMOnline
+/** This class handles the view output of the results for finding lectures via TUMOnline
  * 
  * {@link FindLectures} activity or the {@link MyLectures} activity
  * 
  * linked files: res.layout.lectures_listview
  * 
  * @author Daniel G. Mayr
- * @review Thomas Behrens
- */
+ * @review Thomas Behrens */
 
 public class FindLecturesListAdapter extends BaseAdapter {
 

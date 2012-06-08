@@ -30,17 +30,13 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import de.tum.in.newtumcampus.models.TransportManager;
 
-/**
- * Activity to show transport stations and departures
- */
+/** Activity to show transport stations and departures */
 public class Transports extends Activity implements OnItemClickListener, OnItemLongClickListener,
 		OnEditorActionListener {
 
-	/**
-	 * Check if a network connection is available or can be available soon
+	/** Check if a network connection is available or can be available soon
 	 * 
-	 * @return true if available
-	 */
+	 * @return true if available */
 	public boolean connected() {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();

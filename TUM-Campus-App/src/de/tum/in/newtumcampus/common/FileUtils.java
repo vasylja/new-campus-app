@@ -24,27 +24,22 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
-/**
- * Utility functions to ease the work with files and file contents.
+/** Utility functions to ease the work with files and file contents.
  * 
- * @author Vincenz Doelle
- * 
- */
+ * @author Vincenz Doelle */
 public class FileUtils {
 	// mime-types
 	public static final String PDF_TYPE = "application/pdf";
 	public static final String HTML_TYPE = "text/html";
 
-	/**
-	 * Open a file with given mime-type using the ACTION_VIEW intent.
+	/** Open a file with given mime-type using the ACTION_VIEW intent.
 	 * 
 	 * @param file
 	 *            File to be opened.
 	 * @param context
 	 *            Activity calling.
 	 * @param mimeType
-	 *            The file's mime-type
-	 */
+	 *            The file's mime-type */
 	public static void openFile(File file, Activity context, String mimeType) {
 		if (file != null) {
 			Intent intent = new Intent();
@@ -56,8 +51,7 @@ public class FileUtils {
 		}
 	}
 
-	/**
-	 * Fetches a document from a URL and writes the content to the given file.
+	/** Fetches a document from a URL and writes the content to the given file.
 	 * 
 	 * @param httpClient
 	 *            HTTP client used to fetch the document.
@@ -66,8 +60,7 @@ public class FileUtils {
 	 * @param targetFile
 	 *            The target file where the document's content should be written to
 	 * 
-	 * @return The target file or null if error occurred.
-	 */
+	 * @return The target file or null if error occurred. */
 	public static File getFileFromURL(DefaultHttpClient httpClient, String url, File targetFile) {
 		// check required variables
 		if (url == null || httpClient == null) {
@@ -103,42 +96,36 @@ public class FileUtils {
 		return null;
 	}
 
-	/**
-	 * Gets a document from a URL and returns the source code as text.
+	/** Gets a document from a URL and returns the source code as text.
 	 * 
 	 * @param httpClient
 	 *            HTTP client used to fetch the document.
 	 * @param url
 	 *            The documents URL
 	 * 
-	 * @return The document's source/the requests response
-	 */
+	 * @return The document's source/the requests response */
 	public static String sendGetRequest(DefaultHttpClient httpClient, String url) {
 		return sendRequest(httpClient, new HttpGet(url));
 
 	}
 
-	/**
-	 * Sends a HTTP post request to given URL.
+	/** Sends a HTTP post request to given URL.
 	 * 
 	 * @param httpClient
 	 *            The HTTP client.
 	 * @param url
-	 *            The request URL.
-	 */
+	 *            The request URL. */
 	public static String sendPostRequest(DefaultHttpClient httpClient, String url) {
 		return sendRequest(httpClient, new HttpPost(url));
 	}
 
-	/**
-	 * Sends a HTTP request.
+	/** Sends a HTTP request.
 	 * 
 	 * @param httpClient
 	 *            The corresponding HTTP client.
 	 * @param request
 	 *            The request to be send.
-	 * @return The response as String.
-	 */
+	 * @return The response as String. */
 	public static String sendRequest(DefaultHttpClient httpClient, HttpRequestBase request) {
 		HttpResponse response;
 		String respContent = "";
@@ -158,8 +145,7 @@ public class FileUtils {
 		return respContent;
 	}
 
-	/**
-	 * Returns a file on SD card. Creates it if not exists.
+	/** Returns a file on SD card. Creates it if not exists.
 	 * 
 	 * @param folder
 	 *            The file's folder, relative to the cache directory.
@@ -168,8 +154,7 @@ public class FileUtils {
 	 * 
 	 * @return The file.
 	 * @throws Exception
-	 *             If SD-card does not exist
-	 */
+	 *             If SD-card does not exist */
 	public static File getFileOnSD(String folder, String filename) throws Exception {
 		// Save the file to/open from SD
 		File path = new File(Utils.getCacheDir(folder));
@@ -177,13 +162,11 @@ public class FileUtils {
 		return new File(path, filename);
 	}
 
-	/**
-	 * Reads a text file and returns the content as a String.
+	/** Reads a text file and returns the content as a String.
 	 * 
 	 * @param file
 	 *            The text file.
-	 * @return The file's content.
-	 */
+	 * @return The file's content. */
 	public static String readFile(File file) {
 		StringBuilder contents = new StringBuilder();
 
@@ -207,15 +190,13 @@ public class FileUtils {
 		return contents.toString();
 	}
 
-	/**
-	 * Writes a String to a text file.
+	/** Writes a String to a text file.
 	 * 
 	 * @param file
 	 *            The target file.
 	 * 
 	 * @param content
-	 *            The text content to be written.
-	 */
+	 *            The text content to be written. */
 	public static void writeFile(File file, String content) {
 		InputStream in;
 		in = new ByteArrayInputStream(content.getBytes());
@@ -236,16 +217,14 @@ public class FileUtils {
 		}
 	}
 
-	/**
-	 * Removes whitespaces and appends the file type.
+	/** Removes whitespaces and appends the file type.
 	 * 
 	 * @param name
 	 *            The string that should be used as filename.
 	 * @param appendix
 	 *            The file type (e.g. ".pdf")
 	 * 
-	 * @return The file name build from the arguments.
-	 */
+	 * @return The file name build from the arguments. */
 	public static String getFilename(String name, String appendix) {
 		return name.replace(" ", "_") + appendix;
 	}

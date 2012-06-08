@@ -4,48 +4,31 @@ import java.util.Date;
 
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * CafeteriaMenu object
- */
+/** CafeteriaMenu object */
 public class CafeteriaMenu {
 
-	/**
-	 * CafeteriaMenu Id (empty for addendum)
-	 */
+	/** CafeteriaMenu Id (empty for addendum) */
 	int id;
 
-	/**
-	 * Cafeteria ID
-	 */
+	/** Cafeteria ID */
 	int cafeteriaId;
 
-	/**
-	 * Menu date
-	 */
+	/** Menu date */
 	Date date;
 
-	/**
-	 * Short type, e.g. tg
-	 */
+	/** Short type, e.g. tg */
 	String typeShort;
 
-	/**
-	 * Long type, e.g. Tagesgericht 1
-	 */
+	/** Long type, e.g. Tagesgericht 1 */
 	String typeLong;
 
-	/**
-	 * Type ID
-	 */
+	/** Type ID */
 	int typeNr;
 
-	/**
-	 * Menu name
-	 */
+	/** Menu name */
 	String name;
 
-	/**
-	 * New CafeteriaMenu
+	/** New CafeteriaMenu
 	 * 
 	 * <pre>
 	 * @param id CafeteriaMenu Id (empty for addendum)
@@ -55,8 +38,7 @@ public class CafeteriaMenu {
 	 * @param typeLong Long type, e.g. Tagesgericht 1
 	 * @param typeNr Type ID
 	 * @param name Menu name
-	 * </pre>
-	 */
+	 * </pre> */
 	public CafeteriaMenu(int id, int cafeteriaId, Date date, String typeShort, String typeLong, int typeNr, String name) {
 
 		this.id = id;

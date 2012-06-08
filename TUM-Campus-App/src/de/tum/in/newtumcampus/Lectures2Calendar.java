@@ -25,14 +25,11 @@ import android.widget.TextView;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.LectureItemManager;
 
-/**
- * this activity let the user export all his lectures to a google calendar
+/** this activity let the user export all his lectures to a google calendar
  * 
- * @author Daniel G. Mayr
- * 
- */
+ * @author Daniel G. Mayr */
 public class Lectures2Calendar extends Activity implements OnClickListener, OnSeekBarChangeListener {
-//	TODO Constants not exported from this class
+	// TODO Constants not exported from this class
 	/** UI elements */
 	private Button btnToCalendar;
 	private Spinner spinCalendar;
@@ -99,9 +96,7 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 
 	}
 
-	/**
-	 * @see http://www.developer.com/ws/article.php/3850276/Working-with-the-Android-Calendar.htm
-	 */
+	/** @see http://www.developer.com/ws/article.php/3850276/Working-with-the-Android-Calendar.htm */
 	public boolean addToCalendar(int calendar_id, String title, String description, String location, long start,
 			long end, int minRemind) {
 
@@ -132,11 +127,9 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		return true;
 	}
 
-	/**
-	 * set a reminder for a given event
+	/** set a reminder for a given event
 	 * 
-	 * @return true if it worked correctly
-	 */
+	 * @return true if it worked correctly */
 	private boolean setReminder(String event_id, int minutes) {
 		if (minutes <= 0)
 			return false;
@@ -151,14 +144,12 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		return true;
 	}
 
-	/**
-	 * this method returns the calendar or event uri with respect to the sdk version
+	/** this method returns the calendar or event uri with respect to the sdk version
 	 * 
 	 * @param eventUri
 	 *            if true returns the eventuri, otherwise the calendar uri
 	 * @return eventuri or calendaruri
-	 * @see http://blog.yeradis.com/2011/01/failed-to-find-provider-info-for.html
-	 */
+	 * @see http://blog.yeradis.com/2011/01/failed-to-find-provider-info-for.html */
 	private static Uri getCalendarUri(boolean eventUri) {
 		Uri calendarURI = null;
 
@@ -172,11 +163,9 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		return calendarURI;
 	}
 
-	/**
-	 * this method returns the uri of the reminder content provider
+	/** this method returns the uri of the reminder content provider
 	 * 
-	 * @return the reminders uri
-	 */
+	 * @return the reminders uri */
 	private static Uri getReminderUri() {
 		Uri reminderUri = null;
 		if (android.os.Build.VERSION.SDK_INT <= 7) {
@@ -187,13 +176,11 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		return reminderUri;
 	}
 
-	/**
-	 * will gather all google calendars and their ids
+	/** will gather all google calendars and their ids
 	 * 
 	 * @param con
 	 *            current context
-	 * @return a map of name to id
-	 */
+	 * @return a map of name to id */
 	private static Map<String, Integer> getAvailableGoogleCalendars(Context con) {
 		ContentResolver ctnresolver = con.getContentResolver();
 

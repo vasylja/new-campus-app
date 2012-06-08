@@ -14,34 +14,24 @@ import android.text.Html;
 import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Feed item Manager, handles database stuff, external imports
- */
+/** Feed item Manager, handles database stuff, external imports */
 public class FeedItemManager extends SQLiteOpenHelper {
 
-	/**
-	 * Database connection
-	 */
+	/** Database connection */
 	private SQLiteDatabase db;
 
-	/**
-	 * Last insert counter
-	 */
+	/** Last insert counter */
 	public static int lastInserted = 0;
 
-	/**
-	 * Additional information for exception messages
-	 */
+	/** Additional information for exception messages */
 	public String lastInfo = "";
 
-	/**
-	 * Constructor, open/create database, create table if necessary
+	/** Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
 	 * @param database Filename, e.g. database.db
-	 * </pre>
-	 */
+	 * </pre> */
 	public FeedItemManager(Context context, String database) {
 		super(context, database, null, Const.dbVersion);
 
@@ -49,16 +39,14 @@ public class FeedItemManager extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	/**
-	 * Download feed items from external interface (YQL+JSON)
+	/** Download feed items from external interface (YQL+JSON)
 	 * 
 	 * <pre>
 	 * @param id Feed-ID
 	 * @param retry Retry download after resolving RSS-Url
 	 * @param force True to force download over normal sync period, else false
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void downloadFromExternal(int id, boolean retry, boolean force) throws Exception {
 		String syncId = "feeditem" + id;
 		if (!force && !SyncManager.needSync(db, syncId, 900)) {
@@ -113,24 +101,20 @@ public class FeedItemManager extends SQLiteOpenHelper {
 		lastInserted += Utils.dbGetTableCount(db, "feeds_items") - count;
 	}
 
-	/**
-	 * Get all feed items for a feed from the database
+	/** Get all feed items for a feed from the database
 	 * 
 	 * <pre>
 	 * @param feedId Feed ID
 	 * @return Database cursor (image, title, description, link, _id)
-	 * </pre>
-	 */
+	 * </pre> */
 	public Cursor getAllFromDb(String feedId) {
 		return db.rawQuery("SELECT image, title, description, link, id as _id "
 				+ "FROM feeds_items WHERE feedId = ? ORDER BY date DESC", new String[] { feedId });
 	}
 
-	/**
-	 * Checks if the feeds_items table is empty
+	/** Checks if the feeds_items table is empty
 	 * 
-	 * @return true if no feed items are available, else false
-	 */
+	 * @return true if no feed items are available, else false */
 	public boolean empty() {
 		boolean result = true;
 		Cursor c = db.rawQuery("SELECT id FROM feeds_items LIMIT 1", null);
@@ -141,11 +125,11 @@ public class FeedItemManager extends SQLiteOpenHelper {
 		return result;
 	}
 
-	/**
-	 * Convert JSON to FeedItem and download feed item iamge
+	/** Convert JSON to FeedItem and download feed item iamge
 	 * 
-	 * Example JSON: e.g. { "title": "US-Truppenabzug aus Afghanistan: \"Verlogen und verkorkst\"", "description": "..." , "link":
-	 * "http://www.n-tv.de/politik/pressestimmen/Verlogen-und-verkorkst-article3650731.html" , "pubDate": "Thu, 23 Jun 2011 20:06:53 GMT", "enclosure": { "url":
+	 * Example JSON: e.g. { "title": "US-Truppenabzug aus Afghanistan: \"Verlogen und verkorkst\"", "description": "..."
+	 * , "link": "http://www.n-tv.de/politik/pressestimmen/Verlogen-und-verkorkst-article3650731.html" , "pubDate":
+	 * "Thu, 23 Jun 2011 20:06:53 GMT", "enclosure": { "url":
 	 * "http://www.n-tv.de/img/30/304801/Img_4_3_220_Pressestimmen.jpg" }
 	 * 
 	 * <pre>
@@ -153,8 +137,7 @@ public class FeedItemManager extends SQLiteOpenHelper {
 	 * @param json see above
 	 * @return Feeds
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public static FeedItem getFromJson(int feedId, JSONObject json) throws Exception {
 
 		String target = "";
@@ -171,20 +154,19 @@ public class FeedItemManager extends SQLiteOpenHelper {
 		String description = "";
 		if (json.has(ModelsConst.JSON_DESCRIPTION) && !json.isNull(ModelsConst.JSON_DESCRIPTION)) {
 			// decode HTML entites, remove links, images, etc.
-			description = Html.fromHtml(json.getString(ModelsConst.JSON_DESCRIPTION).replaceAll("\\<.*?\\>", "")).toString();
+			description = Html.fromHtml(json.getString(ModelsConst.JSON_DESCRIPTION).replaceAll("\\<.*?\\>", ""))
+					.toString();
 		}
-		return new FeedItem(feedId, json.getString(ModelsConst.JSON_TITLE).replaceAll("\n", ""), json.getString(ModelsConst.JSON_LINK), description,
-				pubDate, target);
+		return new FeedItem(feedId, json.getString(ModelsConst.JSON_TITLE).replaceAll("\n", ""),
+				json.getString(ModelsConst.JSON_LINK), description, pubDate, target);
 	}
 
-	/**
-	 * Insert a feed item in the database
+	/** Insert a feed item in the database
 	 * 
 	 * <pre>
 	 * @param n FeedItem object
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void insertIntoDb(FeedItem n) throws Exception {
 		if (n.feedId <= 0) {
 			throw new Exception("Invalid feedId.");
@@ -200,28 +182,22 @@ public class FeedItemManager extends SQLiteOpenHelper {
 				n.description, Utils.getDateTimeString(n.date), n.image });
 	}
 
-	/**
-	 * Removes all cache items
-	 */
+	/** Removes all cache items */
 	public void removeCache() {
 		db.execSQL("DELETE FROM feeds_items");
 		Utils.emptyCacheDir("rss/cache");
 	}
 
-	/**
-	 * Deletes feed items from the database
+	/** Deletes feed items from the database
 	 * 
 	 * <pre>
 	 * @param feedId Feed ID
-	 * </pre>
-	 */
+	 * </pre> */
 	public void deleteFromDb(int feedId) {
 		db.execSQL("DELETE FROM feeds_items WHERE feedId = ?", new String[] { String.valueOf(feedId) });
 	}
 
-	/**
-	 * Removes all old items (older than 7 days)
-	 */
+	/** Removes all old items (older than 7 days) */
 	public void cleanupDb() {
 		db.execSQL("DELETE FROM feeds_items WHERE date < date('now','-7 day')");
 	}

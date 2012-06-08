@@ -23,13 +23,11 @@ import de.tum.in.newtumcampus.models.ExamListAdapter;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
 
-/**
- * Activity to show the user's grades/exams passed.
+/** Activity to show the user's grades/exams passed.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens
- */
+ * @review Thomas Behrens */
 public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 
 	/** Spinner to choose between programs */
@@ -43,7 +41,7 @@ public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 
 	/** HTTP request handler to handle requests to TUMOnline */
 	private TUMOnlineRequest requestHandler;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,19 +64,14 @@ public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 		}
 	}
 
-	/**
-	 * Fetches all grades from TUMOnline.
-	 * 
-	 */
+	/** Fetches all grades from TUMOnline. */
 	public void fetchGrades() {
 		requestHandler.fetchInteractive(this, this);
 	}
 
-	/**
-	 * Handle the response by deserializing it into model entities.
+	/** Handle the response by deserializing it into model entities.
 	 * 
-	 * @param rawResp
-	 */
+	 * @param rawResp */
 	@Override
 	public void onFetch(String rawResp) {
 
@@ -111,9 +104,7 @@ public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 		finish();
 	}
 
-	/**
-	 * Initialize the spinner for choosing between the study programs.
-	 */
+	/** Initialize the spinner for choosing between the study programs. */
 	private void initSpinner() {
 
 		// set Spinner data

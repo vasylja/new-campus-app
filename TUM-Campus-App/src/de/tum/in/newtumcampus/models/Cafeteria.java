@@ -1,33 +1,23 @@
 ﻿package de.tum.in.newtumcampus.models;
 
-/**
- * Cafeteria Object
- */
+/** Cafeteria Object */
 public class Cafeteria {
-	/**
-	 * Cafeteria ID, e.g. 412
-	 */
+	/** Cafeteria ID, e.g. 412 */
 	int id;
 
-	/**
-	 * Name, e.g. MensaX
-	 */
+	/** Name, e.g. MensaX */
 	String name;
 
-	/**
-	 * Address, e.g. Boltzmannstr. 3
-	 */
+	/** Address, e.g. Boltzmannstr. 3 */
 	String address;
 
-	/**
-	 * new Cafeteria
+	/** new Cafeteria
 	 * 
 	 * <pre>
 	 * @param id Cafeteria ID, e.g. 412
 	 * @param name Name, e.g. MensaX
 	 * @param address Address, e.g. Boltzmannstr. 3
-	 * </pre>
-	 */
+	 * </pre> */
 	public Cafeteria(int id, String name, String address) {
 		this.id = id;
 		this.name = name;

@@ -22,11 +22,9 @@ import de.tum.in.newtumcampus.common.FileUtils;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 
-/**
- * Activity to download student documents from TUMOnline.
+/** Activity to download student documents from TUMOnline.
  * 
- * @author Vincenz Doelle
- */
+ * @author Vincenz Doelle */
 
 public class TuitionFees extends Activity {
 
@@ -39,7 +37,7 @@ public class TuitionFees extends Activity {
 
 	// widgets
 	private WebView webView;
-	
+
 	private static final String STUDIENBEITRAG_STATUS_URL = "https://campus.tum.de/tumonline/wbstudienbeitragstatus.show";
 
 	@Override
@@ -80,7 +78,8 @@ public class TuitionFees extends Activity {
 			return;
 		}
 
-		tumOnlinePassword = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.TUMONLINE_PASSWORD, null);
+		tumOnlinePassword = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.TUMONLINE_PASSWORD,
+				null);
 		if (tumOnlinePassword == null) {
 			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_password_not_set), new Intent(this,
 					TUMOnlineSettings.class));
@@ -103,9 +102,7 @@ public class TuitionFees extends Activity {
 		}
 	}
 
-	/**
-	 * Shows an {@link AlertDialog} offering the user whether to open the file from SD card or download it again.
-	 */
+	/** Shows an {@link AlertDialog} offering the user whether to open the file from SD card or download it again. */
 	private void showAlertDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(TuitionFees.this);
 		builder.setMessage(getString(R.string.load_doc));
@@ -139,12 +136,10 @@ public class TuitionFees extends Activity {
 
 	}
 
-	/**
-	 * Creates a background task and calls fetchDocument while showing a progress dialog.
+	/** Creates a background task and calls fetchDocument while showing a progress dialog.
 	 * 
 	 * @param documentURL
-	 *            URL of the document to be downloaded
-	 */
+	 *            URL of the document to be downloaded */
 	private void getDocument(String documentURL) {
 		if (!Utils.isConnected(this)) {
 			Utils.showLongCenteredToast(this, getString(R.string.no_internet_connection));
@@ -185,12 +180,10 @@ public class TuitionFees extends Activity {
 		backgroundTask.execute(documentURL);
 	}
 
-	/**
-	 * Fetches the tuition fee document from TUMOnline.
+	/** Fetches the tuition fee document from TUMOnline.
 	 * 
 	 * @param documentURL
-	 *            The URL of the document.
-	 */
+	 *            The URL of the document. */
 	private boolean fetchDocument(String documentURL) {
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 
@@ -208,7 +201,7 @@ public class TuitionFees extends Activity {
 		String resp = FileUtils.sendPostRequest(httpClient, url);
 
 		// login unsuccessful
-//		TODO Check whether tuition fees work with English TUMOnline
+		// TODO Check whether tuition fees work with English TUMOnline
 		if (resp.contains("Kennwort vergessen?")) {
 			return false;
 		}

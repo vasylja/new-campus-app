@@ -9,9 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-/**
- * Activity to show raw table contents of the database
- */
+/** Activity to show raw table contents of the database */
 public class Debug extends Activity implements View.OnClickListener {
 
 	@Override
@@ -60,32 +58,26 @@ public class Debug extends Activity implements View.OnClickListener {
 		b.setOnClickListener(this);
 	}
 
-	/**
-	 * clear debug content text view
-	 */
+	/** clear debug content text view */
 	public void debugReset() {
 		TextView tv = (TextView) findViewById(R.id.debug);
 		tv.setText("");
 	}
 
-	/**
-	 * Add a message to the debug content text view
+	/** Add a message to the debug content text view
 	 * 
 	 * @param s
-	 *            Debug message
-	 */
+	 *            Debug message */
 	public void debugStr(String s) {
 		TextView tv = (TextView) findViewById(R.id.debug);
 		tv.setMovementMethod(new ScrollingMovementMethod());
 		tv.append(s + "\n");
 	}
 
-	/**
-	 * Execute a database query and present the results in the GUI
+	/** Execute a database query and present the results in the GUI
 	 * 
 	 * @param query
-	 *            SQL query to execute
-	 */
+	 *            SQL query to execute */
 	public void debugSQL(String query) {
 		debugReset();
 		SQLiteDatabase db = SQLiteDatabase.openDatabase(getDatabasePath(Const.db).toString(), null,

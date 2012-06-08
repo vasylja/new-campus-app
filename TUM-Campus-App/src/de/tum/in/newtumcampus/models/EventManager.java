@@ -12,29 +12,21 @@ import android.database.sqlite.SQLiteOpenHelper;
 import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Event Manager, handles database stuff, external imports
- */
+/** Event Manager, handles database stuff, external imports */
 public class EventManager extends SQLiteOpenHelper {
 
-	/**
-	 * Database connection
-	 */
+	/** Database connection */
 	private SQLiteDatabase db;
 
-	/**
-	 * Last insert counter
-	 */
+	/** Last insert counter */
 	public static int lastInserted = 0;
 
-	/**
-	 * Constructor, open/create database, create table if necessary
+	/** Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
 	 * @param database Filename, e.g. database.db
-	 * </pre>
-	 */
+	 * </pre> */
 	public EventManager(Context context, String database) {
 		super(context, database, null, Const.dbVersion);
 
@@ -42,14 +34,12 @@ public class EventManager extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	/**
-	 * Download events from external interface (JSON)
+	/** Download events from external interface (JSON)
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void downloadFromExternal(boolean force) throws Exception {
 
 		if (!force && !SyncManager.needSync(db, this, 21600)) { // 6h
@@ -79,11 +69,9 @@ public class EventManager extends SQLiteOpenHelper {
 		lastInserted += Utils.dbGetTableCount(db, "events") - count;
 	}
 
-	/**
-	 * Get all upcoming or unfinished events from the database
+	/** Get all upcoming or unfinished events from the database
 	 * 
-	 * @return Database cursor (image, name, weekday, start_de, end_de, location, _id)
-	 */
+	 * @return Database cursor (image, name, weekday, start_de, end_de, location, _id) */
 	public Cursor getNextFromDb() {
 		return db.rawQuery("SELECT image, name, strftime('%w', start) as weekday, "
 				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, " + "strftime('%H:%M', end) as end_de, "
@@ -91,11 +79,9 @@ public class EventManager extends SQLiteOpenHelper {
 				+ "ORDER BY start ASC LIMIT 25", null);
 	}
 
-	/**
-	 * Get all finished events from the database
+	/** Get all finished events from the database
 	 * 
-	 * @return Database cursor (image, name, weekday, start_de, end_de, location, _id)
-	 */
+	 * @return Database cursor (image, name, weekday, start_de, end_de, location, _id) */
 	public Cursor getPastFromDb() {
 		return db.rawQuery("SELECT image, name, strftime('%w', start) as weekday, "
 				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, " + "strftime('%H:%M', end) as end_de, "
@@ -103,33 +89,30 @@ public class EventManager extends SQLiteOpenHelper {
 				+ "ORDER BY start DESC LIMIT 25", null);
 	}
 
-	/**
-	 * Get event details form the database
+	/** Get event details form the database
 	 * 
 	 * <pre>
 	 * @param id Event-ID
 	 * @return Database cursor (image, name, weekday, start_de, end_de, location, description, link, _id)
-	 * </pre>
-	 */
+	 * </pre> */
 	public Cursor getDetailsFromDb(String id) {
 		return db.rawQuery("SELECT image, name, strftime('%w', start) as weekday, "
 				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, " + "strftime('%H:%M', end) as end_de, "
 				+ "location, description, link, id as _id " + "FROM events WHERE id = ?", new String[] { id });
 	}
 
-	/**
-	 * Convert JSON object to Event, download event picture
+	/** Convert JSON object to Event, download event picture
 	 * 
-	 * Example JSON: e.g. { "id": "166478443419659", "owner": { "name": "TUM Campus App for Android", "category": "Software", "id": "162327853831856" }, "name":
-	 * "R\u00fcckmeldung f\u00fcr Wintersemester 2011/12", "description": "..." , "start_time": "2011-08-15T00:00:00", "end_time": "2011-08-15T03:00:00",
-	 * "location": "TU M\u00fcnchen", "privacy": "OPEN", "updated_time": "2011-06-25T06:26:14+0000" }
+	 * Example JSON: e.g. { "id": "166478443419659", "owner": { "name": "TUM Campus App for Android", "category":
+	 * "Software", "id": "162327853831856" }, "name": "R\u00fcckmeldung f\u00fcr Wintersemester 2011/12", "description":
+	 * "..." , "start_time": "2011-08-15T00:00:00", "end_time": "2011-08-15T03:00:00", "location": "TU M\u00fcnchen",
+	 * "privacy": "OPEN", "updated_time": "2011-06-25T06:26:14+0000" }
 	 * 
 	 * <pre>
 	 * @param json see above
 	 * @return Event
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public static Event getFromJson(JSONObject json) throws Exception {
 
 		String eventId = json.getString(ModelsConst.JSON_ID);
@@ -150,18 +133,17 @@ public class EventManager extends SQLiteOpenHelper {
 		// Link only available in event/feed
 		String link = "";
 
-		return new Event(eventId, json.getString(ModelsConst.JSON_NAME), Utils.getDateTime(json.getString(ModelsConst.JSON_START_TIME)),
-				Utils.getDateTime(json.getString(ModelsConst.JSON_END_TIME)), location, description, link, target);
+		return new Event(eventId, json.getString(ModelsConst.JSON_NAME), Utils.getDateTime(json
+				.getString(ModelsConst.JSON_START_TIME)), Utils.getDateTime(json.getString(ModelsConst.JSON_END_TIME)),
+				location, description, link, target);
 	}
 
-	/**
-	 * Replace or Insert a event in the database
+	/** Replace or Insert a event in the database
 	 * 
 	 * <pre>
 	 * @param e Event object
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void replaceIntoDb(Event e) throws Exception {
 		if (e.id.length() == 0) {
 			throw new Exception("Invalid id.");
@@ -176,17 +158,13 @@ public class EventManager extends SQLiteOpenHelper {
 						Utils.getDateTimeString(e.end), e.location, e.description, e.link, e.image });
 	}
 
-	/**
-	 * Removes all cache items
-	 */
+	/** Removes all cache items */
 	public void removeCache() {
 		db.execSQL("DELETE FROM events");
 		Utils.emptyCacheDir("events/cache");
 	}
 
-	/**
-	 * Removes all old items (older than 3 months)
-	 */
+	/** Removes all old items (older than 3 months) */
 	public void cleanupDb() {
 		db.execSQL("DELETE FROM events WHERE start < date('now','-3 month')");
 	}

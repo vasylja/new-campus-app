@@ -27,27 +27,19 @@ import de.tum.in.newtumcampus.models.FeedItemManager;
 import de.tum.in.newtumcampus.models.FeedManager;
 import de.tum.in.newtumcampus.services.DownloadService;
 
-/**
- * Activity to show RSS-feeds and their news items
- */
+/** Activity to show RSS-feeds and their news items */
 public class Feeds extends Activity implements OnItemClickListener, ViewBinder, OnItemLongClickListener,
 		View.OnClickListener {
 
-	/**
-	 * Current selected feed (ID)
-	 */
+	/** Current selected feed (ID) */
 	private static String feedId;
 
-	/**
-	 * Current selected feed (Name)
-	 */
+	/** Current selected feed (Name) */
 	private static String feedName;
 
-	/**
-	 * Adapter for feed list
-	 */
+	/** Adapter for feed list */
 	private SimpleCursorAdapter adapter;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

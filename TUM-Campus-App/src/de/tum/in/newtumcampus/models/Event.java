@@ -4,53 +4,34 @@ import java.util.Date;
 
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Event object
- */
+/** Event object */
 public class Event {
 
-	/**
-	 * Event Facebook-ID
-	 */
+	/** Event Facebook-ID */
 	String id;
 
-	/**
-	 * Name, e.g. PartyX
-	 */
+	/** Name, e.g. PartyX */
 	String name;
 
-	/**
-	 * Event start DateTime
-	 */
+	/** Event start DateTime */
 	Date start;
 
-	/**
-	 * Event end DateTime
-	 */
+	/** Event end DateTime */
 	Date end;
 
-	/**
-	 * Location, e.g. Munich
-	 */
+	/** Location, e.g. Munich */
 	String location;
 
-	/**
-	 * Description, multiline
-	 */
+	/** Description, multiline */
 	String description;
 
-	/**
-	 * Event link, e.g. http://www.xyz.de
-	 */
+	/** Event link, e.g. http://www.xyz.de */
 	String link;
 
-	/**
-	 * Local image, e.g. /mnt/sdcard/tumcampus/events/cache/xy.jpg
-	 */
+	/** Local image, e.g. /mnt/sdcard/tumcampus/events/cache/xy.jpg */
 	String image;
 
-	/**
-	 * New Event
+	/** New Event
 	 * 
 	 * <pre>
 	 * @param id Event Facebook-ID
@@ -61,8 +42,7 @@ public class Event {
 	 * @param description Description, multiline
 	 * @param link Event link, e.g. http://www.xyz.de
 	 * @param image Local image, e.g. /mnt/sdcard/tumcampus/events/cache/xy.jpg
-	 * </pre>
-	 */
+	 * </pre> */
 	public Event(String id, String name, Date start, Date end, String location, String description, String link,
 			String image) {
 

@@ -17,11 +17,9 @@ import android.widget.TextView;
 import de.tum.in.newtumcampus.models.EventManager;
 import de.tum.in.newtumcampus.services.DownloadService;
 
-/**
- * Activity to show events (name, location, image, etc.)
- */
+/** Activity to show events (name, location, image, etc.) */
 public class Events extends Activity implements OnItemClickListener, ViewBinder {
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -79,20 +77,19 @@ public class Events extends Activity implements OnItemClickListener, ViewBinder 
 
 	public boolean setViewValue(View view, Cursor c, int index) {
 
-		/**
-		 * <pre>
+		/** <pre>
 		 * Show event info text as:
 		 * Week-Day, Start DateTime - End Time
 		 * location
-		 * </pre>
-		 */
+		 * </pre> */
 		if (view.getId() == R.id.infos) {
 			String[] weekDays = getString(R.string.week_splitted).split(",");
 
 			TextView infos = (TextView) view;
 			infos.setText(weekDays[c.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))] + ", "
-					+ c.getString(c.getColumnIndex(Const.START_DE_COLUMN)) + " - " + c.getString(c.getColumnIndex(Const.END_DE_COLUMN))
-					+ "\n" + c.getString(c.getColumnIndex(Const.LOCATION_COLUMN)));
+					+ c.getString(c.getColumnIndex(Const.START_DE_COLUMN)) + " - "
+					+ c.getString(c.getColumnIndex(Const.END_DE_COLUMN)) + "\n"
+					+ c.getString(c.getColumnIndex(Const.LOCATION_COLUMN)));
 			return true;
 		}
 		return false;

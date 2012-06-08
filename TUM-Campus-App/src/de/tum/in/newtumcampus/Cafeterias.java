@@ -23,35 +23,31 @@ import de.tum.in.newtumcampus.models.CafeteriaMenuManager;
 import de.tum.in.newtumcampus.models.LocationManager;
 import de.tum.in.newtumcampus.services.DownloadService;
 
-/**
- * Activity to show cafeterias and meals selected by date
- */
+/** Activity to show cafeterias and meals selected by date */
 public class Cafeterias extends Activity implements OnItemClickListener {
 
 	/** Current Date selected (ISO format) */
 	private static String date;
 
 	/** Current Date selected (German format) */
-	private static String dateStr;	
-	
+	private static String dateStr;
+
 	/** Cafeteria prices url */
 	private static String MENSA_PREISE = "http://www.studentenwerk-muenchen.de/mensa/unsere-preise/";
 
 	/** Cafeteria list Garching url */
 	private static String MENSEN_GARCHING = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/garching/";
-	
+
 	/** Cafeteria list Muenchen url */
 	private static String MENSEN_MUENCHEN = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/muenchen/";
-	
+
 	/** Current Cafeteria selected */
 	private String cafeteriaId;
 
 	/** Current Cafeteria name selected */
 	private String cafeteriaName;
 
-	/**
-	 * Footer with opening hours
-	 */
+	/** Footer with opening hours */
 	View footer;
 
 	@Override
@@ -229,7 +225,7 @@ public class Cafeterias extends Activity implements OnItemClickListener {
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MENSA_PREISE)));
 			return true;
 
-		case Menu.FIRST + 3:			
+		case Menu.FIRST + 3:
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MENSEN_GARCHING)));
 			return true;
 

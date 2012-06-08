@@ -1,57 +1,40 @@
 package de.tum.in.newtumcampus.common;
 
-/*
- * Copyright (C) 2010 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+/* Copyright (C) 2010 The Android Open Source Project
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License. */
 
 import java.io.UnsupportedEncodingException;
 
-/**
- * Utilities for encoding and decoding the Base64 representation of binary data. See RFCs <a href="http://www.ietf.org/rfc/rfc2045.txt">2045</a> and <a
- * href="http://www.ietf.org/rfc/rfc3548.txt">3548</a>.
- */
+/** Utilities for encoding and decoding the Base64 representation of binary data. See RFCs <a
+ * href="http://www.ietf.org/rfc/rfc2045.txt">2045</a> and <a href="http://www.ietf.org/rfc/rfc3548.txt">3548</a>. */
 public class Base64 {
-	/**
-	 * Default values for encoder/decoder flags.
-	 */
+	/** Default values for encoder/decoder flags. */
 	public static final int DEFAULT = 0;
 
-	/**
-	 * Encoder flag bit to omit the padding '=' characters at the end of the output (if any).
-	 */
+	/** Encoder flag bit to omit the padding '=' characters at the end of the output (if any). */
 	public static final int NO_PADDING = 1;
 
-	/**
-	 * Encoder flag bit to omit all line terminators (i.e., the output will be on one long line).
-	 */
+	/** Encoder flag bit to omit all line terminators (i.e., the output will be on one long line). */
 	public static final int NO_WRAP = 2;
 
-	/**
-	 * Encoder flag bit to indicate lines should be terminated with a CRLF pair instead of just an LF. Has no effect if {@code NO_WRAP} is specified as well.
-	 */
+	/** Encoder flag bit to indicate lines should be terminated with a CRLF pair instead of just an LF. Has no effect if
+	 * {@code NO_WRAP} is specified as well. */
 	public static final int CRLF = 4;
 
-	/**
-	 * Encoder/decoder flag bit to indicate using the "URL and filename safe" variant of Base64 (see RFC 3548 section 4) where {@code -} and {@code _} are used
-	 * in place of {@code +} and {@code /}.
-	 */
+	/** Encoder/decoder flag bit to indicate using the "URL and filename safe" variant of Base64 (see RFC 3548 section 4)
+	 * where {@code -} and {@code _} are used in place of {@code +} and {@code /}. */
 	public static final int URL_SAFE = 8;
 
-	/**
-	 * Flag to pass to {@link Base64OutputStream} to indicate that it should not close the output stream it is wrapping when it itself is closed.
-	 */
+	/** Flag to pass to {@link Base64OutputStream} to indicate that it should not close the output stream it is wrapping
+	 * when it itself is closed. */
 	public static final int NO_CLOSE = 16;
 
 	// --------------------------------------------------------
@@ -62,20 +45,18 @@ public class Base64 {
 		public byte[] output;
 		public int op;
 
-		/**
-		 * Encode/decode another block of input data. this.output is provided by the caller, and must be big enough to hold all the coded data. On exit,
-		 * this.opwill be set to the length of the coded data.
+		/** Encode/decode another block of input data. this.output is provided by the caller, and must be big enough to
+		 * hold all the coded data. On exit, this.opwill be set to the length of the coded data.
 		 * 
 		 * @param finish
-		 *            true if this is the final call to process for this object. Will finalize the coder state and include any final bytes in the output.
+		 *            true if this is the final call to process for this object. Will finalize the coder state and
+		 *            include any final bytes in the output.
 		 * 
-		 * @return true if the input so far is good; false if some error has been detected in the input stream..
-		 */
+		 * @return true if the input so far is good; false if some error has been detected in the input stream.. */
 		public abstract boolean process(byte[] input, int offset, int len, boolean finish);
 
-		/**
-		 * @return the maximum number of bytes a call to process() could produce for the given number of input bytes. This may be an overestimate.
-		 */
+		/** @return the maximum number of bytes a call to process() could produce for the given number of input bytes.
+		 *         This may be an overestimate. */
 		public abstract int maxOutputSize(int len);
 	}
 
@@ -83,11 +64,11 @@ public class Base64 {
 	// decoding
 	// --------------------------------------------------------
 
-	/**
-	 * Decode the Base64-encoded data in input and return the data in a new byte array.
+	/** Decode the Base64-encoded data in input and return the data in a new byte array.
 	 * 
 	 * <p>
-	 * The padding '=' characters at the end are considered optional, but if any are present, there must be the correct number of them.
+	 * The padding '=' characters at the end are considered optional, but if any are present, there must be the correct
+	 * number of them.
 	 * 
 	 * @param str
 	 *            the input String to decode, which is converted to bytes using the default charset
@@ -95,17 +76,16 @@ public class Base64 {
 	 *            controls certain features of the decoded output. Pass {@code DEFAULT} to decode standard Base64.
 	 * 
 	 * @throws IllegalArgumentException
-	 *             if the input contains incorrect padding
-	 */
+	 *             if the input contains incorrect padding */
 	public static byte[] decode(String str, int flags) {
 		return decode(str.getBytes(), flags);
 	}
 
-	/**
-	 * Decode the Base64-encoded data in input and return the data in a new byte array.
+	/** Decode the Base64-encoded data in input and return the data in a new byte array.
 	 * 
 	 * <p>
-	 * The padding '=' characters at the end are considered optional, but if any are present, there must be the correct number of them.
+	 * The padding '=' characters at the end are considered optional, but if any are present, there must be the correct
+	 * number of them.
 	 * 
 	 * @param input
 	 *            the input array to decode
@@ -113,17 +93,16 @@ public class Base64 {
 	 *            controls certain features of the decoded output. Pass {@code DEFAULT} to decode standard Base64.
 	 * 
 	 * @throws IllegalArgumentException
-	 *             if the input contains incorrect padding
-	 */
+	 *             if the input contains incorrect padding */
 	public static byte[] decode(byte[] input, int flags) {
 		return decode(input, 0, input.length, flags);
 	}
 
-	/**
-	 * Decode the Base64-encoded data in input and return the data in a new byte array.
+	/** Decode the Base64-encoded data in input and return the data in a new byte array.
 	 * 
 	 * <p>
-	 * The padding '=' characters at the end are considered optional, but if any are present, there must be the correct number of them.
+	 * The padding '=' characters at the end are considered optional, but if any are present, there must be the correct
+	 * number of them.
 	 * 
 	 * @param input
 	 *            the data to decode
@@ -135,8 +114,7 @@ public class Base64 {
 	 *            controls certain features of the decoded output. Pass {@code DEFAULT} to decode standard Base64.
 	 * 
 	 * @throws IllegalArgumentException
-	 *             if the input contains incorrect padding
-	 */
+	 *             if the input contains incorrect padding */
 	public static byte[] decode(byte[] input, int offset, int len, int flags) {
 		// Allocate space for the most data the input could represent.
 		// (It could contain less if it contains whitespace, etc.)
@@ -159,9 +137,7 @@ public class Base64 {
 	}
 
 	/* package */static class Decoder extends Coder {
-		/**
-		 * Lookup table for turning bytes into their position in the Base64 alphabet.
-		 */
+		/** Lookup table for turning bytes into their position in the Base64 alphabet. */
 		private static final int DECODE[] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 				-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62,
 				-1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -2, -1, -1, -1, 0, 1, 2, 3, 4, 5,
@@ -174,9 +150,7 @@ public class Base64 {
 				-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 				-1, -1, };
 
-		/**
-		 * Decode lookup table for the "web safe" variant (RFC 3548 sec. 4) where - and _ replace + and /.
-		 */
+		/** Decode lookup table for the "web safe" variant (RFC 3548 sec. 4) where - and _ replace + and /. */
 		private static final int DECODE_WEBSAFE[] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 				-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 				-1, -1, -1, 62, -1, -1, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -2, -1, -1, -1, 0, 1, 2, 3,
@@ -193,10 +167,9 @@ public class Base64 {
 		private static final int SKIP = -1;
 		private static final int EQUALS = -2;
 
-		/**
-		 * States 0-3 are reading through the next input tuple. State 4 is having read one '=' and expecting exactly one more. State 5 is expecting no more data
-		 * or padding characters in the input. State 6 is the error state; an error has been detected in the input and no future input can "fix" it.
-		 */
+		/** States 0-3 are reading through the next input tuple. State 4 is having read one '=' and expecting exactly one
+		 * more. State 5 is expecting no more data or padding characters in the input. State 6 is the error state; an
+		 * error has been detected in the input and no future input can "fix" it. */
 		private int state; // state number (0 to 6)
 		private int value;
 
@@ -210,19 +183,16 @@ public class Base64 {
 			value = 0;
 		}
 
-		/**
-		 * @return an overestimate for the number of bytes {@code len} bytes could decode to.
-		 */
+		/** @return an overestimate for the number of bytes {@code len} bytes could decode to. */
 		@Override
 		public int maxOutputSize(int len) {
 			return len * 3 / 4 + 10;
 		}
 
-		/**
-		 * Decode another block of input data.
+		/** Decode another block of input data.
 		 * 
-		 * @return true if the state machine is still healthy. false if bad base-64 data has been detected in the input stream.
-		 */
+		 * @return true if the state machine is still healthy. false if bad base-64 data has been detected in the input
+		 *         stream. */
 		@Override
 		public boolean process(byte[] input, int offset, int len, boolean finish) {
 			if (this.state == 6)
@@ -406,14 +376,13 @@ public class Base64 {
 	// encoding
 	// --------------------------------------------------------
 
-	/**
-	 * Base64-encode the given data and return a newly allocated String with the result.
+	/** Base64-encode the given data and return a newly allocated String with the result.
 	 * 
 	 * @param input
 	 *            the data to encode
 	 * @param flags
-	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that adheres to RFC 2045.
-	 */
+	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
+	 *            adheres to RFC 2045. */
 	public static String encodeToString(byte[] input, int flags) {
 		try {
 			return new String(encode(input, flags), "US-ASCII");
@@ -423,8 +392,7 @@ public class Base64 {
 		}
 	}
 
-	/**
-	 * Base64-encode the given data and return a newly allocated String with the result.
+	/** Base64-encode the given data and return a newly allocated String with the result.
 	 * 
 	 * @param input
 	 *            the data to encode
@@ -433,8 +401,8 @@ public class Base64 {
 	 * @param len
 	 *            the number of bytes of input to encode
 	 * @param flags
-	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that adheres to RFC 2045.
-	 */
+	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
+	 *            adheres to RFC 2045. */
 	public static String encodeToString(byte[] input, int offset, int len, int flags) {
 		try {
 			return new String(encode(input, offset, len, flags), "US-ASCII");
@@ -444,20 +412,18 @@ public class Base64 {
 		}
 	}
 
-	/**
-	 * Base64-encode the given data and return a newly allocated byte[] with the result.
+	/** Base64-encode the given data and return a newly allocated byte[] with the result.
 	 * 
 	 * @param input
 	 *            the data to encode
 	 * @param flags
-	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that adheres to RFC 2045.
-	 */
+	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
+	 *            adheres to RFC 2045. */
 	public static byte[] encode(byte[] input, int flags) {
 		return encode(input, 0, input.length, flags);
 	}
 
-	/**
-	 * Base64-encode the given data and return a newly allocated byte[] with the result.
+	/** Base64-encode the given data and return a newly allocated byte[] with the result.
 	 * 
 	 * @param input
 	 *            the data to encode
@@ -466,8 +432,8 @@ public class Base64 {
 	 * @param len
 	 *            the number of bytes of input to encode
 	 * @param flags
-	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that adheres to RFC 2045.
-	 */
+	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
+	 *            adheres to RFC 2045. */
 	public static byte[] encode(byte[] input, int offset, int len, int flags) {
 		Encoder encoder = new Encoder(flags, null);
 
@@ -506,23 +472,17 @@ public class Base64 {
 	}
 
 	/* package */static class Encoder extends Coder {
-		/**
-		 * Emit a new line every this many output tuples. Corresponds to a 76-character line length (the maximum allowable according to <a
-		 * href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045</a>).
-		 */
+		/** Emit a new line every this many output tuples. Corresponds to a 76-character line length (the maximum
+		 * allowable according to <a href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045</a>). */
 		public static final int LINE_GROUPS = 19;
 
-		/**
-		 * Lookup table for turning Base64 alphabet positions (6 bits) into output bytes.
-		 */
+		/** Lookup table for turning Base64 alphabet positions (6 bits) into output bytes. */
 		private static final byte ENCODE[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
 				'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
 				'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1',
 				'2', '3', '4', '5', '6', '7', '8', '9', '+', '/', };
 
-		/**
-		 * Lookup table for turning Base64 alphabet positions (6 bits) into output bytes.
-		 */
+		/** Lookup table for turning Base64 alphabet positions (6 bits) into output bytes. */
 		private static final byte ENCODE_WEBSAFE[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 				'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g',
 				'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0',
@@ -551,9 +511,7 @@ public class Base64 {
 			count = do_newline ? LINE_GROUPS : -1;
 		}
 
-		/**
-		 * @return an overestimate for the number of bytes {@code len} bytes could encode to.
-		 */
+		/** @return an overestimate for the number of bytes {@code len} bytes could encode to. */
 		@Override
 		public int maxOutputSize(int len) {
 			return len * 8 / 5 + 10;

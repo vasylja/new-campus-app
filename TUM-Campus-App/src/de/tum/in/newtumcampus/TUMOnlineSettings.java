@@ -13,22 +13,18 @@ import android.widget.Toast;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 
-/**
- * This activity should handle all preferences and interaction to set up the app working with TUMOnline i.e. get access token, set permissions etc.
+/** This activity should handle all preferences and interaction to set up the app working with TUMOnline i.e. get access
+ * token, set permissions etc.
  * 
  * @author Vincenz Doelle, Daniel G. Mayr
- * @review Daniel G. Mayr
- * 
- */
+ * @review Daniel G. Mayr */
 public class TUMOnlineSettings extends PreferenceActivity implements OnClickListener,
 		android.content.DialogInterface.OnClickListener {
 
 	/** UI button to generate access token */
 	private Button btnGetAccessToken;
 
-	/**
-	 * just overwitten to set layout, view and the listeners
-	 */
+	/** just overwitten to set layout, view and the listeners */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,14 +35,12 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 		btnGetAccessToken.setOnClickListener(this);
 	}
 
-	/**
-	 * get a new access token for TUMOnline by passing the lrz ID due to the simplicity of the given xml file we only need to parse the <token> element using an
-	 * xml-parser is simply to much... just extract the pattern via regex
+	/** get a new access token for TUMOnline by passing the lrz ID due to the simplicity of the given xml file we only
+	 * need to parse the <token> element using an xml-parser is simply to much... just extract the pattern via regex
 	 * 
 	 * @param lrz_id
 	 *            lrz user id
-	 * @return the access token
-	 */
+	 * @return the access token */
 	private static String getAccessToken(String lrz_id) {
 		// we don't have an access token yet, though we take the constructor
 		// with only one parameter to set the method
@@ -64,9 +58,7 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 				strTokenXml.indexOf("</token>"));
 	}
 
-	/**
-	 * this function does the handle of the OnClickListener of the getAccessToken Button
-	 */
+	/** this function does the handle of the OnClickListener of the getAccessToken Button */
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == btnGetAccessToken.getId()) {
@@ -80,8 +72,8 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 			if (strLRZID.length() == 7) {
 
 				// is access token already set?
-				String oldaccesstoken = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.ACCESS_TOKEN,
-						"");
+				String oldaccesstoken = PreferenceManager.getDefaultSharedPreferences(this).getString(
+						Const.ACCESS_TOKEN, "");
 				if (oldaccesstoken.length() > 2) {
 					// show Dialog first
 					AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -108,8 +100,8 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 			// save access token to preferences
 			Utils.setSetting(getBaseContext(), Const.ACCESS_TOKEN, strAccessToken);
 			Toast.makeText(this,
-					getString(R.string.access_token_generated) + " - " + Utils.getSetting(this, Const.ACCESS_TOKEN), 10000)
-					.show();
+					getString(R.string.access_token_generated) + " - " + Utils.getSetting(this, Const.ACCESS_TOKEN),
+					10000).show();
 
 		} catch (Exception ex) {
 			// set access token to null

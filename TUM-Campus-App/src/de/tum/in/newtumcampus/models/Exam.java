@@ -3,15 +3,13 @@ package de.tum.in.newtumcampus.models;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-/**
- * Exam passed by the user.
+/** Exam passed by the user.
  * <p>
  * Note: This model is based on the TUMOnline web service response format for a corresponding request.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens
- */
+ * @review Thomas Behrens */
 @Root(name = "row", strict = false)
 public class Exam {
 	@Element(name = "datum")

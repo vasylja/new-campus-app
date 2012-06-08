@@ -7,24 +7,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Location manager, handles database stuff
- */
+/** Location manager, handles database stuff */
 public class LocationManager extends SQLiteOpenHelper {
 
-	/**
-	 * Database connection
-	 */
+	/** Database connection */
 	private SQLiteDatabase db;
 
-	/**
-	 * Constructor, open/create database, create table if necessary
+	/** Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
 	 * @param database Filename, e.g. database.db
-	 * </pre>
-	 */
+	 * </pre> */
 	public LocationManager(Context context, String database) {
 		super(context, database, null, Const.dbVersion);
 
@@ -32,28 +26,24 @@ public class LocationManager extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	/**
-	 * Get all locations by category from the database
+	/** Get all locations by category from the database
 	 * 
 	 * <pre>
 	 * @param category String Location category, e.g. library, cafeteria
 	 * @return Database cursor (name, address, room, transport, hours, remark, 
 	 * 		url, _id)
-	 * </pre>
-	 */
+	 * </pre> */
 	public Cursor getAllHoursFromDb(String category) {
 		return db.rawQuery("SELECT name, address, room, transport, hours, " + "remark, url, id as _id "
 				+ "FROM locations WHERE category=? ORDER BY name", new String[] { category });
 	}
 
-	/**
-	 * Get opening hours for a specific location
+	/** Get opening hours for a specific location
 	 * 
 	 * <pre>
 	 * @param id String Location ID, e.g. 100
 	 * @return String hours
-	 * </pre>
-	 */
+	 * </pre> */
 	public String getHoursById(String id) {
 		Cursor c = db.rawQuery("SELECT hours FROM locations WHERE id=?", new String[] { id });
 
@@ -63,11 +53,9 @@ public class LocationManager extends SQLiteOpenHelper {
 		return "";
 	}
 
-	/**
-	 * Checks if the locations table is empty
+	/** Checks if the locations table is empty
 	 * 
-	 * @return true if no locations are available, else false
-	 */
+	 * @return true if no locations are available, else false */
 	public boolean empty() {
 		boolean result = true;
 		Cursor c = db.rawQuery("SELECT id FROM locations LIMIT 1", null);
@@ -78,14 +66,12 @@ public class LocationManager extends SQLiteOpenHelper {
 		return result;
 	}
 
-	/**
-	 * Replaces a location in the database
+	/** Replaces a location in the database
 	 * 
 	 * <pre>
 	 * @param l Location object
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void replaceIntoDb(Location l) throws Exception {
 		Utils.log(l.toString());
 

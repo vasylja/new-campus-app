@@ -10,14 +10,10 @@ import de.tum.in.newtumcampus.common.Utils;
 
 public class InterfacesTest extends AndroidTestCase {
 
-	/**
-	 * Facebook date time format e.g. 2011-08-15T03:00:00
-	 */
+	/** Facebook date time format e.g. 2011-08-15T03:00:00 */
 	private static final String dateTimeFormat = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
 
-	/**
-	 * ISO date format e.g. 2011-08-15
-	 */
+	/** ISO date format e.g. 2011-08-15 */
 	private static final String dateFormat = "\\d{4}-\\d{2}-\\d{2}";
 
 	public final void testFacebookNews() throws Exception {

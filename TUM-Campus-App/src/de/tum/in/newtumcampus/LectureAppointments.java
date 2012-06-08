@@ -14,8 +14,7 @@ import de.tum.in.newtumcampus.models.LectureAppointmentsRowSet;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
 
-/**
- * This activity provides the appointment dates to a given lecture using the TUMOnline web service.
+/** This activity provides the appointment dates to a given lecture using the TUMOnline web service.
  * 
  * HINT: a valid TUM Online token is needed
  * 
@@ -26,8 +25,7 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
  * 
  * @solves [M5] Abhaltungstermine zu Lehrveranstaltungen einsehen
  * @author Daniel G. Mayr
- * @review Thomas Behrens // i found nothing tbd.
- */
+ * @review Thomas Behrens // i found nothing tbd. */
 public class LectureAppointments extends Activity implements TUMOnlineRequestFetchListener {
 
 	/** Handler to send request to TUMOnline */
@@ -36,7 +34,7 @@ public class LectureAppointments extends Activity implements TUMOnlineRequestFet
 	/** UI elements */
 	private ListView lvTermine;
 	private TextView tvTermineLectureName;
-	
+
 	private static final String VERANSTALTUNGEN_TERMINE = "veranstaltungenTermine";
 
 	@Override
@@ -65,9 +63,7 @@ public class LectureAppointments extends Activity implements TUMOnlineRequestFet
 		requestHandler.fetchInteractive(this, this);
 	}
 
-	/**
-	 * process data got from TUMOnline request and show the listview
-	 */
+	/** process data got from TUMOnline request and show the listview */
 	@Override
 	public void onFetch(String rawResponse) {
 		// deserialize xml
@@ -90,9 +86,7 @@ public class LectureAppointments extends Activity implements TUMOnlineRequestFet
 		lvTermine.setAdapter(new LectureAppointmentsListAdapter(this, LecturesList.getLehrveranstaltungenTermine()));
 	}
 
-	/**
-	 * while fetching a TUMOnline Request an error occurred this will show the error message in a toast
-	 */
+	/** while fetching a TUMOnline Request an error occurred this will show the error message in a toast */
 	@Override
 	public void onFetchError(String errorReason) {
 		Utils.showLongCenteredToast(this, errorReason);

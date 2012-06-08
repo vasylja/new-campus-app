@@ -24,13 +24,11 @@ import de.tum.in.newtumcampus.common.FileUtils;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 
-/**
- * Activity to download student documents from TUMOnline.
+/** Activity to download student documents from TUMOnline.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens
- */
+ * @review Thomas Behrens */
 public class Documents extends Activity {
 
 	// credentials
@@ -41,7 +39,7 @@ public class Documents extends Activity {
 	private ListView lvDocuments;
 	// choice from list
 	private int selectedDocument;
-	
+
 	// all documents available; displayed in lvDocuments
 	String[] options;
 
@@ -67,7 +65,8 @@ public class Documents extends Activity {
 			return;
 		}
 
-		tumOnlinePassword = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.TUMONLINE_PASSWORD, null);
+		tumOnlinePassword = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.TUMONLINE_PASSWORD,
+				null);
 		if (tumOnlinePassword == null) {
 			Dialogs.showIntentSwitchDialog(this, this, getString(R.string.dialog_password_not_set), new Intent(this,
 					TUMOnlineSettings.class));
@@ -93,8 +92,8 @@ public class Documents extends Activity {
 
 				try {
 					// try if document exists in storage
-					if (!FileUtils.getFileOnSD(Const.DOCUMENTS, FileUtils.getFilename(options[selectedDocument], ".pdf"))
-							.exists()) {
+					if (!FileUtils.getFileOnSD(Const.DOCUMENTS,
+							FileUtils.getFilename(options[selectedDocument], ".pdf")).exists()) {
 						// we can access external storage but file does not exist
 						// hence, download it
 						getDocument();
@@ -107,7 +106,8 @@ public class Documents extends Activity {
 					return;
 				}
 
-				// file exists, so show alert dialog offering the user to open the document from SD-card or to newly download it
+				// file exists, so show alert dialog offering the user to open the document from SD-card or to newly
+				// download it
 				AlertDialog.Builder builder = new AlertDialog.Builder(Documents.this);
 				builder.setMessage(getString(R.string.load_doc));
 				builder.setPositiveButton(getString(R.string.open_from_sd), new DialogInterface.OnClickListener() {
@@ -141,10 +141,7 @@ public class Documents extends Activity {
 		});
 	}
 
-	/**
-	 * Creates a background task and calls fetchDocument while showing a progress dialog.
-	 * 
-	 */
+	/** Creates a background task and calls fetchDocument while showing a progress dialog. */
 	private void getDocument() {
 		// cancel if no internet connection
 		if (!Utils.isConnected(this)) {
@@ -198,11 +195,9 @@ public class Documents extends Activity {
 		backgroundTask.execute();
 	}
 
-	/**
-	 * Fetch the selected document from TUMOnline.
+	/** Fetch the selected document from TUMOnline.
 	 * 
-	 * @throws Exception
-	 */
+	 * @throws Exception */
 	private String prepareDownload(DefaultHttpClient httpClient) {
 		// get cookies
 		String url = TUMOnlineRequest.LOGIN_SERVICE_URL;
@@ -280,16 +275,14 @@ public class Documents extends Activity {
 		return url;
 	}
 
-	/**
-	 * Read a number from the position of the given pattern until a non-integer character occurs.
+	/** Read a number from the position of the given pattern until a non-integer character occurs.
 	 * 
 	 * @param text
 	 *            Text containing the pattern followed by the number
 	 * @param pattern
 	 *            Pattern to look for; will be followed by the desired number
 	 * 
-	 * @return The number as a String
-	 */
+	 * @return The number as a String */
 	private static String parseNumber(String text, String pattern) {
 		int i = text.indexOf(pattern) + pattern.length();
 		String number = "";

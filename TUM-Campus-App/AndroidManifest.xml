@@ -21,7 +21,7 @@
 
     <application
         android:icon="@drawable/icon"
-        android:label="TUMCampus"
+        android:label="NewTUMCampus"
         android:theme="@android:style/Theme.Light" >
         <uses-library android:name="android.test.runner" />
 

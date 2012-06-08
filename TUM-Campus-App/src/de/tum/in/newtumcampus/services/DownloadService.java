@@ -27,9 +27,7 @@ import de.tum.in.newtumcampus.models.OrganisationManager;
 import de.tum.in.newtumcampus.models.SyncManager;
 import de.tum.in.newtumcampus.R;
 
-/**
- * Service used to download files from external pages
- */
+/** Service used to download files from external pages */
 public class DownloadService extends IntentService {
 
 	/** Indicator to avoid starting new downloads */
@@ -39,21 +37,16 @@ public class DownloadService extends IntentService {
 	public final static String broadcast = "de.tum.in.newtumcampus.intent.action.BROADCAST_DOWNLOAD";
 
 	private static final String DOWNLOAD_SERVICE = "DownloadService";
-	/**
-	 * default init (run intent in new thread)
-	 */
+
+	/** default init (run intent in new thread) */
 	public DownloadService() {
 		super(DOWNLOAD_SERVICE);
 	}
 
-	/**
-	 * Notification message
-	 */
+	/** Notification message */
 	private String message = "";
 
-	/**
-	 * Default receiver: output feedback as toast and resume activity
-	 */
+	/** Default receiver: output feedback as toast and resume activity */
 	public static BroadcastReceiver receiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -141,13 +134,11 @@ public class DownloadService extends IntentService {
 		nm.cancel(1);
 	}
 
-	/**
-	 * Download items for all feeds
+	/** Download items for all feeds
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
-	 * </pre>
-	 */
+	 * </pre> */
 	public void downloadFeeds(boolean force) {
 		FeedManager nm = new FeedManager(this, Const.db);
 		List<Integer> list = nm.getAllIdsFromDb();
@@ -167,13 +158,11 @@ public class DownloadService extends IntentService {
 		nim.close();
 	}
 
-	/**
-	 * Download news elements
+	/** Download news elements
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
-	 * </pre>
-	 */
+	 * </pre> */
 	public void downloadNews(boolean force) {
 		NewsManager nm = new NewsManager(this, Const.db);
 		try {
@@ -184,13 +173,11 @@ public class DownloadService extends IntentService {
 		nm.close();
 	}
 
-	/**
-	 * Download events
+	/** Download events
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
-	 * </pre>
-	 */
+	 * </pre> */
 	public void downloadEvents(boolean force) {
 		EventManager em = new EventManager(this, Const.db);
 		try {
@@ -201,13 +188,11 @@ public class DownloadService extends IntentService {
 		em.close();
 	}
 
-	/**
-	 * Download cafeterias
+	/** Download cafeterias
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
-	 * </pre>
-	 */
+	 * </pre> */
 	public void downloadCafeterias(boolean force) {
 		CafeteriaManager cm = new CafeteriaManager(this, Const.db);
 		CafeteriaMenuManager cmm = new CafeteriaMenuManager(this, Const.db);
@@ -221,9 +206,7 @@ public class DownloadService extends IntentService {
 		cm.close();
 	}
 
-	/**
-	 * Download missing icons for links
-	 */
+	/** Download missing icons for links */
 	public void downloadLinks() {
 		LinkManager lm = new LinkManager(this, Const.db);
 		try {
@@ -234,11 +217,9 @@ public class DownloadService extends IntentService {
 		lm.close();
 	}
 
-	/**
-	 * Download OrganisationTree from TUMOnline
+	/** Download OrganisationTree from TUMOnline
 	 * 
-	 * @throws Exception
-	 */
+	 * @throws Exception */
 	public void downloadOrganisations() {
 		OrganisationManager lm = new OrganisationManager(this);
 
@@ -257,14 +238,12 @@ public class DownloadService extends IntentService {
 		// }
 	}
 
-	/**
-	 * Send notification message to service caller
+	/** Send notification message to service caller
 	 * 
 	 * <pre>
 	 * @param e Exception, get message and stacktrace from 
 	 * @param info Notification info, appended to exception message
-	 * </pre>
-	 */
+	 * </pre> */
 	public void logErrorMessage(Exception e, String info) {
 		Utils.log(e, info);
 
@@ -284,14 +263,12 @@ public class DownloadService extends IntentService {
 		sendBroadcast(intentSend);
 	}
 
-	/**
-	 * Send notification message to service caller
+	/** Send notification message to service caller
 	 * 
 	 * <pre>
 	 * @param message Notification message
 	 * @param action Notification action (e.g. error, completed)
-	 * </pre>
-	 */
+	 * </pre> */
 	public void logMessage(String message, String action) {
 		this.message += message;
 

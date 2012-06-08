@@ -41,7 +41,7 @@ Screenshots:
 [=> weitere Screenshots](/thomasbley/tum-campus/tree/master/doc/Screenshots/2011-10)
 
 Datenschutz:  
-Die Anwendung speichert nur personenbezogene Daten, wenn der Benutzer diese explizit eingibt oder über die SD-Karte manuell importiert.<br>
-Die Anwendung übermittelt keinerlei personenbezogene Daten und keinerlei Nutzungsstatistiken an Dritte.
+Die Anwendung speichert nur personenbezogene Daten, wenn der Benutzer diese explizit eingibt oder über TUMOnline oder die SD-Karte manuell importiert (z.B. Noten, Lehrveranstaltungen).<br>
+Die Anwendung übermittelt keinerlei personenbezogene Daten außer denen, die für die Kommunikation mit der TUMOnline API notwendig sind. Die Anwendung übermittelt keinerlei Nutzungsstatistiken an Dritte.
 
 Lizenz: [GNU GPL v3](http://www.gnu.org/licenses/gpl.html) oder [New BSD License](http://www.opensource.org/licenses/bsd-license.php)

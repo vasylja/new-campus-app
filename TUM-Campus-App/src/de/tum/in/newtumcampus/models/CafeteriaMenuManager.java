@@ -14,29 +14,21 @@ import android.database.sqlite.SQLiteOpenHelper;
 import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Cafeteria Menu Manager, handles database stuff, external imports
- */
+/** Cafeteria Menu Manager, handles database stuff, external imports */
 public class CafeteriaMenuManager extends SQLiteOpenHelper {
 
-	/**
-	 * Database connection
-	 */
+	/** Database connection */
 	private SQLiteDatabase db;
 
-	/**
-	 * Last insert counter
-	 */
+	/** Last insert counter */
 	public static int lastInserted = 0;
 
-	/**
-	 * Constructor, open/create database, create table if necessary
+	/** Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
 	 * @param database Filename, e.g. database.db
-	 * </pre>
-	 */
+	 * </pre> */
 	public CafeteriaMenuManager(Context context, String database) {
 		super(context, database, null, Const.dbVersion);
 
@@ -44,15 +36,13 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	/**
-	 * Download cafeteria menus from external interface (JSON)
+	/** Download cafeteria menus from external interface (JSON)
 	 * 
 	 * <pre>
 	 * @param ids List of cafeteria IDs to download items for
 	 * @param force True to force download over normal sync period, else false
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void downloadFromExternal(List<Integer> ids, boolean force) throws Exception {
 
 		if (!force && !SyncManager.needSync(db, this, 86400)) {
@@ -97,43 +87,38 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 		lastInserted += Utils.dbGetTableCount(db, "cafeterias_menus") - count;
 	}
 
-	/**
-	 * Get all distinct menu dates from the database
+	/** Get all distinct menu dates from the database
 	 * 
-	 * @return Database cursor (date_de, _id)
-	 */
+	 * @return Database cursor (date_de, _id) */
 	public Cursor getDatesFromDb() {
 		return db.rawQuery("SELECT DISTINCT strftime('%d.%m.%Y', date) as date_de, date as _id "
 				+ "FROM cafeterias_menus WHERE " + "date >= date() ORDER BY date", null);
 	}
 
-	/**
-	 * Get all types and names from the database for a special date and a special cafeteria
+	/** Get all types and names from the database for a special date and a special cafeteria
 	 * 
 	 * <pre>
 	 * @param mensaId Mensa ID, e.g. 411
 	 * @param date ISO-Date, e.g. 2011-12-31 
 	 * @return Database cursor (typeLong, names, _id)
-	 * </pre>
-	 */
+	 * </pre> */
 	public Cursor getTypeNameFromDb(String mensaId, String date) {
 		return db.rawQuery("SELECT typeLong, group_concat(name, '\n') as names, id as _id "
 				+ "FROM cafeterias_menus WHERE mensaId = ? AND "
 				+ "date = ? GROUP BY typeLong ORDER BY typeNr, typeLong, name", new String[] { mensaId, date });
 	}
 
-	/**
-	 * Convert JSON object to CafeteriaMenu
+	/** Convert JSON object to CafeteriaMenu
 	 * 
-	 * Example JSON: e.g. {"id":"25544","mensa_id":"411","date":"2011-06-20","type_short" :"tg","type_long":"Tagesgericht 3","type_nr":"3","name":
+	 * Example JSON: e.g. {"id":"25544","mensa_id":"411","date":"2011-06-20","type_short"
+	 * :"tg","type_long":"Tagesgericht 3","type_nr":"3","name":
 	 * "Cordon bleu vom Schwein (mit Formfleischhinterschinken) (S) (1,2,3,8)"}
 	 * 
 	 * <pre>
 	 * @param json see above
 	 * @return CafeteriaMenu
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public static CafeteriaMenu getFromJson(JSONObject json) throws Exception {
 
 		return new CafeteriaMenu(json.getInt("id"), json.getInt("mensa_id"), Utils.getDate(json.getString("date")),
@@ -141,31 +126,28 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 				json.getString("name"));
 	}
 
-	/**
-	 * Convert JSON object to CafeteriaMenu (addendum)
+	/** Convert JSON object to CafeteriaMenu (addendum)
 	 * 
-	 * Example JSON: e.g. {"mensa_id":"411","date":"2011-07-29","name":"Pflaumenkompott" ,"type_short":"bei","type_long":"Beilagen"}
+	 * Example JSON: e.g. {"mensa_id":"411","date":"2011-07-29","name":"Pflaumenkompott"
+	 * ,"type_short":"bei","type_long":"Beilagen"}
 	 * 
 	 * <pre>
 	 * @param json see above
 	 * @return CafeteriaMenu
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public static CafeteriaMenu getFromJsonAddendum(JSONObject json) throws Exception {
 
 		return new CafeteriaMenu(0, json.getInt("mensa_id"), Utils.getDate(json.getString("date")),
 				json.getString("type_short"), json.getString("type_long"), 10, json.getString("name"));
 	}
 
-	/**
-	 * Replace or Insert a cafeteria menu in the database
+	/** Replace or Insert a cafeteria menu in the database
 	 * 
 	 * <pre>
 	 * @param c CafeteriaMenu object
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void replaceIntoDb(CafeteriaMenu c) throws Exception {
 		if (c.cafeteriaId <= 0) {
 			throw new Exception("Invalid cafeteriaId.");
@@ -188,27 +170,21 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 						c.typeShort, c.typeLong, String.valueOf(c.typeNr), c.name });
 	}
 
-	/**
-	 * Removes all cache items
-	 */
+	/** Removes all cache items */
 	public void removeCache() {
 		db.execSQL("DELETE FROM cafeterias_menus");
 	}
 
-	/**
-	 * Deletes menu items from the database
+	/** Deletes menu items from the database
 	 * 
 	 * <pre>
 	 * @param mensaId Mensa ID
-	 * </pre>
-	 */
+	 * </pre> */
 	public void deleteFromDb(int mensaId) {
 		db.execSQL("DELETE FROM cafeterias_menus WHERE mensaId = ?", new String[] { String.valueOf(mensaId) });
 	}
 
-	/**
-	 * Removes all old items (older than 7 days)
-	 */
+	/** Removes all old items (older than 7 days) */
 	public void cleanupDb() {
 		db.execSQL("DELETE FROM cafeterias_menus WHERE date < date('now','-7 day')");
 	}

@@ -22,10 +22,11 @@ import de.tum.in.newtumcampus.models.FindLecturesRowSet;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
 
-/**
- * This activity represents a small find box to query through the TUMOnline web service to find lectures identified by the acquired query string.
+/** This activity represents a small find box to query through the TUMOnline web service to find lectures identified by
+ * the acquired query string.
  * 
- * A list of all found lectures will be displayed and by clicking on each it will send the lecture number to the LectureDetails Activity.
+ * A list of all found lectures will be displayed and by clicking on each it will send the lecture number to the
+ * LectureDetails Activity.
  * 
  * HINT: a TUMOnline access token is needed
  * 
@@ -37,8 +38,7 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
  * 
  * @solves [M4] Lehrveranstaltungen suchen
  * @author Daniel Mayr
- * @review Thomas Behrens
- */
+ * @review Thomas Behrens */
 public class FindLectures extends Activity implements OnEditorActionListener, TUMOnlineRequestFetchListener {
 
 	/** UI Elements */
@@ -47,9 +47,9 @@ public class FindLectures extends Activity implements OnEditorActionListener, TU
 
 	/** Handler to send request to TUMOnline */
 	private TUMOnlineRequest requestHandler;
-	
+
 	private static String VERANSTALTUNGENSUCHE = "veranstaltungenSuche";
-	
+
 	private static String P_SUCHE = "pSuche";
 
 	@Override
@@ -138,9 +138,7 @@ public class FindLectures extends Activity implements OnEditorActionListener, TU
 		});
 	}
 
-	/**
-	 * while fetching a TUMOnline Request an error occurred this will show the error message in a toast
-	 */
+	/** while fetching a TUMOnline Request an error occurred this will show the error message in a toast */
 	@Override
 	public void onFetchError(String errorReason) {
 		Utils.showLongCenteredToast(this, errorReason);

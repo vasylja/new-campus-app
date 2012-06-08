@@ -9,34 +9,24 @@ import android.database.sqlite.SQLiteOpenHelper;
 import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Link Manager, handles database stuff, internal imports, external downloads (icons)
- */
+/** Link Manager, handles database stuff, internal imports, external downloads (icons) */
 public class LinkManager extends SQLiteOpenHelper {
 
-	/**
-	 * Database connection
-	 */
+	/** Database connection */
 	private SQLiteDatabase db;
 
-	/**
-	 * Last insert counter
-	 */
+	/** Last insert counter */
 	public static int lastInserted = 0;
 
-	/**
-	 * Additional information for exception messages
-	 */
+	/** Additional information for exception messages */
 	public String lastInfo = "";
 
-	/**
-	 * Constructor, open/create database, create table if necessary
+	/** Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
 	 * @param database Filename, e.g. database.db
-	 * </pre>
-	 */
+	 * </pre> */
 	public LinkManager(Context context, String database) {
 		super(context, database, null, Const.dbVersion);
 
@@ -44,11 +34,9 @@ public class LinkManager extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	/**
-	 * Import links from internal sd-card directory
+	/** Import links from internal sd-card directory
 	 * 
-	 * @throws Exception
-	 */
+	 * @throws Exception */
 	public void importFromInternal() throws Exception {
 		File[] files = new File(Utils.getCacheDir("links")).listFiles();
 
@@ -74,9 +62,7 @@ public class LinkManager extends SQLiteOpenHelper {
 		lastInserted += Utils.dbGetTableCount(db, "links") - count;
 	}
 
-	/**
-	 * Check if all icons are available in the cache directory
-	 */
+	/** Check if all icons are available in the cache directory */
 	public void checkExistingIcons() {
 		Cursor c = db.rawQuery("SELECT DISTINCT icon FROM links WHERE icon!=''", null);
 
@@ -91,11 +77,9 @@ public class LinkManager extends SQLiteOpenHelper {
 		c.close();
 	}
 
-	/**
-	 * Download missing link icons
+	/** Download missing link icons
 	 * 
-	 * @throws Exception
-	 */
+	 * @throws Exception */
 	public void downloadMissingIcons() throws Exception {
 		checkExistingIcons();
 
@@ -112,20 +96,16 @@ public class LinkManager extends SQLiteOpenHelper {
 		c.close();
 	}
 
-	/**
-	 * Get all links from the database
+	/** Get all links from the database
 	 * 
-	 * @return Database cursor (icon, name, url, _id)
-	 */
+	 * @return Database cursor (icon, name, url, _id) */
 	public Cursor getAllFromDb() {
 		return db.rawQuery("SELECT icon, name, url, id as _id " + "FROM links ORDER BY name", null);
 	}
 
-	/**
-	 * Checks if the links table is empty
+	/** Checks if the links table is empty
 	 * 
-	 * @return true if no links are available, else false
-	 */
+	 * @return true if no links are available, else false */
 	public boolean empty() {
 		boolean result = true;
 		Cursor c = db.rawQuery("SELECT id FROM links LIMIT 1", null);
@@ -136,14 +116,12 @@ public class LinkManager extends SQLiteOpenHelper {
 		return result;
 	}
 
-	/**
-	 * Insert or Update a link in the database
+	/** Insert or Update a link in the database
 	 * 
 	 * <pre>
 	 * @param l Link object
 	 * @throws Exception
-	 * </pre>
-	 */
+	 * </pre> */
 	public void insertUpdateIntoDb(Link l) throws Exception {
 		Utils.log(l.toString());
 
@@ -164,21 +142,17 @@ public class LinkManager extends SQLiteOpenHelper {
 		}
 	}
 
-	/**
-	 * Removes all cache items
-	 */
+	/** Removes all cache items */
 	public void removeCache() {
 		db.execSQL("UPDATE links SET icon = ''");
 		Utils.emptyCacheDir("links/cache");
 	}
 
-	/**
-	 * Delete Link from database
+	/** Delete Link from database
 	 * 
 	 * <pre>
 	 * @param id Link id
-	 * </pre>
-	 */
+	 * </pre> */
 	public void deleteFromDb(int id) {
 		db.execSQL("DELETE FROM links WHERE id = ?", new String[] { String.valueOf(id) });
 	}
