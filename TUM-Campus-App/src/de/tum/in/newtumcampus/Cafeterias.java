@@ -23,7 +23,9 @@ import de.tum.in.newtumcampus.models.CafeteriaMenuManager;
 import de.tum.in.newtumcampus.models.LocationManager;
 import de.tum.in.newtumcampus.services.DownloadService;
 
-/** Activity to show cafeterias and meals selected by date */
+/**
+ * Activity to show cafeterias and meals selected by date
+ */
 public class Cafeterias extends Activity implements OnItemClickListener {
 
 	/** Current Date selected (ISO format) */

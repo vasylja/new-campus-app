@@ -28,7 +28,9 @@ import de.tum.in.newtumcampus.models.Location;
 import de.tum.in.newtumcampus.models.LocationManager;
 import de.tum.in.newtumcampus.models.TransportManager;
 
-/** Service used to import files from internal sd-card */
+/**
+ * Service used to import files from internal sd-card
+ */
 public class ImportService extends IntentService {
 
 	public static final String IMPORT_SERVICE = "ImportService";
@@ -47,12 +49,16 @@ public class ImportService extends IntentService {
 
 	public static final String CSV_LINKS = "links.csv";
 
-	/** default init (run intent in new thread) */
+	/**
+	 * default init (run intent in new thread)
+	 */
 	public ImportService() {
 		super(IMPORT_SERVICE);
 	}
 
-	/** Import broadcast identifier */
+	/**
+	 * Import broadcast identifier
+	 */
 	public final static String broadcast = "de.tum.in.newtumcampus.intent.action.BROADCAST_IMPORT";
 
 	@Override
@@ -125,13 +131,17 @@ public class ImportService extends IntentService {
 		}
 	}
 
-	/** Update database schema */
+	/**
+	 * Update database schema
+	 */
 	public void updateDatabase() {
 		GalleryManager gm = new GalleryManager(this);
 		gm.update();
 	}
 
-	/** Import feeds from internal directory */
+	/**
+	 * Import feeds from internal directory
+	 */
 	public void importFeeds() {
 		FeedManager nm = new FeedManager(this);
 		try {
@@ -141,7 +151,9 @@ public class ImportService extends IntentService {
 		}
 	}
 
-	/** Import links from internal directory */
+	/**
+	 * Import links from internal directory
+	 */
 	public void importLinks() {
 		LinkManager lm = new LinkManager(this);
 		try {
@@ -151,7 +163,9 @@ public class ImportService extends IntentService {
 		}
 	}
 
-	/** Import lectures and lecture items from internal directory */
+	/**
+	 * Import lectures and lecture items from internal directory
+	 */
 	public void importLectureItems() {
 		LectureItemManager lim = new LectureItemManager(this);
 		try {

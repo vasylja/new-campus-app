@@ -37,12 +37,9 @@ public class FileUtils {
 	/**
 	 * Open a file with given mime-type using the ACTION_VIEW intent.
 	 * 
-	 * @param file
-	 *            File to be opened.
-	 * @param context
-	 *            Activity calling.
-	 * @param mimeType
-	 *            The file's mime-type
+	 * @param file File to be opened.
+	 * @param context Activity calling.
+	 * @param mimeType The file's mime-type
 	 */
 	public static void openFile(File file, Activity context, String mimeType) {
 		if (file != null) {
@@ -58,12 +55,9 @@ public class FileUtils {
 	/**
 	 * Fetches a document from a URL and writes the content to the given file.
 	 * 
-	 * @param httpClient
-	 *            HTTP client used to fetch the document.
-	 * @param url
-	 *            The documents URL
-	 * @param targetFile
-	 *            The target file where the document's content should be written to
+	 * @param httpClient HTTP client used to fetch the document.
+	 * @param url The documents URL
+	 * @param targetFile The target file where the document's content should be written to
 	 * 
 	 * @return The target file or null if error occurred.
 	 */
@@ -105,10 +99,8 @@ public class FileUtils {
 	/**
 	 * Gets a document from a URL and returns the source code as text.
 	 * 
-	 * @param httpClient
-	 *            HTTP client used to fetch the document.
-	 * @param url
-	 *            The documents URL
+	 * @param httpClient HTTP client used to fetch the document.
+	 * @param url The documents URL
 	 * 
 	 * @return The document's source/the requests response
 	 */
@@ -120,10 +112,8 @@ public class FileUtils {
 	/**
 	 * Sends a HTTP post request to given URL.
 	 * 
-	 * @param httpClient
-	 *            The HTTP client.
-	 * @param url
-	 *            The request URL.
+	 * @param httpClient The HTTP client.
+	 * @param url The request URL.
 	 */
 	public static String sendPostRequest(DefaultHttpClient httpClient, String url) {
 		return sendRequest(httpClient, new HttpPost(url));
@@ -132,10 +122,8 @@ public class FileUtils {
 	/**
 	 * Sends a HTTP request.
 	 * 
-	 * @param httpClient
-	 *            The corresponding HTTP client.
-	 * @param request
-	 *            The request to be send.
+	 * @param httpClient The corresponding HTTP client.
+	 * @param request The request to be send.
 	 * @return The response as String.
 	 */
 	public static String sendRequest(DefaultHttpClient httpClient, HttpRequestBase request) {
@@ -160,14 +148,11 @@ public class FileUtils {
 	/**
 	 * Returns a file on SD card. Creates it if not exists.
 	 * 
-	 * @param folder
-	 *            The file's folder, relative to the cache directory.
-	 * @param filename
-	 *            The file's name.
+	 * @param folder The file's folder, relative to the cache directory.
+	 * @param filename The file's name.
 	 * 
 	 * @return The file.
-	 * @throws Exception
-	 *             If SD-card does not exist
+	 * @throws Exception If SD-card does not exist
 	 */
 	public static File getFileOnSD(String folder, String filename) throws Exception {
 		// Save the file to/open from SD
@@ -179,8 +164,7 @@ public class FileUtils {
 	/**
 	 * Reads a text file and returns the content as a String.
 	 * 
-	 * @param file
-	 *            The text file.
+	 * @param file The text file.
 	 * @return The file's content.
 	 */
 	public static String readFile(File file) {
@@ -209,11 +193,9 @@ public class FileUtils {
 	/**
 	 * Writes a String to a text file.
 	 * 
-	 * @param file
-	 *            The target file.
+	 * @param file The target file.
 	 * 
-	 * @param content
-	 *            The text content to be written.
+	 * @param content The text content to be written.
 	 */
 	public static void writeFile(File file, String content) {
 		InputStream in;
@@ -238,10 +220,8 @@ public class FileUtils {
 	/**
 	 * Removes whitespaces and appends the file type.
 	 * 
-	 * @param name
-	 *            The string that should be used as filename.
-	 * @param appendix
-	 *            The file type (e.g. ".pdf")
+	 * @param name The string that should be used as filename.
+	 * @param appendix The file type (e.g. ".pdf")
 	 * 
 	 * @return The file name build from the arguments.
 	 */

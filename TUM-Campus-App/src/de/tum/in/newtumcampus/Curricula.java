@@ -116,10 +116,8 @@ public class Curricula extends Activity {
 	 * Downloads the curricula data, parses the relevant content, adds the corresponding css information and creates a
 	 * new html document.
 	 * 
-	 * @param name
-	 *            The name of the curriculum as displayed in the list.
-	 * @param url
-	 *            The url of the curriculum to be downloaded.
+	 * @param name The name of the curriculum as displayed in the list.
+	 * @param url The url of the curriculum to be downloaded.
 	 */
 	private void getCurriculum(String name, final String url) {
 
@@ -183,10 +181,8 @@ public class Curricula extends Activity {
 	/**
 	 * Fetches the curriculum document and extracts all relevant information.
 	 * 
-	 * @param url
-	 *            URL of the curriculum document
-	 * @param targetFile
-	 *            Target where the results should be written to
+	 * @param url URL of the curriculum document
+	 * @param targetFile Target where the results should be written to
 	 */
 	private void fetchCurriculum(String url, File targetFile) {
 		String text = Utils.buildHTMLDocument(
@@ -201,8 +197,7 @@ public class Curricula extends Activity {
 	/**
 	 * Extract the results from a document fetched from the given URL.
 	 * 
-	 * @param url
-	 *            URL pointing to a document where the results are extracted from.
+	 * @param url URL pointing to a document where the results are extracted from.
 	 * @return The results.
 	 */
 	private String extractResultsFromURL(String url) {
@@ -217,8 +212,7 @@ public class Curricula extends Activity {
 	/**
 	 * Opens a local file.
 	 * 
-	 * @param file
-	 *            File to be opened.
+	 * @param file File to be opened.
 	 */
 	private void openFile(File file) {
 		if (file == null) {

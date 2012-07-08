@@ -28,26 +28,38 @@ import de.tum.in.newtumcampus.models.NewsManager;
 import de.tum.in.newtumcampus.models.OrganisationManager;
 import de.tum.in.newtumcampus.models.SyncManager;
 
-/** Service used to download files from external pages */
+/**
+ * Service used to download files from external pages
+ */
 public class DownloadService extends IntentService {
 
-	/** Indicator to avoid starting new downloads */
+	/**
+	 * Indicator to avoid starting new downloads
+	 */
 	private volatile boolean destroyed = false;
 
-	/** Download broadcast identifier */
+	/**
+	 * Download broadcast identifier
+	 */
 	public final static String broadcast = "de.tum.in.newtumcampus.intent.action.BROADCAST_DOWNLOAD";
 
 	private static final String DOWNLOAD_SERVICE = "DownloadService";
 
-	/** default init (run intent in new thread) */
+	/**
+	 * default init (run intent in new thread)
+	 */
 	public DownloadService() {
 		super(DOWNLOAD_SERVICE);
 	}
 
-	/** Notification message */
+	/**
+	 * Notification message
+	 */
 	private String message = "";
 
-	/** Default receiver: output feedback as toast and resume activity */
+	/**
+	 * Default receiver: output feedback as toast and resume activity
+	 */
 	public static BroadcastReceiver receiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -228,7 +240,9 @@ public class DownloadService extends IntentService {
 		}
 	}
 
-	/** Download missing icons for links */
+	/**
+	 * Download missing icons for links
+	 */
 	public void downloadLinks() {
 		LinkManager lm = new LinkManager(this);
 		try {

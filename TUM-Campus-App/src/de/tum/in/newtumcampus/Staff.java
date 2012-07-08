@@ -87,8 +87,7 @@ public class Staff extends Activity implements OnEditorActionListener, TUMOnline
 	/**
 	 * Handles the XML response from TUMOnline by deserializing the information to model entities.
 	 * 
-	 * @param rawResp
-	 *            The XML data from TUMOnline.
+	 * @param rawResp The XML data from TUMOnline.
 	 */
 	@Override
 	public void onFetch(String rawResp) {
@@ -134,8 +133,7 @@ public class Staff extends Activity implements OnEditorActionListener, TUMOnline
 	/**
 	 * Displays the employees searched for.
 	 * 
-	 * @param employees
-	 *            The search results enriched with some additional information.
+	 * @param employees The search results enriched with some additional information.
 	 */
 	private void displayResults(List<Person> employees) {
 		final ListView lvStaff = (ListView) findViewById(R.id.lstPersons);

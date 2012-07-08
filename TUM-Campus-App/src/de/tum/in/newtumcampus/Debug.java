@@ -71,8 +71,7 @@ public class Debug extends Activity implements View.OnClickListener {
 	/**
 	 * Add a message to the debug content text view
 	 * 
-	 * @param s
-	 *            Debug message
+	 * @param s Debug message
 	 */
 	public void debugStr(String s) {
 		TextView tv = (TextView) findViewById(R.id.debug);
@@ -83,8 +82,7 @@ public class Debug extends Activity implements View.OnClickListener {
 	/**
 	 * Execute a database query and present the results in the GUI
 	 * 
-	 * @param query
-	 *            SQL query to execute
+	 * @param query SQL query to execute
 	 */
 	public void debugSQL(String query) {
 		debugReset();

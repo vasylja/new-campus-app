@@ -55,8 +55,7 @@ public class StaffDetails extends Activity {
 	/**
 	 * Displays all relevant information about the given employee in the user interface (UI).
 	 * 
-	 * @param employee
-	 *            The employee whose information should be displayed.
+	 * @param employee The employee whose information should be displayed.
 	 */
 	private void initUI(Employee employee) {
 

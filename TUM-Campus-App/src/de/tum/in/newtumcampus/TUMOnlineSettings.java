@@ -41,8 +41,7 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 	 * get a new access token for TUMOnline by passing the lrz ID due to the simplicity of the given xml file we only
 	 * need to parse the <token> element using an xml-parser is simply to much... just extract the pattern via regex
 	 * 
-	 * @param lrz_id
-	 *            lrz user id
+	 * @param lrz_id lrz user id
 	 * @return the access token
 	 */
 	private static String getAccessToken(String lrz_id) {

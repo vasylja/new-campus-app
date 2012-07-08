@@ -60,8 +60,7 @@ public class TUMCampusRequest {
 	private String progressDialogMessage = "";
 
 	/**
-	 * @param method
-	 *            the function name to which we are calling
+	 * @param method the function name to which we are calling
 	 */
 	public TUMCampusRequest(String method) {
 		this.method = method;
@@ -71,10 +70,8 @@ public class TUMCampusRequest {
 	/**
 	 * Sets one parameter name to its given value
 	 * 
-	 * @param name
-	 *            identifier of the parameter
-	 * @param value
-	 *            value of the parameter
+	 * @param name identifier of the parameter
+	 * @param value value of the parameter
 	 */
 	public void setParameter(String name, String value) {
 		parameters.put(name, value);
@@ -84,8 +81,7 @@ public class TUMCampusRequest {
 	 * If you want to put a complete Parameter Map into the request, use this function to merge them with the existing
 	 * parameter map
 	 * 
-	 * @param existingMap
-	 *            a Map<String,String> which should be set
+	 * @param existingMap a Map<String,String> which should be set
 	 */
 	public void setParameters(Map<String, String> existingMap) {
 		parameters.putAll(existingMap);
@@ -155,10 +151,8 @@ public class TUMCampusRequest {
 	 * this fetch method will fetch the data from the TUMOnline Request and will address the listeners onFetch if the
 	 * fetch succeeded, else the onFetchError will be called
 	 * 
-	 * @param context
-	 *            the current context (may provide the current activity)
-	 * @param listener
-	 *            the listener, which takes the result
+	 * @param context the current context (may provide the current activity)
+	 * @param listener the listener, which takes the result
 	 */
 	public void fetchInteractive(final Context context, final TUMOnlineRequestFetchListener listener) {
 		// start the progress dialog

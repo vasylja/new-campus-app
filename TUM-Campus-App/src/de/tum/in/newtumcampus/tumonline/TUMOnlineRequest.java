@@ -70,8 +70,7 @@ public class TUMOnlineRequest {
 	 * the access token to use access token see the other constructors
 	 * 
 	 * @author Daniel G. Mayr
-	 * @param method
-	 *            the function name to which we are calling
+	 * @param method the function name to which we are calling
 	 */
 	public TUMOnlineRequest(String method) {
 		this.method = method;
@@ -83,10 +82,8 @@ public class TUMOnlineRequest {
 	 * use the stored access token and show a dialog if this one is not set, take {@link TUMOnlineRequest(String method,
 	 * Activity callingActivity)}
 	 * 
-	 * @param method
-	 *            facing web service function
-	 * @param accessToken
-	 *            user's access token to the webservice
+	 * @param method facing web service function
+	 * @param accessToken user's access token to the webservice
 	 */
 	public TUMOnlineRequest(String method, String accessToken) {
 		this.method = method;
@@ -98,10 +95,8 @@ public class TUMOnlineRequest {
 	 * this constructor will try to load the access token from preferences. if this is not possible, a dialog will
 	 * prompt the user to generate the access token via the settings menu
 	 * 
-	 * @param method
-	 *            function name, which is the last part of the core URL
-	 * @param callingActivity
-	 *            the activity from which the constructor will be called (mostly this)
+	 * @param method function name, which is the last part of the core URL
+	 * @param callingActivity the activity from which the constructor will be called (mostly this)
 	 */
 	public TUMOnlineRequest(String method, Activity callingActivity) {
 		this.method = method;
@@ -126,10 +121,8 @@ public class TUMOnlineRequest {
 	/**
 	 * Sets one parameter name to its given value
 	 * 
-	 * @param name
-	 *            identifier of the parameter
-	 * @param value
-	 *            value of the parameter
+	 * @param name identifier of the parameter
+	 * @param value value of the parameter
 	 */
 	public void setParameter(String name, String value) {
 		parameters.put(name, value);
@@ -138,8 +131,7 @@ public class TUMOnlineRequest {
 	/**
 	 * Check if TUMOnline access token can be retrieved from shared preferences.
 	 * 
-	 * @param context
-	 *            The context
+	 * @param context The context
 	 * @return true if access token is available; false otherwise
 	 */
 	private boolean loadAccessTokenFromPreferences(Context context) {
@@ -162,8 +154,7 @@ public class TUMOnlineRequest {
 	 * If you want to put a complete Parameter Map into the request, use this function to merge them with the existing
 	 * parameter map
 	 * 
-	 * @param existingMap
-	 *            a Map<String,String> which should be set
+	 * @param existingMap a Map<String,String> which should be set
 	 */
 	public void setParameters(Map<String, String> existingMap) {
 		parameters.putAll(existingMap);
@@ -238,10 +229,8 @@ public class TUMOnlineRequest {
 	 * this fetch method will fetch the data from the TUMOnline Request and will address the listeners onFetch if the
 	 * fetch succeeded, else the onFetchError will be called
 	 * 
-	 * @param context
-	 *            the current context (may provide the current activity)
-	 * @param listener
-	 *            the listener, which takes the result
+	 * @param context the current context (may provide the current activity)
+	 * @param listener the listener, which takes the result
 	 */
 	public void fetchInteractive(final Context context, final TUMOnlineRequestFetchListener listener) {
 

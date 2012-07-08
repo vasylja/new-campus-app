@@ -141,8 +141,7 @@ public class TuitionFees extends Activity {
 	/**
 	 * Creates a background task and calls fetchDocument while showing a progress dialog.
 	 * 
-	 * @param documentURL
-	 *            URL of the document to be downloaded
+	 * @param documentURL URL of the document to be downloaded
 	 */
 	private void getDocument(String documentURL) {
 		if (!Utils.isConnected(this)) {
@@ -187,8 +186,7 @@ public class TuitionFees extends Activity {
 	/**
 	 * Fetches the tuition fee document from TUMOnline.
 	 * 
-	 * @param documentURL
-	 *            The URL of the document.
+	 * @param documentURL The URL of the document.
 	 */
 	private boolean fetchDocument(String documentURL) {
 		DefaultHttpClient httpClient = new DefaultHttpClient();

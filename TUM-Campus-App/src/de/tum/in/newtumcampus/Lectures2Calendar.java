@@ -32,6 +32,7 @@ import de.tum.in.newtumcampus.models.LectureItemManager;
  */
 public class Lectures2Calendar extends Activity implements OnClickListener, OnSeekBarChangeListener {
 	// TODO Constants not exported from this class
+
 	/** UI elements */
 	private Button btnToCalendar;
 	private Spinner spinCalendar;
@@ -151,8 +152,7 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 	/**
 	 * this method returns the calendar or event uri with respect to the sdk version
 	 * 
-	 * @param eventUri
-	 *            if true returns the eventuri, otherwise the calendar uri
+	 * @param eventUri if true returns the eventuri, otherwise the calendar uri
 	 * @return eventuri or calendaruri
 	 * @see http://blog.yeradis.com/2011/01/failed-to-find-provider-info-for.html
 	 */
@@ -187,8 +187,7 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 	/**
 	 * will gather all google calendars and their ids
 	 * 
-	 * @param con
-	 *            current context
+	 * @param con current context
 	 * @return a map of name to id
 	 */
 	private static Map<String, Integer> getAvailableGoogleCalendars(Context con) {

@@ -17,14 +17,10 @@ public class Dialogs {
 	/**
 	 * Shows a dialog asking to switch to another activity in order perform some actions there.
 	 * 
-	 * @param context
-	 *            The current context.
-	 * @param parent
-	 *            The parent activity.
-	 * @param msg
-	 *            The message to be displayed.
-	 * @param intent
-	 *            The target intent if the user chooses "YES"
+	 * @param context The current context.
+	 * @param parent The parent activity.
+	 * @param msg The message to be displayed.
+	 * @param intent The target intent if the user chooses "YES"
 	 */
 	public static void showIntentSwitchDialog(Context context, final Activity parent, String msg, final Intent intent) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);

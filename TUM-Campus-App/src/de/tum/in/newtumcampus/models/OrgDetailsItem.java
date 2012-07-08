@@ -82,8 +82,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * @param id the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -95,8 +94,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -108,8 +106,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param code
-	 *            the code to set
+	 * @param code the code to set
 	 */
 	public void setCode(String code) {
 		this.code = code;
@@ -121,8 +118,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param description
-	 *            the description to set
+	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -134,8 +130,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactName
-	 *            the contactName to set
+	 * @param contactName the contactName to set
 	 */
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
@@ -147,8 +142,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactStreet
-	 *            the contactStreet to set
+	 * @param contactStreet the contactStreet to set
 	 */
 	public void setContactStreet(String contactStreet) {
 		this.contactStreet = contactStreet;
@@ -160,8 +154,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactLocality
-	 *            the contactLocality to set
+	 * @param contactLocality the contactLocality to set
 	 */
 	public void setContactLocality(String contactLocality) {
 		this.contactLocality = contactLocality;
@@ -173,8 +166,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactPLZ
-	 *            the contactPLZ to set
+	 * @param contactPLZ the contactPLZ to set
 	 */
 	public void setContactPLZ(String contactPLZ) {
 		this.contactPLZ = contactPLZ;
@@ -186,8 +178,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactCountry
-	 *            the contactCountry to set
+	 * @param contactCountry the contactCountry to set
 	 */
 	public void setContactCountry(String contactCountry) {
 		this.contactCountry = contactCountry;
@@ -199,8 +190,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactTelephone
-	 *            the contactTelephone to set
+	 * @param contactTelephone the contactTelephone to set
 	 */
 	public void setContactTelephone(String contactTelephone) {
 		this.contactTelephone = contactTelephone;
@@ -212,8 +202,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactFax
-	 *            the contactFax to set
+	 * @param contactFax the contactFax to set
 	 */
 	public void setContactFax(String contactFax) {
 		this.contactFax = contactFax;
@@ -225,8 +214,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactEmail
-	 *            the contactEmail to set
+	 * @param contactEmail the contactEmail to set
 	 */
 	public void setContactEmail(String contactEmail) {
 		this.contactEmail = contactEmail;
@@ -238,8 +226,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactLink
-	 *            the contactLink to set
+	 * @param contactLink the contactLink to set
 	 */
 	public void setContactLink(String contactLink) {
 		this.contactLink = contactLink;
@@ -251,8 +238,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactLocationURL
-	 *            the contactLocationURL to set
+	 * @param contactLocationURL the contactLocationURL to set
 	 */
 	public void setContactLocationURL(String contactLocationURL) {
 		this.contactLocationURL = contactLocationURL;
@@ -264,8 +250,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactAdditionalInfo
-	 *            the contactAdditionalInfo to set
+	 * @param contactAdditionalInfo the contactAdditionalInfo to set
 	 */
 	public void setContactAdditionalInfo(String contactAdditionalInfo) {
 		this.contactAdditionalInfo = contactAdditionalInfo;
@@ -277,8 +262,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param tumCampusLink
-	 *            the tumCampusLink to set
+	 * @param tumCampusLink the tumCampusLink to set
 	 */
 	public void setTumCampusLink(String tumCampusLink) {
 		this.tumCampusLink = tumCampusLink;
@@ -290,8 +274,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param contactTelephoneType
-	 *            the contactTelephoneType to set
+	 * @param contactTelephoneType the contactTelephoneType to set
 	 */
 	public void setContactTelephoneType(String contactTelephoneType) {
 		this.contactTelephoneType = contactTelephoneType;
@@ -303,8 +286,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param additionalInfoCaption
-	 *            the additionalInfoCaption to set
+	 * @param additionalInfoCaption the additionalInfoCaption to set
 	 */
 	public void setAdditionalInfoCaption(String additionalInfoCaption) {
 		this.additionalInfoCaption = additionalInfoCaption;
@@ -316,8 +298,7 @@ public class OrgDetailsItem {
 	}
 
 	/**
-	 * @param additionalInfoText
-	 *            the additionalInfoText to set
+	 * @param additionalInfoText the additionalInfoText to set
 	 */
 	public void setAdditionalInfoText(String additionalInfoText) {
 		this.additionalInfoText = additionalInfoText;

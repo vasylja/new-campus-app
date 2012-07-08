@@ -282,10 +282,8 @@ public class Documents extends Activity {
 	/**
 	 * Read a number from the position of the given pattern until a non-integer character occurs.
 	 * 
-	 * @param text
-	 *            Text containing the pattern followed by the number
-	 * @param pattern
-	 *            Pattern to look for; will be followed by the desired number
+	 * @param text Text containing the pattern followed by the number
+	 * @param pattern Pattern to look for; will be followed by the desired number
 	 * 
 	 * @return The number as a String
 	 */

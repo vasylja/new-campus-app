@@ -79,8 +79,7 @@ public class MyLectures extends Activity implements TUMOnlineRequestFetchListene
 	/**
 	 * Sets all data concerning the FindLecturesListView.
 	 * 
-	 * @param lecturesList
-	 *            filtered list of lectures
+	 * @param lecturesList filtered list of lectures
 	 */
 	private void setListView(List<FindLecturesRow> lecturesList) {
 		// set ListView to data via the FindLecturesListAdapter

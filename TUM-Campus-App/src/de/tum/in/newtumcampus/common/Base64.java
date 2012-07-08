@@ -1,6 +1,7 @@
 package de.tum.in.newtumcampus.common;
 
-/* Copyright (C) 2010 The Android Open Source Project
+/*
+ * Copyright (C) 2010 The Android Open Source Project
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -9,7 +10,8 @@ package de.tum.in.newtumcampus.common;
  * 
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License. */
+ * specific language governing permissions and limitations under the License.
+ */
 
 import java.io.UnsupportedEncodingException;
 
@@ -57,9 +59,8 @@ public class Base64 {
 		 * Encode/decode another block of input data. this.output is provided by the caller, and must be big enough to
 		 * hold all the coded data. On exit, this.opwill be set to the length of the coded data.
 		 * 
-		 * @param finish
-		 *            true if this is the final call to process for this object. Will finalize the coder state and
-		 *            include any final bytes in the output.
+		 * @param finish true if this is the final call to process for this object. Will finalize the coder state and
+		 *        include any final bytes in the output.
 		 * 
 		 * @return true if the input so far is good; false if some error has been detected in the input stream..
 		 */
@@ -83,13 +84,10 @@ public class Base64 {
 	 * The padding '=' characters at the end are considered optional, but if any are present, there must be the correct
 	 * number of them.
 	 * 
-	 * @param str
-	 *            the input String to decode, which is converted to bytes using the default charset
-	 * @param flags
-	 *            controls certain features of the decoded output. Pass {@code DEFAULT} to decode standard Base64.
+	 * @param str the input String to decode, which is converted to bytes using the default charset
+	 * @param flags controls certain features of the decoded output. Pass {@code DEFAULT} to decode standard Base64.
 	 * 
-	 * @throws IllegalArgumentException
-	 *             if the input contains incorrect padding
+	 * @throws IllegalArgumentException if the input contains incorrect padding
 	 */
 	public static byte[] decode(String str, int flags) {
 		return decode(str.getBytes(), flags);
@@ -102,13 +100,10 @@ public class Base64 {
 	 * The padding '=' characters at the end are considered optional, but if any are present, there must be the correct
 	 * number of them.
 	 * 
-	 * @param input
-	 *            the input array to decode
-	 * @param flags
-	 *            controls certain features of the decoded output. Pass {@code DEFAULT} to decode standard Base64.
+	 * @param input the input array to decode
+	 * @param flags controls certain features of the decoded output. Pass {@code DEFAULT} to decode standard Base64.
 	 * 
-	 * @throws IllegalArgumentException
-	 *             if the input contains incorrect padding
+	 * @throws IllegalArgumentException if the input contains incorrect padding
 	 */
 	public static byte[] decode(byte[] input, int flags) {
 		return decode(input, 0, input.length, flags);
@@ -121,17 +116,12 @@ public class Base64 {
 	 * The padding '=' characters at the end are considered optional, but if any are present, there must be the correct
 	 * number of them.
 	 * 
-	 * @param input
-	 *            the data to decode
-	 * @param offset
-	 *            the position within the input array at which to start
-	 * @param len
-	 *            the number of bytes of input to decode
-	 * @param flags
-	 *            controls certain features of the decoded output. Pass {@code DEFAULT} to decode standard Base64.
+	 * @param input the data to decode
+	 * @param offset the position within the input array at which to start
+	 * @param len the number of bytes of input to decode
+	 * @param flags controls certain features of the decoded output. Pass {@code DEFAULT} to decode standard Base64.
 	 * 
-	 * @throws IllegalArgumentException
-	 *             if the input contains incorrect padding
+	 * @throws IllegalArgumentException if the input contains incorrect padding
 	 */
 	public static byte[] decode(byte[] input, int offset, int len, int flags) {
 		// Allocate space for the most data the input could represent.
@@ -401,11 +391,9 @@ public class Base64 {
 	/**
 	 * Base64-encode the given data and return a newly allocated String with the result.
 	 * 
-	 * @param input
-	 *            the data to encode
-	 * @param flags
-	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
-	 *            adheres to RFC 2045.
+	 * @param input the data to encode
+	 * @param flags controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
+	 *        adheres to RFC 2045.
 	 */
 	public static String encodeToString(byte[] input, int flags) {
 		try {
@@ -419,15 +407,11 @@ public class Base64 {
 	/**
 	 * Base64-encode the given data and return a newly allocated String with the result.
 	 * 
-	 * @param input
-	 *            the data to encode
-	 * @param offset
-	 *            the position within the input array at which to start
-	 * @param len
-	 *            the number of bytes of input to encode
-	 * @param flags
-	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
-	 *            adheres to RFC 2045.
+	 * @param input the data to encode
+	 * @param offset the position within the input array at which to start
+	 * @param len the number of bytes of input to encode
+	 * @param flags controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
+	 *        adheres to RFC 2045.
 	 */
 	public static String encodeToString(byte[] input, int offset, int len, int flags) {
 		try {
@@ -441,11 +425,9 @@ public class Base64 {
 	/**
 	 * Base64-encode the given data and return a newly allocated byte[] with the result.
 	 * 
-	 * @param input
-	 *            the data to encode
-	 * @param flags
-	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
-	 *            adheres to RFC 2045.
+	 * @param input the data to encode
+	 * @param flags controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
+	 *        adheres to RFC 2045.
 	 */
 	public static byte[] encode(byte[] input, int flags) {
 		return encode(input, 0, input.length, flags);
@@ -454,15 +436,11 @@ public class Base64 {
 	/**
 	 * Base64-encode the given data and return a newly allocated byte[] with the result.
 	 * 
-	 * @param input
-	 *            the data to encode
-	 * @param offset
-	 *            the position within the input array at which to start
-	 * @param len
-	 *            the number of bytes of input to encode
-	 * @param flags
-	 *            controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
-	 *            adheres to RFC 2045.
+	 * @param input the data to encode
+	 * @param offset the position within the input array at which to start
+	 * @param len the number of bytes of input to encode
+	 * @param flags controls certain features of the encoded output. Passing {@code DEFAULT} results in output that
+	 *        adheres to RFC 2045.
 	 */
 	public static byte[] encode(byte[] input, int offset, int len, int flags) {
 		Encoder encoder = new Encoder(flags, null);

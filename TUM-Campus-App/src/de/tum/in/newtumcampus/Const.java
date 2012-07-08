@@ -168,7 +168,7 @@ public final class Const {
 	/** Holiday */
 	public static final String HOLIDAY = "holiday";
 
-	/** /** ****************************************************************** */
+	/** ****************************************************************** */
 
 	/** Error (used in extras) */
 	public static final String ERROR = "error";

@@ -33,8 +33,10 @@ import de.tum.in.newtumcampus.models.OrgItemList;
 import de.tum.in.newtumcampus.models.OrgItemListAdapter;
 import de.tum.in.newtumcampus.models.OrganisationManager;
 
-/************************************ Things could be improved: - add an loading screen after every click - color pushed elements e.g. blue after clicked
- * on it, to see that a element has been clicked - ************************************/
+/************************************
+ * Things could be improved: - add an loading screen after every click - color pushed elements e.g. blue after clicked
+ * on it, to see that a element has been clicked -
+ ************************************/
 
 /**
  * Activity that shows the first level of organisations at TUM.
@@ -192,8 +194,7 @@ public class Organisation extends Activity implements OnClickListener {
 	/**
 	 * Show all items in a certain layer having a parent element with parent_id = parent.
 	 * 
-	 * @param parent
-	 *            all items with the same parent
+	 * @param parent all items with the same parent
 	 * @throws ParserConfigurationException
 	 * @throws IOException
 	 * @throws SAXException
@@ -326,10 +327,8 @@ public class Organisation extends Activity implements OnClickListener {
 	/**
 	 * Function that gets the Value out of a Node with a special name
 	 * 
-	 * @param item
-	 *            = Node that gets evaluated
-	 * @param type
-	 *            = Type of node (e.g. parent, id, nameDe)
+	 * @param item = Node that gets evaluated
+	 * @param type = Type of node (e.g. parent, id, nameDe)
 	 */
 	public String getValue(Node item, String type) {
 		Element elem = (Element) item;
