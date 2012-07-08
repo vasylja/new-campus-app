@@ -20,11 +20,10 @@
 			android:text="@string/debug_cafeterias_menus"/>
 	</LinearLayout>
 
-	<LinearLayout android:id="@+id/debugFeeds"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
+	<LinearLayout 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:orientation="horizontal">
 		
-		<Button android:id="@+id/debugFeed"
+		<Button android:id="@+id/debugFeeds"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" 
 			android:text="@string/debug_feeds" />
 
@@ -46,8 +45,7 @@
 		
 	</LinearLayout>
 
-	<LinearLayout android:id="@+id/debugLecturesAndMore"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
+	<LinearLayout 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:orientation="horizontal">
 		
 		<Button android:id="@+id/debugLectures"
@@ -68,15 +66,21 @@
 		
 	</LinearLayout>
 
-	<LinearLayout android:id="@+id/debugMaster"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
+	<LinearLayout 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:orientation="horizontal">
 		
-		<Button android:id="@+id/debugButton"
+		<Button             android:id="@+id/debugMaster"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/debug_master" />
 		
-	</LinearLayout>
+	<!-- TODO translate text -->
+
+        <Button
+            android:id="@+id/debugGallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="gallery" />
+    </LinearLayout>
 
 	<TextView android:id="@+id/debug"
 	    android:layout_width="fill_parent" android:layout_height="wrap_content"
