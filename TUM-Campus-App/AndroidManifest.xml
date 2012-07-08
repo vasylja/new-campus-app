@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.tum.in.newtumcampus"
-    android:versionCode="11"
-    android:versionName="0.78" > <!-- android:installLocation="preferExternal" -->
-
-    <uses-sdk android:minSdkVersion="7" />
+    android:versionCode="19"
+    android:versionName="0.93" >         <uses-sdk android:minSdkVersion="7" />
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
@@ -15,8 +13,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <!-- Daniel G. Mayr: export Lectures to calendar -->
-    <uses-permission android:name="android.permission.READ_CALENDAR" />
+<uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
@@ -47,9 +44,7 @@
             android:name=".Lectures"
             android:label="@string/lectures" />
 
-        <!-- added by Daniel Mayr -->
-
-        <activity
+<activity
             android:name=".TUMOnline"
             android:label="@string/tumonline_connection" />
         <activity
@@ -69,9 +64,7 @@
             android:name=".Lectures2Calendar"
             android:label="@string/export2calendar" />
 
-        <!-- added by Vincenz Doelle -->
-
-        <activity
+<activity
             android:name=".TUMOnlineSettings"
             android:label="@string/access_token_settings" />
         <activity
@@ -102,9 +95,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/tuition_fees" />
 
-        <!-- added by Thomas Behrens -->
-
-        <activity
+<activity
             android:name=".Organisation"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/organisations" />
@@ -113,9 +104,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/organisation_details" />
 
-        <!-- others -->
-
-        <activity
+<activity
             android:name=".Links"
             android:label="@string/links" />
         <activity
@@ -133,6 +122,16 @@
         <activity
             android:name=".Hours"
             android:label="@string/opening_hours" />
+        
+<!-- TODO translate -->
+<activity
+            android:name=".Gallery"
+            android:label="Kurz notiert" />
+        
+<!-- TODO translate -->
+<activity
+            android:name=".GalleryDetails"
+            android:label="Kurz notiert" />
         <activity
             android:name=".AppInfo"
             android:label="@string/full_app_info" />
@@ -153,7 +152,7 @@
         <service
             android:name=".services.SilenceService"
             android:exported="false" />
-        <receiver android:name=".receivers.BootCompleted" >
+                <receiver android:name=".receivers.BootCompleted" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
