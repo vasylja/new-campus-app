@@ -22,16 +22,24 @@ import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 
-/** Lecture item Manager, handles database stuff, internal imports */
+/**
+ * Lecture item Manager, handles database stuff, internal imports
+ */
 public class LectureItemManager {
 
-	/** Database connection */
+	/**
+	 * Database connection
+	 */
 	private SQLiteDatabase db;
 
-	/** Last insert counter */
+	/**
+	 * Last insert counter
+	 */
 	public static int lastInserted = 0;
 
-	/** Additional information for exception messages */
+	/**
+	 * Additional information for exception messages
+	 */
 	public String lastInfo = "";
 
 	/**

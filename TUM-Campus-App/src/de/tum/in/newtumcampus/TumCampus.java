@@ -46,7 +46,9 @@ import de.tum.in.newtumcampus.services.DownloadService;
 import de.tum.in.newtumcampus.services.ImportService;
 import de.tum.in.newtumcampus.services.SilenceService;
 
-/** Main activity to show main menu, logo and refresh button */
+/**
+ * Main activity to show main menu, logo and refresh button
+ */
 public class TumCampus extends Activity implements OnItemClickListener, View.OnClickListener {
 
 	static boolean syncing = false;
@@ -263,7 +265,9 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		list.add(map);
 	}
 
-	/** @Author Vasyl Malinskyi */
+	/**
+	 * @Author Vasyl Malinskyi
+	 */
 
 	private Intent createRoomfinderAppIntent() {
 		Intent resultIntent = null;
@@ -357,7 +361,9 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		return false;
 	}
 
-	/** Clears the cache (database tables, sd-card) */
+	/**
+	 * Clears the cache (database tables, sd-card)
+	 */
 	public void clearCache() {
 		try {
 			Utils.getCacheDir("");
@@ -483,7 +489,9 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		b.setEnabled(enabled);
 	}
 
-	/** Receiver for Download and Import services */
+	/**
+	 * Receiver for Download and Import services
+	 */
 	private final BroadcastReceiver receiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {

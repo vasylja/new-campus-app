@@ -6,10 +6,14 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.Const;
 
-/** Database singleton */
+/**
+ * Database singleton
+ */
 abstract public class DatabaseManager {
 
-	/** Database connection */
+	/**
+	 * Database connection
+	 */
 	private static SQLiteDatabase db;
 
 	/**

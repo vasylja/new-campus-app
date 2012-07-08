@@ -12,16 +12,24 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.Html;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Feed item Manager, handles database stuff, external imports */
+/**
+ * Feed item Manager, handles database stuff, external imports
+ */
 public class FeedItemManager {
 
-	/** Database connection */
+	/**
+	 * Database connection
+	 */
 	private SQLiteDatabase db;
 
-	/** Last insert counter */
+	/**
+	 * Last insert counter
+	 */
 	public static int lastInserted = 0;
 
-	/** Additional information for exception messages */
+	/**
+	 * Additional information for exception messages
+	 */
 	public String lastInfo = "";
 
 	/**

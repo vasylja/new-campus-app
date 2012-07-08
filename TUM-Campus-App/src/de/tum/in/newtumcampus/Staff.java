@@ -36,13 +36,19 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
  */
 public class Staff extends Activity implements OnEditorActionListener, TUMOnlineRequestFetchListener {
 
-	/** Handler to send request to TUMOnline */
+	/**
+	 * Handler to send request to TUMOnline
+	 */
 	private TUMOnlineRequest requestHandler;
 
-	/** Text field for the search tokens. */
+	/**
+	 * Text field for the search tokens.
+	 */
 	private EditText etSearch;
 
-	/** List to display the results */
+	/**
+	 * List to display the results
+	 */
 	private ListView lvPersons;
 
 	private static final String PERSONEN_SUCHE = "personenSuche";
@@ -198,7 +204,9 @@ public class Staff extends Activity implements OnEditorActionListener, TUMOnline
 			numberEmployeesProcessed = 0;
 		}
 
-		/** Fetch all persons whose IDs are given. Use personIds as a queue that is emptied successively. */
+		/**
+		 * Fetch all persons whose IDs are given. Use personIds as a queue that is emptied successively.
+		 */
 		private void fetchEmploymentDetails() {
 
 			// if all persons' details are fetched, display results and finish

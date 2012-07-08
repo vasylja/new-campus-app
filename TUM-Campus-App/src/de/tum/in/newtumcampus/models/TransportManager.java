@@ -12,10 +12,14 @@ import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Transport Manager, handles database stuff, internet connections */
+/**
+ * Transport Manager, handles database stuff, internet connections
+ */
 public class TransportManager {
 
-	/** Database connection */
+	/**
+	 * Database connection
+	 */
 	private SQLiteDatabase db;
 
 	/**

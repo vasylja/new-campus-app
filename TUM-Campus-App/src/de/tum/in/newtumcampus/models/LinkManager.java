@@ -7,16 +7,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Link Manager, handles database stuff, internal imports, external downloads (icons) */
+/**
+ * Link Manager, handles database stuff, internal imports, external downloads (icons)
+ */
 public class LinkManager {
 
-	/** Database connection */
+	/**
+	 * Database connection
+	 */
 	private SQLiteDatabase db;
 
-	/** Last insert counter */
+	/**
+	 * Last insert counter
+	 */
 	public static int lastInserted = 0;
 
-	/** Additional information for exception messages */
+	/**
+	 * Additional information for exception messages
+	 */
 	public String lastInfo = "";
 
 	/**
@@ -64,7 +72,9 @@ public class LinkManager {
 		lastInserted += Utils.dbGetTableCount(db, "links") - count;
 	}
 
-	/** Check if all icons are available in the cache directory */
+	/**
+	 * Check if all icons are available in the cache directory
+	 */
 	public void checkExistingIcons() {
 		Cursor c = db.rawQuery("SELECT DISTINCT icon FROM links WHERE icon!=''", null);
 
@@ -155,7 +165,9 @@ public class LinkManager {
 		}
 	}
 
-	/** Removes all cache items */
+	/**
+	 * Removes all cache items
+	 */
 	public void removeCache() {
 		db.execSQL("UPDATE links SET icon = ''");
 		Utils.emptyCacheDir("links/cache");

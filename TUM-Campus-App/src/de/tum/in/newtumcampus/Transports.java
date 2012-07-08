@@ -30,7 +30,9 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import de.tum.in.newtumcampus.models.TransportManager;
 
-/** Activity to show transport stations and departures */
+/**
+ * Activity to show transport stations and departures
+ */
 public class Transports extends Activity implements OnItemClickListener, OnItemLongClickListener,
 		OnEditorActionListener {
 

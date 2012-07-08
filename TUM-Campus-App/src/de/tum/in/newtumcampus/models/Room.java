@@ -6,9 +6,8 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 /**
- * A room that belongs to some {@link Person} or {@link Employee}.
- * <p>
- * Note: This model is based on the TUMOnline web service response format for a corresponding request.
+ * A room that belongs to some {@link Person} or {@link Employee}. Note: This model is based on the TUMOnline web
+ * service response format for a corresponding request.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr

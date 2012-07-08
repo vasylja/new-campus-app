@@ -10,13 +10,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Cafeteria Menu Manager, handles database stuff, external imports */
+/**
+ * Cafeteria Menu Manager, handles database stuff, external imports
+ */
 public class CafeteriaMenuManager {
 
-	/** Database connection */
+	/**
+	 * Database connection
+	 */
 	private SQLiteDatabase db;
 
-	/** Last insert counter */
+	/**
+	 * Last insert counter
+	 */
 	public static int lastInserted = 0;
 
 	/**
@@ -177,12 +183,16 @@ public class CafeteriaMenuManager {
 						c.typeShort, c.typeLong, String.valueOf(c.typeNr), c.name });
 	}
 
-	/** Removes all cache items */
+	/**
+	 * Removes all cache items
+	 */
 	public void removeCache() {
 		db.execSQL("DELETE FROM cafeterias_menus");
 	}
 
-	/** Removes all old items (older than 7 days) */
+	/**
+	 * Removes all old items (older than 7 days)
+	 */
 	public void cleanupDb() {
 		db.execSQL("DELETE FROM cafeterias_menus WHERE date < date('now','-7 day')");
 	}

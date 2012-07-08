@@ -143,7 +143,9 @@ public class Documents extends Activity {
 		});
 	}
 
-	/** Creates a background task and calls fetchDocument while showing a progress dialog. */
+	/**
+	 * Creates a background task and calls fetchDocument while showing a progress dialog.
+	 */
 	private void getDocument() {
 		// cancel if no internet connection
 		if (!Utils.isConnected(this)) {

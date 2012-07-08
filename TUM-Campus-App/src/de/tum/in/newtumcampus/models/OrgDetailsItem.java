@@ -2,14 +2,15 @@ package de.tum.in.newtumcampus.models;
 
 /**
  * Modell for the Organisation Details collected by {@link OrgDetailsItemHandler}
- * <p>
  * 
  * @author Thomas Behrens
  */
 
 public class OrgDetailsItem {
 
-	/** Information about the organisation */
+	/**
+	 * Information about the organisation
+	 */
 	// Organisation Identification Number
 	private String id;
 	// Organisation Name
@@ -19,7 +20,9 @@ public class OrgDetailsItem {
 	// Organisation Description, eg. "Weitere Angebote und Vorträge..."
 	private String description;
 
-	/** Information about how to get in contact with organisation */
+	/**
+	 * Information about how to get in contact with organisation
+	 */
 	// Contact Name of Organisation, similar to Organisation name
 	private String contactName;
 	// Street and Street number of the Organisation
@@ -47,7 +50,9 @@ public class OrgDetailsItem {
 	// TUMCampus link
 	private String tumCampusLink;
 
-	/** Additional Info Text: Can be very different filled */
+	/**
+	 * Additional Info Text: Can be very different filled
+	 */
 	// Caption
 	private String additionalInfoCaption;
 	// Information
@@ -76,7 +81,9 @@ public class OrgDetailsItem {
 		this.additionalInfoText = "";
 	}
 
-	/** @return the id */
+	/**
+	 * @return the id
+	 */
 	public String getId() {
 		return id;
 	}
@@ -88,7 +95,9 @@ public class OrgDetailsItem {
 		this.id = id;
 	}
 
-	/** @return the name */
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
@@ -100,7 +109,9 @@ public class OrgDetailsItem {
 		this.name = name;
 	}
 
-	/** @return the code */
+	/**
+	 * @return the code
+	 */
 	public String getCode() {
 		return code;
 	}
@@ -112,7 +123,9 @@ public class OrgDetailsItem {
 		this.code = code;
 	}
 
-	/** @return the description */
+	/**
+	 * @return the description
+	 */
 	public String getDescription() {
 		return description;
 	}
@@ -124,7 +137,9 @@ public class OrgDetailsItem {
 		this.description = description;
 	}
 
-	/** @return the contactName */
+	/**
+	 * @return the contactName
+	 */
 	public String getContactName() {
 		return contactName;
 	}
@@ -136,7 +151,9 @@ public class OrgDetailsItem {
 		this.contactName = contactName;
 	}
 
-	/** @return the contactStreet */
+	/**
+	 * @return the contactStreet
+	 */
 	public String getContactStreet() {
 		return contactStreet;
 	}
@@ -148,7 +165,9 @@ public class OrgDetailsItem {
 		this.contactStreet = contactStreet;
 	}
 
-	/** @return the contactLocality */
+	/**
+	 * @return the contactLocality
+	 */
 	public String getContactLocality() {
 		return contactLocality;
 	}
@@ -160,7 +179,9 @@ public class OrgDetailsItem {
 		this.contactLocality = contactLocality;
 	}
 
-	/** @return the contactPLZ */
+	/**
+	 * @return the contactPLZ
+	 */
 	public String getContactPLZ() {
 		return contactPLZ;
 	}
@@ -172,7 +193,9 @@ public class OrgDetailsItem {
 		this.contactPLZ = contactPLZ;
 	}
 
-	/** @return the contactCountry */
+	/**
+	 * @return the contactCountry
+	 */
 	public String getContactCountry() {
 		return contactCountry;
 	}
@@ -184,7 +207,9 @@ public class OrgDetailsItem {
 		this.contactCountry = contactCountry;
 	}
 
-	/** @return the contactTelephone */
+	/**
+	 * @return the contactTelephone
+	 */
 	public String getContactTelephone() {
 		return contactTelephone;
 	}
@@ -196,7 +221,9 @@ public class OrgDetailsItem {
 		this.contactTelephone = contactTelephone;
 	}
 
-	/** @return the contactFax */
+	/**
+	 * @return the contactFax
+	 */
 	public String getContactFax() {
 		return contactFax;
 	}
@@ -208,7 +235,9 @@ public class OrgDetailsItem {
 		this.contactFax = contactFax;
 	}
 
-	/** @return the contactEmail */
+	/**
+	 * @return the contactEmail
+	 */
 	public String getContactEmail() {
 		return contactEmail;
 	}
@@ -220,7 +249,9 @@ public class OrgDetailsItem {
 		this.contactEmail = contactEmail;
 	}
 
-	/** @return the contactLink */
+	/**
+	 * @return the contactLink
+	 */
 	public String getContactLink() {
 		return contactLink;
 	}
@@ -232,7 +263,9 @@ public class OrgDetailsItem {
 		this.contactLink = contactLink;
 	}
 
-	/** @return the contactLocationURL */
+	/**
+	 * @return the contactLocationURL
+	 */
 	public String getContactLocationURL() {
 		return contactLocationURL;
 	}
@@ -244,7 +277,9 @@ public class OrgDetailsItem {
 		this.contactLocationURL = contactLocationURL;
 	}
 
-	/** @return the contactAdditionalInfo */
+	/**
+	 * @return the contactAdditionalInfo
+	 */
 	public String getContactAdditionalInfo() {
 		return contactAdditionalInfo;
 	}
@@ -256,7 +291,9 @@ public class OrgDetailsItem {
 		this.contactAdditionalInfo = contactAdditionalInfo;
 	}
 
-	/** @return the tumCampusLink */
+	/**
+	 * @return the tumCampusLink
+	 */
 	public String getTumCampusLink() {
 		return tumCampusLink;
 	}
@@ -268,7 +305,9 @@ public class OrgDetailsItem {
 		this.tumCampusLink = tumCampusLink;
 	}
 
-	/** @return the contactTelephoneType */
+	/**
+	 * @return the contactTelephoneType
+	 */
 	public String getContactTelephoneType() {
 		return contactTelephoneType;
 	}
@@ -280,7 +319,9 @@ public class OrgDetailsItem {
 		this.contactTelephoneType = contactTelephoneType;
 	}
 
-	/** @return the additionalInfoCaption */
+	/**
+	 * @return the additionalInfoCaption
+	 */
 	public String getAdditionalInfoCaption() {
 		return additionalInfoCaption;
 	}
@@ -292,7 +333,9 @@ public class OrgDetailsItem {
 		this.additionalInfoCaption = additionalInfoCaption;
 	}
 
-	/** @return the additionalInfoText */
+	/**
+	 * @return the additionalInfoText
+	 */
 	public String getAdditionalInfoText() {
 		return additionalInfoText;
 	}

@@ -23,10 +23,14 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 public class TUMOnlineSettings extends PreferenceActivity implements OnClickListener,
 		android.content.DialogInterface.OnClickListener {
 
-	/** UI button to generate access token */
+	/**
+	 * UI button to generate access token
+	 */
 	private Button btnGetAccessToken;
 
-	/** just overwitten to set layout, view and the listeners */
+	/**
+	 * just overwitten to set layout, view and the listeners
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,7 +65,9 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 				strTokenXml.indexOf("</token>"));
 	}
 
-	/** this function does the handle of the OnClickListener of the getAccessToken Button */
+	/**
+	 * this function does the handle of the OnClickListener of the getAccessToken Button
+	 */
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == btnGetAccessToken.getId()) {

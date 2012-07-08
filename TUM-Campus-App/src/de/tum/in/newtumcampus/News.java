@@ -19,8 +19,9 @@ import android.widget.Toast;
 import de.tum.in.newtumcampus.models.NewsManager;
 import de.tum.in.newtumcampus.services.DownloadService;
 
-/** Activity to show News (message, image, date) */
-
+/**
+ * Activity to show News (message, image, date)
+ */
 public class News extends Activity implements OnItemClickListener, ViewBinder {
 
 	@Override

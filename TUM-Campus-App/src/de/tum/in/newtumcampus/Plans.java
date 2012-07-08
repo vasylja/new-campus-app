@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SlidingDrawer;
 
-/** Activity to show plans */
+/**
+ * Activity to show plans
+ */
 public class Plans extends Activity implements OnItemClickListener {
 
 	private static int position = -1;

@@ -1,12 +1,13 @@
-/**
- * 
- */
 package de.tum.in.newtumcampus.models;
 
-/** @author Vasyl Malinskyi */
+/**
+ * @author Vasyl Malinskyi
+ */
 public class ModelsConst {
 
-	/** JSON identifiers ************************************************** */
+	/**
+	 * JSON identifiers **************************************************
+	 */
 	public static final String JSON_MENSA_MENSEN = "mensa_mensen";
 
 	public static final String JSON_ID = "id";

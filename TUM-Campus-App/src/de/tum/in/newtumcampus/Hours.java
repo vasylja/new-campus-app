@@ -17,7 +17,9 @@ import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import de.tum.in.newtumcampus.models.LocationManager;
 
-/** Activity to show opening hours */
+/**
+ * Activity to show opening hours
+ */
 public class Hours extends Activity implements OnItemClickListener, ViewBinder {
 
 	private String[] names;
@@ -93,7 +95,9 @@ public class Hours extends Activity implements OnItemClickListener, ViewBinder {
 		lv2.setAdapter(adapter);
 	}
 
-	/** change presentation of locations in the list */
+	/**
+	 * change presentation of locations in the list
+	 */
 	@Override
 	public boolean setViewValue(View view, Cursor c, int index) {
 		if (view.getId() == android.R.id.text2) {

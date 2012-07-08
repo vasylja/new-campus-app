@@ -3,7 +3,6 @@ package de.tum.in.newtumcampus.models;
 /**
  * An Element of the Organisation Tree. In the App a List of those Elements is showed ({@link OrgItemList}). The shown
  * Elements are for Navigation to an Element without child-Element, whose details are then shown.
- * <p>
  * 
  * @author Thomas Behrens
  * @review Daniel G. Mayr, Vincenz Doelle
@@ -11,16 +10,24 @@ package de.tum.in.newtumcampus.models;
 
 public class OrgItem {
 
-	/** Organisation ID -> to identify */
+	/**
+	 * Organisation ID -> to identify
+	 */
 	private String id;
 
-	/** Organisation ID of the parent Organisation */
+	/**
+	 * Organisation ID of the parent Organisation
+	 */
 	private String parentId;
 
-	/** German Description of the Organisation */
+	/**
+	 * German Description of the Organisation
+	 */
 	private String nameDe;
 
-	/** English Description of the Organisation */
+	/**
+	 * English Description of the Organisation
+	 */
 	private String nameEn;
 
 	// Getter and Setter Functions

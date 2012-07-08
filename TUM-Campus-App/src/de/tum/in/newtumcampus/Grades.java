@@ -32,16 +32,24 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
  */
 public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 
-	/** Spinner to choose between programs */
+	/**
+	 * Spinner to choose between programs
+	 */
 	private Spinner spFilter;
 
-	/** List with all exams passed (including grades) */
+	/**
+	 * List with all exams passed (including grades)
+	 */
 	private ExamList examList;
 
-	/** List view to display all exams/grades */
+	/**
+	 * List view to display all exams/grades
+	 */
 	private ListView lvGrades;
 
-	/** HTTP request handler to handle requests to TUMOnline */
+	/**
+	 * HTTP request handler to handle requests to TUMOnline
+	 */
 	private TUMOnlineRequest requestHandler;
 
 	@Override
@@ -108,7 +116,9 @@ public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 		finish();
 	}
 
-	/** Initialize the spinner for choosing between the study programs. */
+	/**
+	 * Initialize the spinner for choosing between the study programs.
+	 */
 	private void initSpinner() {
 
 		// set Spinner data

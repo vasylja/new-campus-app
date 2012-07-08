@@ -9,10 +9,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Cafeteria Manager, handles database stuff, external imports */
+/**
+ * Cafeteria Manager, handles database stuff, external imports
+ */
 public class CafeteriaManager {
 
-	/** Database connection */
+	/**
+	 * Database connection
+	 */
 	private SQLiteDatabase db;
 
 	/**
@@ -115,7 +119,9 @@ public class CafeteriaManager {
 				c.name, c.address });
 	}
 
-	/** Removes all cache items */
+	/**
+	 * Removes all cache items
+	 */
 	public void removeCache() {
 		db.execSQL("DELETE FROM cafeterias");
 	}

@@ -24,7 +24,9 @@ import de.tum.in.newtumcampus.models.TelSubstation;
  */
 public class StaffDetails extends Activity {
 
-	/** The employee */
+	/**
+	 * The employee
+	 */
 	private Person personObject;
 
 	@Override

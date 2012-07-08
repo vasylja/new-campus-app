@@ -23,10 +23,14 @@ import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.LectureItemManager;
 import de.tum.in.newtumcampus.models.LectureManager;
 
-/** Activity to show lectures and lecture units */
+/**
+ * Activity to show lectures and lecture units
+ */
 public class Lectures extends Activity implements OnItemClickListener, OnItemLongClickListener, ViewBinder {
 
-	/** Current lecture selected */
+	/**
+	 * Current lecture selected
+	 */
 	String lectureId;
 
 	@Override
@@ -81,7 +85,9 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		LectureItemManager.lastInserted = 0;
 	}
 
-	/** change presentation of lecture units in the list */
+	/**
+	 * change presentation of lecture units in the list
+	 */
 	@Override
 	public boolean setViewValue(View view, Cursor c, int index) {
 		String[] weekDays = getString(R.string.week_splitted).split(",");

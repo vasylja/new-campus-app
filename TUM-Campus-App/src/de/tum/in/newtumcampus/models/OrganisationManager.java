@@ -10,10 +10,6 @@ import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.FileUtils;
 
 /**
- * 
- */
-
-/**
  * Event Manager, handles database stuff, external imports
  * <p>
  * 

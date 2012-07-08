@@ -4,25 +4,39 @@ import java.util.Date;
 
 import de.tum.in.newtumcampus.common.Utils;
 
-/** FeedItem object */
+/**
+ * FeedItem object
+ */
 public class FeedItem {
 
-	/** Feed ID */
+	/**
+	 * Feed ID
+	 */
 	int feedId;
 
-	/** Item title */
+	/**
+	 * Item title
+	 */
 	String title;
 
-	/** Item link, e.g. http://www.heise.de/... */
+	/**
+	 * Item link, e.g. http://www.heise.de/...
+	 */
 	String link;
 
-	/** description Item description */
+	/**
+	 * description Item description
+	 */
 	String description;
 
-	/** DateTime */
+	/**
+	 * DateTime
+	 */
 	Date date;
 
-	/** image Local image, e.g. /mnt/sdcard/tumcampus/feeds/cache/xy.jpg */
+	/**
+	 * image Local image, e.g. /mnt/sdcard/tumcampus/feeds/cache/xy.jpg
+	 */
 	String image;
 
 	/**

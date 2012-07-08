@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import de.tum.in.newtumcampus.models.DatabaseManager;
 
-/** Activity to show raw table contents of the database */
+/**
+ * Activity to show raw table contents of the database
+ */
 public class Debug extends Activity implements View.OnClickListener {
 
 	@Override
@@ -62,7 +64,9 @@ public class Debug extends Activity implements View.OnClickListener {
 		b.setOnClickListener(this);
 	}
 
-	/** clear debug content text view */
+	/**
+	 * clear debug content text view
+	 */
 	public void debugReset() {
 		TextView tv = (TextView) findViewById(R.id.debug);
 		tv.setText("");

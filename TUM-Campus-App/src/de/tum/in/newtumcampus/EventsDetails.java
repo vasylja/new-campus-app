@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import de.tum.in.newtumcampus.models.EventManager;
 
-/** Activity to show event details (name, location, image, description, etc.) */
+/**
+ * Activity to show event details (name, location, image, description, etc.)
+ */
 public class EventsDetails extends Activity {
 
 	@Override

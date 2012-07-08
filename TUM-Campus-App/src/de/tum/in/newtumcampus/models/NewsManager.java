@@ -12,13 +12,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** News Manager, handles database stuff, external imports */
+/**
+ * News Manager, handles database stuff, external imports
+ */
 public class NewsManager {
 
-	/** Database connection */
+	/**
+	 * Database connection
+	 */
 	private SQLiteDatabase db;
 
-	/** Last insert counter */
+	/**
+	 * Last insert counter
+	 */
 	public static int lastInserted = 0;
 
 	/**
@@ -176,13 +182,17 @@ public class NewsManager {
 				n.message, n.link, n.image, Utils.getDateString(n.date) });
 	}
 
-	/** Removes all cache items */
+	/**
+	 * Removes all cache items
+	 */
 	public void removeCache() {
 		db.execSQL("DELETE FROM news");
 		Utils.emptyCacheDir("news/cache");
 	}
 
-	/** Removes all old items (older than 3 months) */
+	/**
+	 * Removes all old items (older than 3 months)
+	 */
 	public void cleanupDb() {
 		db.execSQL("DELETE FROM news WHERE date < date('now','-3 month')");
 	}

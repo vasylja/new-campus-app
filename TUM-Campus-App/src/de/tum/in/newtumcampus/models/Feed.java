@@ -1,12 +1,18 @@
 ﻿package de.tum.in.newtumcampus.models;
 
-/** Feed object */
+/**
+ * Feed object
+ */
 public class Feed {
 
-	/** Feed name, e.g. Spiegel */
+	/**
+	 * Feed name, e.g. Spiegel
+	 */
 	String name;
 
-	/** Feed Url, e.g. http://www.spiegel.de/schlagzeilen/index.rss */
+	/**
+	 * Feed Url, e.g. http://www.spiegel.de/schlagzeilen/index.rss
+	 */
 	String feedUrl;
 
 	/**

@@ -4,37 +4,59 @@ import java.util.Date;
 
 import de.tum.in.newtumcampus.common.Utils;
 
-/** LectureItem object */
+/**
+ * LectureItem object
+ */
 public class LectureItem {
 
-	/** Lecture item ID (LectureId_Start-Unix-Timestamp) */
+	/**
+	 * Lecture item ID (LectureId_Start-Unix-Timestamp)
+	 */
 	String id;
 
-	/** Lecture ID */
+	/**
+	 * Lecture ID
+	 */
 	String lectureId;
 
-	/** Start DateTime */
+	/**
+	 * Start DateTime
+	 */
 	Date start;
 
-	/** End DateTime */
+	/**
+	 * End DateTime
+	 */
 	Date end;
 
-	/** Lecture name */
+	/**
+	 * Lecture name
+	 */
 	String name;
 
-	/** Lecture module */
+	/**
+	 * Lecture module
+	 */
 	String module;
 
-	/** Lecture item location */
+	/**
+	 * Lecture item location
+	 */
 	String location;
 
-	/** Lecture item note, e.g. Übung */
+	/**
+	 * Lecture item note, e.g. Übung
+	 */
 	String note;
 
-	/** Lecture item URL */
+	/**
+	 * Lecture item URL
+	 */
 	String url;
 
-	/** Lecture item series ID (LectureID_Week-Day_Start-Time) */
+	/**
+	 * Lecture item series ID (LectureID_Week-Day_Start-Time)
+	 */
 	String seriesId;
 
 	/**
@@ -75,7 +97,9 @@ public class LectureItem {
 	}
 
 	// TODO Check whether to externalise Strings ex. Feiertag
-	/** Holiday object (extends LectureItem) */
+	/**
+	 * Holiday object (extends LectureItem)
+	 */
 	public static class Holiday extends LectureItem {
 
 		/**
@@ -92,7 +116,9 @@ public class LectureItem {
 		}
 	}
 
-	/** Vacation object (extends LectureItem) */
+	/**
+	 * Vacation object (extends LectureItem)
+	 */
 	public static class Vacation extends LectureItem {
 
 		/**

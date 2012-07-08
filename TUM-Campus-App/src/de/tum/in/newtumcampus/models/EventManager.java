@@ -10,13 +10,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Event Manager, handles database stuff, external imports */
+/**
+ * Event Manager, handles database stuff, external imports
+ */
 public class EventManager {
 
-	/** Database connection */
+	/**
+	 * Database connection
+	 */
 	private SQLiteDatabase db;
 
-	/** Last insert counter */
+	/**
+	 * Last insert counter
+	 */
 	public static int lastInserted = 0;
 
 	/**
@@ -168,13 +174,17 @@ public class EventManager {
 				Utils.getDateTimeString(e.end), e.location, e.description, e.link, e.image });
 	}
 
-	/** Removes all cache items */
+	/**
+	 * Removes all cache items
+	 */
 	public void removeCache() {
 		db.execSQL("DELETE FROM events");
 		Utils.emptyCacheDir("events/cache");
 	}
 
-	/** Removes all old items (older than 3 months) */
+	/**
+	 * Removes all old items (older than 3 months)
+	 */
 	public void cleanupDb() {
 		db.execSQL("DELETE FROM events WHERE start < date('now','-3 month')");
 	}

@@ -5,10 +5,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Sync Manager, tracks last successful syncs */
+/**
+ * Sync Manager, tracks last successful syncs
+ */
 public class SyncManager {
 
-	/** Database connection */
+	/**
+	 * Database connection
+	 */
 	private SQLiteDatabase db;
 
 	/**
@@ -90,7 +94,9 @@ public class SyncManager {
 		return result;
 	}
 
-	/** Removes all items from database */
+	/**
+	 * Removes all items from database
+	 */
 	public void deleteFromDb() {
 		db.execSQL("DELETE FROM syncs");
 	}

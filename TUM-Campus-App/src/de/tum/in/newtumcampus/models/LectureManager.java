@@ -4,10 +4,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-/** Lecture Manager, handles database stuff */
+/**
+ * Lecture Manager, handles database stuff
+ */
 public class LectureManager {
 
-	/** Database connection */
+	/**
+	 * Database connection
+	 */
 	private SQLiteDatabase db;
 
 	/**
@@ -33,7 +37,9 @@ public class LectureManager {
 		return db.rawQuery("SELECT name, module, id as _id FROM lectures ORDER BY name", null);
 	}
 
-	/** Refresh lectures from the lectures_items table */
+	/**
+	 * Refresh lectures from the lectures_items table
+	 */
 	public void updateLectures() {
 		db.execSQL("REPLACE INTO lectures (id, name, module) "
 				+ "SELECT DISTINCT lectureId, name, module FROM lectures_items");

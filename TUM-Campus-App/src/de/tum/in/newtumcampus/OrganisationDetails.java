@@ -31,13 +31,19 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
  */
 public class OrganisationDetails extends Activity implements TUMOnlineRequestFetchListener {
 
-	/** To fetch the Details from the TUMCampus interface */
+	/**
+	 * To fetch the Details from the TUMCampus interface
+	 */
 	private TUMCampusRequest requestHandler;
 
-	/** Id of the organisation of which the details should be shown */
+	/**
+	 * Id of the organisation of which the details should be shown
+	 */
 	private String orgId;
 
-	/** Only for setting it in the caption at the top */
+	/**
+	 * Only for setting it in the caption at the top
+	 */
 	private String orgName;
 
 	@Override
@@ -95,7 +101,9 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		updateUI(o);
 	}
 
-	/** while fetching a TUMOnline Request an error occured this will show the error message in a toast */
+	/**
+	 * while fetching a TUMOnline Request an error occured this will show the error message in a toast
+	 */
 	@Override
 	public void onFetchError(String errorReason) {
 		Utils.showLongCenteredToast(this, "Error: " + errorReason);

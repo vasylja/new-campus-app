@@ -19,7 +19,9 @@ import android.widget.TextView;
 import de.tum.in.newtumcampus.models.EventManager;
 import de.tum.in.newtumcampus.services.DownloadService;
 
-/** Activity to show events (name, location, image, etc.) */
+/**
+ * Activity to show events (name, location, image, etc.)
+ */
 public class Events extends Activity implements OnItemClickListener, ViewBinder {
 
 	@Override

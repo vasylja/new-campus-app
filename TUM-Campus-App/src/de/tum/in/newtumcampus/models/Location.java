@@ -1,33 +1,53 @@
 package de.tum.in.newtumcampus.models;
 
-/** Location object */
+/**
+ * Location object
+ */
 public class Location {
 
-	/** Location ID */
+	/**
+	 * Location ID
+	 */
 	int id;
 
-	/** Category */
+	/**
+	 * Category
+	 */
 	String category;
 
-	/** Location name */
+	/**
+	 * Location name
+	 */
 	String name;
 
-	/** Address */
+	/**
+	 * Address
+	 */
 	String address;
 
-	/** Room */
+	/**
+	 * Room
+	 */
 	String room;
 
-	/** Next transport station */
+	/**
+	 * Next transport station
+	 */
 	String transport;
 
-	/** Opening hours */
+	/**
+	 * Opening hours
+	 */
 	String hours;
 
-	/** Remark */
+	/**
+	 * Remark
+	 */
 	String remark;
 
-	/** URL */
+	/**
+	 * URL
+	 */
 	String url;
 
 	/**

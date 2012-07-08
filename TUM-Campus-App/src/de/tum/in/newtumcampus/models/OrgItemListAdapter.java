@@ -20,10 +20,14 @@ import de.tum.in.newtumcampus.R;
 
 public class OrgItemListAdapter extends BaseAdapter {
 
-	/** Organisation list, that is getting shown */
+	/**
+	 * Organisation list, that is getting shown
+	 */
 	private static List<OrgItem> organisationList;
 
-	/** To inflate the layout */
+	/**
+	 * To inflate the layout
+	 */
 	private final LayoutInflater mInflater;
 
 	public OrgItemListAdapter(Context context, List<OrgItem> results) {
@@ -31,25 +35,33 @@ public class OrgItemListAdapter extends BaseAdapter {
 		mInflater = LayoutInflater.from(context);
 	}
 
-	/** get number of list items */
+	/**
+	 * get number of list items
+	 */
 	@Override
 	public int getCount() {
 		return organisationList.size();
 	}
 
-	/** get position in the list */
+	/**
+	 * get position in the list
+	 */
 	@Override
 	public Object getItem(int position) {
 		return organisationList.get(position);
 	}
 
-	/** get id of the item in the list */
+	/**
+	 * get id of the item in the list
+	 */
 	@Override
 	public long getItemId(int position) {
 		return position;
 	}
 
-	/** get a view in which the TextView elements have the values */
+	/**
+	 * get a view in which the TextView elements have the values
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;

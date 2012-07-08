@@ -1,11 +1,17 @@
 ﻿package de.tum.in.newtumcampus.models;
 
-/** Link object */
+/**
+ * Link object
+ */
 public class Link {
-	/** Name, e.g. TUM */
+	/**
+	 * Name, e.g. TUM
+	 */
 	String name;
 
-	/** Url, e.g. http://www.in.tum.de */
+	/**
+	 * Url, e.g. http://www.in.tum.de
+	 */
 	String url;
 
 	/**
