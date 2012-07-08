@@ -1,66 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="fill_parent" android:padding="6dip"
-	android:orientation="vertical" android:layout_width="fill_parent">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="6dip" >
 
-    <Button android:id="@+id/btnTUMOnlineSettings"
-        android:layout_height="wrap_content" android:layout_width="fill_parent"
-        android:textColor="#FF2546A4" 
-        android:text="@string/tumonline_settings"/>
+    <Button
+        android:id="@+id/btnTUMOnlineSettings"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tumonline_settings"
+        android:textColor="#FF2546A4" />
 
-    <Button android:id="@+id/importLecturesTUMOnline"
-        android:layout_width="fill_parent" android:layout_height="wrap_content"
-        android:textColor="#FF2546A4" 
-        android:text="@string/import_lectures_from_tumonline"/>
+    <Button
+        android:id="@+id/importLecturesTUMOnline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/import_lectures_from_tumonline"
+        android:textColor="#FF2546A4" />
 
-	<Button android:id="@+id/importLectures"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_marginBottom="3dip"
-		android:text="@string/import_lectures_from_sd_card"        android:textColor="#FF2546A4" />
+    <Button
+        android:id="@+id/importLectures"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dip"
+        android:text="@string/import_lectures_from_sd_card"
+        android:textColor="#FF2546A4" />
 
-	<Button android:id="@+id/importLinks"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:textColor="#FF2546A4" 
-		android:text="@string/import_links" />
+    <Button
+        android:id="@+id/importLinks"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/import_links"
+        android:textColor="#FF2546A4" />
 
-	<Button android:id="@+id/importFeeds"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:textColor="#FF2546A4" android:layout_marginBottom="3dip" 
-		android:text="@string/import_rss_feed" />
+    <Button
+        android:id="@+id/importFeeds"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dip"
+        android:text="@string/import_rss_feed"
+        android:textColor="#FF2546A4" />
 
-	<TextView 
-	    android:layout_width="fill_parent" android:layout_height="0.5dip" 
-	    android:background="#0065BD" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:background="#0065BD" />
 
-	<TextView 
-	    android:layout_width="fill_parent" android:layout_height="wrap_content" 
-	    android:textColor="#0065BD" android:layout_margin="3dip"
-		android:text="@string/howto_import_lectures" />
+    <TextView
+        android:id="@+id/noteLectures1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dip"
+        android:text="@string/howto_import_lectures"
+        android:textColor="#0065BD" />
 
-	<TextView 
-	    android:layout_width="fill_parent" android:layout_height="0.5dip"
-		android:background="#0065BD" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:background="#0065BD" />
 
-	<TextView 
-	    android:layout_width="fill_parent" android:layout_height="wrap_content" 
-	    android:textColor="#0065BD" android:layout_margin="3dip" 
-		android:text="@string/howto_import_rss_feed" />
+    <!-- TODO translate text -->
 
-	<TextView 
-	    android:layout_width="fill_parent" android:layout_height="0.5dip"
-	    android:background="#0065BD" />
+    <TextView
+        android:id="@+id/noteLectures2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dip"
+        android:text="Vorlesungen importieren (andere Hochschule):\n
+		1. Handy an den Computer per USB anstecken\n
+		2. USB-Speicher am Handy aktivieren\n
+		3. Template herunterladen unter:\n
+		    http://bit.ly/LectureCsv\n
+		4. Template mit Excel bearbeiten\n
+		5. Datei unter\n
+		    &lt;SD-Karte>\\tumcampus\\lectures speichern\n
+		6. USB-Speicher am Handy deaktivieren\n
+		7. Hier auf &apos;Vorlesungen importieren&apos; drücken"
+        android:textColor="#0065BD" />
 
-	<TextView 
-	    android:layout_width="fill_parent" android:layout_height="wrap_content"
-		 android:textColor="#0065BD" android:layout_margin="3dip" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:background="#0065BD" />
 
-	<TextView 
-	    android:layout_width="fill_parent" android:layout_height="0.5dip" 
-	    android:background="#0065BD" />
+    <!-- TODO translate text -->
 
-	<TextView 
-	    android:layout_width="fill_parent" android:layout_height="wrap_content"
-	    android:textColor="#0065BD"	android:layout_margin="3dip" 
-		android:text="@string/import_hint"/>
-	
+    <TextView
+        android:id="@+id/noteLinks"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dip"
+        android:text="Links importieren:\n
+		1. Handy an den Computer per USB anstecken\n
+		2. USB-Speicher am Handy aktivieren\n
+		3. Am Computer eine URL aus dem Browser in\n
+		    das Verzeichnis\n
+		    &lt;SD-Karte>\\tumcampus\\links\n
+		    im Windows Explorer ziehen\n
+		4. USB-Speicher am Handy deaktivieren\n
+		5. Hier auf &apos;Links importieren&apos; drücken"
+        android:textColor="#0065BD" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:background="#0065BD" />
+
+    <TextView
+        android:id="@+id/noteFeeds"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dip"
+        android:text="@string/howto_import_rss_feed"
+        android:textColor="#0065BD" />
+
+    <!-- TODO translate  text -->
+
+    <TextView
+        android:id="@+id/noteModules"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dip"
+        android:text="Module für den Datenimport deaktiviert."
+        android:textColor="#0065BD"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:background="#0065BD" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dip"
+        android:text="@string/import_hint"
+        android:textColor="#0065BD" />
+
 </LinearLayout>

@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:background="#0065BD" android:orientation="vertical" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#0065BD"
+    android:orientation="vertical" >
 
-    <Spinner android:id="@+id/spFilter"
-        android:layout_width="fill_parent" android:layout_height="wrap_content" />
-    
-	<ListView android:id="@+id/lvMyLecturesList"
-	    android:layout_height="0dip" android:layout_width="fill_parent" 
-		android:scrollbars="vertical" android:layout_weight="51"
-		android:layout_marginBottom="6dip" android:padding="4dip"
-		android:background="#FFFFFF"  />	
+    <Spinner
+        android:id="@+id/spFilter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:id="@+id/lvMyLecturesList"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_marginBottom="6dip"
+        android:layout_weight="51"
+        android:background="#FFFFFF"
+        android:padding="4dip"
+        android:scrollbars="vertical" />
+
 </LinearLayout>

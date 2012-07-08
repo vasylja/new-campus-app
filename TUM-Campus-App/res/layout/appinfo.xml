@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:background="#0065BD" android:orientation="vertical">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#0065BD"
+    android:orientation="vertical" >
 
-	<TextView android:id="@+id/appinfoCaptionText"
-	    android:layout_width="fill_parent" android:layout_height="2dip" />
+    <TextView
+        android:id="@+id/appinfoCaptionText"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip" />
 
-	<TextView  android:id="@+id/appinfoText"
-	    android:layout_width="fill_parent" android:layout_height="fill_parent"
-	    android:autoLink="web" android:background="#FFFFFF"
-	    android:textColor="#0065BD"
-	    android:text="@string/app_info_text" />
+    <TextView
+        android:id="@+id/appinfoText"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:autoLink="web"
+        android:background="#FFFFFF"
+        android:text="@string/app_info_text"
+        android:textColor="#0065BD" />
+
 </LinearLayout>

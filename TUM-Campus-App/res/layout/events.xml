@@ -1,38 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:background="#0065BD" android:orientation="vertical">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#0065BD"
+    android:orientation="vertical" >
 
-	<TextView android:id="@+id/line"
-	    android:layout_width="fill_parent" android:layout_height="2dip" />
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip" />
 
-	<FrameLayout 
-	    android:layout_width="fill_parent" android:layout_height="fill_parent">
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
-		<ListView android:id="@+id/listView"
-		    android:layout_width="fill_parent" android:layout_height="fill_parent"
-			android:background="#FFFFFF" android:scrollbars="vertical"
-			android:layout_marginBottom="33dip" />
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="33dip"
+            android:background="#FFFFFF"
+            android:scrollbars="vertical" />
 
-		<SlidingDrawer android:id="@+id/slider"
-		    android:layout_width="fill_parent" android:layout_height="fill_parent"
-			android:handle="@+id/handle" android:content="@+id/slide">
+        <SlidingDrawer
+            android:id="@+id/slider"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:content="@+id/slide"
+            android:handle="@+id/handle" >
 
-			<Button android:id="@+id/handle"
-			    android:layout_height="wrap_content" android:layout_width="fill_parent" 
-				android:background="#0065BD" android:textColor="#FFFFFF"
-				android:height="33dip" 
-				android:text="@string/past_events"/>
+            <Button
+                android:id="@+id/handle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#0065BD"
+                android:height="33dip"
+                android:text="@string/past_events"
+                android:textColor="#FFFFFF" />
 
-			<LinearLayout android:id="@+id/slide"
-				android:layout_width="fill_parent" android:layout_height="fill_parent"
-				android:orientation="vertical" android:background="#F1FFFFFF" >
+            <LinearLayout
+                android:id="@+id/slide"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#F1FFFFFF"
+                android:orientation="vertical" >
 
-				<ListView android:id="@+id/listView2"
-				    android:layout_width="fill_parent" android:layout_height="fill_parent"
-					android:scrollbars="vertical" />
+                <ListView
+                    android:id="@+id/listView2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+        </SlidingDrawer>
+    </FrameLayout>
 
-			</LinearLayout>
-		</SlidingDrawer>
-	</FrameLayout>
 </LinearLayout>

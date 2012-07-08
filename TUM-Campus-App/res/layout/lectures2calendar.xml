@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:background="#0065BD" android:orientation="vertical"
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#0065BD"
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/tvExportExplanation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/calendarexport"
+        android:background="#FFFFFF"
         android:padding="4dip"
-        android:textAppearance="?android:attr/textAppearanceMedium" android:textColor="#0065BD" android:background="#FFFFFF"/>
+        android:text="@string/calendarexport"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#0065BD" />
 
     <TextView
         android:id="@+id/tvExplainCalendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/choose_calendar" android:textColor="#FFFFFF"/>
+        android:text="@string/choose_calendar"
+        android:textColor="#FFFFFF" />
 
     <Spinner
         android:id="@+id/spinCalendar"
@@ -26,7 +31,8 @@
         android:id="@+id/tvReminderCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/chooseReminder" android:textColor="#FFFFFF"/>
+        android:text="@string/chooseReminder"
+        android:textColor="#FFFFFF" />
 
     <SeekBar
         android:id="@+id/sbReminder"
@@ -37,7 +43,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Export:" android:textColor="#FFFFFF"/>
+        android:text="Export:"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/btnToCalendar"
@@ -45,5 +52,5 @@
         android:layout_height="wrap_content"
         android:text="@string/export_events"
         android:textColor="#2546A4" />
-	
+
 </LinearLayout>

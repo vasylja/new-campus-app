@@ -33,7 +33,7 @@
         android:background="#0065BD"
         android:text="@string/roomfinder_results"
         android:textColor="#FFFFFF" />
-    
+
     <WebView
         android:id="@+id/wvResults"
         android:layout_width="fill_parent"

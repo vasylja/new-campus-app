@@ -1,22 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-	<Preference android:title="TUMOnline Einstellungen" android:key="tumonline"
-		android:summary="z.B. Access-Token-Einstellungen" />
-	
-	<EditTextPreference android:key="cafeteriaFilter"
-		android:summary="z.B. 'Garching' um nur Mensen in Garching auflisten"
-		android:title="Mensa-Filter" />
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-	<CheckBoxPreference android:key="silence"
-		android:title="Handy autom. lautlos" android:summary="während der Vorlesung"
-		android:defaultValue="true" />
+    <Preference
+        android:key="tumonline"
+        android:summary="z.B. Access-Token-Einstellungen"
+        android:title="TUMOnline Einstellungen" />
 
-	<CheckBoxPreference android:key="debug"
-		android:title="Debug-Modus" />
+    <!-- TODO check const -->
+    <PreferenceScreen
+        android:key="modules"
+        android:summary="aktivieren, deaktivieren"
+        android:title="Module" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="lectures"
+            android:title="Vorlesungen" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="cafeterias"
+            android:title="Speisepläne" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="transports"
+            android:title="MVV" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="feeds"
+            android:title="RSS-Feeds" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="events"
+            android:title="Veranstaltungen" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="gallery"
+            android:title="Kurz notiert" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="news"
+            android:title="Nachrichten" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="plans"
+            android:title="Umgebungspläne" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="hours"
+            android:title="Öffnungszeiten" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="links"
+            android:title="Links" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="facebook"
+            android:title="Facebook-Link" />
+    </PreferenceScreen>
 
-	<Preference android:title="Android Market" android:key="market"
-		android:summary="TUM Campus bewerten oder aktualisieren" />
+    <EditTextPreference
+        android:key="cafeteriaFilter"
+        android:summary="z.B. &apos;Garching&apos; um nur Mensen in Garching auflisten"
+        android:title="Mensa-Filter" />
 
-	<Preference android:title="App-Verwaltung" android:key="app_details"
-		android:summary="Daten löschen oder App deinstallieren" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="silence"
+        android:summary="während der Vorlesung"
+        android:title="Handy autom. lautlos" />
+    <!-- TODO check const -->
+    <CheckBoxPreference
+        android:key="debug"
+        android:summary="für Entwickler"
+        android:title="Debug-Modus" />
+
+    <Preference
+        android:key="market"
+        android:summary="TUM Campus bewerten oder aktualisieren"
+        android:title="Android Market" />
+    <Preference
+        android:key="app_details"
+        android:summary="Daten löschen oder App deinstallieren"
+        android:title="App-Verwaltung" />
+
 </PreferenceScreen>

@@ -1,79 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="fill_parent" android:layout_width="fill_parent"
-	android:orientation="vertical">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-	<LinearLayout android:id="@+id/debugSyncs"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:orientation="horizontal">
-		
-		<Button android:id="@+id/debugSync"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/debug_syncs"/>
+    <LinearLayout
+        android:id="@+id/debugSyncs"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-		<Button android:id="@+id/debugCafeterias"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/debug_cafeterias"/>
+        <Button
+            android:id="@+id/debugSync"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_syncs" />
 
-		<Button android:id="@+id/debugCafeteriasMenus"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" 
-			android:text="@string/debug_cafeterias_menus"/>
-	</LinearLayout>
+        <Button
+            android:id="@+id/debugCafeterias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_cafeterias" />
 
-	<LinearLayout 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:orientation="horizontal">
-		
-		<Button android:id="@+id/debugFeeds"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" 
-			android:text="@string/debug_feeds" />
+        <Button
+            android:id="@+id/debugCafeteriasMenus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_cafeterias_menus" />
+    </LinearLayout>
 
-		<Button android:id="@+id/debugFeedsItems"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" 
-			android:text="@string/debug_feeds_items" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-		<Button android:id="@+id/debugLinks"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" 
-			android:text="@string/debug_links"/>
+        <Button
+            android:id="@+id/debugFeeds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_feeds" />
 
-		<Button android:id="@+id/debugEvents"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" 
-			android:text="@string/debug_events" />
+        <Button
+            android:id="@+id/debugFeedsItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_feeds_items" />
 
-		<Button android:id="@+id/debugNews"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" 
-			android:text="@string/debug_news"/>
-		
-	</LinearLayout>
+        <Button
+            android:id="@+id/debugLinks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_links" />
 
-	<LinearLayout 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:orientation="horizontal">
-		
-		<Button android:id="@+id/debugLectures"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/debug_lectures" />
+        <Button
+            android:id="@+id/debugEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_events" />
 
-		<Button android:id="@+id/debugLecturesItems"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/debug_lectures_items" />
+        <Button
+            android:id="@+id/debugNews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_news" />
+    </LinearLayout>
 
-		<Button android:id="@+id/debugLocations"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/debug_locations" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-		<Button android:id="@+id/debugTime"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/debug_time" />
-		
-	</LinearLayout>
+        <Button
+            android:id="@+id/debugLectures"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_lectures" />
 
-	<LinearLayout 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:orientation="horizontal">
-		
-		<Button             android:id="@+id/debugMaster"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/debug_master" />
-		
-	<!-- TODO translate text -->
+        <Button
+            android:id="@+id/debugLecturesItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_lectures_items" />
+
+        <Button
+            android:id="@+id/debugLocations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_locations" />
+
+        <Button
+            android:id="@+id/debugTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_time" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/debugMaster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_master" />
+
+        <!-- TODO translate text -->
 
         <Button
             android:id="@+id/debugGallery"
@@ -82,8 +115,10 @@
             android:text="gallery" />
     </LinearLayout>
 
-	<TextView android:id="@+id/debug"
-	    android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:scrollbars="vertical" />
+    <TextView
+        android:id="@+id/debug"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
 
 </LinearLayout>
