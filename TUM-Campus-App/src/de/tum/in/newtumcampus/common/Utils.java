@@ -1,6 +1,7 @@
 ﻿package de.tum.in.newtumcampus.common;
 
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -24,6 +25,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -50,7 +52,30 @@ public class Utils {
 	/** Counter for unfinished downloads */
 	public static int openDownloads = 0;
 
-	/** Download a JSON stream from a URL
+	/**
+	 * Download a String from a URL
+	 * 
+	 * <pre>
+	 * @param url Valid URL
+	 * @return String
+	 * @throws Exception
+	 * </pre>
+	 */
+	public static String downloadString(String url) throws Exception {
+		Utils.log(url);
+
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpEntity entity = httpclient.execute(new HttpGet(url)).getEntity();
+		if (entity == null) {
+			return "";
+		}
+		String data = EntityUtils.toString(entity);
+		Utils.log(data);
+		return data;
+	}
+
+	/**
+	 * Download a JSON stream from a URL
 	 * 
 	 * <pre>
 	 * @param url Valid URL
