@@ -15,8 +15,8 @@
 
 	<Button android:id="@+id/importLectures"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:textColor="#FF2546A4" 
-		android:text="@string/import_lectures_from_sd_card"/>
+		android:layout_marginBottom="3dip"
+		android:text="@string/import_lectures_from_sd_card"        android:textColor="#FF2546A4" />
 
 	<Button android:id="@+id/importLinks"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
