@@ -40,25 +40,26 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		}
 
 		// get all upcoming lecture units
-		LectureItemManager lim = new LectureItemManager(this, Const.db);
+		LectureItemManager lim = new LectureItemManager(this);
 		Cursor c = lim.getRecentFromDb();
 
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item, c,
 				c.getColumnNames(), new int[] { android.R.id.text1, android.R.id.text2 });
+
 		adapter.setViewBinder(this);
 
 		ListView lv = (ListView) findViewById(R.id.listView);
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(this);
 		lv.setOnItemLongClickListener(this);
-		lim.close();
 
 		// get all lectures
-		LectureManager lm = new LectureManager(this, Const.db);
+		LectureManager lm = new LectureManager(this);
 		Cursor c2 = lm.getAllFromDb();
 
 		SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c2,
 				c2.getColumnNames(), new int[] { android.R.id.text1 });
+
 		adapter2.setViewBinder(new ViewBinder() {
 
 			@Override
@@ -75,7 +76,6 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		lv2.setAdapter(adapter2);
 		lv2.setOnItemClickListener(this);
 		lv2.setOnItemLongClickListener(this);
-		lm.close();
 
 		// reset new items counter
 		LectureItemManager.lastInserted = 0;
@@ -152,11 +152,10 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 			String module = c2.getString(c2.getColumnIndex(Const.MODULE_COLUMN));
 
 			// get all lecture units from a lecture
-			LectureItemManager lim = new LectureItemManager(this, Const.db);
+			LectureItemManager lim = new LectureItemManager(this);
 
 			SimpleCursorAdapter adapter = (SimpleCursorAdapter) lv.getAdapter();
 			adapter.changeCursor(lim.getAllFromDb(lectureId));
-			lim.close();
 
 			TextView tv = (TextView) findViewById(R.id.lectureText);
 			tv.setText(Utils.trunc(name + ":", 35));
@@ -198,7 +197,7 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 	 * </pre> */
 	public void deleteLectureItem(String itemId) {
 		// delete lecture item
-		LectureItemManager lim = new LectureItemManager(this, Const.db);
+		LectureItemManager lim = new LectureItemManager(this);
 		lim.deleteItemFromDb(itemId);
 
 		ListView lv = (ListView) findViewById(R.id.listView);
@@ -208,7 +207,6 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		} else {
 			adapter.changeCursor(lim.getAllFromDb(lectureId));
 		}
-		lim.close();
 	}
 
 	/** Deletes a lecture and refreshes both list views
@@ -218,17 +216,16 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 	 * </pre> */
 	public void deleteLecture(String itemId) {
 		// delete lecture
-		LectureManager lm = new LectureManager(this, Const.db);
+		LectureManager lm = new LectureManager(this);
 		lm.deleteItemFromDb(itemId);
 
 		// refresh lecture list
 		ListView lv2 = (ListView) findViewById(R.id.listView2);
 		SimpleCursorAdapter adapter = (SimpleCursorAdapter) lv2.getAdapter();
 		adapter.changeCursor(lm.getAllFromDb());
-		lm.close();
 
 		// delete lecture items
-		LectureItemManager lim = new LectureItemManager(this, Const.db);
+		LectureItemManager lim = new LectureItemManager(this);
 		lim.deleteLectureFromDb(itemId);
 
 		// refresh lecture unit list if viewing deleted lecture or
@@ -248,7 +245,6 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 			// unselect current lecture (no longer exists)
 			lectureId = null;
 		}
-		lim.close();
 	}
 
 	@Override

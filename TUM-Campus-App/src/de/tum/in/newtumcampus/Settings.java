@@ -33,6 +33,7 @@ public class Settings extends PreferenceActivity {
 				Uri uri = Uri.parse("package:" + getPackageName());
 				Intent intent = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS", uri);
 				startActivity(intent);
+
 			} else {
 				// older Androids
 				Intent intent = new Intent(Intent.ACTION_VIEW);

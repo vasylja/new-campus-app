@@ -58,7 +58,7 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 		}
 
 		// get all stations from db
-		TransportManager tm = new TransportManager(this, Const.db);
+		TransportManager tm = new TransportManager(this);
 		Cursor c = tm.getAllFromDb();
 
 		ListAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c, c.getColumnNames(),
@@ -68,7 +68,6 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(this);
 		lv.setOnItemLongClickListener(this);
-		tm.close();
 
 		// search stations when edit box has 3 characters
 		final EditText et = (EditText) findViewById(R.id.search);
@@ -76,16 +75,19 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 
 		et.addTextChangedListener(new TextWatcher() {
 
+			@Override
 			public void onTextChanged(CharSequence input, int arg1, int arg2, int arg3) {
 				if (input.length() == 3) {
 					et.onEditorAction(android.view.inputmethod.EditorInfo.IME_ACTION_DONE);
 				}
 			}
 
+			@Override
 			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
 				// empty
 			}
 
+			@Override
 			public void afterTextChanged(Editable arg0) {
 				// empty
 			}
@@ -105,6 +107,7 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 		lv2.setAdapter(adapter2);
 	}
 
+	@Override
 	public void onItemClick(final AdapterView<?> av, View v, int position, long id) {
 		// click on station in list
 		Cursor c = (Cursor) av.getAdapter().getItem(position);
@@ -119,35 +122,36 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 		// save clicked station into db and refresh station list
 		// (could be clicked on search result list)
 		SimpleCursorAdapter adapter = (SimpleCursorAdapter) av.getAdapter();
-		TransportManager tm = new TransportManager(this, Const.db);
+		TransportManager tm = new TransportManager(this);
 		tm.replaceIntoDb(location);
 		adapter.changeCursor(tm.getAllFromDb());
-		tm.close();
 
 		// load departures in new thread, show progress dialog during load
 		final ProgressDialog progress = ProgressDialog.show(this, "", getString(R.string.loading), true);
 
 		new Thread(new Runnable() {
+			@Override
 			public void run() {
 				// get departures from website
-				TransportManager tm = new TransportManager(av.getContext(), Const.db);
+				TransportManager tm = new TransportManager(av.getContext());
 				Cursor c = null;
 				try {
 					if (!connected()) {
 						throw new Exception(getString(R.string.no_internet_connection));
 					}
 					c = tm.getDeparturesFromExternal(location);
+
 				} catch (Exception e) {
 					// show errors in departures list
 					MatrixCursor c2 = new MatrixCursor(new String[] { "name", "desc", "_id" });
 					c2.addRow(new String[] { e.getMessage(), "", "0" });
 					c = c2;
 				}
-				tm.close();
 
 				// show departures in list
 				final Cursor c2 = c;
 				runOnUiThread(new Runnable() {
+					@Override
 					public void run() {
 						progress.hide();
 
@@ -160,22 +164,23 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 		}).start();
 	}
 
+	@Override
 	public boolean onItemLongClick(final AdapterView<?> av, View v, final int position, long id) {
 
 		// confirm and delete station
 		DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialog, int id) {
 
 				// delete station from list, refresh station list
 				Cursor c = (Cursor) av.getAdapter().getItem(position);
 				String location = c.getString(c.getColumnIndex(Const.NAME_COLUMN));
 
-				TransportManager tm = new TransportManager(av.getContext(), Const.db);
+				TransportManager tm = new TransportManager(av.getContext());
 				tm.deleteFromDb(location);
 
 				SimpleCursorAdapter adapter = (SimpleCursorAdapter) av.getAdapter();
 				adapter.changeCursor(tm.getAllFromDb());
-				tm.close();
 			}
 		};
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -186,17 +191,19 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 		return false;
 	}
 
+	@Override
 	public boolean onEditorAction(final TextView input, int code, KeyEvent key) {
 
 		// search station in new thread, show progress dialog during search
 		final ProgressDialog progress = ProgressDialog.show(this, "", getString(R.string.loading), true);
 
 		new Thread(new Runnable() {
+			@Override
 			public void run() {
 
 				// search station on website
 				String message = "";
-				TransportManager tm = new TransportManager(input.getContext(), Const.db);
+				TransportManager tm = new TransportManager(input.getContext());
 				Cursor c = null;
 				try {
 					if (!connected()) {
@@ -206,7 +213,6 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 				} catch (Exception e) {
 					message = e.getMessage();
 				}
-				tm.close();
 
 				final Cursor c2 = c;
 				final String message2 = message;
@@ -214,6 +220,7 @@ public class Transports extends Activity implements OnItemClickListener, OnItemL
 				// show stations from search result in station list
 				// show error message if necessary
 				runOnUiThread(new Runnable() {
+					@Override
 					public void run() {
 						progress.hide();
 

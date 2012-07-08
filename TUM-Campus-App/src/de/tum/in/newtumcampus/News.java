@@ -43,22 +43,23 @@ public class News extends Activity implements OnItemClickListener, ViewBinder {
 		super.onResume();
 
 		// get all news from database
-		NewsManager nm = new NewsManager(this, Const.db);
+		NewsManager nm = new NewsManager(this);
 		Cursor c = nm.getAllFromDb();
 
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.news_listview, c, c.getColumnNames(),
 				new int[] { R.id.image, R.id.message, R.id.date });
+
 		adapter.setViewBinder(this);
 
 		ListView lv = (ListView) findViewById(R.id.listView);
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(this);
-		nm.close();
 
 		// reset new items counter
 		NewsManager.lastInserted = 0;
 	}
 
+	@Override
 	public void onItemClick(AdapterView<?> aview, View view, int position, long id) {
 		ListView lv = (ListView) findViewById(R.id.listView);
 		Cursor c = (Cursor) lv.getAdapter().getItem(position);
@@ -74,6 +75,7 @@ public class News extends Activity implements OnItemClickListener, ViewBinder {
 		startActivity(viewIntent);
 	}
 
+	@Override
 	public boolean setViewValue(View view, Cursor cursor, int index) {
 		// add url (domain only) to date
 		if (view.getId() == R.id.date) {
@@ -94,6 +96,7 @@ public class News extends Activity implements OnItemClickListener, ViewBinder {
 			// no binding needed
 			return true;
 		}
+		view.setVisibility(View.VISIBLE);
 		return false;
 	}
 

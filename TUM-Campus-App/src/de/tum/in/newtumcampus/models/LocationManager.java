@@ -3,12 +3,12 @@ package de.tum.in.newtumcampus.models;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Location manager, handles database stuff */
-public class LocationManager extends SQLiteOpenHelper {
+/**
+ * Location manager, handles database stuff
+ */
+public class LocationManager {
 
 	/** Database connection */
 	private SQLiteDatabase db;
@@ -17,13 +17,15 @@ public class LocationManager extends SQLiteOpenHelper {
 	 * 
 	 * <pre>
 	 * @param context Context
-	 * @param database Filename, e.g. database.db
-	 * </pre> */
-	public LocationManager(Context context, String database) {
-		super(context, database, null, Const.dbVersion);
+	 * </pre>
+	 */
+	public LocationManager(Context context) {
+		db = DatabaseManager.getDb(context);
 
-		db = getWritableDatabase();
-		onCreate(db);
+		// create table if needed
+		db.execSQL("CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY, category VARCHAR, "
+				+ "name VARCHAR, address VARCHAR, room VARCHAR, transport VARCHAR, "
+				+ "hours VARCHAR, remark VARCHAR, url VARCHAR)");
 	}
 
 	/** Get all locations by category from the database
@@ -34,7 +36,7 @@ public class LocationManager extends SQLiteOpenHelper {
 	 * 		url, _id)
 	 * </pre> */
 	public Cursor getAllHoursFromDb(String category) {
-		return db.rawQuery("SELECT name, address, room, transport, hours, " + "remark, url, id as _id "
+		return db.rawQuery("SELECT name, address, room, transport, hours, remark, url, id as _id "
 				+ "FROM locations WHERE category=? ORDER BY name", new String[] { category });
 	}
 
@@ -82,21 +84,8 @@ public class LocationManager extends SQLiteOpenHelper {
 			throw new Exception("Invalid name.");
 		}
 		db.execSQL("REPLACE INTO locations (id, category, name, address, room, "
-				+ "transport, hours, remark, url) VALUES " + "(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				+ "transport, hours, remark, url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new String[] { String.valueOf(l.id), l.category, l.name, l.address, l.room, l.transport, l.hours,
 						l.remark, l.url });
-	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS locations (" + "id INTEGER PRIMARY KEY, category VARCHAR, "
-				+ "name VARCHAR, address VARCHAR, room VARCHAR, transport VARCHAR, "
-				+ "hours VARCHAR, remark VARCHAR, url VARCHAR)");
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		onCreate(db);
 	}
 }

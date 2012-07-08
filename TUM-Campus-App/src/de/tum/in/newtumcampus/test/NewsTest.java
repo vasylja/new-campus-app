@@ -4,7 +4,6 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 
-import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.TumCampus;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.News;
@@ -25,17 +24,15 @@ public class NewsTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		// inject test data
 		News n = new News("N1", "Test message", "http://www.test.de", "", Utils.getDate("2011-12-13"));
 
-		NewsManager nm = new NewsManager(getActivity(), Const.db);
+		NewsManager nm = new NewsManager(getActivity());
 		nm.replaceIntoDb(n);
-		nm.close();
 	}
 
 	@Override
 	public void tearDown() throws Exception {
 		// remove test data
-		NewsManager nm = new NewsManager(getActivity(), Const.db);
+		NewsManager nm = new NewsManager(getActivity());
 		nm.removeCache();
-		nm.close();
 		super.tearDown();
 	}
 

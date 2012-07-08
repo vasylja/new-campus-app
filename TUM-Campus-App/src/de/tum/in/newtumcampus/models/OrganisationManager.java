@@ -64,7 +64,7 @@ public class OrganisationManager {
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
-	 * @param Token Token for the XML-Request
+	 * @param token Token for the XML-Request
 	 * @throws Exception
 	 * </pre> */
 	public void downloadFromExternal(String token) throws Exception {

@@ -26,28 +26,44 @@ import de.tum.in.newtumcampus.services.DownloadService;
 /** Activity to show cafeterias and meals selected by date */
 public class Cafeterias extends Activity implements OnItemClickListener {
 
-	/** Current Date selected (ISO format) */
+	/**
+	 * Current Date selected (ISO format)
+	 */
 	private static String date;
 
-	/** Current Date selected (German format) */
+	/**
+	 * Current Date selected (German format)
+	 */
 	private static String dateStr;
 
-	/** Cafeteria prices url */
-	private static String MENSA_PREISE = "http://www.studentenwerk-muenchen.de/mensa/unsere-preise/";
-
-	/** Cafeteria list Garching url */
-	private static String MENSEN_GARCHING = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/garching/";
-
-	/** Cafeteria list Muenchen url */
-	private static String MENSEN_MUENCHEN = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/muenchen/";
-
-	/** Current Cafeteria selected */
+	/**
+	 * Current Cafeteria selected
+	 */
 	private String cafeteriaId;
 
-	/** Current Cafeteria name selected */
+	/**
+	 * Current Cafeteria name selected
+	 */
 	private String cafeteriaName;
 
-	/** Footer with opening hours */
+	/**
+	 * Cafeteria prices url
+	 */
+	private static String MENSA_PREISE = "http://www.studentenwerk-muenchen.de/mensa/unsere-preise/";
+
+	/**
+	 * Cafeteria list Garching url
+	 */
+	private static String MENSEN_GARCHING = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/garching/";
+
+	/**
+	 * Cafeteria list Muenchen url
+	 */
+	private static String MENSEN_MUENCHEN = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/muenchen/";
+
+	/**
+	 * Footer with opening hours
+	 */
 	View footer;
 
 	@Override
@@ -97,7 +113,7 @@ public class Cafeterias extends Activity implements OnItemClickListener {
 		// get cafeteria list, filtered by user-defined substring
 		String filter = Utils.getSetting(this, Const.Settings.cafeteriaFilter);
 
-		CafeteriaManager cm = new CafeteriaManager(this, Const.db);
+		CafeteriaManager cm = new CafeteriaManager(this);
 		Cursor c2 = cm.getAllFromDb("%" + filter + "%");
 
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item, c2,
@@ -106,10 +122,9 @@ public class Cafeterias extends Activity implements OnItemClickListener {
 		ListView lv2 = (ListView) findViewById(R.id.listView2);
 		lv2.setAdapter(adapter);
 		lv2.setOnItemClickListener(this);
-		cm.close();
 
 		// get all (distinct) dates having menus available
-		CafeteriaMenuManager cmm = new CafeteriaMenuManager(this, Const.db);
+		CafeteriaMenuManager cmm = new CafeteriaMenuManager(this);
 		Cursor c = cmm.getDatesFromDb();
 
 		adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c, c.getColumnNames(),
@@ -118,12 +133,12 @@ public class Cafeterias extends Activity implements OnItemClickListener {
 		ListView lv = (ListView) findViewById(R.id.listView);
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(this);
-		cmm.close();
 
 		// reset new items counter
 		CafeteriaMenuManager.lastInserted = 0;
 	}
 
+	@Override
 	public void onItemClick(AdapterView<?> av, View v, int position, long id) {
 
 		SlidingDrawer sd = (SlidingDrawer) findViewById(R.id.slider);
@@ -154,13 +169,12 @@ public class Cafeterias extends Activity implements OnItemClickListener {
 			tv.setText(cafeteriaName + ": " + dateStr);
 
 			// opening hours
-			LocationManager lm = new LocationManager(this, Const.db);
+			LocationManager lm = new LocationManager(this);
 			tv = (TextView) footer.findViewById(android.R.id.text2);
 			tv.setText(lm.getHoursById(cafeteriaId));
-			lm.close();
 
 			// menus
-			CafeteriaMenuManager cmm = new CafeteriaMenuManager(this, Const.db);
+			CafeteriaMenuManager cmm = new CafeteriaMenuManager(this);
 			Cursor c = cmm.getTypeNameFromDb(cafeteriaId, date);
 
 			TextView tv3 = (TextView) footer.findViewById(android.R.id.text1);
@@ -187,7 +201,6 @@ public class Cafeterias extends Activity implements OnItemClickListener {
 
 			ListView lv3 = (ListView) findViewById(R.id.listView3);
 			lv3.setAdapter(adapter);
-			cmm.close();
 		}
 	}
 

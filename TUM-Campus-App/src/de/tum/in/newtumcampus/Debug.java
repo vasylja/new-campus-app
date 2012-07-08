@@ -8,6 +8,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import de.tum.in.newtumcampus.models.DatabaseManager;
 
 /** Activity to show raw table contents of the database */
 public class Debug extends Activity implements View.OnClickListener {
@@ -40,6 +41,9 @@ public class Debug extends Activity implements View.OnClickListener {
 		b.setOnClickListener(this);
 
 		b = (Button) findViewById(R.id.debugEvents);
+		b.setOnClickListener(this);
+
+		b = (Button) findViewById(R.id.debugGallery);
 		b.setOnClickListener(this);
 
 		b = (Button) findViewById(R.id.debugNews);
@@ -80,8 +84,7 @@ public class Debug extends Activity implements View.OnClickListener {
 	 *            SQL query to execute */
 	public void debugSQL(String query) {
 		debugReset();
-		SQLiteDatabase db = SQLiteDatabase.openDatabase(getDatabasePath(Const.db).toString(), null,
-				SQLiteDatabase.OPEN_READONLY);
+		SQLiteDatabase db = DatabaseManager.getDb(this);
 
 		// output raw data row-by-row
 		Cursor c = db.rawQuery(query, null);
@@ -93,9 +96,9 @@ public class Debug extends Activity implements View.OnClickListener {
 			debugStr(content.toString());
 		}
 		c.close();
-		db.close();
 	}
 
+	@Override
 	public void onClick(View v) {
 
 		// execute queries on click and present results in GUI
@@ -137,6 +140,10 @@ public class Debug extends Activity implements View.OnClickListener {
 
 		if (v.getId() == R.id.debugEvents) {
 			debugSQL("SELECT * FROM events ORDER BY start DESC");
+		}
+
+		if (v.getId() == R.id.debugGallery) {
+			debugSQL("SELECT * FROM gallery ORDER BY position ASC");
 		}
 
 		if (v.getId() == R.id.debugNews) {

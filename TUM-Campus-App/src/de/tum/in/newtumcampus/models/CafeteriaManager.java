@@ -1,22 +1,18 @@
 ﻿package de.tum.in.newtumcampus.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.tum.in.newtumcampus.Const;
-import de.tum.in.newtumcampus.common.Utils;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import de.tum.in.newtumcampus.common.Utils;
 
-/** Cafeteria Manager, handles database stuff, external imports */
-public class CafeteriaManager extends SQLiteOpenHelper {
+/**
+ * Cafeteria Manager, handles database stuff, external imports
+ */
+public class CafeteriaManager {
 
 	/** Database connection */
 	private SQLiteDatabase db;
@@ -25,13 +21,13 @@ public class CafeteriaManager extends SQLiteOpenHelper {
 	 * 
 	 * <pre>
 	 * @param context Context
-	 * @param database Filename, e.g. database.db
-	 * </pre> */
-	public CafeteriaManager(Context context, String database) {
-		super(context, database, null, Const.dbVersion);
+	 * </pre>
+	 */
+	public CafeteriaManager(Context context) {
+		db = DatabaseManager.getDb(context);
 
-		db = getWritableDatabase();
-		onCreate(db);
+		// create table if needed
+		db.execSQL("CREATE TABLE IF NOT EXISTS cafeterias (id INTEGER PRIMARY KEY, name VARCHAR, address VARCHAR)");
 	}
 
 	/** Download cafeterias from external interface (JSON)
@@ -65,28 +61,15 @@ public class CafeteriaManager extends SQLiteOpenHelper {
 		}
 	}
 
-	/** Returns all cafeteria IDs
-	 * 
-	 * @return List of all cafeteria IDs */
-	public List<Integer> getAllIdsFromDb() {
-		List<Integer> list = new ArrayList<Integer>();
-
-		Cursor c = db.rawQuery("SELECT id FROM cafeterias ORDER BY id", null);
-		while (c.moveToNext()) {
-			list.add(c.getInt(0));
-		}
-		c.close();
-		return list;
-	}
-
-	/** Returns all cafeterias, filterable by substring of name/address
+	/**
+	 * Returns all cafeterias, filterable by substring of name/address
 	 * 
 	 * <pre>
 	 * @param filter Filter name/address by substring ("" = no filter)
 	 * @return Database cursor (name, address, _id)
 	 * </pre> */
 	public Cursor getAllFromDb(String filter) {
-		return db.rawQuery("SELECT name, address, id as _id " + "FROM cafeterias WHERE name LIKE ? OR address LIKE ? "
+		return db.rawQuery("SELECT name, address, id as _id FROM cafeterias WHERE name LIKE ? OR address LIKE ? "
 				+ "ORDER BY address like '%Garching%' DESC, name", new String[] { filter, filter });
 	}
 
@@ -129,16 +112,5 @@ public class CafeteriaManager extends SQLiteOpenHelper {
 	/** Removes all cache items */
 	public void removeCache() {
 		db.execSQL("DELETE FROM cafeterias");
-	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS cafeterias (" + "id INTEGER PRIMARY KEY, name VARCHAR, address VARCHAR)");
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		onCreate(db);
 	}
 }

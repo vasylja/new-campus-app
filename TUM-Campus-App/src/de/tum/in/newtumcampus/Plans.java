@@ -60,6 +60,7 @@ public class Plans extends Activity implements OnItemClickListener {
 		// draw image from assets directory in webview
 		String file = "";
 		int width = getWindowManager().getDefaultDisplay().getWidth();
+
 		if (position == 0) {
 			file = "plans/CampusGarching.jpg";
 			setTitle(getString(R.string.plan) + getString(R.string.campus_garching));
@@ -78,7 +79,7 @@ public class Plans extends Activity implements OnItemClickListener {
 		} else if (position == 3) {
 			file = "plans/CampusOlympiaparkHallenplan.jpg";
 			setTitle(getString(R.string.plan) + getString(R.string.campus_olympiapark_gyms));
-			browser.setInitialScale(100 * width / 1024);
+			browser.setInitialScale(100 * width / 800);
 
 		} else if (position == 4) {
 			file = "plans/CampusStammgelaende.jpg";
@@ -93,15 +94,15 @@ public class Plans extends Activity implements OnItemClickListener {
 		} else if (position == 6) {
 			file = "plans/mvv.jpg";
 			setTitle(getString(R.string.plan) + getString(R.string.mvv_fast_train_net));
-			browser.setInitialScale(100 * width / 1100);
+			browser.setInitialScale(100 * width / 1454);
 
 		} else {
 			file = "plans/mvv_night.jpg";
 			setTitle(getString(R.string.plan) + getString(R.string.mvv_nightlines));
-			browser.setInitialScale(100 * width / 1485);
+			browser.setInitialScale(100 * width / 1480);
 		}
 
-		String data = "<body style='margin:0px;'><img src='" + file + "'/>" + "</body>";
+		String data = "<body style='margin:0px;'><img src='" + file + "'/></body>";
 		browser.loadDataWithBaseURL("file:///android_asset/", data, "text/html", "UTF-8", null);
 		browser.forceLayout();
 

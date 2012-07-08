@@ -37,6 +37,7 @@ import de.tum.in.newtumcampus.models.CafeteriaMenuManager;
 import de.tum.in.newtumcampus.models.EventManager;
 import de.tum.in.newtumcampus.models.FeedItemManager;
 import de.tum.in.newtumcampus.models.FeedManager;
+import de.tum.in.newtumcampus.models.GalleryManager;
 import de.tum.in.newtumcampus.models.LectureItemManager;
 import de.tum.in.newtumcampus.models.LinkManager;
 import de.tum.in.newtumcampus.models.NewsManager;
@@ -89,22 +90,18 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		b.setOnClickListener(this);
 
 		// show initial download button if feed items are empty
-		FeedItemManager fim = new FeedItemManager(this, Const.db);
+		FeedItemManager fim = new FeedItemManager(this);
 		if (fim.empty()) {
 			b.setVisibility(View.VISIBLE);
 		} else {
 			b.setVisibility(View.GONE);
 		}
-		fim.close();
 
 		// register receiver for download and import
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction(ImportService.broadcast);
 		intentFilter.addAction(DownloadService.broadcast);
 		registerReceiver(receiver, intentFilter);
-
-		// initialize import buttons
-		setImportButtons(true);
 
 		// import default values into database
 		Intent service = new Intent(this, ImportService.class);
@@ -134,10 +131,11 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		String conn = getConnection();
 		Button b = (Button) findViewById(R.id.refresh);
 		// hello world text
-		TextView tv = (TextView) findViewById(R.id.hello);
+		TextView tv = (TextView) findViewById(R.id.status);
 
-		/** <pre>
-		 * hide download button if offline
+		/**
+		 * <pre>
+		 * disable download button if offline
 		 * show cancel button if currently syncing
 		 * else show download button
 		 * </pre> */
@@ -170,6 +168,9 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 			b = (Button) findViewById(R.id.initial);
 			b.setVisibility(View.GONE);
 		}
+
+		// initialize import buttons
+		setImportButtons(true);
 
 		// start silence service
 		Intent service = new Intent(this, SilenceService.class);
@@ -358,34 +359,30 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 			return;
 		}
 
-		CafeteriaManager cm = new CafeteriaManager(this, Const.db);
+		CafeteriaManager cm = new CafeteriaManager(this);
 		cm.removeCache();
-		cm.close();
 
-		CafeteriaMenuManager cmm = new CafeteriaMenuManager(this, Const.db);
+		CafeteriaMenuManager cmm = new CafeteriaMenuManager(this);
 		cmm.removeCache();
-		cmm.close();
 
-		FeedItemManager fim = new FeedItemManager(this, Const.db);
+		FeedItemManager fim = new FeedItemManager(this);
 		fim.removeCache();
-		fim.close();
 
-		EventManager em = new EventManager(this, Const.db);
+		EventManager em = new EventManager(this);
 		em.removeCache();
-		em.close();
 
-		LinkManager lm = new LinkManager(this, Const.db);
+		GalleryManager gm = new GalleryManager(this);
+		gm.removeCache();
+
+		LinkManager lm = new LinkManager(this);
 		lm.removeCache();
-		lm.close();
 
-		NewsManager nm = new NewsManager(this, Const.db);
+		NewsManager nm = new NewsManager(this);
 		nm.removeCache();
-		nm.close();
 
 		// table of all download events
-		SyncManager sm = new SyncManager(this, Const.db);
+		SyncManager sm = new SyncManager(this);
 		sm.deleteFromDb();
-		sm.close();
 
 		// show initial download button
 		Button b = (Button) findViewById(R.id.initial);

@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 import de.tum.in.newtumcampus.Const;
+import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.TumCampus;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.CafeteriaManager;
@@ -21,19 +22,23 @@ import de.tum.in.newtumcampus.models.CafeteriaMenuManager;
 import de.tum.in.newtumcampus.models.EventManager;
 import de.tum.in.newtumcampus.models.FeedItemManager;
 import de.tum.in.newtumcampus.models.FeedManager;
+import de.tum.in.newtumcampus.models.GalleryManager;
 import de.tum.in.newtumcampus.models.LinkManager;
 import de.tum.in.newtumcampus.models.NewsManager;
 import de.tum.in.newtumcampus.models.OrganisationManager;
 import de.tum.in.newtumcampus.models.SyncManager;
-import de.tum.in.newtumcampus.R;
 
 /** Service used to download files from external pages */
 public class DownloadService extends IntentService {
 
-	/** Indicator to avoid starting new downloads */
+	/**
+	 * Indicator to avoid starting new downloads
+	 */
 	private volatile boolean destroyed = false;
 
-	/** Download broadcast identifier */
+	/**
+	 * Download broadcast identifier
+	 */
 	public final static String broadcast = "de.tum.in.newtumcampus.intent.action.BROADCAST_DOWNLOAD";
 
 	private static final String DOWNLOAD_SERVICE = "DownloadService";
@@ -103,7 +108,6 @@ public class DownloadService extends IntentService {
 		if (action != null) {
 			force = true;
 		}
-
 		// download all or only one action
 		if ((action == null || action.equals(Const.FEEDS)) && !destroyed) {
 			logMessage(getString(R.string.rss_feeds) + ", ", "");
@@ -117,12 +121,16 @@ public class DownloadService extends IntentService {
 			logMessage(getString(R.string.events) + ", ", "");
 			downloadEvents(force);
 		}
+		if ((action == null || action.equals("gallery")) && !destroyed && Utils.getSettingBool(this, "gallery")) {
+// TODO translate
+			logMessage("Kurz notiert ", "");
+			downloadGallery(force);
+		}
 		if ((action == null || action.equals(Const.CAFETERIAS)) && !destroyed) {
 			logMessage(getString(R.string.cafeterias) + ", ", "");
 			downloadCafeterias(force);
 		}
 		if ((action == null || action.equals(Const.LINKS)) && !destroyed) {
-			logMessage(getString(R.string.links) + ", ", "");
 			downloadLinks();
 		}
 		if ((action == null || action.equals(Const.ORGANISATIONS)) && !destroyed) {
@@ -140,11 +148,10 @@ public class DownloadService extends IntentService {
 	 * @param force True to force download over normal sync period, else false
 	 * </pre> */
 	public void downloadFeeds(boolean force) {
-		FeedManager nm = new FeedManager(this, Const.db);
+		FeedManager nm = new FeedManager(this);
 		List<Integer> list = nm.getAllIdsFromDb();
-		nm.close();
 
-		FeedItemManager nim = new FeedItemManager(this, Const.db);
+		FeedItemManager nim = new FeedItemManager(this);
 		for (int id : list) {
 			if (destroyed) {
 				break;
@@ -155,7 +162,6 @@ public class DownloadService extends IntentService {
 				logErrorMessage(e, nim.lastInfo);
 			}
 		}
-		nim.close();
 	}
 
 	/** Download news elements
@@ -164,13 +170,12 @@ public class DownloadService extends IntentService {
 	 * @param force True to force download over normal sync period, else false
 	 * </pre> */
 	public void downloadNews(boolean force) {
-		NewsManager nm = new NewsManager(this, Const.db);
+		NewsManager nm = new NewsManager(this);
 		try {
 			nm.downloadFromExternal(force);
 		} catch (Exception e) {
 			logErrorMessage(e, "");
 		}
-		nm.close();
 	}
 
 	/** Download events
@@ -179,13 +184,28 @@ public class DownloadService extends IntentService {
 	 * @param force True to force download over normal sync period, else false
 	 * </pre> */
 	public void downloadEvents(boolean force) {
-		EventManager em = new EventManager(this, Const.db);
+		EventManager em = new EventManager(this);
 		try {
 			em.downloadFromExternal(force);
 		} catch (Exception e) {
 			logErrorMessage(e, "");
 		}
-		em.close();
+	}
+
+	/**
+	 * Download gallery
+	 * 
+	 * <pre>
+	 * @param force True to force download over normal sync period, else false
+	 * </pre>
+	 */
+	public void downloadGallery(boolean force) {
+		GalleryManager gm = new GalleryManager(this);
+		try {
+			gm.downloadFromExternal(force);
+		} catch (Exception e) {
+			logErrorMessage(e, "");
+		}
 	}
 
 	/** Download cafeterias
@@ -194,27 +214,24 @@ public class DownloadService extends IntentService {
 	 * @param force True to force download over normal sync period, else false
 	 * </pre> */
 	public void downloadCafeterias(boolean force) {
-		CafeteriaManager cm = new CafeteriaManager(this, Const.db);
-		CafeteriaMenuManager cmm = new CafeteriaMenuManager(this, Const.db);
+		CafeteriaManager cm = new CafeteriaManager(this);
+		CafeteriaMenuManager cmm = new CafeteriaMenuManager(this);
 		try {
 			cm.downloadFromExternal(force);
-			cmm.downloadFromExternal(cm.getAllIdsFromDb(), force);
+			cmm.downloadFromExternal(force);
 		} catch (Exception e) {
 			logErrorMessage(e, "");
 		}
-		cmm.close();
-		cm.close();
 	}
 
 	/** Download missing icons for links */
 	public void downloadLinks() {
-		LinkManager lm = new LinkManager(this, Const.db);
+		LinkManager lm = new LinkManager(this);
 		try {
 			lm.downloadMissingIcons();
 		} catch (Exception e) {
 			logErrorMessage(e, "");
 		}
-		lm.close();
 	}
 
 	/** Download OrganisationTree from TUMOnline
@@ -298,8 +315,7 @@ public class DownloadService extends IntentService {
 			Utils.getCacheDir("");
 
 			// init sync table
-			SyncManager sm = new SyncManager(this, Const.db);
-			sm.close();
+			new SyncManager(this);
 		} catch (Exception e) {
 			logErrorMessage(e, "");
 

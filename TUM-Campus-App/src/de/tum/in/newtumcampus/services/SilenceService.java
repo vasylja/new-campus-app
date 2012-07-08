@@ -13,7 +13,9 @@ import de.tum.in.newtumcampus.models.LectureItemManager;
 /** Service used to silence the mobile during lectures */
 public class SilenceService extends IntentService {
 
-	/** Interval in milliseconds to check for current lectures */
+	/**
+	 * Interval in milliseconds to check for current lectures
+	 */
 	public static int interval = 60000;
 
 	public static final String SILENCE_SERVICE = "SilenceService";
@@ -32,14 +34,13 @@ public class SilenceService extends IntentService {
 			// default: no silence
 			int mode = AudioManager.RINGER_MODE_NORMAL;
 
-			LectureItemManager lim = new LectureItemManager(this, Const.db);
+			LectureItemManager lim = new LectureItemManager(this);
 			Cursor c = lim.getCurrentFromDb();
 			if (c.getCount() != 0) {
 				// if current lecture(s) found, silence the mobile
 				mode = AudioManager.RINGER_MODE_SILENT;
 			}
 			c.close();
-			lim.close();
 
 			Utils.log(getString(R.string.set_ringer_mode) + mode);
 			// execute (no-)silence mode

@@ -220,10 +220,9 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 				// yes, we have a calendar id
 
 				// get all upcoming lecture units
-				LectureItemManager lim = new LectureItemManager(this, Const.db);
-				try {
+				LectureItemManager lim = new LectureItemManager(this);
 					Cursor c = lim.getFutureFromDb();
-					if (c != null)
+				if (c != null) {
 						while (c.moveToNext()) {
 							// get all information out of the cursor
 							String title = c.getString(c.getColumnIndex("name"));
@@ -251,9 +250,6 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 							}
 
 						}
-
-				} finally {
-					lim.close();
 				}
 
 				// a toast to the export!

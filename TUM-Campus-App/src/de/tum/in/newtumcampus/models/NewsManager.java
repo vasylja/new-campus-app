@@ -10,15 +10,17 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** News Manager, handles database stuff, external imports */
-public class NewsManager extends SQLiteOpenHelper {
+/**
+ * News Manager, handles database stuff, external imports
+ */
+public class NewsManager {
 
-	/** Database connection */
-	private final SQLiteDatabase db;
+	/**
+	 * Database connection
+	 */
+	private SQLiteDatabase db;
 
 	/** Last insert counter */
 	public static int lastInserted = 0;
@@ -27,13 +29,14 @@ public class NewsManager extends SQLiteOpenHelper {
 	 * 
 	 * <pre>
 	 * @param context Context
-	 * @param database Filename, e.g. database.db
-	 * </pre> */
-	public NewsManager(Context context, String database) {
-		super(context, database, null, Const.dbVersion);
+	 * </pre>
+	 */
+	public NewsManager(Context context) {
+		db = DatabaseManager.getDb(context);
 
-		db = getWritableDatabase();
-		onCreate(db);
+		// create table if needed
+		db.execSQL("CREATE TABLE IF NOT EXISTS news (id VARCHAR PRIMARY KEY, message VARCHAR, link VARCHAR, "
+				+ "image VARCHAR, date VARCHAR)");
 	}
 
 	/** Download news from external interface (JSON)
@@ -62,7 +65,7 @@ public class NewsManager extends SQLiteOpenHelper {
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject obj = jsonArray.getJSONObject(i);
 
-				String[] types = new String[] { "photo", "link" };
+				String[] types = new String[] { "photo", "link", "video" };
 				String[] ids = new String[] { "162327853831856_228060957258545", "162327853831856_228060957258545",
 						"162327853831856_224344127630228" };
 
@@ -71,6 +74,10 @@ public class NewsManager extends SQLiteOpenHelper {
 						obj.getString("id")))
 						|| !obj.getJSONObject(ModelsConst.JSON_FROM).getString(ModelsConst.JSON_ID)
 								.equals("162327853831856")) {
+					continue;
+				}
+// TODO check const
+				if (obj.has("name") && obj.getString("name").equals("Kurz notiert")) {
 					continue;
 				}
 				if (countItems > 24) {
@@ -92,7 +99,7 @@ public class NewsManager extends SQLiteOpenHelper {
 	 * 
 	 * @return Database cursor (image, message, date_de, link, _id) */
 	public Cursor getAllFromDb() {
-		return db.rawQuery("SELECT image, message, strftime('%d.%m.%Y', date) " + "as date_de, link, id as _id "
+		return db.rawQuery("SELECT image, message, strftime('%d.%m.%Y', date) as date_de, link, id as _id "
 				+ "FROM news ORDER BY date DESC", null);
 	}
 
@@ -136,6 +143,9 @@ public class NewsManager extends SQLiteOpenHelper {
 			message = json.getString(ModelsConst.JSON_DESCRIPTION);
 		} else if (json.has(ModelsConst.JSON_CAPTION)) {
 			message = json.getString(ModelsConst.JSON_CAPTION);
+// TODO check const
+		} else if (json.has("name")) {
+			message = json.getString("name");
 		}
 		Date date = Utils.getDate(json.getString(ModelsConst.JSON_CREATED_TIME));
 
@@ -152,13 +162,13 @@ public class NewsManager extends SQLiteOpenHelper {
 		Utils.log(n.toString());
 
 		if (n.id.length() == 0) {
-			throw new Exception("Invalid news id.");
+			throw new Exception("Invalid id.");
 		}
 		if (n.message.length() == 0) {
-			throw new Exception("Invalid news content.");
+			throw new Exception("Invalid message.");
 		}
-		db.execSQL("REPLACE INTO news (id, message, link, image, date) " + "VALUES (?, ?, ?, ?, ?)", new String[] {
-				n.id, n.message, n.link, n.image, Utils.getDateString(n.date) });
+		db.execSQL("REPLACE INTO news (id, message, link, image, date) VALUES (?, ?, ?, ?, ?)", new String[] { n.id,
+				n.message, n.link, n.image, Utils.getDateString(n.date) });
 	}
 
 	/** Removes all cache items */
@@ -170,17 +180,5 @@ public class NewsManager extends SQLiteOpenHelper {
 	/** Removes all old items (older than 3 months) */
 	public void cleanupDb() {
 		db.execSQL("DELETE FROM news WHERE date < date('now','-3 month')");
-	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS news (" + "id VARCHAR PRIMARY KEY, message VARCHAR, link VARCHAR, "
-				+ "image VARCHAR, date VARCHAR)");
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		onCreate(db);
 	}
 }

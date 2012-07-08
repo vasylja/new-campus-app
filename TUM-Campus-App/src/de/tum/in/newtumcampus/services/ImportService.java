@@ -18,6 +18,7 @@ import de.tum.in.newtumcampus.TumCampus;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.Feed;
 import de.tum.in.newtumcampus.models.FeedManager;
+import de.tum.in.newtumcampus.models.GalleryManager;
 import de.tum.in.newtumcampus.models.LectureItem;
 import de.tum.in.newtumcampus.models.LectureItemManager;
 import de.tum.in.newtumcampus.models.LectureManager;
@@ -69,12 +70,13 @@ public class ImportService extends IntentService {
 				boolean update = false;
 				File f = new File(getFilesDir() + "/" + version);
 				if (!f.exists()) {
+					updateDatabase();
 					update = true;
 				}
 				importTransportsDefaults();
 				importFeedsDefaults();
 				importLinksDefaults();
-				importLectureItemsDefaults();
+				importLectureItemsDefaults(update);
 				importLocationsDefaults(update);
 				f.createNewFile();
 			} catch (Exception e) {
@@ -113,68 +115,72 @@ public class ImportService extends IntentService {
 						importLectureItems();
 					}
 
+					// TODO Check whether to change "completed"
+					message(getString(R.string.completed), "completed");
 				} catch (Exception e) {
 					message(e, "");
 				}
 			}
-			// TODO Check whether to change "completed"
-			message(getString(R.string.completed), "completed");
 			nm.cancel(1);
 		}
 	}
 
-	/** Import feeds from internal directory */
+	/**
+	 * Update database schema
+	 */
+	public void updateDatabase() {
+		GalleryManager gm = new GalleryManager(this);
+		gm.update();
+	}
+
+	/**
+	 * Import feeds from internal directory
+	 */
 	public void importFeeds() {
-		FeedManager nm = new FeedManager(this, Const.db);
+		FeedManager nm = new FeedManager(this);
 		try {
 			nm.importFromInternal();
 		} catch (Exception e) {
 			message(e, nm.lastInfo);
 		}
-		nm.close();
 	}
 
 	/** Import links from internal directory */
 	public void importLinks() {
-		LinkManager lm = new LinkManager(this, Const.db);
+		LinkManager lm = new LinkManager(this);
 		try {
 			lm.importFromInternal();
 		} catch (Exception e) {
 			message(e, lm.lastInfo);
 		}
-		lm.close();
 	}
 
 	/** Import lectures and lecture items from internal directory */
 	public void importLectureItems() {
-		LectureItemManager lim = new LectureItemManager(this, Const.db);
+		LectureItemManager lim = new LectureItemManager(this);
 		try {
 			lim.importFromInternal();
 		} catch (Exception e) {
 			message(e, lim.lastInfo);
 		}
-		lim.close();
 
-		LectureManager lm = new LectureManager(this, Const.db);
+		LectureManager lm = new LectureManager(this);
 		lm.updateLectures();
-		lm.close();
 	}
 
 	/** imports lecture items from TUMOnline HINT: access token have to be set
 	 * 
 	 * @author Daniel G. Mayr */
 	public void importLectureItemsFromTUMOnline() {
-		LectureItemManager lim = new LectureItemManager(this, Const.db);
+		LectureItemManager lim = new LectureItemManager(this);
 		try {
 			lim.importFromTUMOnline(this);
 		} catch (Exception e) {
 			message(e, lim.lastInfo);
 		}
-		lim.close();
 
-		LectureManager lm = new LectureManager(this, Const.db);
+		LectureManager lm = new LectureManager(this);
 		lm.updateLectures();
-		lm.close();
 	}
 
 	/** Import default stations from assets
@@ -182,7 +188,7 @@ public class ImportService extends IntentService {
 	 * @throws Exception */
 	public void importTransportsDefaults() throws Exception {
 
-		TransportManager tm = new TransportManager(this, Const.db);
+		TransportManager tm = new TransportManager(this);
 		if (tm.empty()) {
 			List<String[]> rows = Utils.readCsv(getAssets().open(CSV_TRANSPORTS), ISO);
 
@@ -190,7 +196,6 @@ public class ImportService extends IntentService {
 				tm.replaceIntoDb(row[0]);
 			}
 		}
-		tm.close();
 	}
 
 	/** Import default feeds from assets
@@ -198,7 +203,7 @@ public class ImportService extends IntentService {
 	 * @throws Exception */
 	public void importFeedsDefaults() throws Exception {
 
-		FeedManager nm = new FeedManager(this, Const.db);
+		FeedManager nm = new FeedManager(this);
 		if (nm.empty()) {
 			List<String[]> rows = Utils.readCsv(getAssets().open(CSV_FEEDS), ISO);
 
@@ -206,7 +211,6 @@ public class ImportService extends IntentService {
 				nm.insertUpdateIntoDb(new Feed(row[0], row[1]));
 			}
 		}
-		nm.close();
 	}
 
 	/** Import default location and opening hours from assets
@@ -217,7 +221,7 @@ public class ImportService extends IntentService {
 	 * </pre> */
 	public void importLocationsDefaults(boolean force) throws Exception {
 
-		LocationManager lm = new LocationManager(this, Const.db);
+		LocationManager lm = new LocationManager(this);
 		if (lm.empty() || force) {
 			List<String[]> rows = Utils.readCsv(getAssets().open(CSV_LOCATIONS), ISO);
 
@@ -226,15 +230,18 @@ public class ImportService extends IntentService {
 						row[7], row[8]));
 			}
 		}
-		lm.close();
 	}
 
 	/** Import default lectures, lecture items (holidays, vacations) from assets
 	 * 
-	 * @throws Exception */
-	public void importLectureItemsDefaults() throws Exception {
-		LectureItemManager lim = new LectureItemManager(this, Const.db);
-		if (lim.empty()) {
+	 * <pre>
+	 * @param force boolean force import of lecture items
+	 * @throws Exception
+	 * </pre>
+	 */
+	public void importLectureItemsDefaults(boolean force) throws Exception {
+		LectureItemManager lim = new LectureItemManager(this);
+		if (lim.empty() || force) {
 			List<String[]> rows = Utils.readCsv(getAssets().open(CSV_HOLIDAYS), ISO);
 
 			for (String[] row : rows) {
@@ -247,18 +254,16 @@ public class ImportService extends IntentService {
 				lim.replaceIntoDb(new LectureItem.Vacation(row[0], Utils.getDate(row[1]), Utils.getDate(row[2]), row[3]));
 			}
 		}
-		lim.close();
 
-		LectureManager lm = new LectureManager(this, Const.db);
+		LectureManager lm = new LectureManager(this);
 		lm.updateLectures();
-		lm.close();
 	}
 
 	/** Import default links from assets
 	 * 
 	 * @throws Exception */
 	public void importLinksDefaults() throws Exception {
-		LinkManager lm = new LinkManager(this, Const.db);
+		LinkManager lm = new LinkManager(this);
 		if (lm.empty()) {
 			List<String[]> rows = Utils.readCsv(getAssets().open(CSV_LINKS), ISO);
 
@@ -266,7 +271,6 @@ public class ImportService extends IntentService {
 				lm.insertUpdateIntoDb(new Link(row[0], row[1]));
 			}
 		}
-		lm.close();
 	}
 
 	/** Send notification message to service caller

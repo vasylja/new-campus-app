@@ -1,13 +1,13 @@
 ﻿package de.tum.in.newtumcampus.models;
 
-import de.tum.in.newtumcampus.Const;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
-/** Lecture Manager, handles database stuff */
-public class LectureManager extends SQLiteOpenHelper {
+/**
+ * Lecture Manager, handles database stuff
+ */
+public class LectureManager {
 
 	/** Database connection */
 	private SQLiteDatabase db;
@@ -16,20 +16,20 @@ public class LectureManager extends SQLiteOpenHelper {
 	 * 
 	 * <pre>
 	 * @param context Context
-	 * @param database Filename, e.g. database.db
-	 * </pre> */
-	public LectureManager(Context context, String database) {
-		super(context, database, null, Const.dbVersion);
+	 * </pre>
+	 */
+	public LectureManager(Context context) {
+		db = DatabaseManager.getDb(context);
 
-		db = getWritableDatabase();
-		onCreate(db);
+		// create table if needed
+		db.execSQL("CREATE TABLE IF NOT EXISTS lectures (id VARCHAR PRIMARY KEY, name VARCHAR, module VARCHAR)");
 	}
 
 	/** Get all lectures from the database
 	 * 
 	 * @return Database cursor (name, module, _id) */
 	public Cursor getAllFromDb() {
-		return db.rawQuery("SELECT name, module, id as _id " + "FROM lectures ORDER BY name", null);
+		return db.rawQuery("SELECT name, module, id as _id FROM lectures ORDER BY name", null);
 	}
 
 	/** Refresh lectures from the lectures_items table */
@@ -45,16 +45,5 @@ public class LectureManager extends SQLiteOpenHelper {
 	 * </pre> */
 	public void deleteItemFromDb(String id) {
 		db.execSQL("DELETE FROM lectures WHERE id = ?", new String[] { id });
-	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS lectures (" + "id VARCHAR PRIMARY KEY, name VARCHAR, module VARCHAR)");
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		onCreate(db);
 	}
 }

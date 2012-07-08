@@ -8,12 +8,12 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Event Manager, handles database stuff, external imports */
-public class EventManager extends SQLiteOpenHelper {
+/**
+ * Event Manager, handles database stuff, external imports
+ */
+public class EventManager {
 
 	/** Database connection */
 	private SQLiteDatabase db;
@@ -25,13 +25,14 @@ public class EventManager extends SQLiteOpenHelper {
 	 * 
 	 * <pre>
 	 * @param context Context
-	 * @param database Filename, e.g. database.db
-	 * </pre> */
-	public EventManager(Context context, String database) {
-		super(context, database, null, Const.dbVersion);
+	 * </pre>
+	 */
+	public EventManager(Context context) {
+		db = DatabaseManager.getDb(context);
 
-		db = getWritableDatabase();
-		onCreate(db);
+		// create table if needed
+		db.execSQL("CREATE TABLE IF NOT EXISTS events (id VARCHAR PRIMARY KEY, name VARCHAR, start VARCHAR, "
+				+ "end VARCHAR, location VARCHAR, description VARCHAR, link VARCHAR, image VARCHAR)");
 	}
 
 	/** Download events from external interface (JSON)
@@ -47,7 +48,7 @@ public class EventManager extends SQLiteOpenHelper {
 		}
 
 		String url = "https://graph.facebook.com/162327853831856/events?"
-				+ "fields=id,name,start_time,end_time,location,description" + "&limit=50&access_token=";
+				+ "fields=id,name,start_time,end_time,location,description&limit=50&access_token=";
 		String token = "141869875879732|FbjTXY-wtr06A18W9wfhU8GCkwU";
 
 		JSONArray jsonArray = Utils.downloadJson(url + URLEncoder.encode(token)).getJSONArray("data");
@@ -74,8 +75,8 @@ public class EventManager extends SQLiteOpenHelper {
 	 * @return Database cursor (image, name, weekday, start_de, end_de, location, _id) */
 	public Cursor getNextFromDb() {
 		return db.rawQuery("SELECT image, name, strftime('%w', start) as weekday, "
-				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, " + "strftime('%H:%M', end) as end_de, "
-				+ "location, id as _id FROM events " + "WHERE end > datetime('now', 'localtime') "
+				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, strftime('%H:%M', end) as end_de, "
+				+ "location, id as _id FROM events WHERE end > datetime('now', 'localtime') "
 				+ "ORDER BY start ASC LIMIT 25", null);
 	}
 
@@ -84,9 +85,9 @@ public class EventManager extends SQLiteOpenHelper {
 	 * @return Database cursor (image, name, weekday, start_de, end_de, location, _id) */
 	public Cursor getPastFromDb() {
 		return db.rawQuery("SELECT image, name, strftime('%w', start) as weekday, "
-				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, " + "strftime('%H:%M', end) as end_de, "
-				+ "location, id as _id FROM events " + "WHERE end <= datetime('now', 'localtime') "
-				+ "ORDER BY start DESC LIMIT 25", null);
+				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, strftime('%H:%M', end) as end_de, "
+				+ "location, id as _id FROM events WHERE end <= datetime('now', 'localtime') "
+				+ "ORDER BY start DESC LIMIT 50", null);
 	}
 
 	/** Get event details form the database
@@ -97,8 +98,8 @@ public class EventManager extends SQLiteOpenHelper {
 	 * </pre> */
 	public Cursor getDetailsFromDb(String id) {
 		return db.rawQuery("SELECT image, name, strftime('%w', start) as weekday, "
-				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, " + "strftime('%H:%M', end) as end_de, "
-				+ "location, description, link, id as _id " + "FROM events WHERE id = ?", new String[] { id });
+				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, strftime('%H:%M', end) as end_de, "
+				+ "location, description, link, id as _id FROM events WHERE id = ?", new String[] { id });
 	}
 
 	/** Convert JSON object to Event, download event picture
@@ -151,10 +152,8 @@ public class EventManager extends SQLiteOpenHelper {
 		if (e.name.length() == 0) {
 			throw new Exception("Invalid name.");
 		}
-		db.execSQL(
-				"REPLACE INTO events (id, name, start, end, location, " + "description, link, image) "
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-				new String[] { String.valueOf(e.id), e.name, Utils.getDateTimeString(e.start),
+		db.execSQL("REPLACE INTO events (id, name, start, end, location, description, link, image) "
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)", new String[] { e.id, e.name, Utils.getDateTimeString(e.start),
 						Utils.getDateTimeString(e.end), e.location, e.description, e.link, e.image });
 	}
 
@@ -167,17 +166,5 @@ public class EventManager extends SQLiteOpenHelper {
 	/** Removes all old items (older than 3 months) */
 	public void cleanupDb() {
 		db.execSQL("DELETE FROM events WHERE start < date('now','-3 month')");
-	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS events (" + "id VARCHAR PRIMARY KEY, name VARCHAR, start VARCHAR, "
-				+ "end VARCHAR, location VARCHAR, description VARCHAR, " + "link VARCHAR, image VARCHAR)");
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		onCreate(db);
 	}
 }

@@ -32,7 +32,7 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 		setContentView(R.layout.links);
 
 		// get all links from database
-		LinkManager lm = new LinkManager(this, Const.db);
+		LinkManager lm = new LinkManager(this);
 		Cursor c = lm.getAllFromDb();
 
 		adapter = new SimpleCursorAdapter(this, R.layout.links_listview, c, c.getColumnNames(), new int[] { R.id.icon,
@@ -47,7 +47,6 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(this);
 		lv.setOnItemLongClickListener(this);
-		lm.close();
 
 		Button save = (Button) view.findViewById(R.id.save);
 		save.setOnClickListener(this);
@@ -56,6 +55,7 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 		LinkManager.lastInserted = 0;
 	}
 
+	@Override
 	public void onItemClick(AdapterView<?> aview, View view, int position, long id) {
 		ListView lv = (ListView) findViewById(R.id.listView);
 		Cursor c = (Cursor) lv.getAdapter().getItem(position);
@@ -70,6 +70,7 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 		}
 	}
 
+	@Override
 	public boolean onItemLongClick(final AdapterView<?> av, View v, final int position, long id) {
 		if (id == -1) {
 			return false;
@@ -77,16 +78,16 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 
 		// confirm delete
 		DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialog, int id) {
 
 				// delete link from list, refresh link list
 				Cursor c = (Cursor) av.getAdapter().getItem(position);
 				int _id = c.getInt(c.getColumnIndex(Const.ID_COLUMN));
 
-				LinkManager lm = new LinkManager(av.getContext(), Const.db);
+				LinkManager lm = new LinkManager(av.getContext());
 				lm.deleteFromDb(_id);
 				adapter.changeCursor(lm.getAllFromDb());
-				lm.close();
 			}
 		};
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -97,6 +98,7 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 		return false;
 	}
 
+	@Override
 	public void onClick(View v) {
 		// add a new link
 		EditText editName = (EditText) findViewById(R.id.lname);
@@ -109,7 +111,7 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 		}
 		String name = editName.getText().toString();
 
-		LinkManager lm = new LinkManager(this, Const.db);
+		LinkManager lm = new LinkManager(this);
 		try {
 			Link link = new Link(name, url);
 			lm.insertUpdateIntoDb(link);
@@ -118,13 +120,13 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 		}
 		// refresh link list
 		adapter.changeCursor(lm.getAllFromDb());
-		lm.close();
 
 		// clear form
 		editName.setText("");
 		editUrl.setText("");
 	}
 
+	@Override
 	public boolean setViewValue(View view, Cursor cursor, int index) {
 		// hide empty view elements
 		if (cursor.getString(index).length() == 0) {
@@ -133,6 +135,7 @@ public class Links extends Activity implements OnItemClickListener, OnItemLongCl
 			// no binding needed
 			return true;
 		}
+		view.setVisibility(View.VISIBLE);
 		return false;
 	}
 }

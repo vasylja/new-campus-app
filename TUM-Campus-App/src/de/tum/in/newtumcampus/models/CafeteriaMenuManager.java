@@ -2,20 +2,18 @@
 
 import static de.tum.in.newtumcampus.common.Utils.getDate;
 
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Cafeteria Menu Manager, handles database stuff, external imports */
-public class CafeteriaMenuManager extends SQLiteOpenHelper {
+/**
+ * Cafeteria Menu Manager, handles database stuff, external imports
+ */
+public class CafeteriaMenuManager {
 
 	/** Database connection */
 	private SQLiteDatabase db;
@@ -27,13 +25,15 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 	 * 
 	 * <pre>
 	 * @param context Context
-	 * @param database Filename, e.g. database.db
-	 * </pre> */
-	public CafeteriaMenuManager(Context context, String database) {
-		super(context, database, null, Const.dbVersion);
+	 * </pre>
+	 */
+	public CafeteriaMenuManager(Context context) {
+		db = DatabaseManager.getDb(context);
 
-		db = getWritableDatabase();
-		onCreate(db);
+		// create table if needed
+		db.execSQL("CREATE TABLE IF NOT EXISTS cafeterias_menus ("
+				+ "id INTEGER, mensaId INTEGER KEY, date VARCHAR, typeShort VARCHAR, "
+				+ "typeLong VARCHAR, typeNr INTEGER, name VARCHAR)");
 	}
 
 	/** Download cafeteria menus from external interface (JSON)
@@ -42,8 +42,9 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 	 * @param ids List of cafeteria IDs to download items for
 	 * @param force True to force download over normal sync period, else false
 	 * @throws Exception
-	 * </pre> */
-	public void downloadFromExternal(List<Integer> ids, boolean force) throws Exception {
+	 * </pre>
+	 */
+	public void downloadFromExternal(boolean force) throws Exception {
 
 		if (!force && !SyncManager.needSync(db, this, 86400)) {
 			return;
@@ -51,20 +52,17 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 		cleanupDb();
 		int count = Utils.dbGetTableCount(db, "cafeterias_menus");
 
-		for (int id : ids) {
-			Cursor c = db.rawQuery("SELECT 1 FROM cafeterias_menus " + "WHERE mensaId = ? AND "
-					+ "date > date('now', '+6 day') LIMIT 1", new String[] { String.valueOf(id) });
-
+		Cursor c = db.rawQuery("SELECT 1 FROM cafeterias_menus WHERE date > date('now', '+6 day') LIMIT 1", null);
 			if (c.getCount() > 0) {
 				c.close();
-				continue;
+		return;
 			}
 			c.close();
 
-			String url = "http://lu32kap.typo3.lrz.de/mensaapp/exportDB.php?mensa_id=";
-			JSONObject json = Utils.downloadJson(url + id);
+		String url = "http://lu32kap.typo3.lrz.de/mensaapp/exportDB.php?mensa_id=all";
+		JSONObject json = Utils.downloadJson(url);
 
-			deleteFromDb(id);
+		removeCache();
 			db.beginTransaction();
 			try {
 				JSONArray menu = json.getJSONArray("mensa_menu");
@@ -80,7 +78,6 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 			} finally {
 				db.endTransaction();
 			}
-		}
 		SyncManager.replaceIntoDb(db, this);
 
 		// update last insert counter
@@ -92,7 +89,7 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 	 * @return Database cursor (date_de, _id) */
 	public Cursor getDatesFromDb() {
 		return db.rawQuery("SELECT DISTINCT strftime('%d.%m.%Y', date) as date_de, date as _id "
-				+ "FROM cafeterias_menus WHERE " + "date >= date() ORDER BY date", null);
+				+ "FROM cafeterias_menus WHERE date >= date() ORDER BY date", null);
 	}
 
 	/** Get all types and names from the database for a special date and a special cafeteria
@@ -175,30 +172,10 @@ public class CafeteriaMenuManager extends SQLiteOpenHelper {
 		db.execSQL("DELETE FROM cafeterias_menus");
 	}
 
-	/** Deletes menu items from the database
-	 * 
-	 * <pre>
-	 * @param mensaId Mensa ID
-	 * </pre> */
-	public void deleteFromDb(int mensaId) {
-		db.execSQL("DELETE FROM cafeterias_menus WHERE mensaId = ?", new String[] { String.valueOf(mensaId) });
-	}
-
-	/** Removes all old items (older than 7 days) */
+	/**
+	 * Removes all old items (older than 7 days)
+	 */
 	public void cleanupDb() {
 		db.execSQL("DELETE FROM cafeterias_menus WHERE date < date('now','-7 day')");
-	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS cafeterias_menus ("
-				+ "id INTEGER, mensaId INTEGER KEY, date VARCHAR, typeShort VARCHAR, "
-				+ "typeLong VARCHAR, typeNr INTEGER, name VARCHAR)");
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		onCreate(db);
 	}
 }

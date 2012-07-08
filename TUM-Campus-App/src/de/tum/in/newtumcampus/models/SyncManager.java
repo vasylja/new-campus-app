@@ -1,14 +1,14 @@
 ﻿package de.tum.in.newtumcampus.models;
 
-import de.tum.in.newtumcampus.Const;
-import de.tum.in.newtumcampus.common.Utils;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import de.tum.in.newtumcampus.common.Utils;
 
-/** Sync Manager, tracks last successful syncs */
-public class SyncManager extends SQLiteOpenHelper {
+/**
+ * Sync Manager, tracks last successful syncs
+ */
+public class SyncManager {
 
 	/** Database connection */
 	private SQLiteDatabase db;
@@ -17,13 +17,13 @@ public class SyncManager extends SQLiteOpenHelper {
 	 * 
 	 * <pre>
 	 * @param context Context
-	 * @param database Filename, e.g. database.db
-	 * </pre> */
-	public SyncManager(Context context, String database) {
-		super(context, database, null, Const.dbVersion);
+	 * </pre>
+	 */
+	public SyncManager(Context context) {
+		db = DatabaseManager.getDb(context);
 
-		db = getWritableDatabase();
-		onCreate(db);
+		// create table if needed
+		db.execSQL("CREATE TABLE IF NOT EXISTS syncs (id VARCHAR PRIMARY KEY, lastSync VARCHAR)");
 	}
 
 	/** Replace or Insert a successful sync event in the database
@@ -74,7 +74,7 @@ public class SyncManager extends SQLiteOpenHelper {
 	 * </pre> */
 	public static boolean needSync(SQLiteDatabase db, String id, int seconds) {
 		boolean result = true;
-		Cursor c = db.rawQuery("SELECT lastSync FROM syncs " + "WHERE lastSync > datetime('now', '-" + seconds
+		Cursor c = db.rawQuery("SELECT lastSync FROM syncs WHERE lastSync > datetime('now', '-" + seconds
 				+ " second') AND id=?", new String[] { id });
 		if (c.getCount() == 1) {
 			result = false;
@@ -86,16 +86,5 @@ public class SyncManager extends SQLiteOpenHelper {
 	/** Removes all items from database */
 	public void deleteFromDb() {
 		db.execSQL("DELETE FROM syncs");
-	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS syncs (" + "id VARCHAR PRIMARY KEY, lastSync VARCHAR)");
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		onCreate(db);
 	}
 }

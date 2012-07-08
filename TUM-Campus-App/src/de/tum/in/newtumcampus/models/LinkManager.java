@@ -5,12 +5,12 @@ import java.io.File;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Link Manager, handles database stuff, internal imports, external downloads (icons) */
-public class LinkManager extends SQLiteOpenHelper {
+/**
+ * Link Manager, handles database stuff, internal imports, external downloads (icons)
+ */
+public class LinkManager {
 
 	/** Database connection */
 	private SQLiteDatabase db;
@@ -25,13 +25,14 @@ public class LinkManager extends SQLiteOpenHelper {
 	 * 
 	 * <pre>
 	 * @param context Context
-	 * @param database Filename, e.g. database.db
-	 * </pre> */
-	public LinkManager(Context context, String database) {
-		super(context, database, null, Const.dbVersion);
+	 * </pre>
+	 */
+	public LinkManager(Context context) {
+		db = DatabaseManager.getDb(context);
 
-		db = getWritableDatabase();
-		onCreate(db);
+		// create table if needed
+		db.execSQL("CREATE TABLE IF NOT EXISTS links (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, "
+				+ "url VARCHAR, icon VARCHAR)");
 	}
 
 	/** Import links from internal sd-card directory
@@ -100,7 +101,7 @@ public class LinkManager extends SQLiteOpenHelper {
 	 * 
 	 * @return Database cursor (icon, name, url, _id) */
 	public Cursor getAllFromDb() {
-		return db.rawQuery("SELECT icon, name, url, id as _id " + "FROM links ORDER BY name", null);
+		return db.rawQuery("SELECT icon, name, url, id as _id FROM links ORDER BY name", null);
 	}
 
 	/** Checks if the links table is empty
@@ -124,6 +125,9 @@ public class LinkManager extends SQLiteOpenHelper {
 	 * </pre> */
 	public void insertUpdateIntoDb(Link l) throws Exception {
 		Utils.log(l.toString());
+
+		l.name = l.name.trim();
+		l.url = l.url.trim();
 
 		if (l.name.length() == 0) {
 			throw new Exception("Invalid name.");
@@ -155,17 +159,5 @@ public class LinkManager extends SQLiteOpenHelper {
 	 * </pre> */
 	public void deleteFromDb(int id) {
 		db.execSQL("DELETE FROM links WHERE id = ?", new String[] { String.valueOf(id) });
-	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS links (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, "
-				+ "url VARCHAR, icon VARCHAR)");
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		onCreate(db);
 	}
 }

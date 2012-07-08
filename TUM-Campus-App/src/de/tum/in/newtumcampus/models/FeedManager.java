@@ -7,15 +7,17 @@ import java.util.List;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Feed Manager, handles database stuff, internal imports */
-public class FeedManager extends SQLiteOpenHelper {
+/**
+ * Feed Manager, handles database stuff, internal imports
+ */
+public class FeedManager {
 
-	/** Database connection */
-	private final SQLiteDatabase db;
+	/**
+	 * Database connection
+	 */
+	private SQLiteDatabase db;
 
 	/** Last insert counter */
 	public static int lastInserted = 0;
@@ -27,13 +29,14 @@ public class FeedManager extends SQLiteOpenHelper {
 	 * 
 	 * <pre>
 	 * @param context Context
-	 * @param database Filename, e.g. database.db
-	 * </pre> */
-	public FeedManager(Context context, String database) {
-		super(context, database, null, Const.dbVersion);
+	 * </pre>
+	 */
+	public FeedManager(Context context) {
+		db = DatabaseManager.getDb(context);
 
-		db = getWritableDatabase();
-		onCreate(db);
+		// create table if needed
+		db.execSQL("CREATE TABLE IF NOT EXISTS feeds ("
+				+ "id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, feedUrl VARCHAR)");
 	}
 
 	/** Import feeds from internal sd-card directory
@@ -68,7 +71,7 @@ public class FeedManager extends SQLiteOpenHelper {
 	 * 
 	 * @return Database cursor (name, feedUrl, _id) */
 	public Cursor getAllFromDb() {
-		return db.rawQuery("SELECT name, feedUrl, id as _id " + "FROM feeds ORDER BY name", null);
+		return db.rawQuery("SELECT name, feedUrl, id as _id FROM feeds ORDER BY name", null);
 	}
 
 	/** Checks if the feeds table is empty
@@ -108,6 +111,9 @@ public class FeedManager extends SQLiteOpenHelper {
 	public int insertUpdateIntoDb(Feed f) throws Exception {
 		Utils.log(f.toString());
 
+		f.name = f.name.trim();
+		f.feedUrl = f.feedUrl.trim();
+
 		if (f.name.length() == 0) {
 			throw new Exception("Invalid name.");
 		}
@@ -136,17 +142,5 @@ public class FeedManager extends SQLiteOpenHelper {
 	 * </pre> */
 	public void deleteFromDb(int id) {
 		db.execSQL("DELETE FROM feeds WHERE id = ?", new String[] { String.valueOf(id) });
-	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS feeds ("
-				+ "id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, feedUrl VARCHAR)");
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		onCreate(db);
 	}
 }

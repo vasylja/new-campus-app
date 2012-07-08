@@ -6,17 +6,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.tum.in.newtumcampus.Const;
-import de.tum.in.newtumcampus.common.Utils;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import de.tum.in.newtumcampus.common.Utils;
 
-/** Transport Manager, handles database stuff, internet connections */
-public class TransportManager extends SQLiteOpenHelper {
+/**
+ * Transport Manager, handles database stuff, internet connections
+ */
+public class TransportManager {
 
 	/** Database connection */
 	private SQLiteDatabase db;
@@ -25,13 +24,13 @@ public class TransportManager extends SQLiteOpenHelper {
 	 * 
 	 * <pre>
 	 * @param context Context
-	 * @param database Filename, e.g. database.db
-	 * </pre> */
-	public TransportManager(Context context, String database) {
-		super(context, database, null, Const.dbVersion);
+	 * </pre>
+	 */
+	public TransportManager(Context context) {
+		db = DatabaseManager.getDb(context);
 
-		db = getWritableDatabase();
-		onCreate(db);
+		// create table if needed
+		db.execSQL("CREATE TABLE IF NOT EXISTS transports (name VARCHAR PRIMARY KEY)");
 	}
 
 	/** Get all departures for a station
@@ -122,7 +121,7 @@ public class TransportManager extends SQLiteOpenHelper {
 	 * 
 	 * @return Database cursor (name, _id) */
 	public Cursor getAllFromDb() {
-		return db.rawQuery("SELECT name, name as _id FROM transports " + "ORDER BY name", null);
+		return db.rawQuery("SELECT name, name as _id FROM transports ORDER BY name", null);
 	}
 
 	/** Checks if the transports table is empty
@@ -160,16 +159,5 @@ public class TransportManager extends SQLiteOpenHelper {
 	 * </pre> */
 	public void deleteFromDb(String name) {
 		db.execSQL("DELETE FROM transports WHERE name = ?", new String[] { name });
-	}
-
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// create table if needed
-		db.execSQL("CREATE TABLE IF NOT EXISTS transports (" + "name VARCHAR PRIMARY KEY)");
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		onCreate(db);
 	}
 }

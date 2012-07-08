@@ -2,7 +2,8 @@
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,10 +18,12 @@ public class EventsDetails extends Activity {
 		setContentView(R.layout.events_details);
 
 		// get event details from db
-		EventManager em = new EventManager(this, Const.db);
+		EventManager em = new EventManager(this);
 		Cursor c = em.getDetailsFromDb(getIntent().getStringExtra(Const.ID_EXTRA));
 
-		if (c.moveToNext()) {
+		if (!c.moveToNext())
+			return;
+
 			String description = c.getString(c.getColumnIndex(Const.DESCRIPTION_COLUMN));
 			String image = c.getString(c.getColumnIndex(Const.IMAGE_COLUMN));
 
@@ -34,9 +37,10 @@ public class EventsDetails extends Activity {
 			 * Location
 			 * Link
 			 * </pre> */
-			String infos = weekDays[c.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))];
-			infos += ", " + c.getString(c.getColumnIndex(Const.START_DE_COLUMN)) + " - "
+		String infos = weekDays[c.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))] + ", ";
+		infos += c.getString(c.getColumnIndex(Const.START_DE_COLUMN)) + " - "
 					+ c.getString(c.getColumnIndex(Const.END_DE_COLUMN)) + "\n";
+
 			infos += c.getString(c.getColumnIndex(Const.LOCATION_COLUMN)) + "\n";
 			infos += c.getString(c.getColumnIndex(Const.LINK_COLUMN));
 
@@ -47,19 +51,7 @@ public class EventsDetails extends Activity {
 			tv.setText(description);
 
 			ImageView iv = (ImageView) findViewById(R.id.image);
-			iv.setImageURI(Uri.parse(image));
-
-			// resize image: 350 x height adapted in aspect ratio
-			if (iv.getDrawable() != null) {
-				double ratio = (double) iv.getDrawable().getIntrinsicWidth()
-						/ (double) iv.getDrawable().getIntrinsicHeight();
-
-				int screen = getWindowManager().getDefaultDisplay().getWidth();
-				int width = Math.min((int) (screen * 0.9), 375);
-				iv.getLayoutParams().width = width;
-				iv.getLayoutParams().height = (int) Math.floor(width / ratio);
-			}
-		}
-		em.close();
+		Bitmap b = BitmapFactory.decodeFile(image);
+		iv.setImageBitmap(Bitmap.createScaledBitmap(b, 360, (b.getHeight() * 360) / b.getWidth(), true));
 	}
 }

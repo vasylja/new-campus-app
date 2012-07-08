@@ -51,7 +51,7 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		}
 
 		// get all feeds
-		FeedManager fm = new FeedManager(this, Const.db);
+		FeedManager fm = new FeedManager(this);
 		Cursor c = fm.getAllFromDb();
 
 		adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c, c.getColumnNames(),
@@ -65,7 +65,6 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(this);
 		lv.setOnItemLongClickListener(this);
-		fm.close();
 
 		Button save = (Button) view.findViewById(R.id.save);
 		save.setOnClickListener(this);
@@ -94,6 +93,7 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		FeedItemManager.lastInserted = 0;
 	}
 
+	@Override
 	public void onItemClick(AdapterView<?> av, View v, int position, long id) {
 
 		// click on feed item in list, open URL in browser
@@ -121,7 +121,7 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		setTitle(getString(R.string.news) + feedName);
 
 		// get all feed items for a feed
-		FeedItemManager fim = new FeedItemManager(this, Const.db);
+		FeedItemManager fim = new FeedItemManager(this);
 		Cursor c2 = fim.getAllFromDb(feedId);
 
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.feeds_listview, c2, c2.getColumnNames(),
@@ -131,9 +131,9 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		ListView lv2 = (ListView) findViewById(R.id.listView2);
 		lv2.setAdapter(adapter);
 		lv2.setOnItemClickListener(this);
-		fim.close();
 	}
 
+	@Override
 	public boolean setViewValue(View view, Cursor cursor, int index) {
 		// hide empty view elements (e.g. missing image or description)
 		if (cursor.getString(index).length() == 0) {
@@ -146,6 +146,7 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		return false;
 	}
 
+	@Override
 	public boolean onItemLongClick(final AdapterView<?> av, View v, final int position, long id) {
 		if (id == -1) {
 			return false;
@@ -153,16 +154,17 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 
 		// confirm delete
 		DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+
+			@Override
 			public void onClick(DialogInterface dialog, int id) {
 
 				// delete feed from list, refresh feed list
 				Cursor c = (Cursor) av.getAdapter().getItem(position);
 				int _id = c.getInt(c.getColumnIndex(Const.ID_COLUMN));
 
-				FeedManager fm = new FeedManager(av.getContext(), Const.db);
+				FeedManager fm = new FeedManager(av.getContext());
 				fm.deleteFromDb(_id);
 				adapter.changeCursor(fm.getAllFromDb());
-				fm.close();
 			}
 		};
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -190,6 +192,7 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		return true;
 	}
 
+	@Override
 	public void onClick(View v) {
 		// add a new feed
 		EditText editName = (EditText) findViewById(R.id.name);
@@ -202,7 +205,7 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 		if (url.length() > 0 && !url.contains(":")) {
 			url = "http://" + url;
 		}
-		FeedManager fm = new FeedManager(this, Const.db);
+		FeedManager fm = new FeedManager(this);
 		try {
 			Feed feed = new Feed(name, url);
 			fm.insertUpdateIntoDb(feed);
@@ -212,7 +215,6 @@ public class Feeds extends Activity implements OnItemClickListener, ViewBinder, 
 
 		// refresh feed list
 		adapter.changeCursor(fm.getAllFromDb());
-		fm.close();
 
 		// clear form
 		editName.setText("");
