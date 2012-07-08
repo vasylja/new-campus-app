@@ -5,13 +5,15 @@ import java.io.Serializable;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-/** Group that describes some organizational entity a person/employee can belong to.
+/**
+ * Group that describes some organizational entity a person/employee can belong to.
  * <p>
  * Note: This model is based on the TUMOnline web service response format for a corresponding request.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens */
+ * @review Thomas Behrens
+ */
 @Root(name = "gruppe", strict = false)
 public class Group implements Serializable {
 

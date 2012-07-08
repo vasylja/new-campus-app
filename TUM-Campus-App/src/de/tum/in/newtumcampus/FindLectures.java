@@ -22,7 +22,8 @@ import de.tum.in.newtumcampus.models.FindLecturesRowSet;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
 
-/** This activity represents a small find box to query through the TUMOnline web service to find lectures identified by
+/**
+ * This activity represents a small find box to query through the TUMOnline web service to find lectures identified by
  * the acquired query string.
  * 
  * A list of all found lectures will be displayed and by clicking on each it will send the lecture number to the
@@ -38,7 +39,8 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
  * 
  * @solves [M4] Lehrveranstaltungen suchen
  * @author Daniel Mayr
- * @review Thomas Behrens */
+ * @review Thomas Behrens
+ */
 public class FindLectures extends Activity implements OnEditorActionListener, TUMOnlineRequestFetchListener {
 
 	/** UI Elements */

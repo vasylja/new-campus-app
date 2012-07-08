@@ -13,9 +13,7 @@ import de.tum.in.newtumcampus.models.LectureItemManager;
 /** Service used to silence the mobile during lectures */
 public class SilenceService extends IntentService {
 
-	/**
-	 * Interval in milliseconds to check for current lectures
-	 */
+	/** Interval in milliseconds to check for current lectures */
 	public static int interval = 60000;
 
 	public static final String SILENCE_SERVICE = "SilenceService";

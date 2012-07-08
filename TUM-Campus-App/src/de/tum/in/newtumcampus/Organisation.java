@@ -36,10 +36,12 @@ import de.tum.in.newtumcampus.models.OrganisationManager;
 /************************************ Things could be improved: - add an loading screen after every click - color pushed elements e.g. blue after clicked
  * on it, to see that a element has been clicked - ************************************/
 
-/** Activity that shows the first level of organisations at TUM.
+/**
+ * Activity that shows the first level of organisations at TUM.
  * 
  * @author Thomas Behrens
- * @review Vincenz Doelle, Daniel G. Mayr */
+ * @review Vincenz Doelle, Daniel G. Mayr
+ */
 public class Organisation extends Activity implements OnClickListener {
 
 	/** To show at start the highest Organisation level (The highest Organisations are child of "Organisation 1" = TUM) */
@@ -187,13 +189,15 @@ public class Organisation extends Activity implements OnClickListener {
 		doc.getDocumentElement().normalize();
 	}
 
-	/** Show all items in a certain layer having a parent element with parent_id = parent.
+	/**
+	 * Show all items in a certain layer having a parent element with parent_id = parent.
 	 * 
 	 * @param parent
 	 *            all items with the same parent
 	 * @throws ParserConfigurationException
 	 * @throws IOException
-	 * @throws SAXException */
+	 * @throws SAXException
+	 */
 	public void showItems(String parent) {
 
 		// caption button gets caption
@@ -278,10 +282,12 @@ public class Organisation extends Activity implements OnClickListener {
 		});
 	}
 
-	/** Returns true if there are one or more elements in the organisation tree inside this organisation
+	/**
+	 * Returns true if there are one or more elements in the organisation tree inside this organisation
 	 * 
 	 * @param organisationId
-	 * @return */
+	 * @return
+	 */
 	private boolean existSuborganisation(String organisationId) {
 
 		// get list of all organisations
@@ -305,9 +311,11 @@ public class Organisation extends Activity implements OnClickListener {
 		return false;
 	}
 
-	/** Return the private Document if existing, else build a new one
+	/**
+	 * Return the private Document if existing, else build a new one
 	 * 
-	 * @return */
+	 * @return
+	 */
 	private Document getDocument() {
 		if (this.doc == null) {
 			buildDocument();
@@ -315,12 +323,14 @@ public class Organisation extends Activity implements OnClickListener {
 		return doc;
 	}
 
-	/** Function that gets the Value out of a Node with a special name
+	/**
+	 * Function that gets the Value out of a Node with a special name
 	 * 
 	 * @param item
 	 *            = Node that gets evaluated
 	 * @param type
-	 *            = Type of node (e.g. parent, id, nameDe) */
+	 *            = Type of node (e.g. parent, id, nameDe)
+	 */
 	public String getValue(Node item, String type) {
 		Element elem = (Element) item;
 		// filter the item with a special tag
@@ -332,10 +342,12 @@ public class Organisation extends Activity implements OnClickListener {
 		return list.item(0).getNodeValue();
 	}
 
-	/** Searches for the parentId of an element, if it is already in the highest layer, it returns 1.
+	/**
+	 * Searches for the parentId of an element, if it is already in the highest layer, it returns 1.
 	 * 
 	 * @param parentId
-	 * @return */
+	 * @return
+	 */
 	public OrgItem getParent(String parentId) {
 
 		// if already in highest layer => create OrgItem of highest layer
@@ -394,9 +406,11 @@ public class Organisation extends Activity implements OnClickListener {
 		return parentObject;
 	}
 
-	/** A click on the BackButton should show the parent class or go back to the main menu
+	/**
+	 * A click on the BackButton should show the parent class or go back to the main menu
 	 * 
-	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent) */
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 

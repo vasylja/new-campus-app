@@ -3,11 +3,13 @@ package de.tum.in.newtumcampus.models;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-/** This class is dealing with the deserialization of the output of TUMOnline to the method "TermineLehrveranstaltungen".
+/**
+ * This class is dealing with the deserialization of the output of TUMOnline to the method "TermineLehrveranstaltungen".
  * 
  * @author Daniel Mayr
  * 
- * @see http://simple.sourceforge.net/download/stream/doc/tutorial/tutorial.php */
+ * @see http://simple.sourceforge.net/download/stream/doc/tutorial/tutorial.php
+ */
 @Root(name = "row")
 public class LectureAppointmentsRow {
 

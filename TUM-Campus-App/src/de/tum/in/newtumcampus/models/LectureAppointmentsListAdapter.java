@@ -15,14 +15,16 @@ import android.widget.TextView;
 import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Generates the output of the ListView on the LectureAppointments activity.
+/**
+ * Generates the output of the ListView on the LectureAppointments activity.
  * 
  * used by: LectureAppointments
  * 
  * linked files: res.layout.termine_listview
  * 
  * @author Daniel G. Mayr
- * @review Thomas Behrens */
+ * @review Thomas Behrens
+ */
 
 public class LectureAppointmentsListAdapter extends BaseAdapter {
 

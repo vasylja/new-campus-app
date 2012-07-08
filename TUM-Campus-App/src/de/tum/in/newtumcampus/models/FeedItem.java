@@ -25,7 +25,8 @@ public class FeedItem {
 	/** image Local image, e.g. /mnt/sdcard/tumcampus/feeds/cache/xy.jpg */
 	String image;
 
-	/** New Feed item (news)
+	/**
+	 * New Feed item (news)
 	 * 
 	 * <pre>
 	 * @param feedId Feed ID
@@ -34,7 +35,8 @@ public class FeedItem {
 	 * @param description Item description
 	 * @param date DateTime
 	 * @param image Local image, e.g. /mnt/sdcard/tumcampus/feeds/cache/xy.jpg
-	 * </pre> */
+	 * </pre>
+	 */
 	public FeedItem(int feedId, String title, String link, String description, Date date, String image) {
 
 		this.feedId = feedId;

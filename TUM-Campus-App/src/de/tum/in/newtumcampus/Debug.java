@@ -68,20 +68,24 @@ public class Debug extends Activity implements View.OnClickListener {
 		tv.setText("");
 	}
 
-	/** Add a message to the debug content text view
+	/**
+	 * Add a message to the debug content text view
 	 * 
 	 * @param s
-	 *            Debug message */
+	 *            Debug message
+	 */
 	public void debugStr(String s) {
 		TextView tv = (TextView) findViewById(R.id.debug);
 		tv.setMovementMethod(new ScrollingMovementMethod());
 		tv.append(s + "\n");
 	}
 
-	/** Execute a database query and present the results in the GUI
+	/**
+	 * Execute a database query and present the results in the GUI
 	 * 
 	 * @param query
-	 *            SQL query to execute */
+	 *            SQL query to execute
+	 */
 	public void debugSQL(String query) {
 		debugReset();
 		SQLiteDatabase db = DatabaseManager.getDb(this);

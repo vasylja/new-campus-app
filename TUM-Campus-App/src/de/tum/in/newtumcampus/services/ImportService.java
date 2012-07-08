@@ -125,17 +125,13 @@ public class ImportService extends IntentService {
 		}
 	}
 
-	/**
-	 * Update database schema
-	 */
+	/** Update database schema */
 	public void updateDatabase() {
 		GalleryManager gm = new GalleryManager(this);
 		gm.update();
 	}
 
-	/**
-	 * Import feeds from internal directory
-	 */
+	/** Import feeds from internal directory */
 	public void importFeeds() {
 		FeedManager nm = new FeedManager(this);
 		try {
@@ -168,9 +164,11 @@ public class ImportService extends IntentService {
 		lm.updateLectures();
 	}
 
-	/** imports lecture items from TUMOnline HINT: access token have to be set
+	/**
+	 * imports lecture items from TUMOnline HINT: access token have to be set
 	 * 
-	 * @author Daniel G. Mayr */
+	 * @author Daniel G. Mayr
+	 */
 	public void importLectureItemsFromTUMOnline() {
 		LectureItemManager lim = new LectureItemManager(this);
 		try {
@@ -183,9 +181,11 @@ public class ImportService extends IntentService {
 		lm.updateLectures();
 	}
 
-	/** Import default stations from assets
+	/**
+	 * Import default stations from assets
 	 * 
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public void importTransportsDefaults() throws Exception {
 
 		TransportManager tm = new TransportManager(this);
@@ -198,9 +198,11 @@ public class ImportService extends IntentService {
 		}
 	}
 
-	/** Import default feeds from assets
+	/**
+	 * Import default feeds from assets
 	 * 
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public void importFeedsDefaults() throws Exception {
 
 		FeedManager nm = new FeedManager(this);
@@ -213,12 +215,14 @@ public class ImportService extends IntentService {
 		}
 	}
 
-	/** Import default location and opening hours from assets
+	/**
+	 * Import default location and opening hours from assets
 	 * 
 	 * <pre>
 	 * @param force boolean force import of locations
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void importLocationsDefaults(boolean force) throws Exception {
 
 		LocationManager lm = new LocationManager(this);
@@ -232,7 +236,8 @@ public class ImportService extends IntentService {
 		}
 	}
 
-	/** Import default lectures, lecture items (holidays, vacations) from assets
+	/**
+	 * Import default lectures, lecture items (holidays, vacations) from assets
 	 * 
 	 * <pre>
 	 * @param force boolean force import of lecture items
@@ -259,9 +264,11 @@ public class ImportService extends IntentService {
 		lm.updateLectures();
 	}
 
-	/** Import default links from assets
+	/**
+	 * Import default links from assets
 	 * 
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public void importLinksDefaults() throws Exception {
 		LinkManager lm = new LinkManager(this);
 		if (lm.empty()) {
@@ -273,12 +280,14 @@ public class ImportService extends IntentService {
 		}
 	}
 
-	/** Send notification message to service caller
+	/**
+	 * Send notification message to service caller
 	 * 
 	 * <pre>
 	 * @param e Exception, get message and stacktrace from 
 	 * @param info Notification info, append to exception message
-	 * </pre> */
+	 * </pre>
+	 */
 	public void message(Exception e, String info) {
 		Utils.log(e, info);
 
@@ -292,12 +301,14 @@ public class ImportService extends IntentService {
 		message(info + " " + message, getString(R.string.error));
 	}
 
-	/** Send notification message to service caller
+	/**
+	 * Send notification message to service caller
 	 * 
 	 * <pre>
 	 * @param message Notification message
 	 * @param action Notification action (e.g. error, completed)
-	 * </pre> */
+	 * </pre>
+	 */
 	public void message(String message, String action) {
 		Intent intentSend = new Intent();
 		intentSend.setAction(broadcast);

@@ -26,11 +26,13 @@ import android.widget.TextView;
 import de.tum.in.newtumcampus.common.FileUtils;
 import de.tum.in.newtumcampus.common.Utils;
 
-/** Activity to fetch and display the curricula of different programs.
+/**
+ * Activity to fetch and display the curricula of different programs.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens */
+ * @review Thomas Behrens
+ */
 public class Curricula extends Activity {
 
 	/** Key for the shared preference */
@@ -110,13 +112,15 @@ public class Curricula extends Activity {
 
 	}
 
-	/** Downloads the curricula data, parses the relevant content, adds the corresponding css information and creates a
+	/**
+	 * Downloads the curricula data, parses the relevant content, adds the corresponding css information and creates a
 	 * new html document.
 	 * 
 	 * @param name
 	 *            The name of the curriculum as displayed in the list.
 	 * @param url
-	 *            The url of the curriculum to be downloaded. */
+	 *            The url of the curriculum to be downloaded.
+	 */
 	private void getCurriculum(String name, final String url) {
 
 		String filename = FileUtils.getFilename(name, ".html");
@@ -176,12 +180,14 @@ public class Curricula extends Activity {
 
 	}
 
-	/** Fetches the curriculum document and extracts all relevant information.
+	/**
+	 * Fetches the curriculum document and extracts all relevant information.
 	 * 
 	 * @param url
 	 *            URL of the curriculum document
 	 * @param targetFile
-	 *            Target where the results should be written to */
+	 *            Target where the results should be written to
+	 */
 	private void fetchCurriculum(String url, File targetFile) {
 		String text = Utils.buildHTMLDocument(
 				FileUtils.sendGetRequest(httpClient, "http://www.in.tum.de/fileadmin/_src/add.css"),
@@ -192,11 +198,13 @@ public class Curricula extends Activity {
 		FileUtils.writeFile(targetFile, text);
 	}
 
-	/** Extract the results from a document fetched from the given URL.
+	/**
+	 * Extract the results from a document fetched from the given URL.
 	 * 
 	 * @param url
 	 *            URL pointing to a document where the results are extracted from.
-	 * @return The results. */
+	 * @return The results.
+	 */
 	private String extractResultsFromURL(String url) {
 		String text = FileUtils.sendGetRequest(httpClient, url);
 
@@ -206,10 +214,12 @@ public class Curricula extends Activity {
 		return Utils.cutText(text, "<!--TYPO3SEARCH_begin-->", "<!--TYPO3SEARCH_end-->");
 	}
 
-	/** Opens a local file.
+	/**
+	 * Opens a local file.
 	 * 
 	 * @param file
-	 *            File to be opened. */
+	 *            File to be opened.
+	 */
 	private void openFile(File file) {
 		if (file == null) {
 			return;

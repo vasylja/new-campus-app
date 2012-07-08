@@ -34,9 +34,11 @@ import de.tum.in.newtumcampus.models.TransportManager;
 public class Transports extends Activity implements OnItemClickListener, OnItemLongClickListener,
 		OnEditorActionListener {
 
-	/** Check if a network connection is available or can be available soon
+	/**
+	 * Check if a network connection is available or can be available soon
 	 * 
-	 * @return true if available */
+	 * @return true if available
+	 */
 	public boolean connected() {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();

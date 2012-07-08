@@ -12,9 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.Html;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Feed item Manager, handles database stuff, external imports
- */
+/** Feed item Manager, handles database stuff, external imports */
 public class FeedItemManager {
 
 	/** Database connection */
@@ -26,7 +24,8 @@ public class FeedItemManager {
 	/** Additional information for exception messages */
 	public String lastInfo = "";
 
-	/** Constructor, open/create database, create table if necessary
+	/**
+	 * Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
@@ -41,14 +40,16 @@ public class FeedItemManager {
 				+ "title VARCHAR, link VARCHAR, description VARCHAR, date VARCHAR, image VARCHAR)");
 	}
 
-	/** Download feed items from external interface (YQL+JSON)
+	/**
+	 * Download feed items from external interface (YQL+JSON)
 	 * 
 	 * <pre>
 	 * @param id Feed-ID
 	 * @param retry Retry download after resolving RSS-Url
 	 * @param force True to force download over normal sync period, else false
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void downloadFromExternal(int id, boolean retry, boolean force) throws Exception {
 		String syncId = "feeditem" + id;
 		if (!force && !SyncManager.needSync(db, syncId, 900)) {
@@ -103,20 +104,24 @@ public class FeedItemManager {
 		lastInserted += Utils.dbGetTableCount(db, "feeds_items") - count;
 	}
 
-	/** Get all feed items for a feed from the database
+	/**
+	 * Get all feed items for a feed from the database
 	 * 
 	 * <pre>
 	 * @param feedId Feed ID
 	 * @return Database cursor (image, title, description, link, _id)
-	 * </pre> */
+	 * </pre>
+	 */
 	public Cursor getAllFromDb(String feedId) {
 		return db.rawQuery("SELECT image, title, description, link, id as _id "
 				+ "FROM feeds_items WHERE feedId = ? ORDER BY date DESC", new String[] { feedId });
 	}
 
-	/** Checks if the feeds_items table is empty
+	/**
+	 * Checks if the feeds_items table is empty
 	 * 
-	 * @return true if no feed items are available, else false */
+	 * @return true if no feed items are available, else false
+	 */
 	public boolean empty() {
 		boolean result = true;
 		Cursor c = db.rawQuery("SELECT id FROM feeds_items LIMIT 1", null);
@@ -127,7 +132,8 @@ public class FeedItemManager {
 		return result;
 	}
 
-	/** Convert JSON to FeedItem and download feed item iamge
+	/**
+	 * Convert JSON to FeedItem and download feed item iamge
 	 * 
 	 * Example JSON: e.g. { "title": "US-Truppenabzug aus Afghanistan: \"Verlogen und verkorkst\"", "description": "..."
 	 * , "link": "http://www.n-tv.de/politik/pressestimmen/Verlogen-und-verkorkst-article3650731.html" , "pubDate":
@@ -139,7 +145,8 @@ public class FeedItemManager {
 	 * @param json see above
 	 * @return Feeds
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public static FeedItem getFromJson(int feedId, JSONObject json) throws Exception {
 
 		String target = "";
@@ -163,12 +170,14 @@ public class FeedItemManager {
 				json.getString(ModelsConst.JSON_LINK), description, pubDate, target);
 	}
 
-	/** Insert a feed item in the database
+	/**
+	 * Insert a feed item in the database
 	 * 
 	 * <pre>
 	 * @param n FeedItem object
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void insertIntoDb(FeedItem n) throws Exception {
 		if (n.feedId <= 0) {
 			throw new Exception("Invalid feedId.");
@@ -190,11 +199,13 @@ public class FeedItemManager {
 		Utils.emptyCacheDir("rss/cache");
 	}
 
-	/** Deletes feed items from the database
+	/**
+	 * Deletes feed items from the database
 	 * 
 	 * <pre>
 	 * @param feedId Feed ID
-	 * </pre> */
+	 * </pre>
+	 */
 	public void deleteFromDb(int feedId) {
 		db.execSQL("DELETE FROM feeds_items WHERE feedId = ?", new String[] { String.valueOf(feedId) });
 	}

@@ -58,16 +58,16 @@ public class Events extends Activity implements OnItemClickListener, ViewBinder 
 		sd.setOnDrawerOpenListener(new OnDrawerOpenListener() {
 			@Override
 			public void onDrawerOpened() {
-		// get past events from database
+				// get past events from database
 				EventManager em = new EventManager(Events.this);
 				Cursor c = em.getPastFromDb();
 
 				SimpleCursorAdapter adapter = new SimpleCursorAdapter(Events.this, R.layout.events_listview, c, c
-					.getColumnNames(), new int[] { R.id.icon, R.id.name, R.id.infos });
+						.getColumnNames(), new int[] { R.id.icon, R.id.name, R.id.infos });
 				adapter.setViewBinder(Events.this);
 
-		ListView lv2 = (ListView) findViewById(R.id.listView2);
-		lv2.setAdapter(adapter);
+				ListView lv2 = (ListView) findViewById(R.id.listView2);
+				lv2.setAdapter(adapter);
 				lv2.setOnItemClickListener(Events.this);
 			}
 		});
@@ -89,11 +89,13 @@ public class Events extends Activity implements OnItemClickListener, ViewBinder 
 	@Override
 	public boolean setViewValue(View view, Cursor c, int index) {
 
-		/** <pre>
+		/**
+		 * <pre>
 		 * Show event info text as:
 		 * Week-Day, Start DateTime - End Time
 		 * location
-		 * </pre> */
+		 * </pre>
+		 */
 		if (view.getId() == R.id.infos) {
 			String[] weekDays = getString(R.string.week_splitted).split(",");
 

@@ -22,14 +22,10 @@ import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 
-/**
- * Lecture item Manager, handles database stuff, internal imports
- */
+/** Lecture item Manager, handles database stuff, internal imports */
 public class LectureItemManager {
 
-	/**
-	 * Database connection
-	 */
+	/** Database connection */
 	private SQLiteDatabase db;
 
 	/** Last insert counter */
@@ -38,7 +34,8 @@ public class LectureItemManager {
 	/** Additional information for exception messages */
 	public String lastInfo = "";
 
-	/** Constructor, open/create database, create table if necessary
+	/**
+	 * Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
@@ -55,11 +52,13 @@ public class LectureItemManager {
 				+ "note VARCHAR, url VARCHAR, seriesId VARCHAR)");
 	}
 
-	/** this function allows us to import all lecture settings from TUMOnline
+	/**
+	 * this function allows us to import all lecture settings from TUMOnline
 	 * 
 	 * @todo check not to set any data to null
 	 * @author Daniel G. Mayr
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public void importFromTUMOnline(Context con) throws Exception {
 		int count = Utils.dbGetTableCount(db, "lectures_items");
 
@@ -189,9 +188,11 @@ public class LectureItemManager {
 		lastInserted += Utils.dbGetTableCount(db, "lectures_items") - count;
 	}
 
-	/** Import lecture items from sd-card directory
+	/**
+	 * Import lecture items from sd-card directory
 	 * 
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public void importFromInternal() throws Exception {
 		File[] files = new File(Utils.getCacheDir("lectures")).listFiles();
 
@@ -214,7 +215,8 @@ public class LectureItemManager {
 		lastInserted += Utils.dbGetTableCount(db, "lectures_items") - count;
 	}
 
-	/** Import lecture items from a CSV file
+	/**
+	 * Import lecture items from a CSV file
 	 * 
 	 * Header format: TERMIN_TYP, TITEL, ORT, LV_NUMMER, DATUM, VON, BIS, WOCHENTAG, ANMERKUNG, URL
 	 * 
@@ -222,7 +224,8 @@ public class LectureItemManager {
 	 * @param file CSV File
 	 * @param encoding Charset, e.g. ISO-8859-1
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void importCsv(File file, String encoding) throws Exception {
 		List<String[]> list = Utils.readCsv(new FileInputStream(file), encoding);
 
@@ -280,18 +283,22 @@ public class LectureItemManager {
 		}
 	}
 
-	/** Get all lecture items from the database
+	/**
+	 * Get all lecture items from the database
 	 * 
-	 * @return Database cursor (name, location, _id) */
+	 * @return Database cursor (name, location, _id)
+	 */
 	public Cursor getCurrentFromDb() {
 		return db.rawQuery("SELECT name, location, id as _id "
 				+ "FROM lectures_items WHERE datetime('now', 'localtime') BETWEEN start AND end AND "
 				+ "lectureId NOT IN ('holiday', 'vacation') LIMIT 1", null);
 	}
 
-	/** Get all upcoming and unfinished lecture items from the database
+	/**
+	 * Get all upcoming and unfinished lecture items from the database
 	 * 
-	 * @return Database cursor (name, note, location, weekday, start_de, end_de, start_dt, end_dt, url, lectureId, _id) */
+	 * @return Database cursor (name, note, location, weekday, start_de, end_de, start_dt, end_dt, url, lectureId, _id)
+	 */
 	public Cursor getRecentFromDb() {
 		return db.rawQuery("SELECT name, note, location, strftime('%w', start) as weekday, "
 				+ "strftime('%H:%M', start) as start_de, strftime('%H:%M', end) as end_de, "
@@ -310,13 +317,15 @@ public class LectureItemManager {
 				+ "WHERE end > datetime('now', 'localtime') ORDER BY start", null);
 	}
 
-	/** Get all lecture items for a special lecture from the database
+	/**
+	 * Get all lecture items for a special lecture from the database
 	 * 
 	 * <pre>
 	 * @param lectureId Lecture ID
 	 * @return Database cursor (name, note, location, weekday, start_de,
 	 * 		   end_de, start_dt, end_dt, url, location, _id)
-	 * </pre> */
+	 * </pre>
+	 */
 	public Cursor getAllFromDb(String lectureId) {
 		return db.rawQuery("SELECT name, note, location, strftime('%w', start) as weekday, "
 				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, strftime('%H:%M', end) as end_de, "
@@ -325,9 +334,11 @@ public class LectureItemManager {
 				new String[] { lectureId });
 	}
 
-	/** Checks if the lectures_items table is empty
+	/**
+	 * Checks if the lectures_items table is empty
 	 * 
-	 * @return true if no lecture items are available, else false */
+	 * @return true if no lecture items are available, else false
+	 */
 	public boolean empty() {
 		boolean result = true;
 		Cursor c = db.rawQuery("SELECT id FROM lectures_items LIMIT 1", null);
@@ -361,7 +372,8 @@ public class LectureItemManager {
 	 * <pre>
 	 * @param l LectureItem object
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void replaceIntoDb(LectureItem l) throws Exception {
 		Utils.log(l.toString());
 
@@ -384,20 +396,24 @@ public class LectureItemManager {
 				l.location, l.note, l.url, l.seriesId });
 	}
 
-	/** Delete lecture item from database
+	/**
+	 * Delete lecture item from database
 	 * 
 	 * <pre>
 	 * @param id Lecture item ID
-	 * </pre> */
+	 * </pre>
+	 */
 	public void deleteItemFromDb(String id) {
 		db.execSQL("DELETE FROM lectures_items WHERE id = ?", new String[] { id });
 	}
 
-	/** Delete lecture items from database
+	/**
+	 * Delete lecture items from database
 	 * 
 	 * <pre>
 	 * @param id Lecture ID
-	 * </pre> */
+	 * </pre>
+	 */
 	public void deleteLectureFromDb(String id) {
 		db.execSQL("DELETE FROM lectures_items WHERE lectureId = ?", new String[] { id });
 	}

@@ -14,7 +14,8 @@ import de.tum.in.newtumcampus.models.LectureAppointmentsRowSet;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
 
-/** This activity provides the appointment dates to a given lecture using the TUMOnline web service.
+/**
+ * This activity provides the appointment dates to a given lecture using the TUMOnline web service.
  * 
  * HINT: a valid TUM Online token is needed
  * 
@@ -25,7 +26,8 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
  * 
  * @solves [M5] Abhaltungstermine zu Lehrveranstaltungen einsehen
  * @author Daniel G. Mayr
- * @review Thomas Behrens // i found nothing tbd. */
+ * @review Thomas Behrens // i found nothing tbd.
+ */
 public class LectureAppointments extends Activity implements TUMOnlineRequestFetchListener {
 
 	/** Handler to send request to TUMOnline */

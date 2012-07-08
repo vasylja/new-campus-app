@@ -10,9 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Cafeteria Menu Manager, handles database stuff, external imports
- */
+/** Cafeteria Menu Manager, handles database stuff, external imports */
 public class CafeteriaMenuManager {
 
 	/** Database connection */
@@ -21,7 +19,8 @@ public class CafeteriaMenuManager {
 	/** Last insert counter */
 	public static int lastInserted = 0;
 
-	/** Constructor, open/create database, create table if necessary
+	/**
+	 * Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
@@ -36,7 +35,8 @@ public class CafeteriaMenuManager {
 				+ "typeLong VARCHAR, typeNr INTEGER, name VARCHAR)");
 	}
 
-	/** Download cafeteria menus from external interface (JSON)
+	/**
+	 * Download cafeteria menus from external interface (JSON)
 	 * 
 	 * <pre>
 	 * @param ids List of cafeteria IDs to download items for
@@ -53,59 +53,64 @@ public class CafeteriaMenuManager {
 		int count = Utils.dbGetTableCount(db, "cafeterias_menus");
 
 		Cursor c = db.rawQuery("SELECT 1 FROM cafeterias_menus WHERE date > date('now', '+6 day') LIMIT 1", null);
-			if (c.getCount() > 0) {
-				c.close();
-		return;
-			}
+		if (c.getCount() > 0) {
 			c.close();
+			return;
+		}
+		c.close();
 
 		String url = "http://lu32kap.typo3.lrz.de/mensaapp/exportDB.php?mensa_id=all";
 		JSONObject json = Utils.downloadJson(url);
 
 		removeCache();
-			db.beginTransaction();
-			try {
-				JSONArray menu = json.getJSONArray("mensa_menu");
-				for (int j = 0; j < menu.length(); j++) {
-					replaceIntoDb(getFromJson(menu.getJSONObject(j)));
-				}
-
-				JSONArray beilagen = json.getJSONArray("mensa_beilagen");
-				for (int j = 0; j < beilagen.length(); j++) {
-					replaceIntoDb(getFromJsonAddendum(beilagen.getJSONObject(j)));
-				}
-				db.setTransactionSuccessful();
-			} finally {
-				db.endTransaction();
+		db.beginTransaction();
+		try {
+			JSONArray menu = json.getJSONArray("mensa_menu");
+			for (int j = 0; j < menu.length(); j++) {
+				replaceIntoDb(getFromJson(menu.getJSONObject(j)));
 			}
+
+			JSONArray beilagen = json.getJSONArray("mensa_beilagen");
+			for (int j = 0; j < beilagen.length(); j++) {
+				replaceIntoDb(getFromJsonAddendum(beilagen.getJSONObject(j)));
+			}
+			db.setTransactionSuccessful();
+		} finally {
+			db.endTransaction();
+		}
 		SyncManager.replaceIntoDb(db, this);
 
 		// update last insert counter
 		lastInserted += Utils.dbGetTableCount(db, "cafeterias_menus") - count;
 	}
 
-	/** Get all distinct menu dates from the database
+	/**
+	 * Get all distinct menu dates from the database
 	 * 
-	 * @return Database cursor (date_de, _id) */
+	 * @return Database cursor (date_de, _id)
+	 */
 	public Cursor getDatesFromDb() {
 		return db.rawQuery("SELECT DISTINCT strftime('%d.%m.%Y', date) as date_de, date as _id "
 				+ "FROM cafeterias_menus WHERE date >= date() ORDER BY date", null);
 	}
 
-	/** Get all types and names from the database for a special date and a special cafeteria
+	/**
+	 * Get all types and names from the database for a special date and a special cafeteria
 	 * 
 	 * <pre>
 	 * @param mensaId Mensa ID, e.g. 411
 	 * @param date ISO-Date, e.g. 2011-12-31 
 	 * @return Database cursor (typeLong, names, _id)
-	 * </pre> */
+	 * </pre>
+	 */
 	public Cursor getTypeNameFromDb(String mensaId, String date) {
 		return db.rawQuery("SELECT typeLong, group_concat(name, '\n') as names, id as _id "
 				+ "FROM cafeterias_menus WHERE mensaId = ? AND "
 				+ "date = ? GROUP BY typeLong ORDER BY typeNr, typeLong, name", new String[] { mensaId, date });
 	}
 
-	/** Convert JSON object to CafeteriaMenu
+	/**
+	 * Convert JSON object to CafeteriaMenu
 	 * 
 	 * Example JSON: e.g. {"id":"25544","mensa_id":"411","date":"2011-06-20","type_short"
 	 * :"tg","type_long":"Tagesgericht 3","type_nr":"3","name":
@@ -115,7 +120,8 @@ public class CafeteriaMenuManager {
 	 * @param json see above
 	 * @return CafeteriaMenu
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public static CafeteriaMenu getFromJson(JSONObject json) throws Exception {
 
 		return new CafeteriaMenu(json.getInt("id"), json.getInt("mensa_id"), Utils.getDate(json.getString("date")),
@@ -123,7 +129,8 @@ public class CafeteriaMenuManager {
 				json.getString("name"));
 	}
 
-	/** Convert JSON object to CafeteriaMenu (addendum)
+	/**
+	 * Convert JSON object to CafeteriaMenu (addendum)
 	 * 
 	 * Example JSON: e.g. {"mensa_id":"411","date":"2011-07-29","name":"Pflaumenkompott"
 	 * ,"type_short":"bei","type_long":"Beilagen"}
@@ -132,19 +139,22 @@ public class CafeteriaMenuManager {
 	 * @param json see above
 	 * @return CafeteriaMenu
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public static CafeteriaMenu getFromJsonAddendum(JSONObject json) throws Exception {
 
 		return new CafeteriaMenu(0, json.getInt("mensa_id"), Utils.getDate(json.getString("date")),
 				json.getString("type_short"), json.getString("type_long"), 10, json.getString("name"));
 	}
 
-	/** Replace or Insert a cafeteria menu in the database
+	/**
+	 * Replace or Insert a cafeteria menu in the database
 	 * 
 	 * <pre>
 	 * @param c CafeteriaMenu object
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void replaceIntoDb(CafeteriaMenu c) throws Exception {
 		if (c.cafeteriaId <= 0) {
 			throw new Exception("Invalid cafeteriaId.");
@@ -172,9 +182,7 @@ public class CafeteriaMenuManager {
 		db.execSQL("DELETE FROM cafeterias_menus");
 	}
 
-	/**
-	 * Removes all old items (older than 7 days)
-	 */
+	/** Removes all old items (older than 7 days) */
 	public void cleanupDb() {
 		db.execSQL("DELETE FROM cafeterias_menus WHERE date < date('now','-7 day')");
 	}

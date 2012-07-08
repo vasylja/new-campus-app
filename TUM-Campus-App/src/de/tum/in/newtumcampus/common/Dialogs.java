@@ -7,12 +7,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-/** Helper class to access predefined alert dialogs.
+/**
+ * Helper class to access predefined alert dialogs.
  * 
- * @author Vincenz Doelle */
+ * @author Vincenz Doelle
+ */
 public class Dialogs {
 
-	/** Shows a dialog asking to switch to another activity in order perform some actions there.
+	/**
+	 * Shows a dialog asking to switch to another activity in order perform some actions there.
 	 * 
 	 * @param context
 	 *            The current context.
@@ -21,7 +24,8 @@ public class Dialogs {
 	 * @param msg
 	 *            The message to be displayed.
 	 * @param intent
-	 *            The target intent if the user chooses "YES" */
+	 *            The target intent if the user chooses "YES"
+	 */
 	public static void showIntentSwitchDialog(Context context, final Activity parent, String msg, final Intent intent) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setMessage(msg).setCancelable(false)

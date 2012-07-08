@@ -26,44 +26,28 @@ import de.tum.in.newtumcampus.services.DownloadService;
 /** Activity to show cafeterias and meals selected by date */
 public class Cafeterias extends Activity implements OnItemClickListener {
 
-	/**
-	 * Current Date selected (ISO format)
-	 */
+	/** Current Date selected (ISO format) */
 	private static String date;
 
-	/**
-	 * Current Date selected (German format)
-	 */
+	/** Current Date selected (German format) */
 	private static String dateStr;
 
-	/**
-	 * Current Cafeteria selected
-	 */
+	/** Current Cafeteria selected */
 	private String cafeteriaId;
 
-	/**
-	 * Current Cafeteria name selected
-	 */
+	/** Current Cafeteria name selected */
 	private String cafeteriaName;
 
-	/**
-	 * Cafeteria prices url
-	 */
+	/** Cafeteria prices url */
 	private static String MENSA_PREISE = "http://www.studentenwerk-muenchen.de/mensa/unsere-preise/";
 
-	/**
-	 * Cafeteria list Garching url
-	 */
+	/** Cafeteria list Garching url */
 	private static String MENSEN_GARCHING = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/garching/";
 
-	/**
-	 * Cafeteria list Muenchen url
-	 */
+	/** Cafeteria list Muenchen url */
 	private static String MENSEN_MUENCHEN = "http://www.studentenwerk-muenchen.de/mensa/unsere-mensen-und-cafeterien/muenchen/";
 
-	/**
-	 * Footer with opening hours
-	 */
+	/** Footer with opening hours */
 	View footer;
 
 	@Override

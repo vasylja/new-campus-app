@@ -9,15 +9,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Cafeteria Manager, handles database stuff, external imports
- */
+/** Cafeteria Manager, handles database stuff, external imports */
 public class CafeteriaManager {
 
 	/** Database connection */
 	private SQLiteDatabase db;
 
-	/** Constructor, open/create database, create table if necessary
+	/**
+	 * Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
@@ -30,12 +29,14 @@ public class CafeteriaManager {
 		db.execSQL("CREATE TABLE IF NOT EXISTS cafeterias (id INTEGER PRIMARY KEY, name VARCHAR, address VARCHAR)");
 	}
 
-	/** Download cafeterias from external interface (JSON)
+	/**
+	 * Download cafeterias from external interface (JSON)
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void downloadFromExternal(boolean force) throws Exception {
 
 		// sync only once per week
@@ -67,13 +68,15 @@ public class CafeteriaManager {
 	 * <pre>
 	 * @param filter Filter name/address by substring ("" = no filter)
 	 * @return Database cursor (name, address, _id)
-	 * </pre> */
+	 * </pre>
+	 */
 	public Cursor getAllFromDb(String filter) {
 		return db.rawQuery("SELECT name, address, id as _id FROM cafeterias WHERE name LIKE ? OR address LIKE ? "
 				+ "ORDER BY address like '%Garching%' DESC, name", new String[] { filter, filter });
 	}
 
-	/** Get Cafeteria object by JSON object
+	/**
+	 * Get Cafeteria object by JSON object
 	 * 
 	 * Example JSON: e.g. {"id":"411","name":"Mensa Leopoldstra\u00dfe","anschrift"
 	 * :"Leopoldstra\u00dfe 13a, M\u00fcnchen"}
@@ -82,19 +85,22 @@ public class CafeteriaManager {
 	 * @param json See example
 	 * @return Cafeteria object
 	 * @throws JSONException
-	 * </pre> */
+	 * </pre>
+	 */
 	public static Cafeteria getFromJson(JSONObject json) throws JSONException {
 
 		return new Cafeteria(json.getInt(ModelsConst.JSON_ID), json.getString(ModelsConst.JSON_NAME),
 				json.getString(ModelsConst.JSON_ANSCHRIFT));
 	}
 
-	/** Replace or Insert a cafeteria in the database
+	/**
+	 * Replace or Insert a cafeteria in the database
 	 * 
 	 * <pre>
 	 * @param c Cafeteria object
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void replaceIntoDb(Cafeteria c) throws Exception {
 		Utils.log(c.toString());
 

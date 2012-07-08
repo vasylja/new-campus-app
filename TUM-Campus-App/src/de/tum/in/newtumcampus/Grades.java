@@ -23,11 +23,13 @@ import de.tum.in.newtumcampus.models.ExamListAdapter;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
 
-/** Activity to show the user's grades/exams passed.
+/**
+ * Activity to show the user's grades/exams passed.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens */
+ * @review Thomas Behrens
+ */
 public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 
 	/** Spinner to choose between programs */
@@ -69,9 +71,11 @@ public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 		requestHandler.fetchInteractive(this, this);
 	}
 
-	/** Handle the response by deserializing it into model entities.
+	/**
+	 * Handle the response by deserializing it into model entities.
 	 * 
-	 * @param rawResp */
+	 * @param rawResp
+	 */
 	@Override
 	public void onFetch(String rawResp) {
 

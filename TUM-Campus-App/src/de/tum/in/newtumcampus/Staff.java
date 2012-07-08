@@ -27,11 +27,13 @@ import de.tum.in.newtumcampus.models.StaffListAdapter;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
 
-/** Activity to search for employees.
+/**
+ * Activity to search for employees.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens */
+ * @review Thomas Behrens
+ */
 public class Staff extends Activity implements OnEditorActionListener, TUMOnlineRequestFetchListener {
 
 	/** Handler to send request to TUMOnline */
@@ -82,10 +84,12 @@ public class Staff extends Activity implements OnEditorActionListener, TUMOnline
 		return true;
 	}
 
-	/** Handles the XML response from TUMOnline by deserializing the information to model entities.
+	/**
+	 * Handles the XML response from TUMOnline by deserializing the information to model entities.
 	 * 
 	 * @param rawResp
-	 *            The XML data from TUMOnline. */
+	 *            The XML data from TUMOnline.
+	 */
 	@Override
 	public void onFetch(String rawResp) {
 
@@ -127,10 +131,12 @@ public class Staff extends Activity implements OnEditorActionListener, TUMOnline
 		// ignore
 	}
 
-	/** Displays the employees searched for.
+	/**
+	 * Displays the employees searched for.
 	 * 
 	 * @param employees
-	 *            The search results enriched with some additional information. */
+	 *            The search results enriched with some additional information.
+	 */
 	private void displayResults(List<Person> employees) {
 		final ListView lvStaff = (ListView) findViewById(R.id.lstPersons);
 
@@ -154,10 +160,12 @@ public class Staff extends Activity implements OnEditorActionListener, TUMOnline
 		});
 	}
 
-	/** Helper class that successively fetches detail information for a list of employees.
+	/**
+	 * Helper class that successively fetches detail information for a list of employees.
 	 * 
 	 * @author Vincenz Doelle
-	 * @review Daniel G. Mayr */
+	 * @review Daniel G. Mayr
+	 */
 	class EmploymentDetailsFetcher implements TUMOnlineRequestFetchListener {
 		// Context activity (Staff.class)
 		private final Activity context;

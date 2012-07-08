@@ -10,9 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Event Manager, handles database stuff, external imports
- */
+/** Event Manager, handles database stuff, external imports */
 public class EventManager {
 
 	/** Database connection */
@@ -21,7 +19,8 @@ public class EventManager {
 	/** Last insert counter */
 	public static int lastInserted = 0;
 
-	/** Constructor, open/create database, create table if necessary
+	/**
+	 * Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
@@ -35,12 +34,14 @@ public class EventManager {
 				+ "end VARCHAR, location VARCHAR, description VARCHAR, link VARCHAR, image VARCHAR)");
 	}
 
-	/** Download events from external interface (JSON)
+	/**
+	 * Download events from external interface (JSON)
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void downloadFromExternal(boolean force) throws Exception {
 
 		if (!force && !SyncManager.needSync(db, this, 21600)) { // 6h
@@ -70,9 +71,11 @@ public class EventManager {
 		lastInserted += Utils.dbGetTableCount(db, "events") - count;
 	}
 
-	/** Get all upcoming or unfinished events from the database
+	/**
+	 * Get all upcoming or unfinished events from the database
 	 * 
-	 * @return Database cursor (image, name, weekday, start_de, end_de, location, _id) */
+	 * @return Database cursor (image, name, weekday, start_de, end_de, location, _id)
+	 */
 	public Cursor getNextFromDb() {
 		return db.rawQuery("SELECT image, name, strftime('%w', start) as weekday, "
 				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, strftime('%H:%M', end) as end_de, "
@@ -80,9 +83,11 @@ public class EventManager {
 				+ "ORDER BY start ASC LIMIT 25", null);
 	}
 
-	/** Get all finished events from the database
+	/**
+	 * Get all finished events from the database
 	 * 
-	 * @return Database cursor (image, name, weekday, start_de, end_de, location, _id) */
+	 * @return Database cursor (image, name, weekday, start_de, end_de, location, _id)
+	 */
 	public Cursor getPastFromDb() {
 		return db.rawQuery("SELECT image, name, strftime('%w', start) as weekday, "
 				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, strftime('%H:%M', end) as end_de, "
@@ -90,19 +95,22 @@ public class EventManager {
 				+ "ORDER BY start DESC LIMIT 50", null);
 	}
 
-	/** Get event details form the database
+	/**
+	 * Get event details form the database
 	 * 
 	 * <pre>
 	 * @param id Event-ID
 	 * @return Database cursor (image, name, weekday, start_de, end_de, location, description, link, _id)
-	 * </pre> */
+	 * </pre>
+	 */
 	public Cursor getDetailsFromDb(String id) {
 		return db.rawQuery("SELECT image, name, strftime('%w', start) as weekday, "
 				+ "strftime('%d.%m.%Y %H:%M', start) as start_de, strftime('%H:%M', end) as end_de, "
 				+ "location, description, link, id as _id FROM events WHERE id = ?", new String[] { id });
 	}
 
-	/** Convert JSON object to Event, download event picture
+	/**
+	 * Convert JSON object to Event, download event picture
 	 * 
 	 * Example JSON: e.g. { "id": "166478443419659", "owner": { "name": "TUM Campus App for Android", "category":
 	 * "Software", "id": "162327853831856" }, "name": "R\u00fcckmeldung f\u00fcr Wintersemester 2011/12", "description":
@@ -113,7 +121,8 @@ public class EventManager {
 	 * @param json see above
 	 * @return Event
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public static Event getFromJson(JSONObject json) throws Exception {
 
 		String eventId = json.getString(ModelsConst.JSON_ID);
@@ -139,12 +148,14 @@ public class EventManager {
 				location, description, link, target);
 	}
 
-	/** Replace or Insert a event in the database
+	/**
+	 * Replace or Insert a event in the database
 	 * 
 	 * <pre>
 	 * @param e Event object
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void replaceIntoDb(Event e) throws Exception {
 		if (e.id.length() == 0) {
 			throw new Exception("Invalid id.");
@@ -153,8 +164,8 @@ public class EventManager {
 			throw new Exception("Invalid name.");
 		}
 		db.execSQL("REPLACE INTO events (id, name, start, end, location, description, link, image) "
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)", new String[] { e.id, e.name, Utils.getDateTimeString(e.start),
-						Utils.getDateTimeString(e.end), e.location, e.description, e.link, e.image });
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)", new String[] { e.id, e.name, Utils.getDateTimeString(e.start),
+				Utils.getDateTimeString(e.end), e.location, e.description, e.link, e.image });
 	}
 
 	/** Removes all cache items */

@@ -31,14 +31,10 @@ import de.tum.in.newtumcampus.models.SyncManager;
 /** Service used to download files from external pages */
 public class DownloadService extends IntentService {
 
-	/**
-	 * Indicator to avoid starting new downloads
-	 */
+	/** Indicator to avoid starting new downloads */
 	private volatile boolean destroyed = false;
 
-	/**
-	 * Download broadcast identifier
-	 */
+	/** Download broadcast identifier */
 	public final static String broadcast = "de.tum.in.newtumcampus.intent.action.BROADCAST_DOWNLOAD";
 
 	private static final String DOWNLOAD_SERVICE = "DownloadService";
@@ -122,7 +118,7 @@ public class DownloadService extends IntentService {
 			downloadEvents(force);
 		}
 		if ((action == null || action.equals("gallery")) && !destroyed && Utils.getSettingBool(this, "gallery")) {
-// TODO translate
+			// TODO translate
 			logMessage("Kurz notiert ", "");
 			downloadGallery(force);
 		}
@@ -142,11 +138,13 @@ public class DownloadService extends IntentService {
 		nm.cancel(1);
 	}
 
-	/** Download items for all feeds
+	/**
+	 * Download items for all feeds
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
-	 * </pre> */
+	 * </pre>
+	 */
 	public void downloadFeeds(boolean force) {
 		FeedManager nm = new FeedManager(this);
 		List<Integer> list = nm.getAllIdsFromDb();
@@ -164,11 +162,13 @@ public class DownloadService extends IntentService {
 		}
 	}
 
-	/** Download news elements
+	/**
+	 * Download news elements
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
-	 * </pre> */
+	 * </pre>
+	 */
 	public void downloadNews(boolean force) {
 		NewsManager nm = new NewsManager(this);
 		try {
@@ -178,11 +178,13 @@ public class DownloadService extends IntentService {
 		}
 	}
 
-	/** Download events
+	/**
+	 * Download events
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
-	 * </pre> */
+	 * </pre>
+	 */
 	public void downloadEvents(boolean force) {
 		EventManager em = new EventManager(this);
 		try {
@@ -208,11 +210,13 @@ public class DownloadService extends IntentService {
 		}
 	}
 
-	/** Download cafeterias
+	/**
+	 * Download cafeterias
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
-	 * </pre> */
+	 * </pre>
+	 */
 	public void downloadCafeterias(boolean force) {
 		CafeteriaManager cm = new CafeteriaManager(this);
 		CafeteriaMenuManager cmm = new CafeteriaMenuManager(this);
@@ -234,9 +238,11 @@ public class DownloadService extends IntentService {
 		}
 	}
 
-	/** Download OrganisationTree from TUMOnline
+	/**
+	 * Download OrganisationTree from TUMOnline
 	 * 
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public void downloadOrganisations() {
 		OrganisationManager lm = new OrganisationManager(this);
 
@@ -255,12 +261,14 @@ public class DownloadService extends IntentService {
 		// }
 	}
 
-	/** Send notification message to service caller
+	/**
+	 * Send notification message to service caller
 	 * 
 	 * <pre>
 	 * @param e Exception, get message and stacktrace from 
 	 * @param info Notification info, appended to exception message
-	 * </pre> */
+	 * </pre>
+	 */
 	public void logErrorMessage(Exception e, String info) {
 		Utils.log(e, info);
 
@@ -280,12 +288,14 @@ public class DownloadService extends IntentService {
 		sendBroadcast(intentSend);
 	}
 
-	/** Send notification message to service caller
+	/**
+	 * Send notification message to service caller
 	 * 
 	 * <pre>
 	 * @param message Notification message
 	 * @param action Notification action (e.g. error, completed)
-	 * </pre> */
+	 * </pre>
+	 */
 	public void logMessage(String message, String action) {
 		this.message += message;
 

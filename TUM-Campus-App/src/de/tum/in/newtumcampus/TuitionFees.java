@@ -22,9 +22,11 @@ import de.tum.in.newtumcampus.common.FileUtils;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 
-/** Activity to download student documents from TUMOnline.
+/**
+ * Activity to download student documents from TUMOnline.
  * 
- * @author Vincenz Doelle */
+ * @author Vincenz Doelle
+ */
 
 public class TuitionFees extends Activity {
 
@@ -136,10 +138,12 @@ public class TuitionFees extends Activity {
 
 	}
 
-	/** Creates a background task and calls fetchDocument while showing a progress dialog.
+	/**
+	 * Creates a background task and calls fetchDocument while showing a progress dialog.
 	 * 
 	 * @param documentURL
-	 *            URL of the document to be downloaded */
+	 *            URL of the document to be downloaded
+	 */
 	private void getDocument(String documentURL) {
 		if (!Utils.isConnected(this)) {
 			Utils.showLongCenteredToast(this, getString(R.string.no_internet_connection));
@@ -180,10 +184,12 @@ public class TuitionFees extends Activity {
 		backgroundTask.execute(documentURL);
 	}
 
-	/** Fetches the tuition fee document from TUMOnline.
+	/**
+	 * Fetches the tuition fee document from TUMOnline.
 	 * 
 	 * @param documentURL
-	 *            The URL of the document. */
+	 *            The URL of the document.
+	 */
 	private boolean fetchDocument(String documentURL) {
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 

@@ -12,20 +12,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * News Manager, handles database stuff, external imports
- */
+/** News Manager, handles database stuff, external imports */
 public class NewsManager {
 
-	/**
-	 * Database connection
-	 */
+	/** Database connection */
 	private SQLiteDatabase db;
 
 	/** Last insert counter */
 	public static int lastInserted = 0;
 
-	/** Constructor, open/create database, create table if necessary
+	/**
+	 * Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
@@ -39,12 +36,14 @@ public class NewsManager {
 				+ "image VARCHAR, date VARCHAR)");
 	}
 
-	/** Download news from external interface (JSON)
+	/**
+	 * Download news from external interface (JSON)
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void downloadFromExternal(boolean force) throws Exception {
 
 		if (!force && !SyncManager.needSync(db, this, 86400)) {
@@ -76,7 +75,7 @@ public class NewsManager {
 								.equals("162327853831856")) {
 					continue;
 				}
-// TODO check const
+				// TODO check const
 				if (obj.has("name") && obj.getString("name").equals("Kurz notiert")) {
 					continue;
 				}
@@ -95,15 +94,18 @@ public class NewsManager {
 		lastInserted += Utils.dbGetTableCount(db, "news") - count;
 	}
 
-	/** Get all news from the database
+	/**
+	 * Get all news from the database
 	 * 
-	 * @return Database cursor (image, message, date_de, link, _id) */
+	 * @return Database cursor (image, message, date_de, link, _id)
+	 */
 	public Cursor getAllFromDb() {
 		return db.rawQuery("SELECT image, message, strftime('%d.%m.%Y', date) as date_de, link, id as _id "
 				+ "FROM news ORDER BY date DESC", null);
 	}
 
-	/** Convert JSON object to News and download news image
+	/**
+	 * Convert JSON object to News and download news image
 	 * 
 	 * Example JSON: e.g. { "id": "162327853831856_174943842570257", "from": { ... }, "message": "Testing ...",
 	 * "picture":
@@ -118,7 +120,8 @@ public class NewsManager {
 	 * @param json see above
 	 * @return News
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public static News getFromJson(JSONObject json) throws Exception {
 
 		String target = "";
@@ -143,7 +146,7 @@ public class NewsManager {
 			message = json.getString(ModelsConst.JSON_DESCRIPTION);
 		} else if (json.has(ModelsConst.JSON_CAPTION)) {
 			message = json.getString(ModelsConst.JSON_CAPTION);
-// TODO check const
+			// TODO check const
 		} else if (json.has("name")) {
 			message = json.getString("name");
 		}
@@ -152,12 +155,14 @@ public class NewsManager {
 		return new News(json.getString(ModelsConst.JSON_ID), message, link, target, date);
 	}
 
-	/** Replace or Insert a event in the database
+	/**
+	 * Replace or Insert a event in the database
 	 * 
 	 * <pre>
 	 * @param n News object
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void replaceIntoDb(News n) throws Exception {
 		Utils.log(n.toString());
 

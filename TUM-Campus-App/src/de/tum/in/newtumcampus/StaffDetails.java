@@ -15,11 +15,13 @@ import de.tum.in.newtumcampus.models.Person;
 import de.tum.in.newtumcampus.models.Room;
 import de.tum.in.newtumcampus.models.TelSubstation;
 
-/** Activity to show information about an employee.
+/**
+ * Activity to show information about an employee.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens */
+ * @review Thomas Behrens
+ */
 public class StaffDetails extends Activity {
 
 	/** The employee */
@@ -50,10 +52,12 @@ public class StaffDetails extends Activity {
 		initUI((Employee) personObject);
 	}
 
-	/** Displays all relevant information about the given employee in the user interface (UI).
+	/**
+	 * Displays all relevant information about the given employee in the user interface (UI).
 	 * 
 	 * @param employee
-	 *            The employee whose information should be displayed. */
+	 *            The employee whose information should be displayed.
+	 */
 	private void initUI(Employee employee) {
 
 		// add the employee's counterfeit

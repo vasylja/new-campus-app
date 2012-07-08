@@ -26,11 +26,13 @@ import android.os.AsyncTask;
 import android.content.DialogInterface.OnCancelListener;
 import android.util.Log;
 
-/** This class will handle all action needed to communicate with the TUMCampus backend The difference between this and
+/**
+ * This class will handle all action needed to communicate with the TUMCampus backend The difference between this and
  * the TUMOnline-class is the use of another webinterface
  * 
  * @author Thomas Behrens
- * @review Vincenz Doelle, Daniel G. Mayr */
+ * @review Vincenz Doelle, Daniel G. Mayr
+ */
 public class TUMCampusRequest {
 
 	/** Server address: TUMCampus interface */
@@ -57,35 +59,43 @@ public class TUMCampusRequest {
 	/** Message to be displayed in progress dialog */
 	private String progressDialogMessage = "";
 
-	/** @param method
-	 *            the function name to which we are calling */
+	/**
+	 * @param method
+	 *            the function name to which we are calling
+	 */
 	public TUMCampusRequest(String method) {
 		this.method = method;
 		resetParameters();
 	}
 
-	/** Sets one parameter name to its given value
+	/**
+	 * Sets one parameter name to its given value
 	 * 
 	 * @param name
 	 *            identifier of the parameter
 	 * @param value
-	 *            value of the parameter */
+	 *            value of the parameter
+	 */
 	public void setParameter(String name, String value) {
 		parameters.put(name, value);
 	}
 
-	/** If you want to put a complete Parameter Map into the request, use this function to merge them with the existing
+	/**
+	 * If you want to put a complete Parameter Map into the request, use this function to merge them with the existing
 	 * parameter map
 	 * 
 	 * @param existingMap
-	 *            a Map<String,String> which should be set */
+	 *            a Map<String,String> which should be set
+	 */
 	public void setParameters(Map<String, String> existingMap) {
 		parameters.putAll(existingMap);
 	}
 
-	/** Returns a map with all set parameter pairs
+	/**
+	 * Returns a map with all set parameter pairs
 	 * 
-	 * @return Map<String, String> parameters */
+	 * @return Map<String, String> parameters
+	 */
 	public Map<String, String> getParameters() {
 		return parameters;
 	}
@@ -96,9 +106,11 @@ public class TUMCampusRequest {
 		parameters.put("token", ACCESSTOKEN);
 	}
 
-	/** This will return the URL to the TUMOnlineRequest with regard to the set parameters
+	/**
+	 * This will return the URL to the TUMOnlineRequest with regard to the set parameters
 	 * 
-	 * @return a String URL */
+	 * @return a String URL
+	 */
 	public String getRequestURL() {
 		String url = serviceBaseURL + method + "/xml?";
 		Iterator<Entry<String, String>> itMapIterator = parameters.entrySet().iterator();
@@ -109,10 +121,12 @@ public class TUMCampusRequest {
 		return url;
 	}
 
-	/** Fetches the result of the HTTPRequest (which can be seen by using getRequestURL)
+	/**
+	 * Fetches the result of the HTTPRequest (which can be seen by using getRequestURL)
 	 * 
 	 * @return output will be a raw String
-	 * @see getRequestURL */
+	 * @see getRequestURL
+	 */
 	public String fetch() {
 		String url = getRequestURL();
 		Log.d("TUMCampusXMLRequest", "fetching URL " + url);
@@ -137,13 +151,15 @@ public class TUMCampusRequest {
 		return null;
 	}
 
-	/** this fetch method will fetch the data from the TUMOnline Request and will address the listeners onFetch if the
+	/**
+	 * this fetch method will fetch the data from the TUMOnline Request and will address the listeners onFetch if the
 	 * fetch succeeded, else the onFetchError will be called
 	 * 
 	 * @param context
 	 *            the current context (may provide the current activity)
 	 * @param listener
-	 *            the listener, which takes the result */
+	 *            the listener, which takes the result
+	 */
 	public void fetchInteractive(final Context context, final TUMOnlineRequestFetchListener listener) {
 		// start the progress dialog
 		progressDialog = ProgressDialog.show(context, "", getProgressDialogMessage());

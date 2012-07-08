@@ -23,10 +23,12 @@ import de.tum.in.newtumcampus.models.OrgDetailsItemHandler;
 import de.tum.in.newtumcampus.tumonline.TUMCampusRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
 
-/** Show all details that are available on TUMCampus to any organisation
+/**
+ * Show all details that are available on TUMCampus to any organisation
  * 
  * @author Thomas Behrens
- * @review Vincenz Doelle, Daniel G. Mayr */
+ * @review Vincenz Doelle, Daniel G. Mayr
+ */
 public class OrganisationDetails extends Activity implements TUMOnlineRequestFetchListener {
 
 	/** To fetch the Details from the TUMCampus interface */
@@ -79,10 +81,12 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		}
 	}
 
-	/** When the data has arrived call this function, parse the Data and Update the UserInterface
+	/**
+	 * When the data has arrived call this function, parse the Data and Update the UserInterface
 	 * 
 	 * @param rawResp
-	 *            = XML-TUMCampus-Response (String) */
+	 *            = XML-TUMCampus-Response (String)
+	 */
 	@Override
 	public void onFetch(String rawResponse) {
 		Log.d("RESPONSE", rawResponse);
@@ -103,11 +107,13 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		// do nothing
 	}
 
-	/** Parse XML-String into one OrgDetails-Object
+	/**
+	 * Parse XML-String into one OrgDetails-Object
 	 * 
 	 * @param rawResp
 	 *            = XML-String to parse
-	 * @return OrgDetailsItem (OrgDetails Object) */
+	 * @return OrgDetailsItem (OrgDetails Object)
+	 */
 	private static OrgDetailsItem parseOrgDetails(String rawResp) {
 
 		/* Get a SAXParser from the SAXPArserFactory. */
@@ -135,13 +141,15 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		return null;
 	}
 
-	/** Helper Class that brings the Strings+Values in a GUI polished format
+	/**
+	 * Helper Class that brings the Strings+Values in a GUI polished format
 	 * 
 	 * @param name
 	 *            Name of the Attribute
 	 * @param value
 	 *            Value of the Attribute
-	 * @return line with name and value */
+	 * @return line with name and value
+	 */
 	private static String makeStringShowable(String name, String value) {
 
 		// if value has length 0 => do nothing
@@ -160,11 +168,13 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		return outputLine;
 	}
 
-	/** Remove various signs out of a number -> Reason: To make a direct call possible
+	/**
+	 * Remove various signs out of a number -> Reason: To make a direct call possible
 	 * 
 	 * @param punctedNumber
 	 *            = String can contain not numbers
-	 * @return number without special characters */
+	 * @return number without special characters
+	 */
 	private static String removePunctuation(String punctedNumber) {
 		// make "(089) 56.." to "(089)56"
 		punctedNumber = punctedNumber.replace(") ", ")");
@@ -178,10 +188,12 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 		return punctedNumber;
 	}
 
-	/** Show the Organisation Details to the user
+	/**
+	 * Show the Organisation Details to the user
 	 * 
 	 * @param organisation
-	 *            (= organisation detail object) */
+	 *            (= organisation detail object)
+	 */
 	private void updateUI(OrgDetailsItem organisation) {
 
 		// catch error
@@ -267,9 +279,11 @@ public class OrganisationDetails extends Activity implements TUMOnlineRequestFet
 
 	}
 
-	/** Initialize BackButton -> On Click: Go to Organisation.java and show the Organisation Tree
+	/**
+	 * Initialize BackButton -> On Click: Go to Organisation.java and show the Organisation Tree
 	 * 
-	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent) */
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 

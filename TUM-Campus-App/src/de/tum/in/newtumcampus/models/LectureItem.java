@@ -37,7 +37,8 @@ public class LectureItem {
 	/** Lecture item series ID (LectureID_Week-Day_Start-Time) */
 	String seriesId;
 
-	/** New Lecture item
+	/**
+	 * New Lecture item
 	 * 
 	 * <pre>
 	 * @param id Lecture item ID (LectureId_Start-Unix-Timestamp)
@@ -50,7 +51,8 @@ public class LectureItem {
 	 * @param note Lecture item note, e.g. Übung
 	 * @param url Lecture item URL
 	 * @param seriesId Lecture item series ID (LectureID_Week-Day_Start-Time)
-	 * </pre> */
+	 * </pre>
+	 */
 	public LectureItem(String id, String lectureId, Date start, Date end, String name, String module, String location,
 			String note, String url, String seriesId) {
 		this.id = id;
@@ -76,13 +78,15 @@ public class LectureItem {
 	/** Holiday object (extends LectureItem) */
 	public static class Holiday extends LectureItem {
 
-		/** New Holiday
+		/**
+		 * New Holiday
 		 * 
 		 * <pre>
 		 * @param id Holiday ID
 		 * @param date Date
 		 * @param name Name, e.g. Allerheiligen
-		 * </pre> */
+		 * </pre>
+		 */
 		public Holiday(String id, Date date, String name) {
 			super(id, "holiday", date, date, "Feiertag", "", "", name, "about:blank", id);
 		}
@@ -91,14 +95,16 @@ public class LectureItem {
 	/** Vacation object (extends LectureItem) */
 	public static class Vacation extends LectureItem {
 
-		/** New Vacation
+		/**
+		 * New Vacation
 		 * 
 		 * <pre>
 		 * @param id Vacation ID
 		 * @param start Begin Date
 		 * @param end End Date
 		 * @param name Name, e.g. Sommerferien
-		 * </pre> */
+		 * </pre>
+		 */
 		public Vacation(String id, Date start, Date end, String name) {
 			super(id, "vacation", start, end, "Ferien", "", "", name, "about:blank", id);
 		}

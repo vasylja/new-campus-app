@@ -28,7 +28,8 @@ public class CafeteriaMenu {
 	/** Menu name */
 	String name;
 
-	/** New CafeteriaMenu
+	/**
+	 * New CafeteriaMenu
 	 * 
 	 * <pre>
 	 * @param id CafeteriaMenu Id (empty for addendum)
@@ -38,7 +39,8 @@ public class CafeteriaMenu {
 	 * @param typeLong Long type, e.g. Tagesgericht 1
 	 * @param typeNr Type ID
 	 * @param name Menu name
-	 * </pre> */
+	 * </pre>
+	 */
 	public CafeteriaMenu(int id, int cafeteriaId, Date date, String typeShort, String typeLong, int typeNr, String name) {
 
 		this.id = id;

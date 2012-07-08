@@ -30,7 +30,8 @@ public class Location {
 	/** URL */
 	String url;
 
-	/** New Location
+	/**
+	 * New Location
 	 * 
 	 * <pre>
 	 * @param id Location ID, e.g. 100
@@ -42,7 +43,8 @@ public class Location {
 	 * @param hours Opening hours, e.g. Mo–Fr 8–24
 	 * @param remark Additional information, e.g. Tel: 089-11111
 	 * @param url Location URL, e.g. http://stud.ub.uni-muenchen.de/
-	 * </pre> */
+	 * </pre>
+	 */
 	public Location(int id, String category, String name, String address, String room, String transport, String hours,
 			String remark, String url) {
 		this.id = id;

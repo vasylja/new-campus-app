@@ -1,33 +1,21 @@
 package de.tum.in.newtumcampus.models;
 
-/**
- * Gallery object
- */
+/** Gallery object */
 public class Gallery {
 
-	/**
-	 * Gallery Facebook-ID
-	 */
+	/** Gallery Facebook-ID */
 	String id;
 
-	/**
-	 * Name, e.g. PartyX
-	 */
+	/** Name, e.g. PartyX */
 	String name;
 
-	/**
-	 * Local image file, e.g. /mnt/sdcard/tumcampus/events/cache/xy.jpg
-	 */
+	/** Local image file, e.g. /mnt/sdcard/tumcampus/events/cache/xy.jpg */
 	String image;
 
-	/**
-	 * Position in gallery
-	 */
+	/** Position in gallery */
 	String position;
 
-	/**
-	 * Image is archived
-	 */
+	/** Image is archived */
 	boolean archive;
 
 	/**

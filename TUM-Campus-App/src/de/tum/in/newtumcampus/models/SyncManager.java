@@ -5,15 +5,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Sync Manager, tracks last successful syncs
- */
+/** Sync Manager, tracks last successful syncs */
 public class SyncManager {
 
 	/** Database connection */
 	private SQLiteDatabase db;
 
-	/** Constructor, open/create database, create table if necessary
+	/**
+	 * Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
@@ -26,23 +25,27 @@ public class SyncManager {
 		db.execSQL("CREATE TABLE IF NOT EXISTS syncs (id VARCHAR PRIMARY KEY, lastSync VARCHAR)");
 	}
 
-	/** Replace or Insert a successful sync event in the database
+	/**
+	 * Replace or Insert a successful sync event in the database
 	 * 
 	 * <pre>
 	 * @param db Database connection
 	 * @param obj Gives class name as sync ID
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public static void replaceIntoDb(SQLiteDatabase db, Object obj) {
 		replaceIntoDb(db, obj.getClass().getName());
 	}
 
-	/** Replace or Insert a successful sync event in the database
+	/**
+	 * Replace or Insert a successful sync event in the database
 	 * 
 	 * <pre>
 	 * @param db Database connection
 	 * @param id Sync-ID (derived by originator class name)
-	 * </pre> */
+	 * </pre>
+	 */
 	public static void replaceIntoDb(SQLiteDatabase db, String id) {
 		Utils.log(id);
 
@@ -52,26 +55,30 @@ public class SyncManager {
 		db.execSQL("REPLACE INTO syncs (id, lastSync) VALUES (?, datetime())", new String[] { id });
 	}
 
-	/** Checks if a new sync is needed or if data is up-to-date
+	/**
+	 * Checks if a new sync is needed or if data is up-to-date
 	 * 
 	 * <pre>
 	 * @param db Database connection
 	 * @param obj Gives class name as sync ID
 	 * @param seconds Sync period, e.g. 86400 for 1 day
 	 * @return true if sync is needed, else false
-	 * </pre> */
+	 * </pre>
+	 */
 	public static boolean needSync(SQLiteDatabase db, Object obj, int seconds) {
 		return needSync(db, obj.getClass().getName(), seconds);
 	}
 
-	/** Checks if a new sync is needed or if data is up-to-date
+	/**
+	 * Checks if a new sync is needed or if data is up-to-date
 	 * 
 	 * <pre>
 	 * @param db Database connection
 	 * @param id Sync-ID (derived by originator class name)
 	 * @param seconds Sync period, e.g. 86400 for 1 day
 	 * @return true if sync is needed, else false
-	 * </pre> */
+	 * </pre>
+	 */
 	public static boolean needSync(SQLiteDatabase db, String id, int seconds) {
 		boolean result = true;
 		Cursor c = db.rawQuery("SELECT lastSync FROM syncs WHERE lastSync > datetime('now', '-" + seconds

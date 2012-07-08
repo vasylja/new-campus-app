@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-/** Custom UI adapter for a list of exams.
+/**
+ * Custom UI adapter for a list of exams.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens */
+ * @review Thomas Behrens
+ */
 public class ExamListAdapter extends BaseAdapter {
 	private static List<Exam> exams;
 

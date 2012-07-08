@@ -10,13 +10,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import de.tum.in.newtumcampus.common.Base64;
 
-/** An employee of the TUM.
+/**
+ * An employee of the TUM.
  * <p>
  * Note: This model is based on the TUMOnline web service response format for a corresponding request.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens */
+ * @review Thomas Behrens
+ */
 @Root(name = "person", strict = false)
 public class Employee extends Person implements Serializable {
 

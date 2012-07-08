@@ -99,14 +99,16 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 			return true;
 		}
 		if (view.getId() == android.R.id.text2) {
-			/** <pre>
+			/**
+			 * <pre>
 			 * show info as:
 			 * Lecture: Week-day, Start DateTime - End Time, Room-Nr-Intern
 			 * Holiday: Week-day, Start Date
 			 * vacation info: Start Date - End Date
 			 * 
 			 * Location format: Room-Nr-Intern, Room-name (Room-Nr-Extern)
-			 * </pre> */
+			 * </pre>
+			 */
 			String info = "";
 			String lectureId = c.getString(c.getColumnIndex(Const.LECTURE_ID_COLUMN));
 			// TODO IMPORTANT Check whether "start_dt" and "start_de" are actually the same
@@ -190,11 +192,13 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		startActivity(viewIntent);
 	}
 
-	/** Deletes a lecture unit and refreshes the lecture unit list
+	/**
+	 * Deletes a lecture unit and refreshes the lecture unit list
 	 * 
 	 * <pre>
 	 * @param itemId Lecture unit id
-	 * </pre> */
+	 * </pre>
+	 */
 	public void deleteLectureItem(String itemId) {
 		// delete lecture item
 		LectureItemManager lim = new LectureItemManager(this);
@@ -209,11 +213,13 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		}
 	}
 
-	/** Deletes a lecture and refreshes both list views
+	/**
+	 * Deletes a lecture and refreshes both list views
 	 * 
 	 * <pre>
 	 * @param itemId Lecture id
-	 * </pre> */
+	 * </pre>
+	 */
 	public void deleteLecture(String itemId) {
 		// delete lecture
 		LectureManager lm = new LectureManager(this);
@@ -277,9 +283,11 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 
-		/** Suche für Lehrveranstaltungen in TUMOnline hinzugefügt Und Ausgabe Eigene Lehrveranstaltungen angefügt
+		/**
+		 * Suche für Lehrveranstaltungen in TUMOnline hinzugefügt Und Ausgabe Eigene Lehrveranstaltungen angefügt
 		 * 
-		 * @author Daniel Mayr */
+		 * @author Daniel Mayr
+		 */
 
 		MenuItem miVorlesungsExport = menu.add(0, Menu.FIRST, 0, getString(R.string.export2calendar));
 		miVorlesungsExport.setIcon(android.R.drawable.ic_menu_my_calendar);
@@ -295,9 +303,11 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		/** kompatiblitaet zu mehreren Menu Punkten hinzugefuegt
+		/**
+		 * kompatiblitaet zu mehreren Menu Punkten hinzugefuegt
 		 * 
-		 * @author Daniel Mayr */
+		 * @author Daniel Mayr
+		 */
 
 		// find lectures via TUMOnline
 		if (item.getTitle() == getString(R.string.search_lectures)) {
@@ -319,9 +329,11 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		return true;
 	}
 
-	/** set to use the find hardware button to get to the findlectures activity
+	/**
+	 * set to use the find hardware button to get to the findlectures activity
 	 * 
-	 * @author Daniel Mayr */
+	 * @author Daniel Mayr
+	 */
 	@Override
 	public boolean onSearchRequested() {
 

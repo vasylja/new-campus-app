@@ -13,29 +13,35 @@ import de.tum.in.newtumcampus.common.FileUtils;
  * 
  */
 
-/** Event Manager, handles database stuff, external imports
+/**
+ * Event Manager, handles database stuff, external imports
  * <p>
  * 
- * @author Thomas Behrens */
+ * @author Thomas Behrens
+ */
 
 public class OrganisationManager {
 
 	/** Maximal file age in milliseconds (here: (3600*1000*24*5) = 5 Days) */
 	private final int MAXFILEAGE = 432000000;
 
-	/** Constructor, open/create database, create table if necessary
+	/**
+	 * Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
 	 * @param database Filename, e.g. database.db
-	 * </pre> */
+	 * </pre>
+	 */
 	public OrganisationManager(Context context) {
 		super();
 	}
 
-	/** Look if the xml-File has to get updated
+	/**
+	 * Look if the xml-File has to get updated
 	 * 
-	 * @return true (if xml-File is older than 1 week or doesn't exist), false (if xml-File is newer than 1 week) */
+	 * @return true (if xml-File is older than 1 week or doesn't exist), false (if xml-File is newer than 1 week)
+	 */
 	public boolean needSync() {
 
 		File xmlOrgFile;
@@ -60,13 +66,15 @@ public class OrganisationManager {
 		return false;
 	}
 
-	/** Download xml File of the full Orgtree
+	/**
+	 * Download xml File of the full Orgtree
 	 * 
 	 * <pre>
 	 * @param force True to force download over normal sync period, else false
 	 * @param token Token for the XML-Request
 	 * @throws Exception
-	 * </pre> */
+	 * </pre>
+	 */
 	public void downloadFromExternal(String token) throws Exception {
 
 		// cancel, if it has been updated in the last 5 days

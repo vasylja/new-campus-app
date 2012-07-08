@@ -9,12 +9,14 @@ public class Feed {
 	/** Feed Url, e.g. http://www.spiegel.de/schlagzeilen/index.rss */
 	String feedUrl;
 
-	/** New Feed
+	/**
+	 * New Feed
 	 * 
 	 * <pre>
 	 * @param name Feed name, e.g. Spiegel
 	 * @param feedUrl Feed Url, e.g. http://www.spiegel.de/schlagzeilen/index.rss
-	 * </pre> */
+	 * </pre>
+	 */
 	public Feed(String name, String feedUrl) {
 		this.name = name;
 		this.feedUrl = feedUrl;

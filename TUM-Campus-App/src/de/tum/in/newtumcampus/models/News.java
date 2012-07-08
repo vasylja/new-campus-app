@@ -22,7 +22,8 @@ public class News {
 	/** Date */
 	Date date;
 
-	/** New News
+	/**
+	 * New News
 	 * 
 	 * <pre>
 	 * @param id News Facebook-ID
@@ -30,7 +31,8 @@ public class News {
 	 * @param link Url, e.g. http://www.in.tum.de
 	 * @param image Local image, e.g. /mnt/sdcard/tumcampus/news/cache/xy.jpg
 	 * @param date Date
-	 * </pre> */
+	 * </pre>
+	 */
 	public News(String id, String message, String link, String image, Date date) {
 
 		this.id = id;

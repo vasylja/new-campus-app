@@ -11,13 +11,15 @@ public class Cafeteria {
 	/** Address, e.g. Boltzmannstr. 3 */
 	String address;
 
-	/** new Cafeteria
+	/**
+	 * new Cafeteria
 	 * 
 	 * <pre>
 	 * @param id Cafeteria ID, e.g. 412
 	 * @param name Name, e.g. MensaX
 	 * @param address Address, e.g. Boltzmannstr. 3
-	 * </pre> */
+	 * </pre>
+	 */
 	public Cafeteria(int id, String name, String address) {
 		this.id = id;
 		this.name = name;

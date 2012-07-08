@@ -25,7 +25,8 @@ import de.tum.in.newtumcampus.models.FindLecturesRowSet;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
 
-/** This activity presents the users' lectures using the TUMOnline web service the results can be filtered by the
+/**
+ * This activity presents the users' lectures using the TUMOnline web service the results can be filtered by the
  * semester or all shown.
  * 
  * This activity uses the same models as FindLectures.
@@ -38,7 +39,8 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
  * res.layout.mylectures (Layout XML), models.FindLecturesRowSet, models.FindLecturesListAdapter
  * 
  * @solves [M1] Meine Lehrveranstaltungen
- * @author Daniel G. Mayr */
+ * @author Daniel G. Mayr
+ */
 public class MyLectures extends Activity implements TUMOnlineRequestFetchListener {
 	/** Handler to send request to TUMOnline */
 	private TUMOnlineRequest requestHandler;
@@ -74,10 +76,12 @@ public class MyLectures extends Activity implements TUMOnlineRequestFetchListene
 		}
 	}
 
-	/** Sets all data concerning the FindLecturesListView.
+	/**
+	 * Sets all data concerning the FindLecturesListView.
 	 * 
 	 * @param lecturesList
-	 *            filtered list of lectures */
+	 *            filtered list of lectures
+	 */
 	private void setListView(List<FindLecturesRow> lecturesList) {
 		// set ListView to data via the FindLecturesListAdapter
 		lvMyLecturesList.setAdapter(new FindLecturesListAdapter(this, lecturesList));
@@ -128,9 +132,11 @@ public class MyLectures extends Activity implements TUMOnlineRequestFetchListene
 		spFilter.setAdapter(spinnerArrayAdapter);
 		spFilter.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-			/** if an item in the spinner is selected, we have to filter the results which are displayed in the ListView
+			/**
+			 * if an item in the spinner is selected, we have to filter the results which are displayed in the ListView
 			 * 
-			 * -> tList will be the data which will be passed to the FindLecturesListAdapter */
+			 * -> tList will be the data which will be passed to the FindLecturesListAdapter
+			 */
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				String filter = spFilter.getItemAtPosition(arg2).toString();

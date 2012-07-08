@@ -4,13 +4,15 @@ import java.io.Serializable;
 
 import org.simpleframework.xml.Element;
 
-/** Contact information of a TUM {@link Employee} or a generic {@link Person}.
+/**
+ * Contact information of a TUM {@link Employee} or a generic {@link Person}.
  * <p>
  * Note: This model is based on the TUMOnline web service response format for a corresponding request.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens */
+ * @review Thomas Behrens
+ */
 public class Contact implements Serializable {
 
 	private static final long serialVersionUID = 4413581972047241018L;

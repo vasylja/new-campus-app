@@ -25,9 +25,11 @@ import android.widget.TextView;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.LectureItemManager;
 
-/** this activity let the user export all his lectures to a google calendar
+/**
+ * this activity let the user export all his lectures to a google calendar
  * 
- * @author Daniel G. Mayr */
+ * @author Daniel G. Mayr
+ */
 public class Lectures2Calendar extends Activity implements OnClickListener, OnSeekBarChangeListener {
 	// TODO Constants not exported from this class
 	/** UI elements */
@@ -127,9 +129,11 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		return true;
 	}
 
-	/** set a reminder for a given event
+	/**
+	 * set a reminder for a given event
 	 * 
-	 * @return true if it worked correctly */
+	 * @return true if it worked correctly
+	 */
 	private boolean setReminder(String event_id, int minutes) {
 		if (minutes <= 0)
 			return false;
@@ -144,12 +148,14 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		return true;
 	}
 
-	/** this method returns the calendar or event uri with respect to the sdk version
+	/**
+	 * this method returns the calendar or event uri with respect to the sdk version
 	 * 
 	 * @param eventUri
 	 *            if true returns the eventuri, otherwise the calendar uri
 	 * @return eventuri or calendaruri
-	 * @see http://blog.yeradis.com/2011/01/failed-to-find-provider-info-for.html */
+	 * @see http://blog.yeradis.com/2011/01/failed-to-find-provider-info-for.html
+	 */
 	private static Uri getCalendarUri(boolean eventUri) {
 		Uri calendarURI = null;
 
@@ -163,9 +169,11 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		return calendarURI;
 	}
 
-	/** this method returns the uri of the reminder content provider
+	/**
+	 * this method returns the uri of the reminder content provider
 	 * 
-	 * @return the reminders uri */
+	 * @return the reminders uri
+	 */
 	private static Uri getReminderUri() {
 		Uri reminderUri = null;
 		if (android.os.Build.VERSION.SDK_INT <= 7) {
@@ -176,11 +184,13 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 		return reminderUri;
 	}
 
-	/** will gather all google calendars and their ids
+	/**
+	 * will gather all google calendars and their ids
 	 * 
 	 * @param con
 	 *            current context
-	 * @return a map of name to id */
+	 * @return a map of name to id
+	 */
 	private static Map<String, Integer> getAvailableGoogleCalendars(Context con) {
 		ContentResolver ctnresolver = con.getContentResolver();
 
@@ -221,35 +231,35 @@ public class Lectures2Calendar extends Activity implements OnClickListener, OnSe
 
 				// get all upcoming lecture units
 				LectureItemManager lim = new LectureItemManager(this);
-					Cursor c = lim.getFutureFromDb();
+				Cursor c = lim.getFutureFromDb();
 				if (c != null) {
-						while (c.moveToNext()) {
-							// get all information out of the cursor
-							String title = c.getString(c.getColumnIndex("name"));
-							String description = c.getString(c.getColumnIndex("note"));
-							String location = c.getString(c.getColumnIndex("location"));
-							String startstr = c.getString(c.getColumnIndex("start"));
-							String endstr = c.getString(c.getColumnIndex("end"));
+					while (c.moveToNext()) {
+						// get all information out of the cursor
+						String title = c.getString(c.getColumnIndex("name"));
+						String description = c.getString(c.getColumnIndex("note"));
+						String location = c.getString(c.getColumnIndex("location"));
+						String startstr = c.getString(c.getColumnIndex("start"));
+						String endstr = c.getString(c.getColumnIndex("end"));
 
-							// Log.d("item", title + description + location + startstr + endstr);
+						// Log.d("item", title + description + location + startstr + endstr);
 
-							try {
-								// format dates
-								SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-								Calendar cal = Calendar.getInstance();
-								cal.setTime(dateformatter.parse(startstr));
-								long start = cal.getTimeInMillis();
-								cal.setTime(dateformatter.parse(endstr));
-								long end = cal.getTimeInMillis();
+						try {
+							// format dates
+							SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+							Calendar cal = Calendar.getInstance();
+							cal.setTime(dateformatter.parse(startstr));
+							long start = cal.getTimeInMillis();
+							cal.setTime(dateformatter.parse(endstr));
+							long end = cal.getTimeInMillis();
 
-								// put it to calendar
-								addToCalendar(selectedCalendar, title, description, location, start, end,
-										sbReminder.getProgress());
-							} catch (Exception ex) {
-								ex.printStackTrace();
-							}
-
+							// put it to calendar
+							addToCalendar(selectedCalendar, title, description, location, start, end,
+									sbReminder.getProgress());
+						} catch (Exception ex) {
+							ex.printStackTrace();
 						}
+
+					}
 				}
 
 				// a toast to the export!

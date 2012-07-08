@@ -4,15 +4,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-/**
- * Lecture Manager, handles database stuff
- */
+/** Lecture Manager, handles database stuff */
 public class LectureManager {
 
 	/** Database connection */
 	private SQLiteDatabase db;
 
-	/** Constructor, open/create database, create table if necessary
+	/**
+	 * Constructor, open/create database, create table if necessary
 	 * 
 	 * <pre>
 	 * @param context Context
@@ -25,9 +24,11 @@ public class LectureManager {
 		db.execSQL("CREATE TABLE IF NOT EXISTS lectures (id VARCHAR PRIMARY KEY, name VARCHAR, module VARCHAR)");
 	}
 
-	/** Get all lectures from the database
+	/**
+	 * Get all lectures from the database
 	 * 
-	 * @return Database cursor (name, module, _id) */
+	 * @return Database cursor (name, module, _id)
+	 */
 	public Cursor getAllFromDb() {
 		return db.rawQuery("SELECT name, module, id as _id FROM lectures ORDER BY name", null);
 	}
@@ -38,11 +39,13 @@ public class LectureManager {
 				+ "SELECT DISTINCT lectureId, name, module FROM lectures_items");
 	}
 
-	/** Delete a lecture from the database
+	/**
+	 * Delete a lecture from the database
 	 * 
 	 * <pre>
 	 * @param id Lecture ID
-	 * </pre> */
+	 * </pre>
+	 */
 	public void deleteItemFromDb(String id) {
 		db.execSQL("DELETE FROM lectures WHERE id = ?", new String[] { id });
 	}

@@ -24,11 +24,13 @@ import de.tum.in.newtumcampus.common.FileUtils;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 
-/** Activity to download student documents from TUMOnline.
+/**
+ * Activity to download student documents from TUMOnline.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr
- * @review Thomas Behrens */
+ * @review Thomas Behrens
+ */
 public class Documents extends Activity {
 
 	// credentials
@@ -195,9 +197,11 @@ public class Documents extends Activity {
 		backgroundTask.execute();
 	}
 
-	/** Fetch the selected document from TUMOnline.
+	/**
+	 * Fetch the selected document from TUMOnline.
 	 * 
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	private String prepareDownload(DefaultHttpClient httpClient) {
 		// get cookies
 		String url = TUMOnlineRequest.LOGIN_SERVICE_URL;
@@ -275,14 +279,16 @@ public class Documents extends Activity {
 		return url;
 	}
 
-	/** Read a number from the position of the given pattern until a non-integer character occurs.
+	/**
+	 * Read a number from the position of the given pattern until a non-integer character occurs.
 	 * 
 	 * @param text
 	 *            Text containing the pattern followed by the number
 	 * @param pattern
 	 *            Pattern to look for; will be followed by the desired number
 	 * 
-	 * @return The number as a String */
+	 * @return The number as a String
+	 */
 	private static String parseNumber(String text, String pattern) {
 		int i = text.indexOf(pattern) + pattern.length();
 		String number = "";

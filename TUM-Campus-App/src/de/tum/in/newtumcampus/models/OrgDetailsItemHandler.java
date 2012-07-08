@@ -7,11 +7,13 @@ import de.tum.in.newtumcampus.common.Utils;
 
 import android.util.Log;
 
-/** Class that handles an OrgDetailsObject and SAX-Parses the XML containing such Objects The parsed Object has no child
+/**
+ * Class that handles an OrgDetailsObject and SAX-Parses the XML containing such Objects The parsed Object has no child
  * Objects (but can be implemented also with child Objects)
  * 
  * @author Thomas Behrens
- * @review Vincenz Doelle, Daniel G. Mayr */
+ * @review Vincenz Doelle, Daniel G. Mayr
+ */
 
 public class OrgDetailsItemHandler extends DefaultHandler {
 
@@ -141,9 +143,11 @@ public class OrgDetailsItemHandler extends DefaultHandler {
 		}
 	}
 
-	/** Returns the collected Organisation Details to the Calling Class
+	/**
+	 * Returns the collected Organisation Details to the Calling Class
 	 * 
-	 * @return OrgDetails Object */
+	 * @return OrgDetails Object
+	 */
 	public OrgDetailsItem getDetails() {
 		return odo;
 	}

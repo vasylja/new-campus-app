@@ -31,7 +31,8 @@ public class Event {
 	/** Local image, e.g. /mnt/sdcard/tumcampus/events/cache/xy.jpg */
 	String image;
 
-	/** New Event
+	/**
+	 * New Event
 	 * 
 	 * <pre>
 	 * @param id Event Facebook-ID
@@ -42,7 +43,8 @@ public class Event {
 	 * @param description Description, multiline
 	 * @param link Event link, e.g. http://www.xyz.de
 	 * @param image Local image, e.g. /mnt/sdcard/tumcampus/events/cache/xy.jpg
-	 * </pre> */
+	 * </pre>
+	 */
 	public Event(String id, String name, Date start, Date end, String location, String description, String link,
 			String image) {
 

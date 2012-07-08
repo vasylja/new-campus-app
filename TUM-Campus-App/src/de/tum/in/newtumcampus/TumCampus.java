@@ -51,9 +51,11 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 
 	static boolean syncing = false;
 
-	/** Returns network connection type if available or can be available soon
+	/**
+	 * Returns network connection type if available or can be available soon
 	 * 
-	 * @return empty String if not available or connection type if available */
+	 * @return empty String if not available or connection type if available
+	 */
 	public String getConnection() {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -138,7 +140,8 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		 * disable download button if offline
 		 * show cancel button if currently syncing
 		 * else show download button
-		 * </pre> */
+		 * </pre>
+		 */
 		if (conn.length() > 0) {
 			b.setVisibility(android.view.View.VISIBLE);
 			if (!syncing) {
@@ -177,9 +180,11 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		startService(service);
 	}
 
-	/** Return main menu item list
+	/**
+	 * Return main menu item list
 	 * 
-	 * @return item list of Map[] (icon, name, icon2, intent) */
+	 * @return item list of Map[] (icon, name, icon2, intent)
+	 */
 	public List<Map<String, Object>> buildMenu() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
@@ -234,7 +239,8 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		return list;
 	}
 
-	/** Add menu item to list
+	/**
+	 * Add menu item to list
 	 * 
 	 * <pre>
 	 * @param list List to append new item to
@@ -242,7 +248,8 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 	 * @param name Menu item name
 	 * @param changed Menu item was changed recently
 	 * @param intent Activity to start on click
-	 * </pre> */
+	 * </pre>
+	 */
 	public void addItem(List<Map<String, Object>> list, int icon, String name, boolean changed, Intent intent) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("icon", icon);
@@ -445,11 +452,13 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		}
 	}
 
-	/** Initialize import buttons
+	/**
+	 * Initialize import buttons
 	 * 
 	 * <pre>
 	 * @param enabled True to enable buttons, False to disable buttons
-	 * </pre> */
+	 * </pre>
+	 */
 	public void setImportButtons(boolean enabled) {
 		Button b = (Button) findViewById(R.id.importLectures);
 		b.setOnClickListener(this);

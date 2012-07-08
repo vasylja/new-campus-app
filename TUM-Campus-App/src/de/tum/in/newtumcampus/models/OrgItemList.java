@@ -3,11 +3,13 @@ package de.tum.in.newtumcampus.models;
 import java.util.ArrayList;
 import java.util.List;
 
-/** An List of Elements of the Organisation Tree. One element is the ({@link OrgItem}).
+/**
+ * An List of Elements of the Organisation Tree. One element is the ({@link OrgItem}).
  * <p>
  * 
  * @author Thomas Behrens
- * @review Vincez Doelle, Daniel G. Mayr */
+ * @review Vincez Doelle, Daniel G. Mayr
+ */
 
 public class OrgItemList {
 

@@ -10,19 +10,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.tum.in.newtumcampus.common.Utils;
 
-/**
- * Gallery Manager, handles database stuff, external imports
- */
+/** Gallery Manager, handles database stuff, external imports */
 public class GalleryManager {
 
-	/**
-	 * Database connection
-	 */
+	/** Database connection */
 	private SQLiteDatabase db;
 
-	/**
-	 * Last insert counter
-	 */
+	/** Last insert counter */
 	public static int lastInserted = 0;
 
 	/**
@@ -40,9 +34,7 @@ public class GalleryManager {
 				+ "position INTEGER, archive VARCHAR(1))");
 	}
 
-	/**
-	 * Update database
-	 */
+	/** Update database */
 	public void update() {
 		db.execSQL("DROP TABLE gallery");
 	}
@@ -169,9 +161,7 @@ public class GalleryManager {
 				g.id, g.name, g.image, g.position, g.archive ? "1" : "0" });
 	}
 
-	/**
-	 * Removes all cache items
-	 */
+	/** Removes all cache items */
 	public void removeCache() {
 		db.execSQL("DELETE FROM gallery");
 		Utils.emptyCacheDir("gallery/cache");
