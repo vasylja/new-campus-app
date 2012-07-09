@@ -27,23 +27,79 @@
             android:textColorLink="#FFFFFF" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listView"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="6dip"
-        android:layout_weight="51"
+        android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:padding="4dip"
-        android:scrollbars="vertical" />
+        android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/listView2"
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="fill_parent"
+            android:layout_height="192dp"
+            android:layout_marginBottom="6dip"
+            android:background="#FFFFFF"
+            android:padding="4dip"
+            android:scrollbars="vertical" />
+
+        <TextView
+            android:id="@+id/position_test"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/yes" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:background="#F1FFFFFF"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="49"
-        android:background="#FFFFFF"
-        android:padding="4dip"
-        android:scrollbars="vertical" />
+        android:layout_height="0dp"
+        android:layout_weight="0.25"
+        android:orientation="horizontal" >
+
+        <ListView
+            android:id="@+id/listView2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"
+            android:padding="4dip"
+            android:scrollbars="vertical" />
+
+        <SlidingDrawer
+            android:id="@+id/slider"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:content="@+id/slide"
+            android:handle="@+id/handle" >
+
+            <Button
+                android:id="@+id/handle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#0065BD"
+                android:height="33dip"
+                android:text="@string/slide_lectures"
+                android:textColor="#FFFFFF" />
+
+            <LinearLayout
+                android:id="@+id/slide"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#F1FFFFFF"
+                android:orientation="vertical" >
+
+                <ListView
+                    android:id="@+id/listView3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+        </SlidingDrawer>
+    </FrameLayout>
 
 </LinearLayout>

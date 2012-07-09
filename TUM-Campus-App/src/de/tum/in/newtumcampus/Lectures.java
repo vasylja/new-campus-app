@@ -9,13 +9,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
@@ -80,6 +83,16 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		lv2.setAdapter(adapter2);
 		lv2.setOnItemClickListener(this);
 		lv2.setOnItemLongClickListener(this);
+		
+		/**
+		 * @author	Florian Schulz
+		 * @soves	SlideBar
+		 */
+		ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+		adapter3.add(getString(R.string.my_lectures));
+		adapter3.add(getString(R.string.search_lectures));		
+		ListView lv3 = (ListView) findViewById(R.id.listView3);
+		lv3.setAdapter(adapter3);		
 
 		// reset new items counter
 		LectureItemManager.lastInserted = 0;
@@ -151,6 +164,7 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 
 		ListView lv = (ListView) findViewById(R.id.listView);
 		ListView lv2 = (ListView) findViewById(R.id.listView2);
+		TextView position_test = (TextView) findViewById(R.id.position_test);
 
 		// Click on lecture list
 		if (av.getId() == R.id.listView2) {
@@ -192,6 +206,40 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 			url = "https://campus.tum.de/tumonline/wbSuche.LVSucheSimple?"
 					+ "pLVNrFlag=J&pSjNr=1593&pSemester=A&pSuchbegriff=" + c.getString(c.getColumnIndex("lectureId"));
 		}
+		
+		/**
+		 * @author	Florian Schulz
+		 * @soves	SlideBar
+		 */
+		// TODO Review Vasyl
+		ListView lv3 = (ListView) findViewById(R.id.listView3);
+		position_test.setText(" "+av.getId());
+		position_test.invalidate();
+		
+		if (v.getId() == R.id.listView3){
+			SimpleAdapter adapter3 = (SimpleAdapter) lv3.getAdapter();
+			
+			Log.v("ADAPTER_POSITION ID", ""+adapter3.getItemId(position));
+			Log.v("R.string.my_lectures ID", ""+R.string.my_lectures);
+			
+			
+			// TODO Verlinkung
+			if (adapter3.getItemId(position) == R.string.my_lectures) {
+				position_test.setText(" "+position);
+				position_test.invalidate();
+				Intent iMyLectures = new Intent(this.getBaseContext(), MyLectures.class);
+				startActivity(iMyLectures);
+			}
+			if (adapter3.getItemId(position) == R.string.search_lectures) {
+				position_test.setText(" "+position);
+				position_test.invalidate();
+				Intent iFindLectures = new Intent(this.getBaseContext(), FindLectures.class);
+				startActivity(iFindLectures);
+			}
+		}
+		/**
+		 * end
+		 */
 
 		// Connection to browser
 		Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -313,21 +361,22 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		 * kompatiblitaet zu mehreren Menu Punkten hinzugefuegt
 		 * 
 		 * @author Daniel Mayr
+		 * @review Florian Schulz, BAD_PRACTICE fixed (String comparison)
 		 */
-
+		// TODO Review für Vasyl 3 ifs
 		// find lectures via TUMOnline
-		if (item.getTitle() == getString(R.string.search_lectures)) {
+		if (item.getTitle().equals(getString(R.string.search_lectures))) {
 			onSearchRequested();
 		}
-
+		
 		// show my lectures from TUMOnline
-		if (item.getTitle() == getString(R.string.my_lectures)) {
+		if (item.getTitle().equals(getString(R.string.my_lectures))) {
 			Intent iMyLectures = new Intent(this.getBaseContext(), MyLectures.class);
 			startActivity(iMyLectures);
 		}
 
 		// export lectures to google calendar
-		if (item.getTitle() == getString(R.string.export2calendar)) {
+		if (item.getTitle().equals(getString(R.string.export2calendar))) {
 			Intent iLectures2Calendar = new Intent(this.getBaseContext(), Lectures2Calendar.class);
 			startActivity(iLectures2Calendar);
 		}

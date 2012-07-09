@@ -117,6 +117,7 @@
 
     <!-- lectures_horizontal.xml & lectures.xml -->
     <string name="next_lectures">Nächste Vorlesungen:</string>
+    <string name="slide_lectures">Lehrveranstaltungen</string>
 
     <!-- main_import.xml -->
     <string name="tumonline_settings">TUMOnline Einstellungen</string>

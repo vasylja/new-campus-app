@@ -118,6 +118,7 @@
 
     <!-- lectures_horizontal.xml & lectures.xml -->
     <string name="next_lectures">Next lectures:</string>
+    <string name="slide_lectures">Lectures</string>
 
     <!-- main_import.xml -->
     <string name="tumonline_settings">TUMOnline settings</string>
