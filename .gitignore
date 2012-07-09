@@ -1,6 +1,6 @@
 *.class
 TUM-Campus-App/gen/*.*
-
+TUM-Campus-App/bin/*.*
 
 # Package Files #
 *.jar
