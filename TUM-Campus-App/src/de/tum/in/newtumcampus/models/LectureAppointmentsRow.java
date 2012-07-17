@@ -27,6 +27,12 @@ public class LectureAppointmentsRow {
 
 	@Element(required = false)
 	private String termin_betreff;
+	
+	@Element(required = false)
+	private String raum_nr;
+	
+	@Element(required = false)
+	private String raum_nr_architekt;
 
 	public String getOrt() {
 		return ort;
@@ -66,6 +72,27 @@ public class LectureAppointmentsRow {
 
 	public void setEnde_datum_zeitpunkt(String ende_datum_zeitpunkt) {
 		this.ende_datum_zeitpunkt = ende_datum_zeitpunkt;
+	}
+	
+	/*
+	 * Florian Schulz
+	 * added
+	 * TODO Review Vasyl
+	 */
+	public String getRaum_nr(){
+		return raum_nr;
+	}
+	
+	public void setRaum_nr(String raum_nr){
+		this.raum_nr = raum_nr;
+	}
+
+	public String getRaum_nr_architekt(){
+		return raum_nr_architekt;
+	}
+	
+	public void setRaum_nr_architekt(String raum_nr_architekt){
+		this.raum_nr_architekt = raum_nr_architekt;
 	}
 
 }

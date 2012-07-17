@@ -12,11 +12,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.text.util.Linkify;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.LectureDetailsRow;
 import de.tum.in.newtumcampus.models.LectureDetailsRowSet;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
+
 
 /**
  * This Activity will show all details found on the TUMOnline web service identified by its lecture id (which has to be
@@ -77,6 +79,7 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 
 		btnLDetailsTermine = (Button) findViewById(R.id.btnLDetailsTermine);
 		btnLDetailsTermine.setOnClickListener(this);
+		
 	}
 
 	@Override

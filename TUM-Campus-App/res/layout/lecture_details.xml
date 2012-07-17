@@ -231,7 +231,6 @@
             android:id="@+id/tvLDetailsLiteratur"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:autoLink="all"
             android:background="#FFFFFF"
             android:inputType="textMultiLine"
             android:padding="4dip"
