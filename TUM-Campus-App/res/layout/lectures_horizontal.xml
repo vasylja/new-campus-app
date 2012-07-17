@@ -4,52 +4,96 @@
     android:layout_height="fill_parent"
     android:background="#0065BD"
     android:baselineAligned="false"
-    android:orientation="horizontal" >
+    android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginRight="3dip"
-        android:layout_weight="50"
-        android:orientation="vertical" >
+    <TextView
+        android:id="@+id/lectureText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="@string/next_lectures"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center_horizontal"
+         />
 
-        <TextView
-            android:id="@+id/lectureText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:text="@string/next_lectures"
-            android:textColor="#FFFFFF" />
 
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#FFFFFF"
-            android:padding="4dip"
-            android:scrollbars="vertical" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="50"
-        android:orientation="vertical" >
-
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" > 
+        
         <TextView
             android:id="@+id/moduleText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
+            android:text=""
             android:textColorLink="#FFFFFF" />
 
+   	<FrameLayout
+   	    android:layout_gravity="right"
+   	    android:layout_width="260dp"
+        android:layout_height="fill_parent">
+        
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left"
+            android:layout_marginBottom="6dip"
+            android:background="#FFFFFF"
+            android:padding="4dip"
+            android:scrollbars="vertical" />
+	</FrameLayout>
+        
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="#F1FFFFFF"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+           	<FrameLayout
+   	    android:layout_gravity="left"
+   	    android:layout_width="260dp"
+        android:layout_height="fill_parent">
+        
         <ListView
             android:id="@+id/listView2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_gravity="right"
             android:background="#FFFFFF"
             android:padding="4dip"
             android:scrollbars="vertical" />
-    </LinearLayout>
+        
+        </FrameLayout>
+
+        <SlidingDrawer
+            android:id="@+id/slider"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:content="@+id/slide"
+            android:handle="@+id/handle" >
+
+            <Button
+                android:id="@+id/handle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#0065BD"
+                android:height="33dip"
+                android:text="@string/slide_lectures"
+                android:textColor="#FFFFFF" />
+
+            <ScrollView
+                android:id="@+id/slide"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#F1FFFFFF" >
+
+                <include layout="@layout/lectures_import" />
+            </ScrollView>
+        </SlidingDrawer>
+    </FrameLayout>
 
 </LinearLayout>

@@ -5,10 +5,9 @@
     android:background="#0065BD"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/lectureText"
@@ -17,6 +16,11 @@
             android:singleLine="true"
             android:text="@string/next_lectures"
             android:textColor="#FFFFFF" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/moduleText"
@@ -25,14 +29,8 @@
             android:gravity="right"
             android:text=""
             android:textColorLink="#FFFFFF" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:orientation="vertical" >
-
+        <!-- android:background="#FFFFFF" -->
         <ListView
             android:id="@+id/listView"
             android:layout_width="fill_parent"
@@ -41,33 +39,25 @@
             android:background="#FFFFFF"
             android:padding="4dip"
             android:scrollbars="vertical" />
-
-        <TextView
-            android:id="@+id/position_test"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/yes" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="5dp"
-        android:background="#F1FFFFFF"
-        android:orientation="vertical" >
-    </LinearLayout>
+    </FrameLayout>
 
     <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.25"
-        android:orientation="horizontal" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:background="#F1FFFFFF"
+            android:orientation="vertical" >
+        </LinearLayout>
 
         <ListView
             android:id="@+id/listView2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="#FFFFFF"
             android:padding="4dip"
+            android:background="#FFFFFF"
             android:scrollbars="vertical" />
 
         <SlidingDrawer
@@ -76,7 +66,7 @@
             android:layout_height="fill_parent"
             android:content="@+id/slide"
             android:handle="@+id/handle" >
-
+
             <Button
                 android:id="@+id/handle"
                 android:layout_width="fill_parent"
@@ -86,19 +76,14 @@
                 android:text="@string/slide_lectures"
                 android:textColor="#FFFFFF" />
 
-            <LinearLayout
+            <ScrollView
                 android:id="@+id/slide"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="#F1FFFFFF"
-                android:orientation="vertical" >
+                android:background="#F1FFFFFF" >
 
-                <ListView
-                    android:id="@+id/listView3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="vertical" />
-            </LinearLayout>
+                <include layout="@layout/lectures_import" />
+            </ScrollView>
         </SlidingDrawer>
     </FrameLayout>
 

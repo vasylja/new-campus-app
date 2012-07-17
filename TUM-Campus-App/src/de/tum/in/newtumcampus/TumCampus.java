@@ -19,6 +19,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -404,7 +405,6 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 
 	@Override
 	public void onClick(View v) {
-
 		// Click on download/cancel button, start/stop download service
 		if (v.getId() == R.id.refresh || v.getId() == R.id.initial) {
 			Intent service = new Intent(this, DownloadService.class);

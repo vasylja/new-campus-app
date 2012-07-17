@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -29,7 +30,8 @@ import de.tum.in.newtumcampus.models.LectureManager;
 /**
  * Activity to show lectures and lecture units
  */
-public class Lectures extends Activity implements OnItemClickListener, OnItemLongClickListener, ViewBinder {
+public class Lectures extends Activity implements OnItemClickListener,
+		OnItemLongClickListener, ViewBinder, OnClickListener {
 
 	/**
 	 * Current lecture selected
@@ -50,8 +52,9 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		LectureItemManager lim = new LectureItemManager(this);
 		Cursor c = lim.getRecentFromDb();
 
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item, c,
-				c.getColumnNames(), new int[] { android.R.id.text1, android.R.id.text2 });
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+				android.R.layout.two_line_list_item, c, c.getColumnNames(),
+				new int[] { android.R.id.text1, android.R.id.text2 });
 
 		adapter.setViewBinder(this);
 
@@ -64,8 +67,9 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		LectureManager lm = new LectureManager(this);
 		Cursor c2 = lm.getAllFromDb();
 
-		SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c2,
-				c2.getColumnNames(), new int[] { android.R.id.text1 });
+		SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this,
+				android.R.layout.simple_list_item_1, c2, c2.getColumnNames(),
+				new int[] { android.R.id.text1 });
 
 		adapter2.setViewBinder(new ViewBinder() {
 
@@ -83,16 +87,15 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		lv2.setAdapter(adapter2);
 		lv2.setOnItemClickListener(this);
 		lv2.setOnItemLongClickListener(this);
-		
+
 		/**
-		 * @author	Florian Schulz
-		 * @soves	SlideBar
+		 * @author Florian Schulz
+		 * @soves SlideBar
 		 */
-		ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-		adapter3.add(getString(R.string.my_lectures));
-		adapter3.add(getString(R.string.search_lectures));		
-		ListView lv3 = (ListView) findViewById(R.id.listView3);
-		lv3.setAdapter(adapter3);		
+		TextView tv1 = (TextView) findViewById(R.id.slide_my_lectures);
+		TextView tv2 = (TextView) findViewById(R.id.slide_search_lectures);
+		tv1.setOnClickListener(this);
+		tv2.setOnClickListener(this);
 
 		// reset new items counter
 		LectureItemManager.lastInserted = 0;
@@ -129,22 +132,31 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 			 * </pre>
 			 */
 			String info = "";
-			String lectureId = c.getString(c.getColumnIndex(Const.LECTURE_ID_COLUMN));
-			// TODO IMPORTANT Check whether "start_dt" and "start_de" are actually the same
+			String lectureId = c.getString(c
+					.getColumnIndex(Const.LECTURE_ID_COLUMN));
+			// TODO IMPORTANT Check whether "start_dt" and "start_de" are
+			// actually the same
 			if (lectureId.equals(Const.VACATION)) {
-				info = c.getString(c.getColumnIndex(Const.START_DT_COLUMN)) + " - "
+				info = c.getString(c.getColumnIndex(Const.START_DT_COLUMN))
+						+ " - "
 						+ c.getString(c.getColumnIndex(Const.START_DT_COLUMN));
 
 			} else if (lectureId.equals(Const.HOLIDAY)) {
-				info = weekDays[c.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))] + ", "
+				info = weekDays[c
+						.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))]
+						+ ", "
 						+ c.getString(c.getColumnIndex(Const.START_DT_COLUMN));
 
 			} else {
-				info = weekDays[c.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))] + ", "
-						+ c.getString(c.getColumnIndex(Const.START_DE_COLUMN)) + " - "
+				info = weekDays[c
+						.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))]
+						+ ", "
+						+ c.getString(c.getColumnIndex(Const.START_DE_COLUMN))
+						+ " - "
 						+ c.getString(c.getColumnIndex(Const.START_DE_COLUMN));
 
-				String location = c.getString(c.getColumnIndex(Const.LOCATION_COLUMN));
+				String location = c.getString(c
+						.getColumnIndex(Const.LOCATION_COLUMN));
 				if (location.indexOf(",") != -1) {
 					location = location.substring(0, location.indexOf(","));
 				}
@@ -164,14 +176,14 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 
 		ListView lv = (ListView) findViewById(R.id.listView);
 		ListView lv2 = (ListView) findViewById(R.id.listView2);
-		TextView position_test = (TextView) findViewById(R.id.position_test);
 
 		// Click on lecture list
 		if (av.getId() == R.id.listView2) {
 			Cursor c2 = (Cursor) lv2.getAdapter().getItem(position);
 			lectureId = c2.getString(c2.getColumnIndex(Const.ID_COLUMN));
 			String name = c2.getString(c2.getColumnIndex(Const.NAME_COLUMN));
-			String module = c2.getString(c2.getColumnIndex(Const.MODULE_COLUMN));
+			String module = c2
+					.getString(c2.getColumnIndex(Const.MODULE_COLUMN));
 
 			// get all lecture units from a lecture
 			LectureItemManager lim = new LectureItemManager(this);
@@ -183,10 +195,12 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 			tv.setText(Utils.trunc(name + ":", 35));
 
 			// Link to lecture module homepage (e.g. contains ECTS)
-			String moduleUrl = "https://drehscheibe.in.tum.de/myintum/kurs_verwaltung/cm.html.de?id=" + module;
+			String moduleUrl = "https://drehscheibe.in.tum.de/myintum/kurs_verwaltung/cm.html.de?id="
+					+ module;
 
 			TextView tv2 = (TextView) findViewById(R.id.moduleText);
-			tv2.setText(Html.fromHtml("<a href='" + moduleUrl + "'>" + module + "</a>"));
+			tv2.setText(Html.fromHtml("<a href='" + moduleUrl + "'>" + module
+					+ "</a>"));
 			tv2.setMovementMethod(LinkMovementMethod.getInstance());
 			return;
 		}
@@ -204,42 +218,9 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		// 1593 = WS2011/12
 		if (url.length() == 0) {
 			url = "https://campus.tum.de/tumonline/wbSuche.LVSucheSimple?"
-					+ "pLVNrFlag=J&pSjNr=1593&pSemester=A&pSuchbegriff=" + c.getString(c.getColumnIndex("lectureId"));
+					+ "pLVNrFlag=J&pSjNr=1593&pSemester=A&pSuchbegriff="
+					+ c.getString(c.getColumnIndex("lectureId"));
 		}
-		
-		/**
-		 * @author	Florian Schulz
-		 * @soves	SlideBar
-		 */
-		// TODO Review Vasyl
-		ListView lv3 = (ListView) findViewById(R.id.listView3);
-		position_test.setText(" "+av.getId());
-		position_test.invalidate();
-		
-		if (v.getId() == R.id.listView3){
-			SimpleAdapter adapter3 = (SimpleAdapter) lv3.getAdapter();
-			
-			Log.v("ADAPTER_POSITION ID", ""+adapter3.getItemId(position));
-			Log.v("R.string.my_lectures ID", ""+R.string.my_lectures);
-			
-			
-			// TODO Verlinkung
-			if (adapter3.getItemId(position) == R.string.my_lectures) {
-				position_test.setText(" "+position);
-				position_test.invalidate();
-				Intent iMyLectures = new Intent(this.getBaseContext(), MyLectures.class);
-				startActivity(iMyLectures);
-			}
-			if (adapter3.getItemId(position) == R.string.search_lectures) {
-				position_test.setText(" "+position);
-				position_test.invalidate();
-				Intent iFindLectures = new Intent(this.getBaseContext(), FindLectures.class);
-				startActivity(iFindLectures);
-			}
-		}
-		/**
-		 * end
-		 */
 
 		// Connection to browser
 		Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -253,6 +234,7 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 	 * @param itemId Lecture unit id
 	 * </pre>
 	 */
+
 	public void deleteLectureItem(String itemId) {
 		// delete lecture item
 		LectureItemManager lim = new LectureItemManager(this);
@@ -308,7 +290,8 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 	}
 
 	@Override
-	public boolean onItemLongClick(final AdapterView<?> av, View v, final int position, long id) {
+	public boolean onItemLongClick(final AdapterView<?> av, View v,
+			final int position, long id) {
 
 		// confirm deleting lectures or lecture units
 		DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
@@ -338,18 +321,22 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		super.onCreateOptionsMenu(menu);
 
 		/**
-		 * Suche für Lehrveranstaltungen in TUMOnline hinzugefügt Und Ausgabe Eigene Lehrveranstaltungen angefügt
+		 * Suche für Lehrveranstaltungen in TUMOnline hinzugefügt Und Ausgabe
+		 * Eigene Lehrveranstaltungen angefügt
 		 * 
 		 * @author Daniel Mayr
 		 */
 
-		MenuItem miVorlesungsExport = menu.add(0, Menu.FIRST, 0, getString(R.string.export2calendar));
+		MenuItem miVorlesungsExport = menu.add(0, Menu.FIRST, 0,
+				getString(R.string.export2calendar));
 		miVorlesungsExport.setIcon(android.R.drawable.ic_menu_my_calendar);
 
-		MenuItem miVorlesungssuche = menu.add(1, Menu.FIRST + 1, 0, getString(R.string.search_lectures));
+		MenuItem miVorlesungssuche = menu.add(1, Menu.FIRST + 1, 0,
+				getString(R.string.search_lectures));
 		miVorlesungssuche.setIcon(android.R.drawable.ic_menu_search);
 
-		MenuItem miMyLectures = menu.add(2, Menu.FIRST + 2, 0, getString(R.string.my_lectures));
+		MenuItem miMyLectures = menu.add(2, Menu.FIRST + 2, 0,
+				getString(R.string.my_lectures));
 		miMyLectures.setIcon(android.R.drawable.ic_menu_agenda);
 
 		return true;
@@ -361,23 +348,25 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 		 * kompatiblitaet zu mehreren Menu Punkten hinzugefuegt
 		 * 
 		 * @author Daniel Mayr
-		 * @review Florian Schulz, BAD_PRACTICE fixed (String comparison)
+		 * @review Florian Schulz, BAD_PRACTICE fixed (String comparison) TODO
+		 *         Review für Vasyl Stringvergleich mit ==
 		 */
-		// TODO Review für Vasyl 3 ifs
 		// find lectures via TUMOnline
 		if (item.getTitle().equals(getString(R.string.search_lectures))) {
 			onSearchRequested();
 		}
-		
+
 		// show my lectures from TUMOnline
 		if (item.getTitle().equals(getString(R.string.my_lectures))) {
-			Intent iMyLectures = new Intent(this.getBaseContext(), MyLectures.class);
+			Intent iMyLectures = new Intent(this.getBaseContext(),
+					MyLectures.class);
 			startActivity(iMyLectures);
 		}
 
 		// export lectures to google calendar
 		if (item.getTitle().equals(getString(R.string.export2calendar))) {
-			Intent iLectures2Calendar = new Intent(this.getBaseContext(), Lectures2Calendar.class);
+			Intent iLectures2Calendar = new Intent(this.getBaseContext(),
+					Lectures2Calendar.class);
 			startActivity(iLectures2Calendar);
 		}
 
@@ -392,9 +381,31 @@ public class Lectures extends Activity implements OnItemClickListener, OnItemLon
 	@Override
 	public boolean onSearchRequested() {
 
-		Intent iFindLectures = new Intent(this.getBaseContext(), FindLectures.class);
+		Intent iFindLectures = new Intent(this.getBaseContext(),
+				FindLectures.class);
 		startActivity(iFindLectures);
 		return false; // don't go ahead and show the search box
+	}
+
+	/**
+	 * @author Florian Schulz
+	 * @soves SlideBar
+	 */
+	// TODO Review Vasyl
+	@Override
+	public void onClick(View v) {
+		if (v.getId() == R.id.slide_my_lectures) {
+			Intent iMyLectures = new Intent(this.getBaseContext(),
+					MyLectures.class);
+			startActivity(iMyLectures);
+		}
+
+		if (v.getId() == R.id.slide_search_lectures) {
+			Intent iFindLectures = new Intent(this.getBaseContext(),
+					FindLectures.class);
+			startActivity(iFindLectures);
+		}
+		return;
 	}
 
 }
