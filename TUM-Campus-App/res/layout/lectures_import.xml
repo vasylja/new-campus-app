@@ -4,28 +4,32 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
+    <Button
         android:id="@+id/slide_my_lectures"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dip"
-        android:gravity="center"
         android:text="@string/my_lectures"
-        android:textSize="20dip"
-        />
-	
+        android:textColor="#FF2546A4" />
+
+    <Button
+        android:id="@+id/slide_search_lectures"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dip"
+        android:text="@string/search_lectures"
+        android:textColor="#FF2546A4" />
+    
+    <Button
+        android:id="@+id/slide_calendarexport"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dip"
+        android:text="@string/export2calendar"
+        android:textColor="#FF2546A4" />
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="0.5dip"
         android:background="#0065BD" />
-
-    <TextView
-        android:id="@+id/slide_search_lectures"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dip"
-        android:gravity="center"
-        android:text="@string/search_lectures"
-        android:textSize="20dip" />
 
 </LinearLayout>

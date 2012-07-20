@@ -9,17 +9,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+//import android.view.Menu;
+//import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
@@ -92,11 +90,12 @@ public class Lectures extends Activity implements OnItemClickListener,
 		 * @author Florian Schulz
 		 * @soves SlideBar
 		 */
-		TextView tv1 = (TextView) findViewById(R.id.slide_my_lectures);
-		TextView tv2 = (TextView) findViewById(R.id.slide_search_lectures);
-		tv1.setOnClickListener(this);
-		tv2.setOnClickListener(this);
-
+		Button bv1 = (Button) findViewById(R.id.slide_my_lectures);
+		Button bv2 = (Button) findViewById(R.id.slide_search_lectures);
+		Button bv3 = (Button) findViewById(R.id.slide_calendarexport);
+		bv1.setOnClickListener(this);
+		bv2.setOnClickListener(this);
+		bv3.setOnClickListener(this);
 		// reset new items counter
 		LectureItemManager.lastInserted = 0;
 	}
@@ -316,16 +315,22 @@ public class Lectures extends Activity implements OnItemClickListener,
 		return false;
 	}
 
+	/**
+	 * @author Florian Schulz
+	 * @solves No Hardware-Button Menu used (Style-Reasons) => Slidebar
+	 * 
+	 * 
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 
-		/**
+		**
 		 * Suche für Lehrveranstaltungen in TUMOnline hinzugefügt Und Ausgabe
 		 * Eigene Lehrveranstaltungen angefügt
 		 * 
 		 * @author Daniel Mayr
-		 */
+		 *
 
 		MenuItem miVorlesungsExport = menu.add(0, Menu.FIRST, 0,
 				getString(R.string.export2calendar));
@@ -342,15 +347,16 @@ public class Lectures extends Activity implements OnItemClickListener,
 		return true;
 	}
 
+	**
+	 * kompatiblitaet zu mehreren Menu Punkten hinzugefuegt
+	 * 
+	 * @author Daniel Mayr
+	 * @review Florian Schulz, BAD_PRACTICE fixed (String comparison) TODO
+	 *         Review für Vasyl Stringvergleich mit ==
+	 *
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		/**
-		 * kompatiblitaet zu mehreren Menu Punkten hinzugefuegt
-		 * 
-		 * @author Daniel Mayr
-		 * @review Florian Schulz, BAD_PRACTICE fixed (String comparison) TODO
-		 *         Review für Vasyl Stringvergleich mit ==
-		 */
+		
 		// find lectures via TUMOnline
 		if (item.getTitle().equals(getString(R.string.search_lectures))) {
 			onSearchRequested();
@@ -373,11 +379,12 @@ public class Lectures extends Activity implements OnItemClickListener,
 		return true;
 	}
 
-	/**
+	
+	**
 	 * set to use the find hardware button to get to the findlectures activity
 	 * 
 	 * @author Daniel Mayr
-	 */
+	 *
 	@Override
 	public boolean onSearchRequested() {
 
@@ -386,6 +393,7 @@ public class Lectures extends Activity implements OnItemClickListener,
 		startActivity(iFindLectures);
 		return false; // don't go ahead and show the search box
 	}
+	*/
 
 	/**
 	 * @author Florian Schulz
@@ -399,11 +407,15 @@ public class Lectures extends Activity implements OnItemClickListener,
 					MyLectures.class);
 			startActivity(iMyLectures);
 		}
-
 		if (v.getId() == R.id.slide_search_lectures) {
 			Intent iFindLectures = new Intent(this.getBaseContext(),
 					FindLectures.class);
 			startActivity(iFindLectures);
+		}
+		if (v.getId() == R.id.slide_calendarexport){
+			Intent iCalenderExport = new Intent(this.getBaseContext(),
+					Lectures2Calendar.class);
+			startActivity(iCalenderExport);
 		}
 		return;
 	}
