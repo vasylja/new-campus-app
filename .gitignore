@@ -2,7 +2,7 @@
 TUM-Campus-App/gen/*.*
 TUM-Campus-App/bin/*
 TUM-Campus-App/gen/*
-TUM-Campus-App/gen/R.java
+TUM-Campus-App/gen/de/tum/in/newtumcampus/R.java
 
 # Package Files #
 *.jar

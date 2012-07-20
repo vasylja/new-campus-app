@@ -196,6 +196,9 @@
     <string name="opening_hours">Opening Hours</string>
     <string name="news">News</string>
     <string name="links">Links</string>
+    <string name="facebook">Facebook</string>
+    <string name="facebook_link">https://m.facebook.com/TUMCampus</string>
+    <string name="gallery">Gallery</string>
     <string name="app_info">App-Info</string>
 
     <!-- Grades.java -->

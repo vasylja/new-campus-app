@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?> <!-- GERMAN -->
+<?xml version="1.0" encoding="utf-8"?>
+ <!-- GERMAN -->
 <resources>
 
     <string name="hello">Hello World, TUMCampus!</string>
@@ -125,7 +126,7 @@
     <string name="import_lectures_from_tumonline">Vorlesungen von TUMOnline importieren</string>
     <string name="import_links">Links importieren</string>
     <string name="import_rss_feed">RSS-Feeds importieren</string>
-	<string name="howto_import_lectures">Vorlesungen von Speicher importieren:\n
+    <string name="howto_import_lectures">Vorlesungen von Speicher importieren:\n
 		1. Telefon an den Computer per USB anstecken\n
 		2. USB-Speicher am Telefon aktivieren\n
 		3. Am Computer bei TumOnline.de einloggen:\n
@@ -195,6 +196,9 @@
     <string name="opening_hours">Öffnungszeiten</string>
     <string name="news">Nachrichten</string>
     <string name="links">Links</string>
+    <string name="facebook">Facebook</string>
+    <string name="facebook_link">https://m.facebook.com/TUMCampus</string>
+    <string name="gallery">Kurz notiert</string>
     <string name="app_info">App-Info</string>
 
     <!-- Grades.java -->
@@ -334,21 +338,21 @@
     <string name="tumonline_password">Passwort für TUMOnline</string>
     <string name="tumonline_access_token">Access token für TUMOnline</string>
     <string name="lrz_id">Kennung für das LRZ\nz.B. go42tum</string>
-    
+
     <!-- DownloadService.java -->
     <string name="updating">Aktualisiere …</string>
     <string name="tum_campus_download">TUMCampus download …</string>
     <string name="cafeterias">Mensen</string>
-	<string name="completed">Fertig!</string>
-	
-	<!-- ImportService.java -->
-	<string name="importing">Importiere…</string>
-	<string name="tum_campus_import">TUMCampus import …</string>
-	<string name="service">Service</string>
-	<string name="import_from_tumonline">import aus TUMOnline</string>
-	
-	<!-- SilenceService -->
-	<string name="set_ringer_mode">set ringer mode: </string>
+    <string name="completed">Fertig!</string>
+
+    <!-- ImportService.java -->
+    <string name="importing">Importiere…</string>
+    <string name="tum_campus_import">TUMCampus import …</string>
+    <string name="service">Service</string>
+    <string name="import_from_tumonline">import aus TUMOnline</string>
+
+    <!-- SilenceService -->
+    <string name="set_ringer_mode">set ringer mode: </string>
 
     <!-- ###### MANIFEST ####### -->
     <string name="current_events">Aktuelle Veranstaltungen</string>
@@ -392,6 +396,6 @@
     <string name="calendarexport">Um alle Vorlesungen aus der TUMCampus App in einen Google Calendar zu übertragen, wählen Sie zunächst unten den richtigen Kalender aus, in dem die Daten exportiert werden sollen. Nach einem Klick auf den Button erscheinen die Vorlesungen auch im jeweiligen Google Calendar.</string>
     <string name="chooseReminder">Eine Erinnerung setzen:</string>
     <string name="deactivated">deaktiviert</string>
-	<string name="error">Fehler</string>
-	
+    <string name="error">Fehler</string>
+
 </resources>

@@ -6,55 +6,83 @@
         android:summary="z.B. Access-Token-Einstellungen"
         android:title="TUMOnline Einstellungen" />
 
-    <!-- TODO check const -->
+    <!-- TODO Review Vasyl => Flo changed Constants for List -->
     <PreferenceScreen
         android:key="modules"
         android:summary="aktivieren, deaktivieren"
         android:title="Module" >
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="lectures"
-            android:title="Vorlesungen" />
+            android:key="@string/lectures"
+            android:title="@string/lectures" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="cafeterias"
-            android:title="Speisepläne" />
+            android:key="@string/person_search"
+            android:title="@string/person_search" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="transports"
-            android:title="MVV" />
+            android:key="@string/organisations"
+            android:title="@string/organisations" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="feeds"
-            android:title="RSS-Feeds" />
+            android:key="@string/grades"
+            android:title="@string/grades" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="events"
-            android:title="Veranstaltungen" />
+            android:key="@string/documents"
+            android:title="@string/documents" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="gallery"
-            android:title="Kurz notiert" />
+            android:key="@string/study_plans"
+            android:title="@string/study_plans" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="news"
-            android:title="Nachrichten" />
+            android:key="@string/tuition_fees"
+            android:title="@string/tuition_fees" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="plans"
-            android:title="Umgebungspläne" />
+            android:key="@string/menues"
+            android:title="@string/menues" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="hours"
-            android:title="Öffnungszeiten" />
+            android:key="@string/mvv"
+            android:title="@string/mvv" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="links"
-            android:title="Links" />
+            android:key="@string/rss_feeds"
+            android:title="@string/rss_feeds" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="facebook"
-            android:title="Facebook-Link" />
+            android:key="@string/events"
+            android:title="@string/events" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/gallery"
+            android:title="@string/gallery" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/area_maps"
+            android:title="@string/area_maps" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/roomfinder"
+            android:title="@string/roomfinder" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/opening_hours"
+            android:title="@string/opening_hours" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/news"
+            android:title="@string/news" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/links"
+            android:title="@string/links" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/facebook"
+            android:title="@string/facebook" />
     </PreferenceScreen>
 
     <EditTextPreference

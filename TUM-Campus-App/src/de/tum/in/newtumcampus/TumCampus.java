@@ -191,51 +191,78 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 	public List<Map<String, Object>> buildMenu() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
-		// build list, intent = start activity on click
+		/* build list, intent = start activity on click
+		 * TODO Review Vasyl
+		 * Florian Schulz:
+		 * Changed ifs with external Strings + "kurz notiert" also view settings.xml (same with 
+		*/
+		if (Utils.getSettingBool(this, getString(R.string.lectures))) {
 		addItem(list, R.drawable.vorlesung, getString(R.string.lectures), LectureItemManager.lastInserted > 0,
-				new Intent(this, Lectures.class));
-
+			new Intent(this, Lectures.class));
+		}
+		if(Utils.getSettingBool(this, getString(R.string.person_search))){
 		addItem(list, R.drawable.personnel, getString(R.string.person_search), false, new Intent(this, Staff.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.organisations))){
 		addItem(list, R.drawable.organisationen, getString(R.string.organisations), false, new Intent(this,
 				Organisation.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.grades))){
 		addItem(list, R.drawable.grade, getString(R.string.grades), false, new Intent(this, Grades.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.documents))){
 		addItem(list, R.drawable.documents, getString(R.string.documents), false, new Intent(this, Documents.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.study_plans))){
 		addItem(list, R.drawable.curricula, getString(R.string.study_plans), false, new Intent(this, Curricula.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.tuition_fees))){
 		addItem(list, R.drawable.euro, getString(R.string.tuition_fees), false, new Intent(this, TuitionFees.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.menues))){
 		addItem(list, R.drawable.essen, getString(R.string.menues), CafeteriaMenuManager.lastInserted > 0, new Intent(
 				this, Cafeterias.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.mvv))){
 		addItem(list, R.drawable.zug, getString(R.string.mvv), false, new Intent(this, Transports.class));
-
+		}
+		if (Utils.getSettingBool(this, getString(R.string.rss_feeds))) {
 		addItem(list, R.drawable.rss, getString(R.string.rss_feeds), FeedItemManager.lastInserted
 				+ FeedManager.lastInserted > 0, new Intent(this, Feeds.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.events))){
 		addItem(list, R.drawable.party, getString(R.string.events), EventManager.lastInserted > 0, new Intent(this,
 				Events.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.gallery))){
+			addItem(list, R.drawable.gallery, getString(R.string.gallery), false, new Intent(this, Gallery.class));
+		}
+		if(Utils.getSettingBool(this, getString(R.string.area_maps))){
 		addItem(list, R.drawable.kompass, getString(R.string.area_maps), false, new Intent(this, Plans.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.roomfinder))){
 		addItem(list, android.R.drawable.ic_menu_mylocation, getString(R.string.roomfinder), false,
 				createRoomfinderAppIntent());
 		// TODO Remove comments after checking
 		// new Intent(this,Roomfinder.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.opening_hours))){
 		addItem(list, R.drawable.hours, getString(R.string.opening_hours), false, new Intent(this, Hours.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.news))){
 		addItem(list, R.drawable.globus, getString(R.string.news), NewsManager.lastInserted > 0, new Intent(this,
 				News.class));
-
+		}
+		if(Utils.getSettingBool(this, getString(R.string.links))){
 		addItem(list, R.drawable.www, getString(R.string.links), LinkManager.lastInserted > 0, new Intent(this,
 				Links.class));
-
+		}
+		if (Utils.getSettingBool(this, getString(R.string.facebook))) {
+			addItem(list, R.drawable.fb, getString(R.string.facebook), false, new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebook_link))));
+		}
+		// not optional
 		addItem(list, R.drawable.info, getString(R.string.app_info), false, new Intent(this, AppInfo.class));
-
+		
 		if (Utils.getSettingBool(this, Const.Settings.debug)) {
 			addItem(list, R.drawable.icon, "Debug", false, new Intent(this, Debug.class));
 		}
