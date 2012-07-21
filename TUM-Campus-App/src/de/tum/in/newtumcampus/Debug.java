@@ -20,7 +20,7 @@ public class Debug extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.debug);
 
-		// initialize buttons
+		// initialize buttons		
 		Button b = (Button) findViewById(R.id.debugCafeterias);
 		b.setOnClickListener(this);
 
@@ -50,8 +50,9 @@ public class Debug extends Activity implements View.OnClickListener {
 
 		b = (Button) findViewById(R.id.debugNews);
 		b.setOnClickListener(this);
-
-		b = (Button) findViewById(R.id.debugSyncs);
+		
+		// @author Florian Schulz TODO Review Vasyl: Syncs in Sync
+		b = (Button) findViewById(R.id.debugSync);
 		b.setOnClickListener(this);
 
 		b = (Button) findViewById(R.id.debugTime);
@@ -91,7 +92,7 @@ public class Debug extends Activity implements View.OnClickListener {
 	public void debugSQL(String query) {
 		debugReset();
 		SQLiteDatabase db = DatabaseManager.getDb(this);
-
+		
 		// output raw data row-by-row
 		Cursor c = db.rawQuery(query, null);
 		while (c.moveToNext()) {
@@ -106,12 +107,14 @@ public class Debug extends Activity implements View.OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-
 		// execute queries on click and present results in GUI
-		if (v.getId() == R.id.debugSyncs) {
+		/* TODO Review Vasyl
+		 * @author	Florian Schulz
+		 * @solves 	DebugView Problems -> changed R.id.debugSyncs in R.id.debugSyncs
+		 */
+		if (v.getId() == R.id.debugSync) {
 			debugSQL("SELECT * FROM syncs ORDER BY id");
 		}
-
 		if (v.getId() == R.id.debugCafeterias) {
 			debugSQL("SELECT * FROM cafeterias ORDER BY id");
 		}

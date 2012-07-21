@@ -106,13 +106,13 @@
             android:layout_height="wrap_content"
             android:text="@string/debug_master" />
 
-        <!-- TODO translate text -->
+        <!-- TODO Review Translation Vasyl -->
 
         <Button
             android:id="@+id/debugGallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="gallery" />
+            android:text="@string/gallery" />
     </LinearLayout>
 
     <TextView
