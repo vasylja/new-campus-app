@@ -6,7 +6,8 @@ import org.simpleframework.xml.Root;
 /**
  * Exam passed by the user.
  * <p>
- * Note: This model is based on the TUMOnline web service response format for a corresponding request.
+ * Note: This model is based on the TUMOnline web service response format for a
+ * corresponding request.
  * 
  * @author Vincenz Doelle
  * @review Daniel G. Mayr

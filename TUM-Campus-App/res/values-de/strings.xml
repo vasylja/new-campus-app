@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
- <!-- GERMAN -->
+<!-- GERMAN -->
 <resources>
 
     <string name="hello">Hello World, TUMCampus!</string>
@@ -207,6 +207,9 @@
     <string name="grades_get_fetched">Noten werden abgerufen…</string>
 
     <!-- ExamListAdapter.java -->
+    <string name="semester_w">Wintersemester</string>
+    <string name="semester_s">Sommersemester</string>
+    <string name="semester_n">Nicht gefunden</string>
     <string name="date">Datum</string>
 
     <!-- StaffDetails.java -->

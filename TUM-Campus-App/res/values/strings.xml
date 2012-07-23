@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?> <!-- ENGLISH -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ENGLISH -->
 <resources>
 
     <string name="hello">Hello World, TUMCampus!</string>
@@ -6,8 +7,7 @@
 
     <!-- ###### LAYOUT FILES ####### -->
     <!-- appinfo.xml -->
-    <string name="app_info_text">		
-        TUM Campus App -EXPERIMENTAL-\n
+    <string name="app_info_text">        TUM Campus App -EXPERIMENTAL-\n
         \n
         by Christoph Richter, Thomas Bley (Android Praktikum SS2011)
         and
@@ -207,6 +207,9 @@
     <string name="grades_get_fetched">Fetching grades…</string>
 
     <!-- ExamListAdapter.java -->
+    <string name="semester_w">Winter semester</string>
+    <string name="semester_s">Summer semester</string>
+    <string name="semester_n">Not found</string>    
     <string name="date">Date</string>
 
     <!-- StaffDetails.java -->
@@ -338,21 +341,21 @@
     <string name="tumonline_password">Password for TUMOnline</string>
     <string name="tumonline_access_token">Access token for TUMOnline</string>
     <string name="lrz_id">LRZ login\nz.B. go42tum"</string>
-    
+
     <!-- DownloadService.java -->
     <string name="updating">Updating …</string>
     <string name="tum_campus_download">TUMCampus download …</string>
     <string name="cafeterias">Cafeterias</string>
-	<string name="completed">Completed</string>
-	
-	<!-- ImportService.java -->
-	<string name="importing">Importing…</string>
-	<string name="tum_campus_import">TUMCampus import …</string>
-	<string name="service">Service</string>
-	<string name="import_from_tumonline">import from TUMOnline</string>
-	
-	<!-- SilenceService -->
-	<string name="set_ringer_mode">set ringer mode: </string>
+    <string name="completed">Completed</string>
+
+    <!-- ImportService.java -->
+    <string name="importing">Importing…</string>
+    <string name="tum_campus_import">TUMCampus import …</string>
+    <string name="service">Service</string>
+    <string name="import_from_tumonline">import from TUMOnline</string>
+
+    <!-- SilenceService -->
+    <string name="set_ringer_mode">set ringer mode: </string>
 
     <!-- ###### MANIFEST ####### -->
     <string name="current_events">Current Events</string>
@@ -396,6 +399,6 @@
     <string name="calendarexport">Here you can export all your inserted lectures to a Google Calendar. To do so, select the right Google Calendar below and click on the button to export, then all lectures you have imported to TUMCampus App will appear in your Google Calendar as well.</string>
     <string name="chooseReminder">choose a reminder:</string>
     <string name="deactivated">deactivated</string>
-	<string name="error">Error</string>
-	
+    <string name="error">Error</string>
+
 </resources>

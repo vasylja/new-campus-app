@@ -14,8 +14,8 @@ import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 
 /**
- * This activity should handle all preferences and interaction to set up the app working with TUMOnline i.e. get access
- * token, set permissions etc.
+ * This activity should handle all preferences and interaction to set up the app
+ * working with TUMOnline i.e. get access token, set permissions etc.
  * 
  * @author Vincenz Doelle, Daniel G. Mayr
  * @review Daniel G. Mayr
@@ -42,10 +42,13 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 	}
 
 	/**
-	 * get a new access token for TUMOnline by passing the lrz ID due to the simplicity of the given xml file we only
-	 * need to parse the <token> element using an xml-parser is simply to much... just extract the pattern via regex
+	 * get a new access token for TUMOnline by passing the lrz ID due to the
+	 * simplicity of the given xml file we only need to parse the <token>
+	 * element using an xml-parser is simply to much... just extract the pattern
+	 * via regex
 	 * 
-	 * @param lrz_id lrz user id
+	 * @param lrz_id
+	 *            lrz user id
 	 * @return the access token
 	 */
 	private static String getAccessToken(String lrz_id) {
@@ -66,7 +69,8 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 	}
 
 	/**
-	 * this function does the handle of the OnClickListener of the getAccessToken Button
+	 * this function does the handle of the OnClickListener of the
+	 * getAccessToken Button
 	 */
 	@Override
 	public void onClick(View v) {
