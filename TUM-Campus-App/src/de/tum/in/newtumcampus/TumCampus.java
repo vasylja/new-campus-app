@@ -244,7 +244,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		if (Utils.getSettingBool(this, getString(R.string.roomfinder))) {
 			addItem(list, android.R.drawable.ic_menu_mylocation, getString(R.string.roomfinder), false,
 					createRoomfinderAppIntent());
-			// TODO Remove comments after checking
+			// TODO Remove comments after checking, i think another 
 			// new Intent(this,Roomfinder.class));
 		}
 		if (Utils.getSettingBool(this, getString(R.string.opening_hours))) {

@@ -27,6 +27,8 @@ public class ExamListAdapter extends BaseAdapter {
 	private final Context context;
 	
 	private String semesterHelper = "";
+	
+	private String[] semester = new String[exams.size()];
 
 	public ExamListAdapter(Context context, List<Exam> results) {
 		exams = results;
@@ -73,7 +75,7 @@ public class ExamListAdapter extends BaseAdapter {
 		Exam exam = exams.get(position);
 		if (exam != null) {
 			boolean semesterCheck = getSemesterCheck(exam);
-			holder.tvTest.setText("" + position);
+			holder.tvTest.setText("" + position+","+(++position));
 			if (semesterCheck) {
 				holder.tvSemester.setText(cutSemester(exam.getSemester()));
 			}
@@ -107,12 +109,26 @@ public class ExamListAdapter extends BaseAdapter {
 			semesterHelper = exam.getSemester();
 			return true;
 		} else if (semesterHelper.equals(exam.getSemester())) {
+			semesterHelper = "";
 			Log.v(exam.getSemester()+" bleibt", "MSGS-false");
 			return false;
 		} else {
 			Log.v("WECHSEL bei :"+exam.getSemester(), "MSGS-true");
 			semesterHelper = exam.getSemester();
 			return true;
+		}
+	}
+	
+	public void setSemesterString(){
+		for(int i = 0; i < exams.size()-1; i++){
+			// initialize
+			semester[i] = exams.get(i).getSemester();
+		}
+		for(int i = 1; i < exams.size()-1; i++){
+			// initialize
+			if(semester[i] == semester[i++]){
+				semester[i] == 
+			}
 		}
 	}
 
