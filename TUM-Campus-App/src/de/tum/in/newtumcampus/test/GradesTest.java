@@ -42,12 +42,16 @@ public class GradesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		solo.scrollDown();
 	}
 	
-	private void _testResults(){
+	public void _testResults(){
 		assertTrue(solo.searchText("Datenbanken"));
 		assertTrue(solo.searchText(solo.getString(R.string.semester)));
 		assertTrue(solo.searchText("11W"));
 		assertTrue(solo.searchText(solo.getString(R.string.date)));
-		
+		assertTrue(solo.searchText("2012-04-14"));
+		assertTrue(solo.searchText(solo.getString(R.string.examiner)));
+		assertTrue(solo.searchText("Neumann"));
+		assertTrue(solo.searchText(solo.getString(R.string.mode)));
+		assertTrue(solo.searchText("Schriftlich"));
 		assertTrue(solo.searchText("Datenbanken"));
 	}
 
@@ -55,11 +59,13 @@ public class GradesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	public void testPortrait() {
 		solo.setActivityOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		_testSpinner();
+		//_testResults();
 	}
 	
 	public void testLandscape() {
 		solo.setActivityOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		_testSpinner();
+		//_testResults();
 	}
 	
 }
