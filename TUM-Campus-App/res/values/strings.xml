@@ -47,6 +47,19 @@
 		with the TUMOnline API (ex. AccessToken).
 		No usage statistics is transmitted to third parties.</string>
 
+    <!-- settings.xml -->
+	<string name="mensa_filter">Mensa filter</string>
+	<string name="mensa_settings_info">e.g. "Garching" to list only the dining halls in Garching</string>    
+    <string name="silence_phone">Phone atomatic. silently</string>
+    <string name="silence_phone_info">during the lecture</string>
+    <string name="debug_for_developer">for developers</string>
+    <string name="debug_mode">debug mode</string>
+    <string name="market">Google Play</string>
+    <string name="market_info">Rate or update TUM Campus</string>
+    <string name="app_management">App management</string>
+    <string name="app_management_info">Delete data or deinstall app</string>
+	
+    
     <!-- cafeterias_horizontal.xml & cafeterias.xml -->
     <string name="choose_mensa">Please select a university canteen.</string>
     <string name="choose_date">Choose date</string>
@@ -200,6 +213,7 @@
     <string name="facebook_link">https://m.facebook.com/TUMCampus</string>
     <string name="gallery">Gallery</string>
     <string name="app_info">App-Info</string>
+    <string name="debug">Debug</string>
 
     <!-- Grades.java -->
     <string name="all">All</string>

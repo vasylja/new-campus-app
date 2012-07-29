@@ -5,6 +5,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 
+import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.TumCampus;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.LectureItem;
@@ -50,34 +51,34 @@ public class LecturesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 
 	public void testLecturesPortrait() {
-		assertTrue(solo.searchText("Vorlesungen"));
-		solo.clickOnText("Vorlesungen");
+		assertTrue(solo.searchText(solo.getString(R.string.lectures)));
+		solo.clickOnText(solo.getString(R.string.lectures));
 
 		solo.setActivityOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		_testLectures();
 	}
 
 	public void testLecturesLandscape() {
-		assertTrue(solo.searchText("Vorlesungen"));
-		solo.clickOnText("Vorlesungen");
+		assertTrue(solo.searchText(solo.getString(R.string.lectures)));
+		solo.clickOnText(solo.getString(R.string.lectures));
 
 		solo.setActivityOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		_testLectures();
 	}
 
 	public void testLecturesLink() {
-		assertTrue(solo.searchText("Vorlesungen"));
-		solo.clickOnText("Vorlesungen");
+		assertTrue(solo.searchText(solo.getString(R.string.lectures)));
+		solo.clickOnText(solo.getString(R.string.lectures));
 
-		assertTrue(solo.searchText("Nächste Vorlesungen"));
+		assertTrue(solo.searchText(solo.getString(R.string.next_lectures)));
 
 		assertTrue(solo.searchText("CSCW"));
 		solo.clickOnText("CSCW");
 	}
 
 	public void testLecturesItemDelete() {
-		assertTrue(solo.searchText("Vorlesungen"));
-		solo.clickOnText("Vorlesungen");
+		assertTrue(solo.searchText(solo.getString(R.string.lectures)));
+		solo.clickOnText(solo.getString(R.string.lectures));
 
 		solo.clickOnText("Feiertag");
 
@@ -91,8 +92,8 @@ public class LecturesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 
 	public void testLecturesDelete() {
-		assertTrue(solo.searchText("Vorlesungen"));
-		solo.clickOnText("Vorlesungen");
+		assertTrue(solo.searchText(solo.getString(R.string.lectures)));
+		solo.clickOnText(solo.getString(R.string.lectures));
 
 		assertTrue(solo.searchText("CSCW"));
 		solo.clickLongOnText("CSCW");
@@ -104,30 +105,55 @@ public class LecturesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 
 	public void testLecturesContextMenu() {
-		assertTrue(solo.searchText("Vorlesungen"));
-		solo.clickOnText("Vorlesungen");
+		assertTrue(solo.searchText(solo.getString(R.string.lectures)));
+		solo.clickOnText(solo.getString(R.string.lectures));
 
-		solo.sendKey(Solo.MENU);
-		solo.clickOnText("Roomfinder");
-		solo.sleep(2000);
+		//solo.sendKey(Solo.MENU);
+		//solo.clickOnText(solo.getString(R.string.roomfinder));
+		//solo.sleep(2000);
 	}
 
 	private void _testLectures() {
-		assertTrue(solo.searchText("Nächste Vorlesungen"));
-
+		assertTrue(solo.searchText(solo.getString(R.string.lectures)));
+		solo.clickOnText(solo.getString(R.string.lectures));
 		assertTrue(solo.searchText("Feiertag"));
 		solo.clickOnText("Feiertag");
-		assertTrue(solo.searchText("Deutschen Einheit"));
-		assertTrue(solo.searchText("Mo, 03.10.2011"));
+		assertTrue(solo.searchText("Karfreitag"));
+		assertTrue(solo.searchText("Fr, 06.04.2012"));
 
 		assertTrue(solo.searchText("Ferien"));
 		solo.clickOnText("Ferien");
 		assertTrue(solo.searchText("Sommerferien"));
-		assertTrue(solo.searchText("01.08.2011 - 30.09.2011"));
+		assertTrue(solo.searchText("01.08.2012 - 30.09.2012"));
 
 		solo.clickOnText("CSCW");
 		assertTrue(solo.searchText("Mi, 04.05.2011 14:00 - 16:00, 01.07.023"));
 		assertTrue(solo.searchText("IN2119"));
 		solo.clickOnText("IN2119");
+		
+	}
+
+	/**
+	 * @author Florian Schulz
+	 * tests slider
+	 * TODO Review Vasyl
+	 */
+	public void testSlider(){
+		assertTrue(solo.searchText(solo.getString(R.string.lectures)));
+		solo.clickOnText(solo.getString(R.string.lectures));
+		assertTrue(solo.searchText(solo.getString(R.string.slide_lectures)));
+		solo.clickOnText(solo.getString(R.string.slide_lectures));
+		assertTrue(solo.searchText(solo.getString(R.string.my_lectures)));
+		solo.clickOnText(solo.getString(R.string.my_lectures));
+		solo.goBack();
+		solo.goBack();
+		assertTrue(solo.searchText(solo.getString(R.string.search_lectures)));
+		solo.clickOnText(solo.getString(R.string.search_lectures));
+		solo.goBack();
+		/* if calenderexport is released
+		assertTrue(solo.searchText(solo.getString(R.string.export2calendar)));
+		solo.clickOnText(solo.getString(R.string.export2calendar));
+		solo.goBack();
+		*/
 	}
 }

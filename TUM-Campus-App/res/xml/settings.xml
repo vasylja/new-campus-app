@@ -6,7 +6,7 @@
         android:summary="z.B. Access-Token-Einstellungen"
         android:title="TUMOnline Einstellungen" />
 
-    <!-- TODO Review Vasyl => Flo changed Constants for List -->
+    <!-- TODO Review Vasyl => Flo changed Constants for List & SettingList -->
     <PreferenceScreen
         android:key="modules"
         android:summary="aktivieren, deaktivieren"
@@ -84,30 +84,30 @@
             android:key="@string/facebook"
             android:title="@string/facebook" />
     </PreferenceScreen>
-
+    <!-- TODO check const -->
     <EditTextPreference
         android:key="cafeteriaFilter"
-        android:summary="z.B. &apos;Garching&apos; um nur Mensen in Garching auflisten"
-        android:title="Mensa-Filter" />
+        android:summary="@string/mensa_settings_info"
+        android:title="@string/mensa_filter" />
 
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="silence"
-        android:summary="während der Vorlesung"
-        android:title="Handy autom. lautlos" />
-    <!-- TODO check const -->
+        android:summary="@string/silence_phone_info"
+        android:title="@string/silence_phone" />
+
     <CheckBoxPreference
         android:key="debug"
-        android:summary="für Entwickler"
-        android:title="Debug-Modus" />
+        android:summary="@string/debug_for_developer"
+        android:title="@string/debug" />
 
     <Preference
         android:key="market"
-        android:summary="TUM Campus bewerten oder aktualisieren"
-        android:title="Android Market" />
+        android:summary="@string/market_info"
+        android:title="@string/market" />
     <Preference
         android:key="app_details"
-        android:summary="Daten löschen oder App deinstallieren"
-        android:title="App-Verwaltung" />
+        android:summary="@string/app_management_info"
+        android:title="@string/app_management" />
 
 </PreferenceScreen>

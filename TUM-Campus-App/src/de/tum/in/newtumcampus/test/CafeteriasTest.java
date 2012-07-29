@@ -8,8 +8,14 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 
+import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.TumCampus;
 
+/*
+ * Florian Schulz
+ * changed of xml-external reasons, some not (external information)
+ * TODO Review Vasyl
+ */
 public class CafeteriasTest extends ActivityInstrumentationTestCase2<TumCampus> {
 
 	private Solo solo; // simulates the user of the app
@@ -22,54 +28,56 @@ public class CafeteriasTest extends ActivityInstrumentationTestCase2<TumCampus> 
 	public void setUp() {
 		solo = new Solo(getInstrumentation(), getActivity());
 
-		assertTrue(solo.searchText("Speisepläne"));
-		solo.clickOnText("Speisepläne");
+		assertTrue(solo.searchText(solo.getString(R.string.menues)));
+		solo.clickOnText(solo.getString(R.string.menues));
 
 		solo.sendKey(Solo.MENU);
-		solo.clickOnText("Aktualisieren");
+		solo.clickOnText(solo.getString(R.string.update));
 		solo.sleep(10000);
 		solo.goBack();
 	}
 
 	public void testCafeteriasPortrait() {
-		assertTrue(solo.searchText("Speisepläne"));
-		solo.clickOnText("Speisepläne");
+		assertTrue(solo.searchText(solo.getString(R.string.menues)));
+		solo.clickOnText(solo.getString(R.string.menues));
 
 		solo.setActivityOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		_testCafeterias();
 
 		solo.goBack();
-		assertTrue(solo.searchText("Speisepläne"));
+		assertTrue(solo.searchText(solo.getString(R.string.menues)));
 	}
 
 	public void testCafeteriasLandscape() {
-		assertTrue(solo.searchText("Speisepläne"));
-		solo.clickOnText("Speisepläne");
+		assertTrue(solo.searchText(solo.getString(R.string.menues)));
+		solo.clickOnText(solo.getString(R.string.menues));
 
 		solo.setActivityOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		_testCafeterias();
 
 		solo.goBack();
-		assertTrue(solo.searchText("Speisepläne"));
+		assertTrue(solo.searchText(solo.getString(R.string.menues)));
 	}
 
 	public void testCafeteriasSettings() {
-		assertTrue(solo.searchText("Speisepläne"));
-		solo.clickOnText("Speisepläne");
+		assertTrue(solo.searchText(solo.getString(R.string.menues)));
+		solo.clickOnText(solo.getString(R.string.menues));
 
 		solo.sendKey(Solo.MENU);
-		solo.clickOnText("Einstellungen");
-		solo.clickOnText("Mensa-Filter");
+		solo.clickOnText(solo.getString(R.string.settings));
+		// TODO Maybe Change
+		solo.clickOnText(solo.getString(R.string.mensa_filter));
 		solo.clearEditText(0);
 		solo.enterText(0, "Garching");
+		
 		solo.goBack();
 		solo.clickOnText("OK");
 		solo.goBack();
 		assertFalse(solo.searchText("München"));
 
 		solo.sendKey(Solo.MENU);
-		solo.clickOnText("Einstellungen");
-		solo.clickOnText("Mensa-Filter");
+		solo.clickOnText(solo.getString(R.string.settings));
+		solo.clickOnText(solo.getString(R.string.mensa_filter));
 		solo.clearEditText(0);
 		solo.goBack();
 		solo.clickOnText("OK");
@@ -78,16 +86,16 @@ public class CafeteriasTest extends ActivityInstrumentationTestCase2<TumCampus> 
 	}
 
 	public void testCafeteriasContextMenu() {
-		assertTrue(solo.searchText("Speisepläne"));
-		solo.clickOnText("Speisepläne");
+		assertTrue(solo.searchText(solo.getString(R.string.menues)));
+		solo.clickOnText(solo.getString(R.string.menues));
 
 		solo.sendKey(Solo.MENU);
-		solo.clickOnText("Preise");
+		solo.clickOnText(solo.getString(R.string.prices));
 	}
 
 	private void _testCafeterias() {
-		assertTrue(solo.searchText("Mensa Garching"));
-		solo.clickOnText("Mensa Garching");
+		assertTrue(solo.searchText(solo.getString(R.string.mensa_garching)));
+		solo.clickOnText(solo.getString(R.string.mensa_garching));
 
 		Calendar calendar = Calendar.getInstance();
 		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
@@ -100,13 +108,14 @@ public class CafeteriasTest extends ActivityInstrumentationTestCase2<TumCampus> 
 
 		SimpleDateFormat de = new SimpleDateFormat("dd.MM.yyyy");
 		String today = de.format(calendar.getTime());
-
+// Zeile 111 Fehler TODO Flo
 		assertTrue(solo.searchText("Mensa Garching: " + today));
 		assertTrue(solo.searchText("Beilagen"));
-		assertTrue(solo.searchText("Tagesgericht"));
+		// Zeile 114 assertionFailderror
+		assertTrue(solo.searchText("Tagesgericht 1"));
 
-		assertTrue(solo.searchText("Datum auswählen"));
-		solo.clickOnText("Datum auswählen");
+		assertTrue(solo.searchText(solo.getString(R.string.choose_date)));
+		solo.clickOnText(solo.getString(R.string.choose_date));
 
 		if (dayOfWeek == Calendar.FRIDAY) {
 			calendar.add(Calendar.DATE, 3);
@@ -120,4 +129,5 @@ public class CafeteriasTest extends ActivityInstrumentationTestCase2<TumCampus> 
 
 		assertTrue(solo.searchText("Mensa Garching: " + tomorrow));
 	}
+	
 }

@@ -166,6 +166,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 			b.setVisibility(android.view.View.GONE);
 
 			// show hello world line when offline
+			// TODO Externalisize 
 			tv.setVisibility(View.VISIBLE);
 			tv.setText("Offline.");
 			tv.setTag("offline");
@@ -264,9 +265,9 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		}
 		// not optional
 		addItem(list, R.drawable.info, getString(R.string.app_info), false, new Intent(this, AppInfo.class));
-
+		// TODO Review Vasyl bitte des mit Const.Settings.debug prüfen!
 		if (Utils.getSettingBool(this, Const.Settings.debug)) {
-			addItem(list, R.drawable.icon, "Debug", false, new Intent(this, Debug.class));
+			addItem(list, R.drawable.icon, getString(R.string.debug), false, new Intent(this, Debug.class));
 		}
 		return list;
 	}
@@ -360,8 +361,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		case Menu.FIRST + 1:
 			try {
 				// copy pdf manual from assets to sd-card
-				String target = Utils.getCacheDir("cache") + "TUM Campus Handbuch.pdf";
-
+				String target = Utils.getCacheDir("cache") + getString(R.string.manual);
 				InputStream in = getAssets().open("manual.pdf");
 				OutputStream out = new FileOutputStream(target);
 

@@ -25,10 +25,6 @@ public class ExamListAdapter extends BaseAdapter {
 	private final LayoutInflater mInflater;
 
 	private final Context context;
-	
-	private String semesterHelper = "";
-	
-	private String[] semester = new String[exams.size()];
 
 	public ExamListAdapter(Context context, List<Exam> results) {
 		exams = results;
@@ -51,10 +47,16 @@ public class ExamListAdapter extends BaseAdapter {
 		return position;
 	}
 
+
+	private String[] semester;
+
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 
+		semester = new String[getCount()];	
+		
 		// find and init UI
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.grades_listview, null);
@@ -70,15 +72,14 @@ public class ExamListAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-
+		setSemesterString();
 		// fill UI with data
 		Exam exam = exams.get(position);
 		if (exam != null) {
-			boolean semesterCheck = getSemesterCheck(exam);
-			holder.tvTest.setText("" + position+","+(++position));
-			if (semesterCheck) {
+			holder.tvTest.setText(""+position);
+			//if (getSemesterCheck(position)) {
 				holder.tvSemester.setText(cutSemester(exam.getSemester()));
-			}
+			//}
 			holder.tvName.setText(exam.getCourse());
 			holder.tvGrade.setText(exam.getGrade());
 			holder.tvDetails1.setText(context.getString(R.string.date) + ": " + exam.getDate() + ", "
@@ -104,17 +105,12 @@ public class ExamListAdapter extends BaseAdapter {
 	 * @solves examSemester check 
 	 * TODO Review Vasyl
 	 */
-	public boolean getSemesterCheck(Exam exam) {
-		if (semesterHelper.equals("")){
-			semesterHelper = exam.getSemester();
+	public boolean getSemesterCheck(int position) {
+		if (position == 0){
 			return true;
-		} else if (semesterHelper.equals(exam.getSemester())) {
-			semesterHelper = "";
-			Log.v(exam.getSemester()+" bleibt", "MSGS-false");
+		} else if (semester[position].equals(semester[++position]) && (position <= getCount()-1)) {
 			return false;
 		} else {
-			Log.v("WECHSEL bei :"+exam.getSemester(), "MSGS-true");
-			semesterHelper = exam.getSemester();
 			return true;
 		}
 	}
@@ -124,12 +120,14 @@ public class ExamListAdapter extends BaseAdapter {
 			// initialize
 			semester[i] = exams.get(i).getSemester();
 		}
-		for(int i = 1; i < exams.size()-1; i++){
-			// initialize
-			if(semester[i] == semester[i++]){
-				semester[i] == 
-			}
+	}
+	
+	public String getSemesterString(){
+		String a = "";
+		for(int i = 0; i < exams.size()-1; i++){
+			a = a + "i="+i+" "+semester[i] + " ";
 		}
+		return a;
 	}
 
 	/**

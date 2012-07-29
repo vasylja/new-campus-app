@@ -137,8 +137,8 @@ public class Lectures extends Activity implements OnItemClickListener,
 			// actually the same
 			if (lectureId.equals(Const.VACATION)) {
 				info = c.getString(c.getColumnIndex(Const.START_DT_COLUMN))
-						+ " - "
-						+ c.getString(c.getColumnIndex(Const.START_DT_COLUMN));
+						+ " - " // TODO REVIEW Vasyl changed start to end
+						+ c.getString(c.getColumnIndex(Const.END_DT_COLUMN));
 
 			} else if (lectureId.equals(Const.HOLIDAY)) {
 				info = weekDays[c
@@ -151,8 +151,8 @@ public class Lectures extends Activity implements OnItemClickListener,
 						.getInt(c.getColumnIndex(Const.WEEKDAY_COLUMN))]
 						+ ", "
 						+ c.getString(c.getColumnIndex(Const.START_DE_COLUMN))
-						+ " - "
-						+ c.getString(c.getColumnIndex(Const.START_DE_COLUMN));
+						+ " - " // TODO REVIEW Vasyl changed start to end
+						+ c.getString(c.getColumnIndex(Const.END_DE_COLUMN));
 
 				String location = c.getString(c
 						.getColumnIndex(Const.LOCATION_COLUMN));
@@ -279,7 +279,6 @@ public class Lectures extends Activity implements OnItemClickListener,
 
 			TextView tv = (TextView) findViewById(R.id.lectureText);
 			tv.setText(getString(R.string.next_lectures));
-
 			TextView tv2 = (TextView) findViewById(R.id.moduleText);
 			tv2.setText("");
 

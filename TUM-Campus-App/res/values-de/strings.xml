@@ -5,7 +5,7 @@
     <string name="hello">Hello World, TUMCampus!</string>
     <string name="lang">deu</string>
 
-    <!-- ###### LAYOUT FILES ####### -->
+    <!-- ###### LAYOUT FILES ####### -->    
     <!-- appinfo.xml -->
     <string name="app_info_text">		TUM Campus App -EXPERIMENTAL-\n
         \n
@@ -47,6 +47,19 @@
 		notwendig sind (z.B. AccessToken). \n
 		Die Anwendung übermittelt keinerlei Nutzungsstatistiken an Dritte.</string>
 
+    <!-- settings.xml -->
+	<string name="mensa_filter">Mensa-Fiter</string>
+	<string name="mensa_settings_info">z.B. "Garching" um nur Mensen in Garching auflisten</string>    
+    <string name="silence_phone">Handy autom. lautlos</string>
+    <string name="silence_phone_info">während der Vorlesung</string>
+    <string name="debug_for_developer">für Entwickler</string>
+    <string name="debug_mode">Debug-Modus</string>
+    <string name="market">Google Play</string>
+    <string name="market_info">TUM Campus bewerten oder aktualisieren</string>
+    <string name="app_management">App-Verwaltung</string>
+    <string name="app_management_info">Daten löschen oder App deinstallieren</string>
+    
+	
     <!-- cafeterias_horizontal.xml & cafeterias.xml -->
     <string name="choose_mensa">Bitte wählen Sie eine Mensa aus.</string>
     <string name="choose_date">Datum auswählen</string>
@@ -200,6 +213,7 @@
     <string name="facebook_link">https://m.facebook.com/TUMCampus</string>
     <string name="gallery">Kurz notiert</string>
     <string name="app_info">App-Info</string>
+    <string name="debug">Debug</string>
 
     <!-- Grades.java -->
     <string name="all">Alle</string>
