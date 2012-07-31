@@ -4,7 +4,15 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 
+import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.TumCampus;
+
+/**
+ * @author Florian Schulz
+ * @solves DebugTest
+ * tests debug function
+ * TODO Review Vasyl
+ */
 
 public class DebugTest extends ActivityInstrumentationTestCase2<TumCampus> {
 
@@ -20,40 +28,42 @@ public class DebugTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 
 	public void testDebug() {
-		assertFalse(solo.searchText("Debug"));
+		assertFalse(solo.searchText(solo.getString(R.string.debug)));
 
 		solo.sendKey(Solo.MENU);
-		solo.clickOnText("Einstellungen");
-		solo.clickOnText("Debug-Modus");
+		solo.clickOnText(solo.getString(R.string.settings));
+		solo.clickOnText(solo.getString(R.string.debug));
 		solo.goBack();
 
-		assertTrue(solo.searchText("Debug"));
-		solo.clickOnText("Debug");
+		assertTrue(solo.searchText(solo.getString(R.string.debug)));
+		solo.clickOnText(solo.getString(R.string.debug));
 
-		assertTrue(solo.searchText("Debug SQLite"));
+		assertTrue(solo.searchText(solo.getString(R.string.debug_sqllite)));
 
-		solo.clickOnText("syncs");
-		solo.clickOnText("cafeterias");
-		solo.clickOnText("cafeterias_menus");
-		solo.clickOnText("feeds");
-		solo.clickOnText("feeds_items");
-		solo.clickOnText("lectures");
-		solo.clickOnText("lectures_items");
-		solo.clickOnText("links");
-		solo.clickOnText("events");
-		solo.clickOnText("news");
-		solo.clickOnText("time");
-		solo.clickOnText("locations");
-		solo.clickOnText("master");
+		solo.clickOnText(solo.getString(R.string.debug_syncs));
+		solo.clickOnText(solo.getString(R.string.debug_cafeterias));
+		solo.clickOnText(solo.getString(R.string.debug_cafeterias_menus));
+		solo.clickOnText(solo.getString(R.string.debug_feeds));
+		solo.clickOnText(solo.getString(R.string.debug_feeds_items));
+		solo.clickOnText(solo.getString(R.string.debug_lectures));
+		solo.clickOnText(solo.getString(R.string.debug_lectures_items));
+		solo.clickOnText(solo.getString(R.string.debug_links));
+		solo.clickOnText(solo.getString(R.string.debug_events));
+		solo.clickOnText(solo.getString(R.string.debug_news));
+		solo.clickOnText(solo.getString(R.string.debug_time));
+		solo.clickOnText(solo.getString(R.string.debug_locations));
+		solo.clickOnText(solo.getString(R.string.debug_master));
+		solo.clickOnText(solo.getString(R.string.gallery));
 
 		solo.goBack();
-		assertTrue(solo.searchText("Hello World"));
+		// not availible anymore
+		//assertTrue(solo.searchText("Hello World"));
 
 		solo.sendKey(Solo.MENU);
-		solo.clickOnText("Einstellungen");
-		solo.clickOnText("Debug-Modus");
+		solo.clickOnText(solo.getString(R.string.settings));
+		solo.clickOnText(solo.getString(R.string.debug));
 		solo.goBack();
 
-		assertFalse(solo.searchText("Debug"));
+		assertFalse(solo.searchText(solo.getString(R.string.debug)));
 	}
 }

@@ -42,7 +42,7 @@ public class GradesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		solo.scrollDown();
 	}
 	
-	public void _testResults(){
+	public void testResults(){
 		assertTrue(solo.searchText("Datenbanken"));
 		assertTrue(solo.searchText(solo.getString(R.string.semester)));
 		assertTrue(solo.searchText("11W"));
@@ -52,7 +52,6 @@ public class GradesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		assertTrue(solo.searchText("Neumann"));
 		assertTrue(solo.searchText(solo.getString(R.string.mode)));
 		assertTrue(solo.searchText("Schriftlich"));
-		assertTrue(solo.searchText("Datenbanken"));
 	}
 
 	

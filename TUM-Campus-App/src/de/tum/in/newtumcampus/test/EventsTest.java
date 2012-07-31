@@ -10,6 +10,13 @@ import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.Event;
 import de.tum.in.newtumcampus.models.EventManager;
 
+/**
+ * @author first team / Florian Schulz
+ * @solves EventsTest
+ * checks some functions of events
+ * TODO Review Vasyl
+ */
+
 public class EventsTest extends ActivityInstrumentationTestCase2<TumCampus> {
 
 	private Solo solo; // simulates the user of the app
@@ -40,8 +47,8 @@ public class EventsTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 
 	public void testEvents() {
-		assertTrue(solo.searchText("Veranstaltungen"));
-		solo.clickOnText("Veranstaltungen");
+		assertTrue(solo.searchText(solo.getString(R.string.events)));
+		solo.clickOnText(solo.getString(R.string.events));
 
 		assertTrue(solo.searchText("Test Event"));
 		assertTrue(solo.searchText("Di, 13.12.2011 14:00 - 15:00"));
@@ -52,13 +59,13 @@ public class EventsTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 
 	public void testEventsContextMenu() {
-		assertTrue(solo.searchText("Veranstaltungen"));
-		solo.clickOnText("Veranstaltungen");
+		assertTrue(solo.searchText(solo.getString(R.string.events)));
+		solo.clickOnText(solo.getString(R.string.events));
 
 		solo.sendKey(Solo.MENU);
-		solo.clickOnText("Aktualisieren");
+		solo.clickOnText(solo.getString(R.string.update));
 		solo.sleep(25000);
-
+		// TODO Flo: change this value
 		assertTrue(solo.searchText("Tag der Informatik"));
 		assertTrue(solo.searchText("Fr, 02.12.2011 16:00 - 19:00"));
 		assertTrue(solo.searchText("Campus Garching"));
@@ -76,6 +83,6 @@ public class EventsTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		solo.goBack();
 
 		solo.goBack();
-		assertTrue(solo.searchText("Hello World"));
+		//assertTrue(solo.searchText("Hello World"));
 	}
 }
