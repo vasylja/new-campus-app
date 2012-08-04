@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.tum.in.newtumcampus"
     android:versionCode="19"
-    android:versionName="0.93" >         <uses-sdk android:minSdkVersion="7" />
+    android:versionName="0.93" >
+
+    <uses-sdk android:minSdkVersion="7" />
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
@@ -12,11 +14,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-<uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-
+    <!-- android:name="CampusApplication" added for CrashReporting Reasons: Florian Schulz 04-August-2012-->
     <application
+        android:name="CampusApplication"
         android:icon="@drawable/icon"
         android:label="NewTUMCampus"
         android:theme="@android:style/Theme.Light" >
@@ -43,8 +45,7 @@
         <activity
             android:name=".Lectures"
             android:label="@string/lectures" />
-
-<activity
+        <activity
             android:name=".TUMOnline"
             android:label="@string/tumonline_connection" />
         <activity
@@ -63,8 +64,7 @@
         <activity
             android:name=".Lectures2Calendar"
             android:label="@string/export2calendar" />
-
-<activity
+        <activity
             android:name=".TUMOnlineSettings"
             android:label="@string/access_token_settings" />
         <activity
@@ -94,8 +94,7 @@
             android:name=".TuitionFees"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/tuition_fees" />
-
-<activity
+        <activity
             android:name=".Organisation"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/organisations" />
@@ -103,8 +102,7 @@
             android:name=".OrganisationDetails"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/organisation_details" />
-
-<activity
+        <activity
             android:name=".Links"
             android:label="@string/links" />
         <activity
@@ -122,16 +120,14 @@
         <activity
             android:name=".Hours"
             android:label="@string/opening_hours" />
-        
-<!-- TODO translate -->
-<activity
+
+        <activity
             android:name=".Gallery"
-            android:label="Kurz notiert" />
-        
-<!-- TODO translate -->
-<activity
+            android:label="@string/gallery" />
+
+        <activity
             android:name=".GalleryDetails"
-            android:label="Kurz notiert" />
+            android:label="@string/gallery" />
         <activity
             android:name=".AppInfo"
             android:label="@string/full_app_info" />
@@ -152,7 +148,8 @@
         <service
             android:name=".services.SilenceService"
             android:exported="false" />
-                <receiver android:name=".receivers.BootCompleted" >
+
+        <receiver android:name=".receivers.BootCompleted" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

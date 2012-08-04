@@ -191,6 +191,8 @@
     <string name="howto">HowTo</string>
 
     <!-- ###### JAVA FILES ####### -->
+    <!-- CampusApplication.java -->
+    <string name="handle_error">An error occured; a report has been sent to the developers</string>
     <!-- TumCampus.java -->
     <string name="update">Update</string>
     <string name="cancel">Cancel</string>

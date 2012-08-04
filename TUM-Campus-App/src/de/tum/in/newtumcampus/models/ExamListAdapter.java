@@ -77,9 +77,9 @@ public class ExamListAdapter extends BaseAdapter {
 		Exam exam = exams.get(position);
 		if (exam != null) {
 			holder.tvTest.setText(""+position);
-			//if (getSemesterCheck(position)) {
+			if (getSemesterCheck(position)) {
 				holder.tvSemester.setText(cutSemester(exam.getSemester()));
-			//}
+			}
 			holder.tvName.setText(exam.getCourse());
 			holder.tvGrade.setText(exam.getGrade());
 			holder.tvDetails1.setText(context.getString(R.string.date) + ": " + exam.getDate() + ", "
@@ -117,7 +117,6 @@ public class ExamListAdapter extends BaseAdapter {
 	
 	public void setSemesterString(){
 		for(int i = 0; i < exams.size()-1; i++){
-			// initialize
 			semester[i] = exams.get(i).getSemester();
 		}
 	}

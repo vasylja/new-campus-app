@@ -48,7 +48,7 @@
             android:id="@+id/tvLDetailsSemester"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:autoLink="none"
+            android:autoLink="all"
             android:background="#FFFFFF"
             android:inputType="textMultiLine"
             android:padding="4dip"

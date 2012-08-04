@@ -1,5 +1,7 @@
 package de.tum.in.newtumcampus;
 
+import java.util.regex.Pattern;
+
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
@@ -79,7 +81,7 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 
 		btnLDetailsTermine = (Button) findViewById(R.id.btnLDetailsTermine);
 		btnLDetailsTermine.setOnClickListener(this);
-		
+		//Linkify.addLinks(tvLDetailsDozent, Pattern.compile("00.00.000"), "tel:");
 	}
 
 	@Override
