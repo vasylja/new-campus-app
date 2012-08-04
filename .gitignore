@@ -6,6 +6,6 @@ TUM-Campus-App/gen/de/tum/in/newtumcampus/R.java
 TUM-Campus-App/lint.xml
 
 # Package Files #
-*.jar
+
 *.war
 *.ear
