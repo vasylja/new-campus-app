@@ -23,6 +23,13 @@
         android:label="NewTUMCampus"
         android:theme="@android:style/Theme.Light" >
         <uses-library android:name="android.test.runner" />
+        
+        <activity android:name="org.acra.CrashReportDialog"
+        android:theme="@android:style/Theme.Dialog"
+        android:launchMode="singleInstance"
+        android:excludeFromRecents="true"
+        android:finishOnTaskLaunch="true" />
+        <!-- end of CampusApplication & activity -->
 
         <activity
             android:name=".TumCampus"

@@ -48,8 +48,8 @@
 		No usage statistics is transmitted to third parties.</string>
 
     <!-- settings.xml -->
-	<string name="mensa_filter">Mensa filter</string>
-	<string name="mensa_settings_info">e.g. "Garching" to list only the dining halls in Garching</string>    
+    <string name="mensa_filter">Mensa filter</string>
+    <string name="mensa_settings_info">e.g. "Garching" to list only the dining halls in Garching</string>
     <string name="silence_phone">Phone atomatic. silently</string>
     <string name="silence_phone_info">during the lecture</string>
     <string name="debug_for_developer">for developers</string>
@@ -58,8 +58,7 @@
     <string name="market_info">Rate or update TUM Campus</string>
     <string name="app_management">App management</string>
     <string name="app_management_info">Delete data or deinstall app</string>
-	
-    
+
     <!-- cafeterias_horizontal.xml & cafeterias.xml -->
     <string name="choose_mensa">Please select a university canteen.</string>
     <string name="choose_date">Choose date</string>
@@ -192,7 +191,13 @@
 
     <!-- ###### JAVA FILES ####### -->
     <!-- CampusApplication.java -->
-    <string name="handle_error">An error occured; a report has been sent to the developers</string>
+    <string name="crash_notif_ticker_text">Unexpected error, please send a report!</string>
+    <string name="crash_notif_title">TUMCampus has crashed!</string>
+    <string name="crash_notif_text">Please click here to help fix the issue.</string>
+    <string name="crash_dialog_text">Please send an report to the developers!</string>
+    <string name="crash_dialog_title">An error occured.</string>
+    <string name="crash_dialog_comment_prompt">You might add your comments about the problem below:</string>
+    <string name="crash_dialog_ok_toast">Thank you!</string>
     <!-- TumCampus.java -->
     <string name="update">Update</string>
     <string name="cancel">Cancel</string>
@@ -225,7 +230,7 @@
     <!-- ExamListAdapter.java -->
     <string name="semester_w">Winter semester</string>
     <string name="semester_s">Summer semester</string>
-    <string name="semester_n">Not found</string>    
+    <string name="semester_n">Not found</string>
     <string name="date">Date</string>
 
     <!-- StaffDetails.java -->
@@ -274,7 +279,7 @@
 
     <!-- LectureDetails -->
     <string name="no_existing_data">No existing data.</string>
-    
+
     <!-- News.java -->
     <string name="no_link_existing">No link existing.</string>
 
