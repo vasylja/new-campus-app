@@ -272,6 +272,9 @@
     <string name="my_lectures">My Lectures</string>
     <string name="roomfinder">Roomfinder</string>
 
+    <!-- LectureDetails -->
+    <string name="no_existing_data">No existing data.</string>
+    
     <!-- News.java -->
     <string name="no_link_existing">No link existing.</string>
 

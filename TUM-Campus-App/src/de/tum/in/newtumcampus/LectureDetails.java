@@ -21,13 +21,13 @@ import de.tum.in.newtumcampus.models.LectureDetailsRowSet;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequestFetchListener;
 
-
 /**
- * This Activity will show all details found on the TUMOnline web service identified by its lecture id (which has to be
- * posted to this activity by bundle).
+ * This Activity will show all details found on the TUMOnline web service
+ * identified by its lecture id (which has to be posted to this activity by
+ * bundle).
  * 
- * There is also the opportunity to get all appointments which are related to this lecture by clicking the button on top
- * of the view.
+ * There is also the opportunity to get all appointments which are related to
+ * this lecture by clicking the button on top of the view.
  * 
  * HINT: a valid TUM Online token is needed
  * 
@@ -81,7 +81,8 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 
 		btnLDetailsTermine = (Button) findViewById(R.id.btnLDetailsTermine);
 		btnLDetailsTermine.setOnClickListener(this);
-		//Linkify.addLinks(tvLDetailsDozent, Pattern.compile("00.00.000"), "tel:");
+		// Linkify.addLinks(tvLDetailsDozent, Pattern.compile("00.00.000"),
+		// "tel:");
 	}
 
 	@Override
@@ -150,6 +151,7 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 				tvLDetailsLiteratur.setText(currentitem.getStudienbehelfe());
 				tvLDetailsTermin.setText(currentitem.getErsttermin());
 			}
+			// TODO Externalise
 		} catch (Exception e) {
 			// well, something went obviously wrong
 			Log.d("conv", "wont work: " + e.toString());
@@ -158,7 +160,10 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 		}
 	}
 
-	/** while fetching a TUMOnline Request an error occurred this will show the error message in a toast */
+	/**
+	 * while fetching a TUMOnline Request an error occurred this will show the
+	 * error message in a toast
+	 */
 	@Override
 	public void onFetchError(String errorReason) {
 		Utils.showLongCenteredToast(this, errorReason);

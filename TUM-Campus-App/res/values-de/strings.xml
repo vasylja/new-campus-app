@@ -271,6 +271,9 @@
     <!-- MyLectures.java -->
     <string name="my_lectures">Meine Lehrveranstaltungen</string>
     <string name="roomfinder">Roomfinder</string>
+    
+    <!-- LectureDetails -->
+    <string name="no_existing_data">No existing data.</string>
 
     <!-- News.java -->
     <string name="no_link_existing">Kein Link vorhanden.</string>
@@ -368,7 +371,7 @@
     <string name="importing">Importiere…</string>
     <string name="tum_campus_import">TUMCampus import …</string>
     <string name="service">Service</string>
-    <string name="import_from_tumonline">import aus TUMOnline</string>
+    <string name="import_from_tumonline">Import aus TUMOnline</string>
 
     <!-- SilenceService -->
     <string name="set_ringer_mode">set ringer mode: </string>
