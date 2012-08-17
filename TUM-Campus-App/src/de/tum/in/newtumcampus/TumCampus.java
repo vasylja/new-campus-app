@@ -302,23 +302,11 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 
 	private Intent createRoomfinderAppIntent() {
 		Intent resultIntent = null;
-		try {
+//		try {
 			final Intent intent = new Intent();
 			intent.setAction("android.intent.action.SEARCH");
 			intent.addCategory("de.tum.event");
-			// intent.putExtra("searchString", "android");
 			resultIntent = intent;
-			// TODO Check, whether exception will still be thrown.
-			// startActivity(intent);
-		} catch (ActivityNotFoundException e) {
-			Toast.makeText(this, "Please install the TUM Roomfinder App", Toast.LENGTH_LONG).show();
-
-			final Intent marketIntent = new Intent();
-			marketIntent.setAction("android.intent.action.VIEW");
-			marketIntent.setData(Uri.parse("market://details?id=de.tum.roomfinder"));
-			resultIntent = marketIntent;
-			// startActivity(marketIntent); //Consider catching this, too
-		}
 		return resultIntent;
 	}
 
@@ -330,7 +318,19 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		Map<String, Object> map = (Map<String, Object>) av.getAdapter().getItem(position);
 
 		Intent intent = (Intent) map.get("intent");
+		try{
 		startActivity(intent);
+		
+		}catch (ActivityNotFoundException e) {
+			if(intent.hasCategory("de.tum.event")&intent.getAction().equals("android.intent.action.SEARCH")){
+			Toast.makeText(this, "Please install the TUM Roomfinder App", Toast.LENGTH_LONG).show();
+
+			final Intent marketIntent = new Intent();
+			marketIntent.setAction("android.intent.action.VIEW");
+			marketIntent.setData(Uri.parse("market://details?id=de.tum.roomfinder"));
+			startActivity(marketIntent); //Consider catching this, too
+			}
+		}
 	}
 
 	@Override
