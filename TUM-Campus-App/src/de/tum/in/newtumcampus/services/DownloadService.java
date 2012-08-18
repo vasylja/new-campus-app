@@ -129,9 +129,8 @@ public class DownloadService extends IntentService {
 			logMessage(getString(R.string.events) + ", ", "");
 			downloadEvents(force);
 		}
-		if ((action == null || action.equals("gallery")) && !destroyed && Utils.getSettingBool(this, "gallery")) {
-			// TODO translate
-			logMessage("Kurz notiert ", "");
+		if ((action == null || action.equals(Const.GALLERY)) && !destroyed && Utils.getSettingBool(this, Const.GALLERY)) {
+			logMessage(getString(R.string.gallery), "");
 			downloadGallery(force);
 		}
 		if ((action == null || action.equals(Const.CAFETERIAS)) && !destroyed) {

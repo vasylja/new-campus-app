@@ -55,7 +55,7 @@
             android:id="@+id/tvDetails4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:autoLink="all"
+            android:autoLink="none"
             android:inputType="textMultiLine"
             android:padding="4dip"
             android:scrollHorizontally="false"

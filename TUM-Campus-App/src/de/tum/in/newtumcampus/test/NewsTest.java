@@ -4,6 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 
+import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.TumCampus;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.models.News;
@@ -37,9 +38,9 @@ public class NewsTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 
 	public void testNews() {
-		assertTrue(solo.searchText("Nachrichten"));
+		assertTrue(solo.searchText(solo.getString(R.string.news)));
 
-		solo.clickOnText("Nachrichten");
+		solo.clickOnText(solo.getString(R.string.news));
 		assertTrue(solo.searchText("Test message"));
 		assertTrue(solo.searchText("13.12.2011"));
 
@@ -47,17 +48,17 @@ public class NewsTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 
 	public void testNewsContextMenu() {
-		assertTrue(solo.searchText("Nachrichten"));
-		solo.clickOnText("Nachrichten");
+		assertTrue(solo.searchText(solo.getString(R.string.news)));
+		solo.clickOnText(solo.getString(R.string.news));
 
 		solo.sendKey(Solo.MENU);
-		solo.clickOnText("Aktualisieren");
+		solo.clickOnText(solo.getString(R.string.update));
 		solo.sleep(10000);
 
-		assertTrue(solo.searchText("Statistiken"));
-		assertTrue(solo.searchText("04.10.2011"));
+		assertTrue(solo.searchText("Umfrage"));
+		assertTrue(solo.searchText("09.07.2012"));
 
-		assertTrue(solo.searchText("Öffnungszeiten"));
-		solo.clickOnText("Öffnungszeiten");
+		assertTrue(solo.searchText(solo.getString(R.string.opening_hours)));
+		solo.clickOnText(solo.getString(R.string.opening_hours));
 	}
 }

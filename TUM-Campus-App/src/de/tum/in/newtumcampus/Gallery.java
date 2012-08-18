@@ -87,7 +87,7 @@ public class Gallery extends Activity implements OnItemClickListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem m = menu.add(0, Menu.FIRST, 0, "Aktualisieren");
+		MenuItem m = menu.add(0, Menu.FIRST, 0, getString(R.string.update));
 		m.setIcon(R.drawable.ic_menu_refresh);
 		return true;
 	}

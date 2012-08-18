@@ -28,7 +28,7 @@ public class GradesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		assertTrue(solo.searchText(solo.getString(R.string.grades)));
 		solo.clickOnText(solo.getString(R.string.grades));
 		solo.sleep(5000);
-		//solo.goBack();
+		solo.goBack();
 		//solo.scrollDown();
 	}
 
@@ -43,11 +43,11 @@ public class GradesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 	
 	public void testResults(){
+		assertTrue(solo.searchText(solo.getString(R.string.grades)));
+		solo.clickOnText(solo.getString(R.string.grades));
 		assertTrue(solo.searchText("Datenbanken"));
 		assertTrue(solo.searchText(solo.getString(R.string.semester)));
 		assertTrue(solo.searchText("11W"));
-		assertTrue(solo.searchText(solo.getString(R.string.date)));
-		assertTrue(solo.searchText("2012-04-14"));
 		assertTrue(solo.searchText(solo.getString(R.string.examiner)));
 		assertTrue(solo.searchText("Neumann"));
 		assertTrue(solo.searchText(solo.getString(R.string.mode)));
@@ -56,15 +56,17 @@ public class GradesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 
 	
 	public void testPortrait() {
+		assertTrue(solo.searchText(solo.getString(R.string.grades)));
+		solo.clickOnText(solo.getString(R.string.grades));
 		solo.setActivityOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		_testSpinner();
-		//_testResults();
 	}
 	
 	public void testLandscape() {
+		assertTrue(solo.searchText(solo.getString(R.string.grades)));
+		solo.clickOnText(solo.getString(R.string.grades));
 		solo.setActivityOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		_testSpinner();
-		//_testResults();
 	}
 	
 }

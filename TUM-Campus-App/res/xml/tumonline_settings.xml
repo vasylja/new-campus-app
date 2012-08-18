@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-
+<!-- Can't export the titles, don't know why (Florian Schulz) -->
     <PreferenceCategory android:title="@string/user_data" >
         <EditTextPreference
             android:key="lrz_id"

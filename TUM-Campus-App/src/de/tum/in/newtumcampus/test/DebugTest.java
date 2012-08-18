@@ -53,12 +53,8 @@ public class DebugTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		solo.clickOnText(solo.getString(R.string.debug_time));
 		solo.clickOnText(solo.getString(R.string.debug_locations));
 		solo.clickOnText(solo.getString(R.string.debug_master));
-		solo.clickOnText(solo.getString(R.string.gallery));
 
 		solo.goBack();
-		// not availible anymore
-		//assertTrue(solo.searchText("Hello World"));
-
 		solo.sendKey(Solo.MENU);
 		solo.clickOnText(solo.getString(R.string.settings));
 		solo.clickOnText(solo.getString(R.string.debug));

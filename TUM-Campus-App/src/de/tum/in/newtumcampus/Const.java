@@ -55,6 +55,9 @@ public final class Const {
 
 	/** Action value "news" */
 	public static final String NEWS = "news";
+	
+	/** Action value "gallery" */
+	public static final String GALLERY = "gallery";
 
 	/** Action value "links" */
 	public static final String LINKS = "links";
@@ -85,7 +88,8 @@ public final class Const {
 
 	/** ********************************************************************* */
 
-	// TODO Check whether there it makes sense to export to strings (because of identifier for SharedPreferences)
+	// TODO Check whether there it makes sense to export to strings (because of
+	// identifier for SharedPreferences)
 	/** LRZ_ID identifier */
 	public static final String LRZ_ID = "lrz_id";
 
@@ -151,7 +155,8 @@ public final class Const {
 	/** Identifier of the URL column */
 	public static final String URL_COLUMN = "url";
 
-	// TODO IMPORTANT Check whether "start_dt" and "start_de" are actually the same
+	// TODO IMPORTANT Check whether "start_dt" and "start_de" are actually the
+	// same
 	/** Lecture starting date */
 	public static final String START_DT_COLUMN = "start_dt";
 
@@ -184,7 +189,14 @@ public final class Const {
 		/** enable silence service, silence the mobile during lectures */
 		public final static String silence = "silence";
 
+		/**
+		 * mobile is switched to silence
+		 * added manually by Florian Schulz
+		 */
+		public final static String silence_on = "silence_on";
+		
 		/** Settings keys */
+		
 		public static final String TUMONLINE_SETTINGS_KEY = "tumonline";
 		public static final String APP_DETAILS_SETTINGS_KEY = "app_details";
 		public static final String MARKET_SETTINGS_KEY = "market";

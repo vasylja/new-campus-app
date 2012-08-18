@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.media.AudioManager;
 import de.tum.in.newtumcampus.Const;
-import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.common.Utils;
+import de.tum.in.newtumcampus.Const.Settings;
 import de.tum.in.newtumcampus.models.LectureItemManager;
 
 /** Service used to silence the mobile during lectures */
@@ -33,21 +33,27 @@ public class SilenceService extends IntentService {
 		// loop until silence mode gets disabled in settings
 		while (Utils.getSettingBool(this, Const.Settings.silence)) {
 
-			// default: no silence
-			int mode = AudioManager.RINGER_MODE_NORMAL;
+			AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
 			LectureItemManager lim = new LectureItemManager(this);
+			if (!lim.hasLectures()) {
+				// no lectures available
+				return;
+			}
 			Cursor c = lim.getCurrentFromDb();
 			if (c.getCount() != 0) {
 				// if current lecture(s) found, silence the mobile
-				mode = AudioManager.RINGER_MODE_SILENT;
-			}
-			c.close();
+				Utils.setSettingBool(this, Settings.silence_on, true);
 
-			Utils.log(getString(R.string.set_ringer_mode) + mode);
-			// execute (no-)silence mode
-			AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-			am.setRingerMode(mode);
+				Utils.log("set ringer mode: silent");
+				am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+
+			} else if (Utils.getSettingBool(this, Settings.silence_on)) {
+				// default: no silence
+				Utils.log("set ringer mode: normal");
+				am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+				Utils.setSettingBool(this, Settings.silence_on, false);
+			}
 
 			// wait unteil next check
 			synchronized (this) {
@@ -59,6 +65,7 @@ public class SilenceService extends IntentService {
 			}
 		}
 	}
+
 
 	@Override
 	public void onDestroy() {

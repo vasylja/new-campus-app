@@ -65,24 +65,16 @@ public class EventsTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		solo.sendKey(Solo.MENU);
 		solo.clickOnText(solo.getString(R.string.update));
 		solo.sleep(25000);
-		// TODO Flo: change this value
-		assertTrue(solo.searchText("Tag der Informatik"));
-		assertTrue(solo.searchText("Fr, 02.12.2011 16:00 - 19:00"));
+		assertTrue(solo.searchText("Tag der offenen Tür"));
+		assertTrue(solo.searchText("Sa, 27.10.2012 02:00 - 09:00"));
 		assertTrue(solo.searchText("Campus Garching"));
 
-		solo.clickOnText("Tag der Informatik");
-		assertTrue(solo.searchText("Universität München lädt ein"));
+		solo.clickOnText("Tag der offenen Tür");
+		assertTrue(solo.searchText("steht wieder an!"));
 		solo.goBack();
 
 		solo.clickOnText("Vergangene Veranstaltungen");
 
-		assertTrue(solo.searchText("Rückmeldung"));
-		solo.clickOnText("Rückmeldung");
-
-		assertTrue(solo.searchText("Rückmeldefrist"));
 		solo.goBack();
-
-		solo.goBack();
-		//assertTrue(solo.searchText("Hello World"));
 	}
 }

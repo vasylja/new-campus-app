@@ -26,6 +26,7 @@ public class TumCampusTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	@Override
 	public void setUp() {
 		solo = new Solo(getInstrumentation(), getActivity());
+	
 	}
 
 	/**
@@ -33,11 +34,10 @@ public class TumCampusTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	 * @solves Test all required modules
 	 */
 	public void testMenu() {
-		//assertTrue(solo.searchText("Hello World"));
 		assertTrue(solo.searchText(solo.getString(R.string.update)));
 		assertTrue(solo.searchText(solo.getString(R.string.lectures)));
 		assertTrue(solo.searchText(solo.getString(R.string.person_search)));
-		assertTrue(solo.searchText(solo.getString(R.string.organisations)));
+		//assertTrue(solo.searchText(solo.getString(R.string.organisations)));
 		assertTrue(solo.searchText(solo.getString(R.string.grades)));
 		assertTrue(solo.searchText(solo.getString(R.string.documents)));
 		assertTrue(solo.searchText(solo.getString(R.string.study_plans)));
@@ -53,8 +53,6 @@ public class TumCampusTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		assertTrue(solo.searchText(solo.getString(R.string.links)));
 		assertTrue(solo.searchText(solo.getString(R.string.facebook)));
 		assertTrue(solo.searchText(solo.getString(R.string.app_info)));
-		// TODO FLO if(Utils.getSettingBool(this, Const.Settings.debug)) => same offline.
-		//assertTrue(solo.searchText(solo.getString(R.string.debug)));
 	}
 
 	public void testRefresh() {
@@ -67,15 +65,6 @@ public class TumCampusTest extends ActivityInstrumentationTestCase2<TumCampus> {
 			solo.sleep(1000);
 			duration++;
 		}
-		// TODO maybe change later
-		assertTrue(solo.searchText("Aktualisiere: RSS Nachrichten Veranstaltungen Mensen Fertig!"));
-	}
-
-	public void testClearCache() {
-		solo.sendKey(Solo.MENU);
-
-		assertTrue(solo.searchText(solo.getString(R.string.empty_cache)));
-		solo.clickOnText(solo.getString(R.string.empty_cache));
 	}
 
 	public void testManual() {
@@ -84,20 +73,22 @@ public class TumCampusTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		assertTrue(solo.searchText(solo.getString(R.string.manual)));
 		solo.clickOnText(solo.getString(R.string.manual));
 
-		solo.goBackToActivity(".TumCampus");
+		solo.goBack();
 	}
 	
+	
+	public void testClearCache() {
+		solo.sendKey(Solo.MENU);
+
+		assertTrue(solo.searchText(solo.getString(R.string.empty_cache)));
+		solo.clickOnText(solo.getString(R.string.empty_cache));
+	}
 
 	public void testAppinfo() {
 		assertTrue(solo.searchText(solo.getString(R.string.app_info)));
 
 		solo.clickOnText(solo.getString(R.string.app_info));
 		assertTrue(solo.searchText(solo.getString(R.string.full_app_info)));
-/*		assertTrue(solo.searchText("GNU GPL v3"));
-		assertTrue(solo.searchText("Source-Code")); 
-		assertTrue(solo.searchText(solo.getString(R.string.app_info_text)));
-*/
 		solo.goBack();
-		//assertTrue(solo.searchText("Hello World"));
 	}
 }

@@ -65,7 +65,6 @@ public class CafeteriasTest extends ActivityInstrumentationTestCase2<TumCampus> 
 
 		solo.sendKey(Solo.MENU);
 		solo.clickOnText(solo.getString(R.string.settings));
-		// TODO Maybe Change
 		solo.clickOnText(solo.getString(R.string.mensa_filter));
 		solo.clearEditText(0);
 		solo.enterText(0, "Garching");
@@ -94,6 +93,8 @@ public class CafeteriasTest extends ActivityInstrumentationTestCase2<TumCampus> 
 	}
 
 	private void _testCafeterias() {
+		assertTrue(solo.searchText(solo.getString(R.string.menues)));
+		solo.clickOnText(solo.getString(R.string.menues));
 		assertTrue(solo.searchText(solo.getString(R.string.mensa_garching)));
 		solo.clickOnText(solo.getString(R.string.mensa_garching));
 
@@ -108,10 +109,8 @@ public class CafeteriasTest extends ActivityInstrumentationTestCase2<TumCampus> 
 
 		SimpleDateFormat de = new SimpleDateFormat("dd.MM.yyyy");
 		String today = de.format(calendar.getTime());
-// Zeile 111 Fehler TODO Flo
-		assertTrue(solo.searchText("Mensa Garching: " + today));
+		assertTrue(solo.searchText(solo.getString(R.string.mensa_garching)+": " + today));
 		assertTrue(solo.searchText("Beilagen"));
-		// Zeile 114 assertionFailderror
 		assertTrue(solo.searchText("Tagesgericht 1"));
 
 		assertTrue(solo.searchText(solo.getString(R.string.choose_date)));
@@ -127,7 +126,7 @@ public class CafeteriasTest extends ActivityInstrumentationTestCase2<TumCampus> 
 		assertTrue(solo.searchText(tomorrow));
 		solo.clickOnText(tomorrow);
 
-		assertTrue(solo.searchText("Mensa Garching: " + tomorrow));
+		assertTrue(solo.searchText(solo.getString(R.string.mensa_garching)+": " + tomorrow));
 	}
 	
 }

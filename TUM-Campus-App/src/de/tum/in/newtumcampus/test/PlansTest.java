@@ -4,6 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 
+import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.TumCampus;
 
 public class PlansTest extends ActivityInstrumentationTestCase2<TumCampus> {
@@ -17,24 +18,23 @@ public class PlansTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	@Override
 	public void setUp() {
 		solo = new Solo(getInstrumentation(), getActivity());
-		solo.scrollDown();
 	}
 
 	public void testPlansList() {
-		assertTrue(solo.searchText("Umgebungspläne"));
-		solo.clickOnText("Umgebungspläne");
+		assertTrue(solo.searchText(solo.getString(R.string.area_maps)));
+		solo.clickOnText(solo.getString(R.string.area_maps));
 
-		assertTrue(solo.searchText("Campus Garching"));
+		assertTrue(solo.searchText(solo.getString(R.string.campus_garching)));
 		assertTrue(solo.searchText("Campus Stammgelände"));
-		assertTrue(solo.searchText("MVV-Schnellbahnnetz"));
+		assertTrue(solo.searchText(solo.getString(R.string.mvv_fast_train_net)));
 
-		solo.clickOnText("Campus Garching");
-		assertTrue(solo.searchText("Plan: Campus Garching"));
+		solo.clickOnText(solo.getString(R.string.campus_garching));
+		assertTrue(solo.searchText(solo.getString(R.string.plan)+""+solo.getString(R.string.campus_garching)));
 
-		solo.clickOnText("Plan auswählen");
-		assertTrue(solo.searchText("MVV-Schnellbahnnetz"));
+		solo.clickOnText(solo.getString(R.string.choose_plan));
+		assertTrue(solo.searchText(solo.getString(R.string.mvv_fast_train_net)));
 
-		solo.clickOnText("MVV-Schnellbahnnetz");
-		assertTrue(solo.searchText("Plan: MVV-Schnellbahnnetz"));
+		solo.clickOnText(solo.getString(R.string.mvv_fast_train_net));
+		assertTrue(solo.searchText(solo.getString(R.string.plan)+""+solo.getString(R.string.mvv_fast_train_net)));
 	}
 }

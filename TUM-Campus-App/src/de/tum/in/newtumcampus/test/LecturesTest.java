@@ -29,10 +29,12 @@ public class LecturesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 				Utils.getDateTime("2011-05-04T16:00:00"), "CSCW 2", "IN2119", "01.07.023", "", "", "T1");
 
 		LectureItem li2 = new LectureItem.Holiday("TH1", Utils.getDate("2011-12-13"), "Some Holiday");
+		LectureItem li3 = new LectureItem.Vacation("VAC2", Utils.getDate("2012-12-13"), Utils.getDate("2012-12-24"), "Some Vacation");
 
 		LectureItemManager lim = new LectureItemManager(getActivity());
 		lim.replaceIntoDb(li);
 		lim.replaceIntoDb(li2);
+		lim.replaceIntoDb(li3);
 
 		LectureManager lm = new LectureManager(getActivity());
 		lm.updateLectures();
@@ -44,6 +46,7 @@ public class LecturesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		LectureItemManager lim = new LectureItemManager(getActivity());
 		lim.deleteLectureFromDb("T1");
 		lim.deleteLectureFromDb("TH1");
+		lim.deleteItemFromDb("VAC2");
 
 		LectureManager lm = new LectureManager(getActivity());
 		lm.deleteItemFromDb("T1");
@@ -85,8 +88,8 @@ public class LecturesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		assertTrue(solo.searchText("Some Holiday"));
 		solo.clickLongOnText("Some Holiday");
 
-		assertTrue(solo.searchButton("Ja"));
-		solo.clickLongOnText("Ja");
+		assertTrue(solo.searchButton(solo.getString(R.string.yes)));
+		solo.clickLongOnText(solo.getString(R.string.yes));
 
 		assertFalse(solo.searchText("Some Holiday"));
 	}
@@ -98,8 +101,8 @@ public class LecturesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		assertTrue(solo.searchText("CSCW"));
 		solo.clickLongOnText("CSCW");
 
-		assertTrue(solo.searchButton("Ja"));
-		solo.clickLongOnText("Ja");
+		assertTrue(solo.searchButton(solo.getString(R.string.yes)));
+		solo.clickLongOnText(solo.getString(R.string.yes));
 
 		assertFalse(solo.searchText("CSCW"));
 	}
@@ -107,10 +110,7 @@ public class LecturesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	public void testLecturesContextMenu() {
 		assertTrue(solo.searchText(solo.getString(R.string.lectures)));
 		solo.clickOnText(solo.getString(R.string.lectures));
-
-		//solo.sendKey(Solo.MENU);
-		//solo.clickOnText(solo.getString(R.string.roomfinder));
-		//solo.sleep(2000);
+		solo.sleep(2000);
 	}
 
 	private void _testLectures() {
@@ -118,19 +118,18 @@ public class LecturesTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		solo.clickOnText(solo.getString(R.string.lectures));
 		assertTrue(solo.searchText("Feiertag"));
 		solo.clickOnText("Feiertag");
-		assertTrue(solo.searchText("Karfreitag"));
-		assertTrue(solo.searchText("Fr, 06.04.2012"));
+		assertTrue(solo.searchText("Frohnleichnam"));
+		assertTrue(solo.searchText(", 07.06.2012")); //without day! - language reasons
 
 		assertTrue(solo.searchText("Ferien"));
 		solo.clickOnText("Ferien");
-		assertTrue(solo.searchText("Sommerferien"));
-		assertTrue(solo.searchText("01.08.2012 - 30.09.2012"));
+		assertTrue(solo.searchText("Some Vacation"));
+		assertTrue(solo.searchText("13.12.2012 - 24.12.2012"));
 
 		solo.clickOnText("CSCW");
 		assertTrue(solo.searchText("Mi, 04.05.2011 14:00 - 16:00, 01.07.023"));
 		assertTrue(solo.searchText("IN2119"));
-		solo.clickOnText("IN2119");
-		
+		solo.clickOnText("IN2119");	
 	}
 
 	/**

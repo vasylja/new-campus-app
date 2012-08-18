@@ -271,7 +271,8 @@ public class Utils {
 	}
 
 	/**
-	 * Returns the full path of a cache directory and checks if it is readable and writable
+	 * Returns the full path of a cache directory and checks if it is readable
+	 * and writable
 	 * 
 	 * <pre>
 	 * @param directory directory postfix (e.g. feeds/cache)
@@ -563,6 +564,22 @@ public class Utils {
 	}
 
 	/**
+	 * Sets the boolean value of a setting
+	 * 
+	 * <pre>
+	 * @param c Context
+	 * @param name setting name
+	 * @param value setting value
+	 * </pre>
+	 * Manually added to Utils by Florian Schulz
+	 */
+	public static void setSettingBool(Context c, String name, boolean value) {
+		SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(c).edit();
+		editor.putBoolean(name, value);
+		editor.commit();
+	}
+
+	/**
 	 * Truncates a string to a specified length and appends ...
 	 * 
 	 * <pre>
@@ -747,9 +764,11 @@ public class Utils {
 	/**
 	 * Shows the keyboard.
 	 * 
-	 * @param activity The corresponding activity.
+	 * @param activity
+	 *            The corresponding activity.
 	 * 
-	 * @param binder The view where the keyboard is bind to.
+	 * @param binder
+	 *            The view where the keyboard is bind to.
 	 */
 	public static void showKeyboard(Activity activity, View binder) {
 		InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -759,9 +778,11 @@ public class Utils {
 	/**
 	 * Hides the keyboard.
 	 * 
-	 * @param activity The corresponding activity.
+	 * @param activity
+	 *            The corresponding activity.
 	 * 
-	 * @param binder The view where the keyboard is bind to.
+	 * @param binder
+	 *            The view where the keyboard is bind to.
 	 */
 	public static void hideKeyboard(Activity activity, View binder) {
 		InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -771,8 +792,10 @@ public class Utils {
 	/**
 	 * Shows a long {@link Toast} centered on the screen.
 	 * 
-	 * @param activity The activity where the toast is shown.
-	 * @param msg The toast message.
+	 * @param activity
+	 *            The activity where the toast is shown.
+	 * @param msg
+	 *            The toast message.
 	 */
 	public static void showLongCenteredToast(Activity activity, String msg) {
 		Toast toast = Toast.makeText(activity, msg, Toast.LENGTH_LONG);
@@ -783,9 +806,12 @@ public class Utils {
 	/**
 	 * Cut substring from a text.
 	 * 
-	 * @param text The text.
-	 * @param startString Start string where the cutting begins.
-	 * @param endString End string where the cutting ends.
+	 * @param text
+	 *            The text.
+	 * @param startString
+	 *            Start string where the cutting begins.
+	 * @param endString
+	 *            End string where the cutting ends.
 	 * @return The cut text.
 	 */
 	public static String cutText(String text, String startString, String endString) {
@@ -807,8 +833,10 @@ public class Utils {
 	/**
 	 * Builds a HTML document out of a css file and the body content.
 	 * 
-	 * @param css The CSS specification
-	 * @param body The body content
+	 * @param css
+	 *            The CSS specification
+	 * @param body
+	 *            The body content
 	 * @return The HTML document.
 	 */
 	public static String buildHTMLDocument(String css, String body) {
@@ -822,8 +850,10 @@ public class Utils {
 	/**
 	 * Configure a {@link WebView} with default settings.
 	 * 
-	 * @param context Context of web view
-	 * @param id id of web view
+	 * @param context
+	 *            Context of web view
+	 * @param id
+	 *            id of web view
 	 * @return configured web view
 	 */
 	public static WebView getDefaultWebView(Activity context, int id) {

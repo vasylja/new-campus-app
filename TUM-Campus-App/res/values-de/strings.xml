@@ -47,7 +47,14 @@
 		notwendig sind (z.B. AccessToken). \n
 		Die Anwendung übermittelt keinerlei Nutzungsstatistiken an Dritte.</string>
 
+    <!-- tumonline_settings.xml -->
+    <string name="tumonline_password_word">TUMOnline-Passwort</string>
+    <string name="tumonline_lrz_id">LRZ-Kennung</string>
+    <string name="tumonline_access_token_word">TUMOnline-Access-Token</string>
     <!-- settings.xml -->
+    <string name="modules">Module</string>
+    <string name="modules_act_deact">aktivieren, deaktivieren</string>
+    <string name="tumonline_summary">z.B. Access-Token-Einstellungen</string>
     <string name="mensa_filter">Mensa-Fiter</string>
     <string name="mensa_settings_info">z.B. "Garching" um nur Mensen in Garching auflisten</string>
     <string name="silence_phone">Handy autom. lautlos</string>
@@ -199,6 +206,7 @@
     <string name="crash_dialog_comment_prompt">Wenn Sie möchten, können Sie einen Kommentar dazu abgeben:</string>
     <string name="crash_dialog_ok_toast">Vielen Dank!</string>
     <!-- TumCampus.java -->
+    <string name="roomfinder_install">Bitte installieren Sie den TUM-Roomfinder!</string>
     <string name="update">Aktualisieren</string>
     <string name="cancel">Abbrechen</string>
     <string name="lectures">Vorlesungen</string>
@@ -350,6 +358,7 @@
 
     <!-- TumCampus.java -->
     <string name="manual">Handbuch</string>
+    <string name="manualpdf">manual_ger.pdf</string>
     <string name="empty_cache">Cache leeren</string>
 
     <!-- TumOnlineSettings.java -->

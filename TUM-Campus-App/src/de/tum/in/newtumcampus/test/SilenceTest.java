@@ -39,7 +39,7 @@ public class SilenceTest extends ServiceTestCase<SilenceService> {
 
 		_removeLecture();
 
-		Thread.sleep(2000);
+		Thread.sleep(60001);
 		assertEquals(am.getRingerMode(), AudioManager.RINGER_MODE_NORMAL);
 	}
 

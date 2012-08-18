@@ -92,10 +92,10 @@ public class Lectures extends Activity implements OnItemClickListener,
 		 */
 		Button bv1 = (Button) findViewById(R.id.slide_my_lectures);
 		Button bv2 = (Button) findViewById(R.id.slide_search_lectures);
-		Button bv3 = (Button) findViewById(R.id.slide_calendarexport);
+	//	Button bv3 = (Button) findViewById(R.id.slide_calendarexport);
 		bv1.setOnClickListener(this);
 		bv2.setOnClickListener(this);
-		bv3.setOnClickListener(this);
+	//	bv3.setOnClickListener(this);
 		// reset new items counter
 		LectureItemManager.lastInserted = 0;
 	}

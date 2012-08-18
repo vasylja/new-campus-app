@@ -15,10 +15,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,6 +56,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 
 	static boolean syncing = false;
 
+
 	/**
 	 * Returns network connection type if available or can be available soon
 	 * 
@@ -82,6 +85,8 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		// added manually by Florian Schulz (i think was lost)
+		PreferenceManager.setDefaultValues(this, R.xml.settings, true);
 
 		// adjust logo width to screen width
 		ImageView iv = (ImageView) findViewById(R.id.logo);
@@ -124,11 +129,9 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 	protected void onResume() {
 		super.onResume();
 
-		// TODO Check whether to fill adapter from constants. Ex. name...
 		// build main menu
 		SimpleAdapter adapter = new SimpleAdapter(this, buildMenu(), R.layout.main_listview, new String[] { "icon",
 				"name", "icon2" }, new int[] { R.id.icon, R.id.name, R.id.icon2 });
-
 		ListView lv = (ListView) findViewById(R.id.menu);
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(this);
@@ -195,7 +198,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		/*
 		 * build list, intent = start activity on click TODO Review Vasyl
 		 * Florian Schulz: Changed ifs with external Strings + "kurz notiert"
-		 * also view settings.xml (same with
+		 * also view settings.xml
 		 */
 		if (Utils.getSettingBool(this, getString(R.string.lectures))) {
 			addItem(list, R.drawable.vorlesung, getString(R.string.lectures), LectureItemManager.lastInserted > 0,
@@ -237,16 +240,14 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 					Events.class));
 		}
 		if (Utils.getSettingBool(this, getString(R.string.gallery))) {
-			addItem(list, R.drawable.gallery, getString(R.string.gallery), false, new Intent(this, Gallery.class));
+			addItem(list, R.drawable.gallery, getString(R.string.gallery), GalleryManager.lastInserted > 0, new Intent(this, Gallery.class));
 		}
 		if (Utils.getSettingBool(this, getString(R.string.area_maps))) {
 			addItem(list, R.drawable.kompass, getString(R.string.area_maps), false, new Intent(this, Plans.class));
 		}
 		if (Utils.getSettingBool(this, getString(R.string.roomfinder))) {
-			addItem(list, android.R.drawable.ic_menu_mylocation, getString(R.string.roomfinder), false,
+			addItem(list, R.drawable.roomfinder, getString(R.string.roomfinder), false,
 					createRoomfinderAppIntent());
-			// TODO Remove comments after checking, i think another 
-			// new Intent(this,Roomfinder.class));
 		}
 		if (Utils.getSettingBool(this, getString(R.string.opening_hours))) {
 			addItem(list, R.drawable.hours, getString(R.string.opening_hours), false, new Intent(this, Hours.class));
@@ -263,9 +264,9 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 			addItem(list, R.drawable.fb, getString(R.string.facebook), false,
 					new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebook_link))));
 		}
-		// not optional
-		addItem(list, R.drawable.info, getString(R.string.app_info), false, new Intent(this, AppInfo.class));
-		// TODO Review Vasyl bitte des mit Const.Settings.debug prüfen!
+		if (Utils.getSettingBool(this, getString(R.string.app_info))){
+			addItem(list, R.drawable.info, getString(R.string.app_info), false, new Intent(this, AppInfo.class));
+		}
 		if (Utils.getSettingBool(this, Const.Settings.debug)) {
 			addItem(list, R.drawable.icon, getString(R.string.debug), false, new Intent(this, Debug.class));
 		}
@@ -298,6 +299,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 
 	/**
 	 * @Author Vasyl Malinskyi
+	 * @review Florian schulz - after checking works - added externalisation
 	 */
 
 	private Intent createRoomfinderAppIntent() {
@@ -323,7 +325,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		
 		}catch (ActivityNotFoundException e) {
 			if(intent.hasCategory("de.tum.event")&intent.getAction().equals("android.intent.action.SEARCH")){
-			Toast.makeText(this, "Please install the TUM Roomfinder App", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, this.getString(R.string.roomfinder_install), Toast.LENGTH_LONG).show();
 
 			final Intent marketIntent = new Intent();
 			marketIntent.setAction("android.intent.action.VIEW");
@@ -362,7 +364,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 			try {
 				// copy pdf manual from assets to sd-card
 				String target = Utils.getCacheDir("cache") + getString(R.string.manual);
-				InputStream in = getAssets().open("manual.pdf");
+				InputStream in = getAssets().open(this.getString(R.string.manualpdf));
 				OutputStream out = new FileOutputStream(target);
 
 				byte[] buffer = new byte[8192];

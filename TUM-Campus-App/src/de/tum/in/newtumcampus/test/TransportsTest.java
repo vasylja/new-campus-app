@@ -5,6 +5,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 
+import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.TumCampus;
 
 public class TransportsTest extends ActivityInstrumentationTestCase2<TumCampus> {
@@ -21,30 +22,28 @@ public class TransportsTest extends ActivityInstrumentationTestCase2<TumCampus> 
 	}
 
 	public void testTransportsPortrait() {
-		assertTrue(solo.searchText("MVV"));
-		solo.clickOnText("MVV");
+		assertTrue(solo.searchText(solo.getString(R.string.mvv)));
+		solo.clickOnText(solo.getString(R.string.mvv));
 
 		solo.setActivityOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		_testTransports();
 
 		solo.goBack();
-		assertTrue(solo.searchText("Hello World"));
 	}
 
 	public void testTransportsLandscape() {
-		assertTrue(solo.searchText("MVV"));
-		solo.clickOnText("MVV");
+		assertTrue(solo.searchText(solo.getString(R.string.mvv)));
+		solo.clickOnText(solo.getString(R.string.mvv));
 
 		solo.setActivityOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		_testTransports();
 
 		solo.goBack();
-		assertTrue(solo.searchText("Hello World"));
 	}
 
 	public void testTransportsSearchDelete() {
-		assertTrue(solo.searchText("MVV"));
-		solo.clickOnText("MVV");
+		assertTrue(solo.searchText(solo.getString(R.string.mvv)));
+		solo.clickOnText(solo.getString(R.string.mvv));
 
 		// search station
 		solo.enterText(0, "kie");
@@ -52,7 +51,7 @@ public class TransportsTest extends ActivityInstrumentationTestCase2<TumCampus> 
 
 		assertTrue(solo.searchText("Kieferngarten"));
 		solo.clickOnText("Kieferngarten");
-		assertTrue(solo.searchText("Abfahrt: Kieferngarten"));
+		assertTrue(solo.searchText(solo.getString(R.string.departure)+" Kieferngarten"));
 		assertTrue(solo.searchText("U6 Klinikum"));
 
 		solo.clickOnText("Marienplatz");
@@ -61,18 +60,18 @@ public class TransportsTest extends ActivityInstrumentationTestCase2<TumCampus> 
 		// delete item
 		solo.clickLongOnText("Kieferngarten");
 
-		assertTrue(solo.searchButton("Ja"));
-		solo.clickOnText("Ja");
+		assertTrue(solo.searchButton(solo.getString(R.string.yes)));
+		solo.clickOnText(solo.getString(R.string.yes));
 
 		assertFalse(solo.searchText("Kieferngarten"));
 	}
 
 	public void testTransportsContextMenu() {
-		assertTrue(solo.searchText("MVV"));
-		solo.clickOnText("MVV");
+		assertTrue(solo.searchText(solo.getString(R.string.mvv)));
+		solo.clickOnText(solo.getString(R.string.mvv));
 
 		solo.sendKey(Solo.MENU);
-		solo.clickOnText("MVV EFA");
+		solo.clickOnText(solo.getString(R.string.mvv_efa));
 	}
 
 	private void _testTransports() {
@@ -80,14 +79,15 @@ public class TransportsTest extends ActivityInstrumentationTestCase2<TumCampus> 
 		assertTrue(solo.searchText("Marienplatz"));
 		solo.clickOnText("Marienplatz");
 		solo.sleep(3000);
-		assertTrue(solo.searchText("Abfahrt: Marienplatz"));
+		assertTrue(solo.searchText(solo.getString(R.string.departure)+" Marienplatz"));
 		assertTrue(solo.searchText("U3 Moosach"));
 
 		assertTrue(solo.searchText("Garching-Forschungszentrum"));
 		solo.clickOnText("Garching-Forschungszentrum");
 		solo.sleep(3000);
 
-		assertTrue(solo.searchText("Abfahrt: Garching-Forschungszentrum"));
+		assertTrue(solo.searchText(solo.getString(R.string.departure)+" Garching-Forschungszentrum"));
 		assertTrue(solo.searchText("U6 Klinikum"));
 	}
+	
 }

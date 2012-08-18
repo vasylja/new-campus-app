@@ -69,7 +69,6 @@ public class FeedsTest extends ActivityInstrumentationTestCase2<TumCampus> {
 		assertTrue(solo.searchText("Test description"));
 
 		solo.goBack();
-		//assertTrue(solo.searchText("Hello World"));
 	}
 
 	public void testFeedsContextMenu() {

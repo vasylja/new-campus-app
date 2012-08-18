@@ -9,6 +9,8 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 
+import de.tum.in.newtumcampus.Const;
+import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.TumCampus;
 import de.tum.in.newtumcampus.common.Utils;
 
@@ -24,9 +26,9 @@ public class ImportTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	public void setUp() throws Exception {
 		solo = new Solo(getInstrumentation(), getActivity());
 
-		Utils.getCacheDir("links");
+		Utils.getCacheDir(Const.LINKS);
 		Utils.getCacheDir("rss");
-		Utils.getCacheDir("lectures");
+		Utils.getCacheDir(Const.LECTURES);
 
 		String path = Environment.getExternalStorageDirectory().getPath() + "/tumcampus/";
 
@@ -56,14 +58,14 @@ public class ImportTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 
 	public void testImportLectures() {
-		assertTrue(solo.searchButton("Daten importieren"));
-		solo.clickOnButton("Daten importieren");
+		assertTrue(solo.searchButton(solo.getString(R.string.data_and_settings)));
+		solo.clickOnButton(solo.getString(R.string.data_and_settings));
 
-		solo.clickOnButton("Vorlesungen importieren");
+		solo.clickOnButton(solo.getString(R.string.import_lectures_from_sd_card));
 		solo.sleep(1000);
 
-		assertTrue(solo.searchText("Vorlesungen"));
-		solo.clickOnText("Vorlesungen");
+		assertTrue(solo.searchText(solo.getString(R.string.lectures)));
+		solo.clickOnText(solo.getString(R.string.lectures));
 
 		solo.clickOnText("Feiertag");
 
@@ -75,15 +77,15 @@ public class ImportTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 
 	public void testImportLinks() {
-		assertTrue(solo.searchButton("Daten importieren"));
-		solo.clickOnButton("Daten importieren");
+		assertTrue(solo.searchButton(solo.getString(R.string.data_and_settings)));
+		solo.clickOnButton(solo.getString(R.string.data_and_settings));
 
-		solo.clickOnButton("Links importieren");
+		solo.clickOnButton(solo.getString(R.string.import_links));
 		solo.sleep(1000);
 		solo.scrollDown();
 
-		assertTrue(solo.searchText("Links"));
-		solo.clickOnText("Links");
+		assertTrue(solo.searchText(solo.getString(R.string.links)));
+		solo.clickOnText(solo.getString(R.string.links));
 
 		assertTrue(solo.searchText("test1"));
 		solo.clickOnText("test1");
@@ -91,17 +93,18 @@ public class ImportTest extends ActivityInstrumentationTestCase2<TumCampus> {
 	}
 
 	public void testImportFeeds() {
-		assertTrue(solo.searchButton("Daten importieren"));
-		solo.clickOnButton("Daten importieren");
+		assertTrue(solo.searchButton(solo.getString(R.string.data_and_settings)));
+		solo.clickOnButton(solo.getString(R.string.data_and_settings));
 
-		solo.clickOnButton("RSS-Feeds importieren");
+		solo.clickOnButton(solo.getString(R.string.import_rss_feed));
 		solo.sleep(1000);
 
-		assertTrue(solo.searchText("RSS-Feeds"));
-		solo.clickOnText("RSS-Feeds");
+		assertTrue(solo.searchText(solo.getString(R.string.rss_feeds)));
+		solo.clickOnText(solo.getString(R.string.rss_feeds));
 
 		assertTrue(solo.searchText("test2"));
 		solo.clickOnText("test2");
 		solo.sleep(2000);
 	}
+	
 }

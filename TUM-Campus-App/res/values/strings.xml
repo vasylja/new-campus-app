@@ -47,7 +47,15 @@
 		with the TUMOnline API (ex. AccessToken).
 		No usage statistics is transmitted to third parties.</string>
 
+    <!-- tumonline_settings -->
+    <string name="tumonline_password_word">TUMOnline password</string>
+    <string name="tumonline_lrz_id">LRZ identification</string>
+    <string name="tumonline_access_token_word">TUMOnline access token</string>
+    
     <!-- settings.xml -->
+    <string name="modules">modules</string>
+    <string name="modules_act_deact">activate, deactivate</string>
+    <string name="tumonline_summary">e.g. access token settings</string>
     <string name="mensa_filter">Mensa filter</string>
     <string name="mensa_settings_info">e.g. "Garching" to list only the dining halls in Garching</string>
     <string name="silence_phone">Phone atomatic. silently</string>
@@ -199,6 +207,7 @@
     <string name="crash_dialog_comment_prompt">You might add your comments about the problem below:</string>
     <string name="crash_dialog_ok_toast">Thank you!</string>
     <!-- TumCampus.java -->
+    <string name="roomfinder_install">Please install the TUM Roomfinder App!</string>
     <string name="update">Update</string>
     <string name="cancel">Cancel</string>
     <string name="lectures">Lectures</string>
@@ -350,6 +359,7 @@
 
     <!-- TumCampus.java -->
     <string name="manual">Manual</string>
+    <string name="manualpdf">manual_eng.pdf</string>
     <string name="empty_cache">Empty cache</string>
 
     <!-- TumOnlineSettings.java -->
@@ -408,7 +418,7 @@
     <string name="dialog_password_not_set">TUMOnline-Password is not set! Do you want to set it?</string>
     <string name="something_wrong">Error occurred</string>
     <string name="elements_found">elements found</string>
-    <string name="really_delete">Are you shure to remove it?</string>
+    <string name="really_delete">Are you sure to remove it?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="no_internet_connection">No internet connection!</string>

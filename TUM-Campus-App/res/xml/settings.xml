@@ -3,14 +3,14 @@
 
     <Preference
         android:key="tumonline"
-        android:summary="z.B. Access-Token-Einstellungen"
-        android:title="TUMOnline Einstellungen" />
+        android:summary="@string/tumonline_summary"
+        android:title="@string/tumonline_settings" />
 
     <!-- TODO Review Vasyl => Flo changed Constants for List & SettingList -->
     <PreferenceScreen
         android:key="modules"
-        android:summary="aktivieren, deaktivieren"
-        android:title="Module" >
+        android:summary="@string/modules_act_deact"
+        android:title="@string/modules" >
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/lectures"
@@ -83,6 +83,10 @@
             android:defaultValue="true"
             android:key="@string/facebook"
             android:title="@string/facebook" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/app_info"
+            android:title="@string/app_info" />
     </PreferenceScreen>
     <!-- TODO check const -->
     <EditTextPreference
