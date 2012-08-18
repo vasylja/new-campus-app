@@ -207,10 +207,10 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		if (Utils.getSettingBool(this, getString(R.string.person_search))) {
 			addItem(list, R.drawable.personnel, getString(R.string.person_search), false, new Intent(this, Staff.class));
 		}
-		if (Utils.getSettingBool(this, getString(R.string.organisations))) {
+		/*if (Utils.getSettingBool(this, getString(R.string.organisations))) {
 			addItem(list, R.drawable.organisationen, getString(R.string.organisations), false, new Intent(this,
 					Organisation.class));
-		}
+		}*/
 		if (Utils.getSettingBool(this, getString(R.string.grades))) {
 			addItem(list, R.drawable.grade, getString(R.string.grades), false, new Intent(this, Grades.class));
 		}
