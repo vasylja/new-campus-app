@@ -4,6 +4,8 @@ TUM-Campus-App/bin/*
 TUM-Campus-App/gen/*
 TUM-Campus-App/gen/de/tum/in/newtumcampus/R.java
 TUM-Campus-App/lint.xml
+TUM-Campus-App/pack_models.ucls
+TUM-Campus-App/pack_newtumonline.ucls
 
 # Package Files #
 *.jar
