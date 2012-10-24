@@ -28,9 +28,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import de.tum.in.newtumcampus.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
@@ -287,10 +290,10 @@ public class Utils {
 			f.mkdirs();
 		}
 		if (!f.canRead()) {
-			throw new Exception("Von der SD-Karte kann nicht gelesen werden: " + "<sd>/tumcampus/" + directory);
+			throw new Exception("Problem mit dem lesen der SD-Karte/ Problem with reading the SD-Card :"+ "<sd>/tumcampus/" + directory);
 		}
 		if (!f.canWrite()) {
-			throw new Exception("Auf die SD-Karte kann nicht geschrieben " + "werden: <sd>/tumcampus/" + directory);
+			throw new Exception("Problem mit dem schreiben auf der SD-Karte/ Problem with writing on the SD-Card :"+ "<sd>/tumcampus/" + directory);
 		}
 		return f.getPath() + "/";
 	}

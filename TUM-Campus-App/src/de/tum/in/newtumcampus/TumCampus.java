@@ -54,8 +54,7 @@ import de.tum.in.newtumcampus.services.SilenceService;
  */
 public class TumCampus extends Activity implements OnItemClickListener, View.OnClickListener {
 
-	static boolean syncing = false;
-
+	static boolean syncing = false;	
 
 	/**
 	 * Returns network connection type if available or can be available soon
@@ -169,7 +168,6 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 			b.setVisibility(android.view.View.GONE);
 
 			// show hello world line when offline
-			// TODO Externalisize 
 			tv.setVisibility(View.VISIBLE);
 			tv.setText("Offline.");
 			tv.setTag("offline");
@@ -207,10 +205,10 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		if (Utils.getSettingBool(this, getString(R.string.person_search))) {
 			addItem(list, R.drawable.personnel, getString(R.string.person_search), false, new Intent(this, Staff.class));
 		}
-		if (Utils.getSettingBool(this, getString(R.string.organisations))) {
+		/*if (Utils.getSettingBool(this, getString(R.string.organisations))) {
 			addItem(list, R.drawable.organisationen, getString(R.string.organisations), false, new Intent(this,
 					Organisation.class));
-		}
+		}*/
 		if (Utils.getSettingBool(this, getString(R.string.grades))) {
 			addItem(list, R.drawable.grade, getString(R.string.grades), false, new Intent(this, Grades.class));
 		}

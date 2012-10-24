@@ -15,6 +15,7 @@ import org.simpleframework.xml.Root;
  */
 @Root(name = "row", strict = false)
 public class Exam {
+	
 	@Element(name = "datum")
 	private String date;
 

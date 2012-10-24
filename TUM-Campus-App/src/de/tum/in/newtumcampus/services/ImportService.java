@@ -121,8 +121,7 @@ public class ImportService extends IntentService {
 						importLectureItems();
 					}
 
-					// TODO Check whether to change "completed"
-					message(getString(R.string.completed), "completed");
+					message(getString(R.string.completed), getString(R.string.completed));
 				} catch (Exception e) {
 					message(e, "");
 				}

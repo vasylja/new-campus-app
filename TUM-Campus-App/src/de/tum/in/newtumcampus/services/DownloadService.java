@@ -144,7 +144,6 @@ public class DownloadService extends IntentService {
 			logMessage(getString(R.string.organisations) + ", ", "");
 			downloadOrganisations();
 		}
-		// TODO Check whether to change "completed"
 		logMessage(getString(R.string.completed), getString(R.string.completed));
 		nm.cancel(1);
 	}

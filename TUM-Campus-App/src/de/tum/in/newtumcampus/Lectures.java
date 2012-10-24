@@ -214,10 +214,11 @@ public class Lectures extends Activity implements OnItemClickListener,
 		}
 
 		// tumonline search page => more lecture details
-		// 1593 = WS2011/12
+		// 1595 = WS2012/13
+		// TODO make it flexible
 		if (url.length() == 0) {
 			url = "https://campus.tum.de/tumonline/wbSuche.LVSucheSimple?"
-					+ "pLVNrFlag=J&pSjNr=1593&pSemester=A&pSuchbegriff="
+					+ "pLVNrFlag=J&pSjNr=1595&pSemester=A&pSuchbegriff="
 					+ c.getString(c.getColumnIndex("lectureId"));
 		}
 
@@ -350,7 +351,7 @@ public class Lectures extends Activity implements OnItemClickListener,
 	 * kompatiblitaet zu mehreren Menu Punkten hinzugefuegt
 	 * 
 	 * @author Daniel Mayr
-	 * @review Florian Schulz, BAD_PRACTICE fixed (String comparison) TODO
+	 * @review Florian Schulz, BAD_PRACTICE fixed (String comparison) 
 	 *         Review für Vasyl Stringvergleich mit ==
 	 *
 	@Override

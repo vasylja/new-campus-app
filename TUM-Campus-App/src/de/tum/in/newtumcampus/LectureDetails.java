@@ -151,7 +151,6 @@ public class LectureDetails extends Activity implements OnClickListener, TUMOnli
 				tvLDetailsLiteratur.setText(currentitem.getStudienbehelfe());
 				tvLDetailsTermin.setText(currentitem.getErsttermin());
 			}
-			// TODO Externalise
 		} catch (Exception e) {
 			// well, something went obviously wrong
 			Log.d("conv", "wont work: " + e.toString());

@@ -96,7 +96,7 @@ public class Grades extends Activity implements TUMOnlineRequestFetchListener {
 
 			// initialize the program choice spinner
 			initSpinner();
-
+			
 			// display results in view
 			lvGrades.setAdapter(new ExamListAdapter(Grades.this, examList.getExams()));
 

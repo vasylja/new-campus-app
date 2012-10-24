@@ -286,9 +286,13 @@
     <string name="my_lectures">My Lectures</string>
     <string name="roomfinder">Roomfinder</string>
 
-    <!-- LectureDetails -->
+    <!-- LectureDetails.java -->
     <string name="no_existing_data">No existing data.</string>
 
+    <!-- LectureItem.java -->
+	<string name="holidays">holidays</string>
+	<string name="vacation">vacations</string>
+    
     <!-- News.java -->
     <string name="no_link_existing">No link existing.</string>
 
@@ -333,6 +337,7 @@
     <string name="please_insert_at_least_two_chars">Please insert at least two characters</string>
     <string name="search_is_running">Search is running …</string>
     <string name="personinformation_are_getting_fetched"> personal information were fetched …</string>
+    <string name="no_entries">no entries</string>
 
     <!-- StaffDetails.java -->
     <string name="mr">Mr.</string>
@@ -349,6 +354,7 @@
 
     <!-- TuitionFees.java -->
     <string name="fetching_document">Fetching document …</string>
+    <!-- <string name="forgotten_password">Forgot password?</string>-->
 
     <!-- Transports.java -->
     <string name="departure">Departure</string>

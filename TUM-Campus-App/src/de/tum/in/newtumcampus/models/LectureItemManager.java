@@ -364,7 +364,6 @@ public class LectureItemManager {
 	 */
 	public boolean hasLectures() {
 		boolean result = false;
-		// TODO check const
 		Cursor c = db.rawQuery("SELECT id FROM lectures_items WHERE "
 				+ "lectureId NOT IN ('holiday', 'vacation') LIMIT 1", null);
 		if (c.moveToNext()) {
