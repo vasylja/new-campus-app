@@ -95,7 +95,7 @@ public class ImportService extends IntentService {
 
 			Notification notification = new Notification(android.R.drawable.stat_sys_download,
 					getString(R.string.importing), System.currentTimeMillis());
-
+// TODO ATHOME check this!!!
 			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, TumCampus.class), 0);
 
 			notification.setLatestEventInfo(this, getString(R.string.tum_campus_import), "", contentIntent);
@@ -265,7 +265,7 @@ public class ImportService extends IntentService {
 			for (String[] row : rows) {
 				lim.replaceIntoDb(new LectureItem.Holiday(row[0], Utils.getDate(row[1]), row[2]));
 			}
-
+// TODO ATHOME CHECK OUTDATED??
 			rows = Utils.readCsv(getAssets().open(CSV_VACATIONS), ISO);
 
 			for (String[] row : rows) {

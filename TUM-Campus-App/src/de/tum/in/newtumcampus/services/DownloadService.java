@@ -117,15 +117,17 @@ public class DownloadService extends IntentService {
 			force = true;
 		}
 		// download all or only one action
-		if ((action == null || action.equals(Const.FEEDS)) && !destroyed) {
+		// Changes: Florian Schulz 24.10.2012 - && Utils.getSettingBool(...) added
+		// TODO Review Vasyl
+		if ((action == null || action.equals(Const.FEEDS)) && !destroyed && Utils.getSettingBool(this, Const.FEEDS)) {
 			logMessage(getString(R.string.rss_feeds) + ", ", "");
 			downloadFeeds(force);
 		}
-		if ((action == null || action.equals(Const.NEWS)) && !destroyed) {
+		if ((action == null || action.equals(Const.NEWS)) && !destroyed && Utils.getSettingBool(this, Const.NEWS)) {
 			logMessage(getString(R.string.news) + ", ", "");
 			downloadNews(force);
 		}
-		if ((action == null || action.equals(Const.EVENTS)) && !destroyed) {
+		if ((action == null || action.equals(Const.EVENTS)) && !destroyed && Utils.getSettingBool(this, Const.EVENTS)) {
 			logMessage(getString(R.string.events) + ", ", "");
 			downloadEvents(force);
 		}
@@ -133,17 +135,20 @@ public class DownloadService extends IntentService {
 			logMessage(getString(R.string.gallery), "");
 			downloadGallery(force);
 		}
-		if ((action == null || action.equals(Const.CAFETERIAS)) && !destroyed) {
+		if ((action == null || action.equals(Const.CAFETERIAS)) && !destroyed && Utils.getSettingBool(this, Const.CAFETERIAS)) {
 			logMessage(getString(R.string.cafeterias) + ", ", "");
 			downloadCafeterias(force);
 		}
-		if ((action == null || action.equals(Const.LINKS)) && !destroyed) {
+		if ((action == null || action.equals(Const.LINKS)) && !destroyed && Utils.getSettingBool(this, Const.LINKS)) {
 			downloadLinks();
 		}
-		if ((action == null || action.equals(Const.ORGANISATIONS)) && !destroyed) {
+		// TODO ORGANISATIONS outcommeted
+		/*
+		if ((action == null || action.equals(Const.ORGANISATIONS)) && !destroyed && Utils.getSettingBool(this, Const.ORGANISATIONS)) {
 			logMessage(getString(R.string.organisations) + ", ", "");
 			downloadOrganisations();
 		}
+		*/
 		logMessage(getString(R.string.completed), getString(R.string.completed));
 		nm.cancel(1);
 	}
@@ -273,6 +278,8 @@ public class DownloadService extends IntentService {
 		// }
 	}
 
+	
+	// TODO ATHOME - Check these two methods
 	/**
 	 * Send notification message to service caller
 	 * 

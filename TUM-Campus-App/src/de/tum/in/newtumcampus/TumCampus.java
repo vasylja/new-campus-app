@@ -147,6 +147,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		 * else show download button
 		 * </pre>
 		 */
+		// TODO ATHOME view this too especially the stuff
 		if (conn.length() > 0) {
 			b.setVisibility(android.view.View.VISIBLE);
 			if (!syncing) {
