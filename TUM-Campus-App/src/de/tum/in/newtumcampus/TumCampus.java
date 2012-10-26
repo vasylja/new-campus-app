@@ -15,13 +15,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -337,7 +335,12 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-
+// TODO Flo/Vasyl: consider to add the APP info here!
+		
+		/* example for this
+		 * MenuItem m = menu.add(0, Menu.FIRST, 0, "App-Info");
+		 * m.setIcon(android.R.drawable.ic_menu_info_details);
+		 */
 		MenuItem m = menu.add(0, Menu.FIRST, 0, getString(R.string.settings));
 		m.setIcon(android.R.drawable.ic_menu_preferences);
 
