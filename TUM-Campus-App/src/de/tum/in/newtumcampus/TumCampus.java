@@ -82,7 +82,6 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		// added manually by Florian Schulz (i think was lost)
 		PreferenceManager.setDefaultValues(this, R.xml.settings, true);
 
 		// adjust logo width to screen width
@@ -136,7 +135,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		String conn = getConnection();
 		Button b = (Button) findViewById(R.id.refresh);
 		// hello world text
-		TextView tv = (TextView) findViewById(R.id.status);
+		//TextView tv = (TextView) findViewById(R.id.status);
 
 		/**
 		 * <pre>
@@ -145,17 +144,19 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		 * else show download button
 		 * </pre>
 		 */
-		// TODO ATHOME view this too especially the stuff
+		// TODO CLEANUP plz Review Vasyl
+		// 4 recognition from v1
 		if (conn.length() > 0) {
-			b.setVisibility(android.view.View.VISIBLE);
+			//b.setVisibility(android.view.View.VISIBLE);
 			if (!syncing) {
 				b.setText(getString(R.string.update) + " (" + conn + ")");
-
+				b.setEnabled(true);
+				/* TODO delete this content
 				// hide text if offline message is still there
-				if (tv.getTag() != null) {
-					tv.setVisibility(View.GONE);
-					tv.setTag(null);
-				}
+				//if (tv.getTag() != null) {
+				//	tv.setVisibility(View.GONE);
+				//	tv.setTag(null);
+				} */
 			} else {
 				b.setText(getString(R.string.cancel));
 
@@ -164,6 +165,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 				b.setVisibility(View.GONE);
 			}
 		} else {
+			/* TODO delete this content
 			b.setVisibility(android.view.View.GONE);
 
 			// show hello world line when offline
@@ -174,6 +176,9 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 			// hide initial download button if no connection
 			b = (Button) findViewById(R.id.initial);
 			b.setVisibility(View.GONE);
+			*/
+			b.setText("offline.");
+			b.setEnabled(false);
 		}
 
 		// initialize import buttons
@@ -335,7 +340,7 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-// TODO Flo/Vasyl: consider to add the APP info here!
+// TODO Flo/Vasyl: consider to add the APPinfo here!
 		
 		/* example for this
 		 * MenuItem m = menu.add(0, Menu.FIRST, 0, "App-Info");
@@ -538,6 +543,9 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 					syncing = false;
 				}
 				if (message.length() > 0) {
+					TextView tv = (TextView) findViewById(R.id.status);
+					tv.setVisibility(View.VISIBLE);
+					tv.setText(message);
 					// make (long) Toast to every Error Message
 					if (action.compareTo(Const.ERROR) == 0) {
 						Toast.makeText(TumCampus.this, message, Toast.LENGTH_LONG).show();
