@@ -7,13 +7,11 @@
 
     <!-- ###### LAYOUT FILES ####### -->
     <!-- appinfo.xml -->
-    <string name="app_info_text">		TUM Campus App -EXPERIMENTAL-\n
-        \n
-        von Christoph Richter, Thomas Bley (Android Praktikum SS2011)
-        und
-        Vincenz Dölle, Daniel Mayr, Thomas Behrens (Android Praktikum WS2011/12)\n
-        und 
-        Florian Schulz, Vasyl Malinskyi (Android Praktikum SS2012)
+    <string name="app_info_text">TUM Campus App -EXPERIMENTAL-\n
+        \nvon Christoph Richter, Thomas Bley (Android Praktikum SS2011)
+        \nVincenz Dölle, Daniel Mayr, Thomas Behrens (Android Praktikum WS2011/12)
+        \nund Florian Schulz, Vasyl Malinskyi (Android Praktikum SS2012)
+		\n
 		\nBei dieser Version handelt es sich um eine experimentelle Version mit allen Neuerungen des aktuellen Semesters.
         Sie verwenden diese Version auf eigene Gefahr (keine Haftung). Es steht keinerlei Support zur Verfügung.\n
         \nDiese App wurde im Rahmen des Android Praktikums entwickelt.\n
@@ -24,10 +22,10 @@
 		85748 Garching bei München\n
 		\n
 		Support:\n
-		http://code.google.com/p/tum-campus/issues/list\n
+		https://github.com/vasylja/new-campus-app/issues\n
 		\n
 		Homepage, Source-Code:\n
-		http://code.google.com/p/tum-campus\n
+		https://github.com/vasylja/new-campus-app\n
 		\n
 		TUM Campus App bei Facebook:\n
 		https://www.facebook.com/TUMCampus\n

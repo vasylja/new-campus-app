@@ -279,7 +279,6 @@ public class DownloadService extends IntentService {
 	}
 
 	
-	// TODO ATHOME - Check these two methods
 	/**
 	 * Send notification message to service caller
 	 * 
