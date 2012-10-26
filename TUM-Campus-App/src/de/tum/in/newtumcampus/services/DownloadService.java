@@ -132,7 +132,7 @@ public class DownloadService extends IntentService {
 			downloadEvents(force);
 		}
 		if ((action == null || action.equals(Const.GALLERY)) && !destroyed){ // && Utils.getSettingBool(this, Const.GALLERY)) {
-			logMessage(getString(R.string.gallery), "");
+			logMessage(getString(R.string.gallery)+ ", ", "");
 			downloadGallery(force);
 		}
 		if ((action == null || action.equals(Const.CAFETERIAS)) && !destroyed){ // && Utils.getSettingBool(this, Const.CAFETERIAS)) {
