@@ -285,9 +285,13 @@
     <string name="my_lectures">Meine Lehrveranstaltungen</string>
     <string name="roomfinder">Roomfinder</string>
 
-    <!-- LectureDetails -->
+    <!-- LectureDetails.java -->
     <string name="no_existing_data">No existing data.</string>
-
+    
+    <!-- LectureItem.java -->
+	<string name="holidays">Feiertage</string>
+	<string name="vacation">Ferien</string>
+	
     <!-- News.java -->
     <string name="no_link_existing">Kein Link vorhanden.</string>
 
@@ -332,6 +336,7 @@
     <string name="please_insert_at_least_two_chars">Bitte mindestens 2 Zeichen angeben</string>
     <string name="search_is_running">Suche läuft …</string>
     <string name="personinformation_are_getting_fetched"> Personeninformationen wurden abgerufen …</string>
+    <string name="no_entries">Keine Ergebnisse</string>
 
     <!-- StaffDetails.java -->
     <string name="mr">Herr</string>
@@ -348,6 +353,7 @@
 
     <!-- TuitionFees.java -->
     <string name="fetching_document">Dokument wird abgerufen …</string>
+    <!-- <string name="forgotten_password">Passwort vergessen?</string> -->
 
     <!-- Transports.java -->
     <string name="departure">Abfahrt</string>

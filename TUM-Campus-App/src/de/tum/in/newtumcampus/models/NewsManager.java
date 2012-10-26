@@ -81,7 +81,7 @@ public class NewsManager {
 								.equals("162327853831856")) {
 					continue;
 				}
-				// TODO check const
+				// TODO check const -- KURZ Notiert -- request from facebook
 				if (obj.has("name") && obj.getString("name").equals("Kurz notiert")) {
 					continue;
 				}
@@ -152,7 +152,6 @@ public class NewsManager {
 			message = json.getString(ModelsConst.JSON_DESCRIPTION);
 		} else if (json.has(ModelsConst.JSON_CAPTION)) {
 			message = json.getString(ModelsConst.JSON_CAPTION);
-			// TODO check const
 		} else if (json.has("name")) {
 			message = json.getString("name");
 		}

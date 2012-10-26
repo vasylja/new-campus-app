@@ -2,6 +2,9 @@
 
 import java.util.Date;
 
+import android.content.Context;
+
+import de.tum.in.newtumcampus.R;
 import de.tum.in.newtumcampus.common.Utils;
 
 /**
@@ -96,7 +99,7 @@ public class LectureItem {
 				+ ", note=" + note + ", seriesId=" + seriesId + ", url=" + url;
 	}
 
-	// TODO Check whether to externalise Strings ex. Feiertag
+	// TODO Check whether to externalise Strings ex. Feiertag - problems (no activity)
 	/**
 	 * Holiday object (extends LectureItem)
 	 */
@@ -111,8 +114,11 @@ public class LectureItem {
 		 * @param name Name, e.g. Allerheiligen
 		 * </pre>
 		 */
+		
 		public Holiday(String id, Date date, String name) {
-			super(id, "holiday", date, date, "Feiertag", "", "", name, "about:blank", id);
+			/* String id, String lectureId, Date start, Date end, String name, String module, String location,
+			String note, String url, String seriesId */
+			super(id, "holiday", date, date, "Feiertage", "", "", name, "about:blank", id);
 		}
 	}
 

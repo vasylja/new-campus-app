@@ -174,7 +174,7 @@ public class CafeteriaMenuManager {
 		if (c.typeShort.length() == 0) {
 			throw new Exception("Invalid typeShort.");
 		}
-		if (c.date.before(getDate("2011-01-01"))) {
+		if (c.date.before(getDate("2012-01-01"))) {
 			throw new Exception("Invalid date.");
 		}
 		db.execSQL("REPLACE INTO cafeterias_menus (id, mensaId, date, typeShort, "

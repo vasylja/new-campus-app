@@ -28,7 +28,6 @@ public class PersonsInterfaceTest extends AndroidTestCase {
 		assertTrue(data.indexOf("<familienname>Baumgarten</familienname>") != -1);
 		assertTrue(data.indexOf("<titel>Prof. Dr.</titel>") != -1);
 		assertTrue(data.indexOf("<obfuscated_id>") != -1);
-		// TODO extend validation
 	}
 
 	public final void testPersonenSuche2() throws Exception {
@@ -41,7 +40,6 @@ public class PersonsInterfaceTest extends AndroidTestCase {
 		assertTrue(data.indexOf("<familienname>Baumgarten</familienname>") != -1);
 		assertTrue(data.indexOf("<titel>Prof. Dr.</titel>") != -1);
 		assertTrue(data.indexOf("<obfuscated_id>") != -1);
-		// TODO extend validation
 	}
 
 	public final void testPersonenDetails() throws Exception {
@@ -54,7 +52,6 @@ public class PersonsInterfaceTest extends AndroidTestCase {
 		assertTrue(data.indexOf("<familienname>Baumgarten</familienname>") != -1);
 		assertTrue(data.indexOf("<email>baumgaru@tum.de</email>") != -1);
 		assertTrue(data.indexOf("<telefonnummer>+49 (89) 289 - 18564</telefonnummer>") != -1);
-		// TODO extend validation
 	}
 
 }

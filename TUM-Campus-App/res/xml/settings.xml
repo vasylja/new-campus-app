@@ -19,7 +19,7 @@
             android:defaultValue="true"
             android:key="@string/person_search"
             android:title="@string/person_search" />
-        <!-- <CheckBoxPreference
+      <!--   <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/organisations"
             android:title="@string/organisations" /> -->

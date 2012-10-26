@@ -205,7 +205,7 @@ public class TuitionFees extends Activity {
 		String resp = FileUtils.sendPostRequest(httpClient, url);
 
 		// login unsuccessful
-		// TODO Check whether tuition fees work with English TUMOnline
+		// TODO Check whether tuition fees work with English TUMOnline - then we have to change the login data.
 		if (resp.contains("Kennwort vergessen?")) {
 			return false;
 		}
