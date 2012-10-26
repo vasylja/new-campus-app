@@ -117,29 +117,29 @@ public class DownloadService extends IntentService {
 			force = true;
 		}
 		// download all or only one action
-		// Changes: Florian Schulz 24.10.2012 - && Utils.getSettingBool(...) added
-		// TODO Review Vasyl
-		if ((action == null || action.equals(Const.FEEDS)) && !destroyed && Utils.getSettingBool(this, Const.FEEDS)) {
+		// Changes: Florian Schulz 24.10.2012 - && Utils.getSettingBool(...) removed! Doesn't work, have to check after Presentation
+		// TODO Download Problem - check after presentation
+		if ((action == null || action.equals(Const.FEEDS)) && !destroyed){ //&& Utils.getSettingBool(this, Const.FEEDS)) {
 			logMessage(getString(R.string.rss_feeds) + ", ", "");
 			downloadFeeds(force);
 		}
-		if ((action == null || action.equals(Const.NEWS)) && !destroyed && Utils.getSettingBool(this, Const.NEWS)) {
+		if ((action == null || action.equals(Const.NEWS)) && !destroyed){ // && Utils.getSettingBool(this, Const.NEWS)) {
 			logMessage(getString(R.string.news) + ", ", "");
 			downloadNews(force);
 		}
-		if ((action == null || action.equals(Const.EVENTS)) && !destroyed && Utils.getSettingBool(this, Const.EVENTS)) {
+		if ((action == null || action.equals(Const.EVENTS)) && !destroyed){ // && Utils.getSettingBool(this, Const.EVENTS)) {
 			logMessage(getString(R.string.events) + ", ", "");
 			downloadEvents(force);
 		}
-		if ((action == null || action.equals(Const.GALLERY)) && !destroyed && Utils.getSettingBool(this, Const.GALLERY)) {
+		if ((action == null || action.equals(Const.GALLERY)) && !destroyed){ // && Utils.getSettingBool(this, Const.GALLERY)) {
 			logMessage(getString(R.string.gallery), "");
 			downloadGallery(force);
 		}
-		if ((action == null || action.equals(Const.CAFETERIAS)) && !destroyed && Utils.getSettingBool(this, Const.CAFETERIAS)) {
+		if ((action == null || action.equals(Const.CAFETERIAS)) && !destroyed){ // && Utils.getSettingBool(this, Const.CAFETERIAS)) {
 			logMessage(getString(R.string.cafeterias) + ", ", "");
 			downloadCafeterias(force);
 		}
-		if ((action == null || action.equals(Const.LINKS)) && !destroyed && Utils.getSettingBool(this, Const.LINKS)) {
+		if ((action == null || action.equals(Const.LINKS)) && !destroyed){ // && Utils.getSettingBool(this, Const.LINKS)) {
 			downloadLinks();
 		}
 		// TODO ORGANISATIONS outcommeted
