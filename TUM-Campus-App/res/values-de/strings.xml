@@ -53,7 +53,7 @@
     <string name="modules">Module</string>
     <string name="modules_act_deact">aktivieren, deaktivieren</string>
     <string name="tumonline_summary">z.B. Access-Token-Einstellungen</string>
-    <string name="mensa_filter">Mensa-Fiter</string>
+    <string name="mensa_filter">Mensa-Filter</string>
     <string name="mensa_settings_info">z.B. "Garching" um nur Mensen in Garching auflisten</string>
     <string name="silence_phone">Handy autom. lautlos</string>
     <string name="silence_phone_info">während der Vorlesung</string>
