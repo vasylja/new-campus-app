@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.math.BigInteger;
@@ -47,6 +48,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Gallery;
 import android.widget.Toast;
 
 /** Class for helper functions */
@@ -271,6 +273,35 @@ public class Utils {
 			}
 		}
 		return sb.toString();
+	}
+	
+	/**
+	 * Puts a .nomedia file into each directory listed, so the images don't 
+	 * appear in the Gallery.
+	 * 
+	 * <pre>
+	 * @throws Exception
+	 * </pre>
+	 */
+	
+	public static void ensureImagesAreNotIndexed() throws Exception{
+//		ArrayList<String> directoriesNotToIndex = new ArrayList<String>();
+//		directoriesNotToIndex.add("rss/cache");
+//		directoriesNotToIndex.add("feeds/cache");
+//		directoriesNotToIndex.add("gallery/cache");
+		String[] directoriesNotToIndex ={"organisations/cache","links/cache","rss/cache","feeds/cache", "gallery/cache","news/cache"};
+		for (String directory : directoriesNotToIndex){
+			File file = new File(getCacheDir(directory)+".nomedia");
+			if(!file.exists()){
+				file.createNewFile();
+				FileOutputStream fOut = new FileOutputStream(file);
+				OutputStreamWriter myOutWriter = 
+										new OutputStreamWriter(fOut);
+				myOutWriter.append("1");
+				myOutWriter.close();
+				fOut.close();
+			}
+		}
 	}
 
 	/**
