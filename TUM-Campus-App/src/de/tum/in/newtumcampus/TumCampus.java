@@ -20,6 +20,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -131,6 +132,13 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		ListView lv = (ListView) findViewById(R.id.menu);
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(this);
+		
+		try {
+			Utils.ensureImagesAreNotIndexed();
+		} catch (Exception e) {
+			Log.e("CampusApp", "Exception", e);
+			e.printStackTrace();
+		}
 
 		String conn = getConnection();
 		Button b = (Button) findViewById(R.id.refresh);
