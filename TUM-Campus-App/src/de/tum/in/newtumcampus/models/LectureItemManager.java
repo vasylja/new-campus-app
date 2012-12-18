@@ -18,6 +18,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 import de.tum.in.newtumcampus.Const;
 import de.tum.in.newtumcampus.common.Utils;
 import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
@@ -59,6 +60,22 @@ public class LectureItemManager {
 				+ "end VARCHAR, name VARCHAR, module VARCHAR, location VARCHAR, "
 				+ "note VARCHAR, url VARCHAR, seriesId VARCHAR)");
 	}
+	
+///**
+// * Simple parser. Searches for the <error> tag 
+// * in the response and tries to extract a message.
+// * @param serverResponse
+// * @return message
+// */
+//	private String detectError(String serverResponse){
+//		String error = serverResponse.substring(
+//				serverResponse.indexOf("<error>") + "<error>".length(),
+//				serverResponse.indexOf("</error>"));
+//		String message = error.substring(error.indexOf("<message>")+ 
+//				"<message>".length(),
+//				error.indexOf("</message>"));
+//		return message;
+//	}
 
 	/**
 	 * this function allows us to import all lecture settings from TUMOnline
@@ -77,13 +94,19 @@ public class LectureItemManager {
 			String accessToken = null;
 			accessToken = PreferenceManager.getDefaultSharedPreferences(con).getString(Const.ACCESS_TOKEN, null);
 
-			if (accessToken == null || accessToken == "") {
+			if (!Utils.isAccessTokenValid(accessToken)) {
 				throw new Exception("no access token set");
 			}
 
 			// get my lectures
 			TUMOnlineRequest requestHandler = new TUMOnlineRequest("veranstaltungenEigene", accessToken);
 			String strMine = requestHandler.fetch();
+			
+//			String error_message = detectError(strMine);
+//			if (error_message != ""){
+//				Context context = con.getApplicationContext();
+//				Toast.makeText(context, error_message, Toast.LENGTH_LONG).show();
+//			}
 			// deserialize
 			Serializer serializer = new Persister();
 
