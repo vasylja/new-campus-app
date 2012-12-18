@@ -27,10 +27,12 @@
             android:defaultValue="true"
             android:key="@string/grades"
             android:title="@string/grades" />
+<!--        
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/documents"
             android:title="@string/documents" />
+-->
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/study_plans"

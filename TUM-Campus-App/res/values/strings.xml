@@ -50,7 +50,7 @@
     <string name="tumonline_access_token_word">TUMOnline access token</string>
     
     <!-- settings.xml -->
-    <string name="modules">modules</string>
+    <string name="modules">Modules</string>
     <string name="modules_act_deact">activate, deactivate</string>
     <string name="tumonline_summary">e.g. access token settings</string>
     <string name="mensa_filter">Mensa filter</string>
