@@ -191,7 +191,7 @@
     <string name="search_station">Search station</string>
 
     <!-- tumonline.xml -->
-    <string name="generate_token">Generate Access Token</string>
+    <string name="generate_token">Manually Generate Access Token</string>
     <string name="howto">HowTo</string>
 
     <!-- ###### JAVA FILES ####### -->

@@ -124,8 +124,7 @@ public class TUMOnlineSettings extends PreferenceActivity implements
 	}
 
 	public void setAccessToken() {
-		String strLRZID = Utils.getSetting(getBaseContext(), Const.LRZ_ID);
-		setAccessToken(strLRZID);
+		setAccessToken(getLrzId());
 	}
 
 	/**
