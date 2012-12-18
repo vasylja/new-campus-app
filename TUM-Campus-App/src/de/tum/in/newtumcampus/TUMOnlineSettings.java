@@ -51,10 +51,10 @@ public class TUMOnlineSettings extends PreferenceActivity implements
 					@Override
 					public boolean onPreferenceChange(Preference preference,
 							Object newValue) {
+						setLrzId((String)newValue);
 						if (!((String) newValue).equals(Utils.getSetting(
 								getBaseContext(), Const.LRZ_ID))
 								&& !((String) newValue).equals("")) {
-							setLrzId((String)newValue);
 							generateToken(getLrzId());
 						}
 						return true;

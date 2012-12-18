@@ -77,7 +77,7 @@ public class LectureItemManager {
 			String accessToken = null;
 			accessToken = PreferenceManager.getDefaultSharedPreferences(con).getString(Const.ACCESS_TOKEN, null);
 
-			if (accessToken == null) {
+			if (accessToken == null || accessToken == "") {
 				throw new Exception("no access token set");
 			}
 
