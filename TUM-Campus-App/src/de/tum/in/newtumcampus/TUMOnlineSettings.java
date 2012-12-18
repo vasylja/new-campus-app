@@ -3,6 +3,8 @@ package de.tum.in.newtumcampus;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -27,6 +29,7 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 	 * UI button to generate access token
 	 */
 	private Button btnGetAccessToken;
+	private Preference lrzIdPreference;
 
 	/**
 	 * just overwitten to set layout, view and the listeners
@@ -39,6 +42,19 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 		// new Button to get access token
 		btnGetAccessToken = (Button) findViewById(R.id.btnGetAccessToken);
 		btnGetAccessToken.setOnClickListener(this);
+		
+		lrzIdPreference = (Preference) this.findPreference(Const.LRZ_ID);
+		lrzIdPreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				if(!((String)newValue).equals(Utils.getSetting(getBaseContext(), Const.LRZ_ID))
+						&&!((String)newValue).equals("")){
+					setAccessToken((String)newValue);
+				}
+				return true;
+			}
+		});
 	}
 
 	/**
