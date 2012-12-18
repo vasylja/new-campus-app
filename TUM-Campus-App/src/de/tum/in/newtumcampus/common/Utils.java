@@ -130,6 +130,13 @@ public class Utils {
 			}
 		}).start();
 	}
+	
+	public static boolean isAccessTokenValid(String token){
+		if(token==null || token == ""){
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Download a file in the same thread

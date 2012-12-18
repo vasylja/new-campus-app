@@ -476,6 +476,11 @@ public class TumCampus extends Activity implements OnItemClickListener, View.OnC
 		// added by Daniel G. Mayr
 		// Click on import lectures from TUMOnline, start import service
 		if (v.getId() == R.id.importLecturesTUMOnline) {
+			if(!Utils.isAccessTokenValid(Utils.getSetting(getBaseContext(), Const.ACCESS_TOKEN))){
+				Intent tumonlinesettings = new Intent(this, TUMOnlineSettings.class);
+				startActivity(tumonlinesettings);
+				return;
+			}
 			Intent service = new Intent(this, ImportService.class);
 			service.putExtra(Const.ACTION_EXTRA, Const.LECTURES_TUM_ONLINE);
 			startService(service);
