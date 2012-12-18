@@ -22,14 +22,15 @@ import de.tum.in.newtumcampus.tumonline.TUMOnlineRequest;
  * @author Vincenz Doelle, Daniel G. Mayr
  * @review Daniel G. Mayr
  */
-public class TUMOnlineSettings extends PreferenceActivity implements OnClickListener,
-		android.content.DialogInterface.OnClickListener {
+public class TUMOnlineSettings extends PreferenceActivity implements
+		OnClickListener, android.content.DialogInterface.OnClickListener {
 
 	/**
 	 * UI button to generate access token
 	 */
 	private Button btnGetAccessToken;
 	private Preference lrzIdPreference;
+	private String lrzId;
 
 	/**
 	 * just overwitten to set layout, view and the listeners
@@ -42,19 +43,23 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 		// new Button to get access token
 		btnGetAccessToken = (Button) findViewById(R.id.btnGetAccessToken);
 		btnGetAccessToken.setOnClickListener(this);
-		
+
 		lrzIdPreference = (Preference) this.findPreference(Const.LRZ_ID);
-		lrzIdPreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				if(!((String)newValue).equals(Utils.getSetting(getBaseContext(), Const.LRZ_ID))
-						&&!((String)newValue).equals("")){
-					setAccessToken((String)newValue);
-				}
-				return true;
-			}
-		});
+		lrzIdPreference
+				.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+					@Override
+					public boolean onPreferenceChange(Preference preference,
+							Object newValue) {
+						if (!((String) newValue).equals(Utils.getSetting(
+								getBaseContext(), Const.LRZ_ID))
+								&& !((String) newValue).equals("")) {
+							setLrzId((String)newValue);
+							generateToken(getLrzId());
+						}
+						return true;
+					}
+				});
 	}
 
 	/**
@@ -80,7 +85,8 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 		String strTokenXml = request.fetch();
 		Log.d("RAWOUTPUT", strTokenXml);
 		// it is only one tag in that xml, let's do a regex pattern
-		return strTokenXml.substring(strTokenXml.indexOf("<token>") + "<token>".length(),
+		return strTokenXml.substring(
+				strTokenXml.indexOf("<token>") + "<token>".length(),
 				strTokenXml.indexOf("</token>"));
 	}
 
@@ -91,31 +97,29 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == btnGetAccessToken.getId()) {
-			// btnAccessToken was pressed
-
-			// load preferences first (we need the lrz id)
-			String strLRZID = PreferenceManager.getDefaultSharedPreferences(this).getString(Const.LRZ_ID, "");
-			Log.d("AcquiredLRZid", strLRZID);
-
-			// check if lrz could be valid?
-			if (strLRZID.length() == 7) {
-
-				// is access token already set?
-				String oldaccesstoken = PreferenceManager.getDefaultSharedPreferences(this).getString(
-						Const.ACCESS_TOKEN, "");
-				if (oldaccesstoken.length() > 2) {
-					// show Dialog first
-					AlertDialog.Builder builder = new AlertDialog.Builder(this);
-					builder.setMessage(getString(R.string.dialog_new_token))
-							.setPositiveButton(getString(R.string.yes), this)
-							.setNegativeButton(getString(R.string.no), this).show();
-				} else {
-					setAccessToken();
-				}
-
-			} else {
-				Toast.makeText(this, getString(R.string.error_lrz_wrong), Toast.LENGTH_LONG).show();
+			// btnAccessToken was pressed			
+			generateToken(getLrzId());
 			}
+			
+	}
+	
+	private void generateToken(String localLRZID){
+		// check if lrz could be valid?
+		if (localLRZID.length() == 7) {
+			// is access token already set?
+			String oldaccesstoken = PreferenceManager.getDefaultSharedPreferences(this).getString(
+					Const.ACCESS_TOKEN, "");
+			if (oldaccesstoken.length() > 2) {
+				// show Dialog first
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage(getString(R.string.dialog_new_token))
+				.setPositiveButton(getString(R.string.yes), this)
+				.setNegativeButton(getString(R.string.no), this).show();
+			} else {
+				setAccessToken(localLRZID);
+			}
+		} else {
+			Toast.makeText(this, getString(R.string.error_lrz_wrong), Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -123,21 +127,20 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 		String strLRZID = Utils.getSetting(getBaseContext(), Const.LRZ_ID);
 		setAccessToken(strLRZID);
 	}
-	
-/**
- * Internal method for setting a new token.
- * WARNING: Doesn't use shared preferences, but rather a parameter.
- * Needed for the onPreferenceChanged callback, 
- * so as to use the new LRZ_ID value for the token generation before it is set 
- * (which happens right after the callback).
- * 
- * @param stringLRZID
- */
-	private void setAccessToken(String stringLRZID){
+
+	/**
+	 * Internal method for setting a new token. WARNING: Doesn't use shared
+	 * preferences, but rather a parameter. Needed for the onPreferenceChanged
+	 * callback, so as to use the new LRZ_ID value for the token generation
+	 * before it is set (which happens right after the callback).
+	 * 
+	 * @param stringLRZID
+	 */
+	private void setAccessToken(String stringLRZID) {
 		try {
-			if(!Utils.isConnected(getBaseContext())){
-				Toast.makeText(getBaseContext(), R.string.no_internet_connection, 
-						Toast.LENGTH_LONG);
+			if (!Utils.isConnected(getBaseContext())) {
+				Toast.makeText(getBaseContext(),
+						R.string.no_internet_connection, Toast.LENGTH_LONG);
 				return;
 			}
 			// ok, do the request now
@@ -145,14 +148,17 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 			Log.d("AcquiredAccessToken", strAccessToken);
 
 			// save access token to preferences
-			Utils.setSetting(getBaseContext(), Const.ACCESS_TOKEN, strAccessToken);
-			Toast.makeText(this,
-					getString(R.string.access_token_generated),Toast.LENGTH_LONG).show();
+			Utils.setSetting(getBaseContext(), Const.ACCESS_TOKEN,
+					strAccessToken);
+			Toast.makeText(this, getString(R.string.access_token_generated),
+					Toast.LENGTH_LONG).show();
 
 		} catch (Exception ex) {
 			// set access token to null
 			Utils.setSetting(this, Const.ACCESS_TOKEN, null);
-			Toast.makeText(this, getString(R.string.access_token_wasnt_generated), Toast.LENGTH_LONG).show();
+			Toast.makeText(this,
+					getString(R.string.access_token_wasnt_generated),
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -160,8 +166,19 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 	public void onClick(DialogInterface dialog, int which) {
 		if (which == DialogInterface.BUTTON_POSITIVE) {
 			// Ja geklickt
-			setAccessToken();
+			setAccessToken(getLrzId());
 		}
 
+	}
+
+	private String getLrzId() {
+		if (lrzId == null || lrzId == "") {
+			lrzId = Utils.getSetting(getBaseContext(), Const.LRZ_ID);
+		}
+		return lrzId;
+	}
+
+	private void setLrzId(String lrzId) {
+		this.lrzId = lrzId;
 	}
 }
