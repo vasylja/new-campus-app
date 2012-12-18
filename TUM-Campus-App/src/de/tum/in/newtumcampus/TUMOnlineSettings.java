@@ -98,7 +98,7 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 				}
 
 			} else {
-				Toast.makeText(this, getString(R.string.error_lrz_wrong), 10000).show();
+				Toast.makeText(this, getString(R.string.error_lrz_wrong), Toast.LENGTH_LONG).show();
 			}
 		}
 	}
@@ -113,13 +113,12 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 			// save access token to preferences
 			Utils.setSetting(getBaseContext(), Const.ACCESS_TOKEN, strAccessToken);
 			Toast.makeText(this,
-					getString(R.string.access_token_generated) + " - " + Utils.getSetting(this, Const.ACCESS_TOKEN),
-					10000).show();
+					getString(R.string.access_token_generated),Toast.LENGTH_LONG).show();
 
 		} catch (Exception ex) {
 			// set access token to null
 			Utils.setSetting(this, Const.ACCESS_TOKEN, null);
-			Toast.makeText(this, getString(R.string.access_token_wasnt_generated), 10000).show();
+			Toast.makeText(this, getString(R.string.access_token_wasnt_generated), Toast.LENGTH_LONG).show();
 		}
 	}
 
