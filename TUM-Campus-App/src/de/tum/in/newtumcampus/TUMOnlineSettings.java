@@ -104,10 +104,28 @@ public class TUMOnlineSettings extends PreferenceActivity implements OnClickList
 	}
 
 	public void setAccessToken() {
+		String strLRZID = Utils.getSetting(getBaseContext(), Const.LRZ_ID);
+		setAccessToken(strLRZID);
+	}
+	
+/**
+ * Internal method for setting a new token.
+ * WARNING: Doesn't use shared preferences, but rather a parameter.
+ * Needed for the onPreferenceChanged callback, 
+ * so as to use the new LRZ_ID value for the token generation before it is set 
+ * (which happens right after the callback).
+ * 
+ * @param stringLRZID
+ */
+	private void setAccessToken(String stringLRZID){
 		try {
+			if(!Utils.isConnected(getBaseContext())){
+				Toast.makeText(getBaseContext(), R.string.no_internet_connection, 
+						Toast.LENGTH_LONG);
+				return;
+			}
 			// ok, do the request now
-			String strLRZID = Utils.getSetting(getBaseContext(), Const.LRZ_ID);
-			String strAccessToken = getAccessToken(strLRZID);
+			String strAccessToken = getAccessToken(stringLRZID);
 			Log.d("AcquiredAccessToken", strAccessToken);
 
 			// save access token to preferences
