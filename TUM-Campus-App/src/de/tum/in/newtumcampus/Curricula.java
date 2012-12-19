@@ -251,13 +251,14 @@ public class Curricula extends Activity {
 				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/informatik/studienplan/studienplan-fpo-2007.html");
 		options.put(
 				getString(R.string.business_informatics_master),
-				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/wirtschaftsinformatik/studienplan/studienplan-fpo-2008.html");
+				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/wirtschaftsinformatik/studienplan/studienplan-ab-ws-201213.html");
 		options.put(getString(R.string.bioinformatics_master),
 				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/bioinformatik/studienplan/ws-20072008.html");
-		options.put(getString(R.string.automotive_master),
-				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/automotive-software-engineering/stundenplaene.html");
+//	TODO Find out why page not found. Maybe try another device.
+//		options.put(getString(R.string.automotive_master),
+//				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/automotive-software-engineering/studienplanung.html");
 		options.put(
 				getString(R.string.computational_science_master),
-				"http://www.in.tum.de/fuer-studierende-der-tum/master-studiengaenge/computational-science-and-engineering/course/list-of-courses.html");
+				"http://www.in.tum.de/fuer-studieninteressierte/master-studiengaenge/computational-science-and-engineering/course/course-plan.html");
 	}
 }
