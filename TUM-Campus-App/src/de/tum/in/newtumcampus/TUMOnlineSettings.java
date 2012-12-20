@@ -44,6 +44,11 @@ public class TUMOnlineSettings extends PreferenceActivity implements
 		btnGetAccessToken = (Button) findViewById(R.id.btnGetAccessToken);
 		btnGetAccessToken.setOnClickListener(this);
 
+//		PreferenceManager.getDefaultSharedPreferences(getBaseContext()).get)
+//		getPreferenceScreen().removePreference(this.findPreference(Const.ACCESS_TOKEN));
+//		getPreferenceScreen().removePreference(this.findPreference(Const.LRZ_ID));
+		
+		
 		lrzIdPreference = (Preference) this.findPreference(Const.LRZ_ID);
 		lrzIdPreference
 				.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
